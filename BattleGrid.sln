@@ -1,0 +1,15 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F16D4249-6279-474E-8826-742E7FF7445C}") = "BattleGrid", "BattleGrid\BattleGrid.z80cdproj", "{AF30ED05-2937-49BB-A07D-4E33583A3B76}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8431C5B2-66AB-4676-B075-69F50B5DDD59}
+	EndGlobalSection
+EndGlobal

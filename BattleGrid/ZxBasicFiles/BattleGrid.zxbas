@@ -1,0 +1,896 @@
+REM @options --asm --array-base 1 --string-base 1 --optimize 1 --org 32768 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
+
+'Total number of 1x1 defined sprites
+#define TOTAL_1x1_SPRITES 32
+'Total number of 1x2 defined sprites
+#define TOTAL_1x2_SPRITES 0
+'Total number of 2x2 defined sprites
+#define TOTAL_2x2_SPRITES 0
+
+'Maximum on-screen 1x1 sprites
+#define ONSCREEN_1x1_SPRITES 24
+'Maximum on-screen 1x2 sprites
+#define ONSCREEN_1x2_SPRITES 0
+'Maximum on-screen 2x2 sprites
+#define ONSCREEN_2x2_SPRITES 0
+
+'If defined enables the tile system in its basic mode (tiles erased when sprite enters on it)
+#define ENABLE_TILES
+'If defined tiles are merged with OR instead of erased
+'Requires ENABLE_TILES
+#define MERGE_TILES
+
+'The lib by default disables interrupts, enabling this option
+'will reactivate them after each call to the lib
+#define ENABLE_INTERRUPTS
+
+#include "GuSprites.zxbas"
+#include <keys.bas>
+#include "FastRND.zxbas"
+#include "BeepFX.zxbas"
+
+ink 7
+paper 0
+border 0
+bright 1
+cls
+
+
+/' IDEAS
+
+    Espejos morados, solo soportan un disparo
+    Divisores azules, solo soportan un disparo
+    Los bloqueadores se destruyen cuando un enemigo los toca
+    Generadores de enemigos
+    Celdas donde no se acepten poner objetos
+
+'/
+
+
+'REM --SPRITE SECTION--
+#define PLAYER_INDEX 1
+#define PLAYERRIGHT_INDEX 2
+#define PLAYERLEFT_INDEX 3
+#define VFIREA_INDEX 4
+#define VFIREB_INDEX 5
+#define HFIREA_INDEX 6
+#define HFIREB_INDEX 7
+#define EXPLODEA_INDEX 8
+#define EXPLODEB_INDEX 9
+#define EXPLODEC_INDEX 10
+#define EXPLODED_INDEX 11
+#define CURSOR_INDEX 12
+#define ENEMA_INDEX 13
+#define ENEMB_INDEX 14
+
+#define PLAYER_ADDRESS (@spriteSet + 0)
+#define PLAYERRIGHT_ADDRESS (@spriteSet + 8)
+#define PLAYERLEFT_ADDRESS (@spriteSet + 16)
+#define VFIREA_ADDRESS (@spriteSet + 24)
+#define VFIREB_ADDRESS (@spriteSet + 32)
+#define HFIREA_ADDRESS (@spriteSet + 40)
+#define HFIREB_ADDRESS (@spriteSet + 48)
+#define EXPLODEA_ADDRESS (@spriteSet + 56)
+#define EXPLODEB_ADDRESS (@spriteSet + 64)
+#define EXPLODEC_ADDRESS (@spriteSet + 72)
+#define EXPLODED_ADDRESS (@spriteSet + 80)
+#define CURSOR_ADDRESS (@spriteSet + 88)
+#define ENEMA_ADDRESS (@spriteSet + 96)
+#define ENEMB_ADDRESS (@spriteSet + 104)
+
+Dim spriteSet(14,8) as uByte => { _
+{ $18, $5A, $A5, $BD, $7E, $66, $5A, $A5 }, _
+{ $08, $2A, $14, $1C, $3E, $36, $2A, $55 }, _
+{ $10, $54, $28, $38, $7C, $6C, $54, $AA }, _
+{ $20, $18, $04, $18, $20, $18, $04, $18 }, _
+{ $18, $04, $18, $20, $18, $04, $18, $20 }, _
+{ $00, $00, $44, $AA, $AA, $11, $00, $00 }, _
+{ $00, $00, $22, $55, $55, $88, $00, $00 }, _
+{ $00, $00, $18, $3C, $3C, $18, $00, $00 }, _
+{ $00, $18, $24, $5A, $5A, $24, $18, $00 }, _
+{ $3C, $42, $99, $A5, $A5, $99, $42, $3C }, _
+{ $42, $81, $24, $00, $00, $24, $81, $42 }, _
+{ $E7, $81, $81, $00, $00, $81, $81, $E7 }, _
+{ $24, $7E, $FF, $99, $DB, $FF, $66, $24 }, _
+{ $24, $7E, $FF, $BD, $DB, $7E, $7E, $18 } _
+}
+
+
+'REM --TILE SECTION--
+#define EMPTY_TILE_INDEX 0
+#define GRID_INDEX 1
+#define DEFLECTORA_INDEX 10
+#define DEFLECTORB_INDEX 11
+#define DEFLECTORC_INDEX 12
+#define DEFLECTORD_INDEX 13
+#define HBARRIER_INDEX 14
+#define VBARRIER_INDEX 17
+#define SPLITTER_INDEX 20
+#define BLOCKER_INDEX 21
+#define LOGO_INDEX 22
+#define MINE_INDEX 54
+#define TARGET_INDEX 55
+#define ERASER_INDEX 56
+
+Dim tileSet(57,8) as uByte => { _
+{ $00, $00, $00, $00, $00, $00, $00, $00 }, _
+{ $3F, $40, $AF, $98, $B3, $A4, $A9, $AA }, _
+{ $AA, $A2, $A2, $AA, $AA, $A2, $A2, $AA }, _
+{ $AA, $A9, $A4, $B3, $98, $AF, $40, $3F }, _
+{ $FF, $00, $FF, $00, $99, $00, $FF, $00 }, _
+{ $00, $00, $00, $18, $18, $00, $00, $00 }, _
+{ $00, $FF, $00, $99, $00, $FF, $00, $FF }, _
+{ $FC, $02, $F5, $19, $CD, $25, $95, $55 }, _
+{ $55, $45, $45, $55, $55, $45, $45, $55 }, _
+{ $55, $95, $25, $CD, $19, $F5, $02, $FC }, _
+{ $80, $C0, $A0, $B0, $A8, $BC, $82, $FF }, _
+{ $FF, $82, $BC, $A8, $B0, $A0, $C0, $80 }, _
+{ $01, $03, $05, $0D, $15, $3D, $41, $FF }, _
+{ $FF, $41, $3D, $15, $0D, $05, $03, $01 }, _
+{ $3F, $7F, $AA, $D1, $D1, $AA, $7F, $3F }, _
+{ $FF, $FF, $A5, $18, $18, $A5, $FF, $FF }, _
+{ $FC, $FE, $55, $8B, $8B, $55, $FE, $FC }, _
+{ $3C, $5A, $E7, $DB, $E7, $C3, $E7, $DB }, _
+{ $E7, $C3, $E7, $DB, $DB, $E7, $C3, $E7 }, _
+{ $DB, $E7, $C3, $E7, $DB, $E7, $5A, $3C }, _
+{ $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
+{ $3C, $42, $99, $A5, $A5, $99, $42, $3C }, _
+{ $00, $0F, $07, $07, $07, $07, $07, $07 }, _
+{ $07, $07, $07, $07, $0F, $00, $00, $FC }, _
+{ $FC, $00, $00, $00, $00, $0C, $0C, $1E }, _
+{ $7F, $1E, $3F, $33, $40, $00, $00, $00 }, _
+{ $00, $78, $1C, $1C, $1C, $18, $70, $38 }, _
+{ $1C, $1C, $1D, $1D, $7B, $00, $00, $00 }, _
+{ $03, $0C, $1C, $1C, $3C, $3C, $3C, $3D }, _
+{ $BD, $3C, $3C, $1C, $9C, $0C, $03, $00 }, _
+{ $00, $78, $78, $B8, $B8, $B8, $BC, $BC }, _
+{ $BC, $FC, $1E, $1E, $9F, $00, $00, $00 }, _
+{ $D3, $71, $31, $31, $11, $11, $01, $F9 }, _
+{ $F1, $F1, $F1, $F1, $F1, $E1, $83, $00 }, _
+{ $00, $DD, $DD, $9C, $9C, $1C, $1C, $1C }, _
+{ $1C, $1C, $1C, $1C, $3E, $00, $00, $00 }, _
+{ $EE, $E7, $E7, $E7, $E7, $E7, $EE, $EE }, _
+{ $E7, $E7, $E7, $E7, $E7, $E7, $F3, $00 }, _
+{ $00, $EE, $EE, $CE, $CE, $0E, $0E, $0E }, _
+{ $0E, $0E, $0E, $1E, $1F, $00, $00, $00 }, _
+{ $1F, $0F, $8F, $8F, $8F, $0F, $0F, $0F }, _
+{ $0F, $8F, $8F, $8F, $CF, $CF, $9F, $00 }, _
+{ $00, $CF, $C7, $47, $47, $07, $07, $07 }, _
+{ $07, $07, $07, $07, $0F, $00, $00, $00 }, _
+{ $BF, $1F, $0F, $0F, $0F, $0F, $0F, $0F }, _
+{ $0F, $0F, $0F, $0F, $0F, $0F, $9F, $00 }, _
+{ $00, $0F, $07, $07, $07, $07, $07, $07 }, _
+{ $07, $27, $27, $67, $6F, $00, $00, $00 }, _
+{ $60, $30, $38, $38, $3C, $3C, $3C, $3C }, _
+{ $3D, $3C, $3C, $38, $39, $30, $40, $00 }, _
+{ $00, $60, $60, $20, $00, $40, $40, $40 }, _
+{ $40, $00, $20, $60, $60, $00, $00, $3F }, _
+{ $3F, $00, $00, $00, $00, $30, $30, $78 }, _
+{ $FE, $78, $FC, $CC, $02, $00, $00, $00 }, _
+{ $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
+{ $18, $66, $5A, $BD, $BD, $5A, $66, $18 }, _
+{ $44, $00, $91, $40, $A4, $D0, $E9, $F4 } _
+}
+
+Dim tileColors(57) as ubyte => { $0, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $42, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $06, $43, $05 }
+
+defines:
+#define CURSOR_FRAMES 10
+#define CURSOR_SPEED 5
+
+#define MAP_X_OFFSET 0
+#define MAP_Y_OFFSET 1
+
+#define MAX_ENEMY_COUNT 4
+#define ENEMY_SPEED 10
+
+#define TOOL_NONE 0
+
+vars:
+Dim playerX as uByte = 20
+Dim playerSprite as uByte = 0
+Dim dir as byte = 0
+Dim dead as ubyte = 0
+
+Dim shots(3,4) as Byte         'x,y,dir,explodePhase
+Dim activeShots as uByte
+
+Dim cursorX as uByte = 0
+Dim cursorY as uByte = 0
+Dim cursorVisible as uByte = 0
+Dim cursorFrames as uByte = CURSOR_FRAMES
+Dim cursorMoved as uByte = 0
+Dim cursorTool as uByte = TOOL_NONE
+
+Dim activeMap(20, 20) as uByte
+
+Dim reflectDirs(4,4) as uByte => { _
+    { 2, 4, 1, 3 }, _
+    { 4, 1, 2, 3 }, _
+    { 2, 3, 4, 1 }, _
+    { 3, 1, 4, 2 } _
+}
+
+Dim enemies(MAX_ENEMY_COUNT,4) as Byte         'x,y,dir,explodePhase
+Dim activeEnemies as uByte
+Dim enemyFrame as uByte = ENEMY_SPEED
+
+funcs:
+sub InitGraphics()
+
+    InitGFXLib()
+    SetTileset(@tileSet)
+
+    Create1x1Sprite(PLAYER_ADDRESS)
+    Create1x1Sprite(PLAYERRIGHT_ADDRESS)
+    Create1x1Sprite(PLAYERLEFT_ADDRESS)
+    Create1x1Sprite(VFIREA_ADDRESS)
+    Create1x1Sprite(VFIREB_ADDRESS)
+    Create1x1Sprite(HFIREA_ADDRESS)
+    Create1x1Sprite(HFIREB_ADDRESS)
+    Create1x1Sprite(EXPLODEA_ADDRESS)
+    Create1x1Sprite(EXPLODEB_ADDRESS)
+    Create1x1Sprite(EXPLODEC_ADDRESS)
+    Create1x1Sprite(EXPLODED_ADDRESS)
+    Create1x1Sprite(CURSOR_ADDRESS)
+    Create1x1Sprite(ENEMA_ADDRESS)
+    Create1x1Sprite(ENEMB_ADDRESS)
+
+end sub
+
+sub DrawGrid()
+
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpColor as uByte
+    SetTile(GRID_INDEX, tileColors(GRID_INDEX + 1), 0, 1)
+    SetTile(GRID_INDEX + 6, tileColors(GRID_INDEX + 7), 21, 1)
+    SetTile(GRID_INDEX + 2, tileColors(GRID_INDEX + 3), 0, 22)
+    SetTile(GRID_INDEX + 8, tileColors(GRID_INDEX + 9), 21, 22)
+
+    for tmpX = 1 to 20
+
+        SetTile(GRID_INDEX + 3, tileColors(GRID_INDEX + 4), tmpX, 1)
+        SetTile(GRID_INDEX + 5, tileColors(GRID_INDEX + 6), tmpX, 22)
+
+    next tmpX
+
+    for tmpY = 2 to 21
+    
+        SetTile(GRID_INDEX + 1, tileColors(GRID_INDEX + 2), 0, tmpY)
+        SetTile(GRID_INDEX + 7, tileColors(GRID_INDEX + 7), 21, tmpY)
+
+        if tmpY = 21 then tmpColor = $46 else tmpColor = $47
+
+        for tmpX = 1 to 20
+
+            SetTile(GRID_INDEX + 4, tmpColor, tmpX, tmpY)
+
+        next tmpX
+
+    next tmpY
+
+    for tmpX = 0 to 31 step 4
+
+        SetTile(LOGO_INDEX + tmpX, tileColors(LOGO_INDEX + tmpX + 1), (tmpX >> 2) + 23, 2)
+        SetTile(LOGO_INDEX + tmpX + 1, tileColors(LOGO_INDEX + tmpX + 2), (tmpX >> 2) + 23, 3)
+        SetTile(LOGO_INDEX + tmpX + 2, tileColors(LOGO_INDEX + tmpX + 3), (tmpX >> 2) + 23, 4)
+        SetTile(LOGO_INDEX + tmpX + 3, tileColors(LOGO_INDEX + tmpX + 4), (tmpX >> 2) + 23, 5)
+
+    next tmpX
+
+end sub
+
+sub InitLevel()
+
+    print at 9, 24; "LEVEL:"
+    print at 10, 24; "01"
+
+    print at 12, 24; "SCORE:"
+    print at 13, 24; "000000"
+
+    print at 15, 24; "TOOL:"
+    print at 16, 24; "NONE"
+
+    shots(1,4) = -1
+    shots(2,4) = -1
+    shots(3,4) = -1
+
+    activeMap (3,3) = SPLITTER_INDEX
+    SetTile(SPLITTER_INDEX, tileColors(SPLITTER_INDEX + 1), 3 + MAP_X_OFFSET, 3 + MAP_Y_OFFSET)
+
+    activeMap (17,3) = SPLITTER_INDEX
+    SetTile(SPLITTER_INDEX, tileColors(SPLITTER_INDEX + 1), 17 + MAP_X_OFFSET, 3 + MAP_Y_OFFSET)
+
+    activeMap (5,10) = DEFLECTORD_INDEX
+    SetTile(DEFLECTORD_INDEX, tileColors(DEFLECTORD_INDEX + 1), 5 + MAP_X_OFFSET, 10 + MAP_Y_OFFSET)
+
+    activeMap (5,1) = DEFLECTORD_INDEX
+    SetTile(DEFLECTORD_INDEX, tileColors(DEFLECTORD_INDEX + 1), 5 + MAP_X_OFFSET, 1 + MAP_Y_OFFSET)
+
+    activeMap (3,1) = DEFLECTORD_INDEX
+    SetTile(DEFLECTORD_INDEX, tileColors(DEFLECTORD_INDEX + 1), 3 + MAP_X_OFFSET, 1 + MAP_Y_OFFSET)
+
+
+    activeMap (15,10) = DEFLECTORB_INDEX
+    SetTile(DEFLECTORB_INDEX, tileColors(DEFLECTORB_INDEX + 1), 15 + MAP_X_OFFSET, 10 + MAP_Y_OFFSET)
+
+    activeMap (1,3) = DEFLECTORB_INDEX
+    SetTile(DEFLECTORB_INDEX, tileColors(DEFLECTORB_INDEX + 1), 1 + MAP_X_OFFSET, 3 + MAP_Y_OFFSET)
+
+    activeMap (1,10) = DEFLECTORB_INDEX
+    SetTile(DEFLECTORB_INDEX, tileColors(DEFLECTORB_INDEX + 1), 1 + MAP_X_OFFSET, 10 + MAP_Y_OFFSET)
+
+    Dim buc as Ubyte
+
+    for buc = 1 to MAX_ENEMY_COUNT
+        enemies(buc, 4) = -1
+    next buc
+
+    activeEnemies = 00001111b
+
+    enemies(1, 1) = 4
+    enemies(1,2) = 4
+    enemies(1,3) = 1
+
+    enemies(2, 1) = 8
+    enemies(2,2) = 4
+    enemies(2,3) = 1
+    
+    enemies(3, 1) = 12
+    enemies(3,2) = 4
+    enemies(3,3) = 1
+
+    enemies(4, 1) = 16
+    enemies(4,2) = 4
+    enemies(4,3) = 1
+
+end sub
+
+sub UpdatePlayer()
+    playerSprite = PLAYER_INDEX
+
+    if MultiKeys(KEYZ) then
+        dir = -1
+        playerSprite = PLAYERLEFT_INDEX
+        if playerX > 2 then playerX = playerX - 1
+    else if MultiKeys(KEYC)
+        dir = 1
+        playerSprite = PLAYERRIGHT_INDEX
+        if playerX < 40 then playerX = playerX + 1
+    else
+        if playerX & 1 = 0 then
+            dir = 0
+            playerSprite = PLAYER_INDEX
+        else
+            playerX = playerX + dir
+        end if
+    end if
+end sub
+
+sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
+
+    if activeMap(cellX, cellY) then
+
+        if activeMap(cellX, cellY) = SPLITTER_INDEX then
+
+            if (activeShots bxor (1 << (shotIndex - 1))) = 0 then 'Only one active shot?
+
+                activeShots = 7 '111, all three shots
+                Dim tmpX as uByte = shots(shotIndex, 1)
+                Dim tmpY as uByte = shots(shotIndex, 2)
+                Dim tmpDir as uByte = shots(shotIndex, 3) 
+
+                if tmpDir = 1 then
+                    shots(1,3) = 1
+                    shots(2,3) = 3
+                    shots(3,3) = 4
+                else if tmpDir = 2 then
+                    shots(1,3) = 2
+                    shots(2,3) = 3
+                    shots(3,3) = 4
+                else if tmpDir = 3 then
+                    shots(1,3) = 1
+                    shots(2,3) = 2
+                    shots(3,3) = 3
+                else if tmpDir = 4 then
+                    shots(1,3) = 1
+                    shots(2,3) = 2
+                    shots(3,3) = 4
+                end if
+
+                shots(1,1) = tmpX
+                shots(2,1) = tmpX
+                shots(3,1) = tmpX
+
+                shots(1,2) = tmpY
+                shots(2,2) = tmpY
+                shots(3,2) = tmpY
+
+            else
+
+                shots(shotIndex, 4) = 0 'explodes
+
+            end if
+
+        else if activeMap(cellX, cellY) >= DEFLECTORA_INDEX and activeMap(cellX, cellY) <= DEFLECTORD_INDEX then
+
+            shots(shotIndex, 3) = reflectDirs(activeMap(cellX, cellY) - DEFLECTORA_INDEX + 1, shots(shotIndex, 3))
+
+        end if
+
+    end if
+
+end sub
+
+sub UpdateFire()
+
+    if activeShots = 0 then
+
+        if MultiKeys(KEYX) and dir = 0 then
+            shots(1,1) = playerX
+            shots(1,2) = 40
+            shots(1,3) = 1
+            activeShots = 1
+        end if
+
+    else
+
+        Dim buc as byte
+        Dim tmpX as byte
+        Dim tmpY as byte
+        Dim tmpDir as byte
+        Dim tmpExplode as byte
+        Dim tmpBounces as byte
+        Dim tmpMask as uByte
+        Dim tmpActive as uByte = activeShots
+
+        for buc = 1 to 3
+
+            tmpMask = 1 << (buc - 1)
+
+            if tmpActive & tmpMask then  'x,y,dir,explodePhase
+                
+                tmpExplode = shots(buc, 4)
+
+                if tmpExplode <> -1 then
+
+                    tmpExplode = tmpExplode + 1
+
+                    if tmpExplode = 4 then
+                        tmpExplode = -1
+                        activeShots = activeShots bxor tmpMask
+                    end if
+
+                    shots(buc, 4) = tmpExplode
+
+                else
+
+                    tmpX = shots(buc, 1)
+                    tmpY = shots(buc, 2)
+                    tmpDir = shots(buc, 3)
+
+                    if tmpDir = 1 then                      'arriba
+                        if tmpY <= 4 then 
+                            shots(buc, 4) = 0
+                            tmpY = 4
+                        else
+                            tmpY = tmpY - 1
+                        end if
+                    else if tmpDir = 2 then                 'abajo
+                        if tmpY >= 42 then 
+                            shots(buc, 4) = 0
+                            tmpY = 42
+                        else
+                            tmpY = tmpY + 1
+                        end if
+                    else if tmpDir = 3 then                 'izquierda
+                        if tmpX <= 2 then
+                            shots(buc, 4) = 0
+                            tmpX = 2
+                        else
+                            tmpX = tmpX - 1
+                        end if
+                    else if tmpDir = 4 then
+                        if tmpX >= 40 then
+                            shots(buc, 4) = 0
+                            tmpX = 40
+                        else
+                            tmpX = tmpX + 1
+                        end if
+                    end if
+
+                    shots(buc, 1) = tmpX
+                    shots(buc, 2) = tmpY
+
+                    if shots(buc, 4) = -1 and ((tmpX & 1) | (tmpY & 1)) = 0 then CheckShotItems(buc, ((tmpX >> 1) - MAP_X_OFFSET), ((tmpY >> 1) - MAP_Y_OFFSET))
+
+                end if
+
+            end if
+
+        next buc
+
+    end if
+
+end sub
+
+sub CheckCursorAction(mapX as uByte, mapY as uByte)
+
+    if cursorTool = TOOL_NONE
+        Dim tmpItem as uByte = activeMap(mapX, mapY)
+        
+        if not tmpItem then 
+            return
+        else if tmpItem = DEFLECTORA_INDEX then
+            activeMap(mapX, mapY) = DEFLECTORB_INDEX
+            tmpItem = 0
+        else if tmpItem = DEFLECTORB_INDEX then
+            activeMap(mapX, mapY) = DEFLECTORD_INDEX
+            tmpItem = 0
+        else if tmpItem = DEFLECTORD_INDEX then
+            activeMap(mapX, mapY) = DEFLECTORC_INDEX
+            tmpItem = 0
+        else if tmpItem = DEFLECTORC_INDEX then
+            activeMap(mapX, mapY) = DEFLECTORA_INDEX
+            tmpItem = 0
+        end if
+
+        if tmpItem = 0 then
+            SetTileChecked(activeMap(mapX, mapY), tileColors(DEFLECTORA_INDEX + 1), mapX + MAP_X_OFFSET, mapY + MAP_Y_OFFSET)
+        end if
+
+    end if
+
+end sub
+
+sub UpdateCursor()
+
+    cursorFrames = cursorFrames - 1
+
+    if cursorMoved = 0 or cursorFrames = 0 then
+        if cursorX > 0 and MultiKeys(KEYJ) then
+            cursorX = cursorX - 1
+            cursorMoved = 1
+            cursorVisible = 1
+            cursorFrames = CURSOR_SPEED
+        else if cursorX < 19 and MultiKeys(KEYL) then
+            cursorX = cursorX + 1
+            cursorMoved = 1
+            cursorVisible = 1
+            cursorFrames = CURSOR_SPEED
+        else if cursorY > 0 and MultiKeys(KEYI) then
+            cursorY = cursorY - 1
+            cursorMoved = 1
+            cursorVisible = 1
+            cursorFrames = CURSOR_SPEED
+        else if cursorY < 19 and MultiKeys(KEYK) then
+            cursorY = cursorY + 1
+            cursorMoved = 1
+            cursorVisible = 1
+            cursorFrames = CURSOR_SPEED
+        else if MultiKeys(KEYSPACE) then
+            CheckCursorAction(cursorX + 1, cursorY + 1)
+            cursorMoved = 1
+            cursorVisible = 1
+            cursorFrames = CURSOR_SPEED
+        else
+            cursorMoved = 0
+        end if
+    else if inkey$="" then
+        cursorMoved = 0
+    end if
+
+    if cursorFrames = 0 then
+        cursorVisible = not cursorVisible
+        cursorFrames = CURSOR_FRAMES
+    end if
+
+end sub
+
+
+sub UpdateEnemies()
+
+    if activeEnemies = 0 then return
+
+    enemyFrame = enemyFrame - 1
+
+    if enemyFrame <> 0 then return
+
+    enemyFrame = ENEMY_SPEED
+
+    Dim buc as uByte
+    Dim tmpExplode as byte
+    Dim tmpX as byte
+    Dim tmpY as byte
+    Dim tmpDir as byte
+    Dim tmpCellX as byte
+    Dim tmpCellY as byte
+    Dim tmpMask as uByte
+
+    for buc = 1 to MAX_ENEMY_COUNT
+
+        tmpMask = (1 << (buc - 1))
+
+        if activeEnemies band tmpMask then 
+
+            'Movimiento del enemigo:
+            /'
+
+                El enemigo tiende a moverse hacia un lado, cuando encuentra un obstáculo intenta bajar.
+                Una vez baja invierte la dirección
+                Si no puede bajar invierte tb dirección
+                Nunca mueve hacia arriba
+
+                Si invierte dirección sin bajar y no puede mover explota (si encerramos al enemigo se muere)
+                
+                Dir: derecha = 1
+                     Izquierda = -1
+    
+            '/
+
+            tmpExplode = enemies(buc, 4)
+
+            if tmpExplode <> -1 then
+
+                tmpExplode = tmpExplode + 1
+
+                if tmpExplode = 4 then
+                    tmpExplode = -1
+                    activeEnemies = activeEnemies bxor tmpMask
+                end if
+
+                enemies(buc, 4) = tmpExplode
+
+            else
+
+                tmpX = enemies(buc, 1)
+                tmpY = enemies(buc, 2)
+                tmpDir = enemies(buc, 3)
+
+
+                if tmpX & 1 then
+
+                    'Estamos en media celda, el movimiento continúa
+                    tmpX = tmpX + tmpDir
+
+                else
+
+                    tmpCellX = (tmpX >> 1) - MAP_X_OFFSET
+                    tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
+
+                    'probamos a seguir
+              
+                    if ((tmpCellX > 1 and tmpDir = -1) or (tmpCellX < 20 and tmpDir = 1)) and activeMap(tmpCellX + tmpDir, tmpCellY) = 0 then 'seguir
+                     tmpX = tmpX + tmpDir
+                    else if tmpCellY < 20 and activeMap(tmpCellX, tmpCellY + 1) = 0 then 'bajar
+                        tmpDir = -tmpDir
+                        tmpY = tmpY + 2 'verticalmente se mueve en celdas
+                    else if tmpCellY < 20 and ((tmpCellX > 1 and tmpDir = 1) or (tmpCellX < 20 and tmpDir = -1)) and activeMap(tmpCellX - tmpDir, tmpCellY) = 0 then 'invertir (en la última fila explota)                       
+                        tmpDir = -tmpDir
+                        tmpX = tmpX + tmpDir
+                    else                'explotar
+                        enemies(buc, 4) = 0
+                    end if
+
+                end if
+
+                enemies(buc, 1) = tmpX
+                enemies(buc, 2) = tmpY
+                enemies(buc, 3) = tmpDir
+
+            end if
+
+        end if
+
+    next buc
+
+end sub
+
+sub TestCollisions()
+
+    Dim buc as ubyte
+
+    Dim tmpShot1X as Byte
+    Dim tmpShot1Y as Byte
+    
+    Dim tmpShot2X as Byte
+    Dim tmpShot2Y as Byte
+    
+    Dim tmpShot3X as Byte
+    Dim tmpShot3Y as Byte
+
+    Dim activeShot1 as Byte
+    Dim activeShot2 as Byte
+    Dim activeShot3 as Byte
+
+    Dim tmpEnemX as Byte
+    Dim tmpEnemY as Byte
+
+    Dim tmpMask as ubyte
+
+    if activeShots then
+
+
+        tmpShot1X = shots(1,1)
+        tmpShot1Y = shots(1,2)
+        activeShot1 = activeShots band 1
+
+        tmpShot2X = shots(2,1)
+        tmpShot2Y = shots(2,2)
+        activeShot2 = activeShots band 2
+
+        tmpShot3X = shots(3,1)
+        tmpShot3Y = shots(3,2)
+        activeShot3 = activeShots band 4
+
+        if activeEnemies then
+
+            for buc = 1 to MAX_ENEMY_COUNT
+
+                if activeEnemies & (1 << (buc - 1)) then
+
+                    tmpEnemX = enemies(buc, 1)
+                    tmpEnemY = enemies(buc, 2)
+
+                    if  (activeShot1 and _
+                            tmpEnemX = tmpShot1X and _
+                            tmpEnemY = tmpShot1Y) then
+
+                        enemies(buc, 4) = 0
+                        activeShots = activeShots band 11111110b
+
+                    else if (activeShot2 and _
+                            tmpEnemX = tmpShot2X and _
+                            tmpEnemY = tmpShot2Y) then
+
+                        enemies(buc, 4) = 0
+                        activeShots = activeShots band 11111101b
+
+                    else if (activeShot3 and _
+                            tmpEnemX = tmpShot3X and _
+                            tmpEnemY = tmpShot3Y) then
+
+                        enemies(buc, 4) = 0
+                        activeShots = activeShots band 11111011b
+
+                    end if
+
+                end if 
+
+            next buc
+
+        end if
+
+        if  (activeShot1 and _
+                playerX = tmpShot1X and _
+                42 = tmpShot1Y) then
+
+                dead = 1
+                activeShots = activeShots band 11111110b
+
+        else if (activeShot2 and _
+                playerX = tmpShot2X and _
+                42 = tmpShot2Y) then
+
+                dead = 1
+                activeShots = activeShots band 11111101b
+
+        else if (activeShot3 and _
+                playerX = tmpShot3X and _
+                42 = tmpShot3Y) then
+
+                dead = 1
+                activeShots = activeShots band 11111011b
+
+        end if
+
+
+    else if activeEnemies then
+
+        for buc = 1 to MAX_ENEMY_COUNT
+
+            tmpMask = 1 << (buc - 1)
+
+            if activeEnemies & tmpMask then
+
+                tmpEnemX = enemies(buc, 1)
+                tmpEnemY = enemies(buc, 2)
+
+                if tmpEnemY = 42 and tmpEnemX = playerX then
+
+                    activeEnemies = activeEnemies bxor tmpMask
+                    dead = 1
+
+                end if
+
+            end if 
+
+        next buc
+
+    end if
+    
+
+
+end sub
+
+main:
+
+InitGraphics()
+DrawGrid()
+InitLevel()
+
+Dim buc as uByte
+
+while(1)
+
+    
+    UpdatePlayer()
+    UpdateFire()
+    UpdateCursor()
+    UpdateEnemies()
+    TestCollisions()
+
+    Draw1x1Sprite(playerSprite, playerX, 42)
+
+    if activeShots <> 0 then
+
+        for buc = 1 to 3
+            
+            if activeShots & (1 << (buc - 1)) then
+
+                if shots(buc, 4) <> -1 then
+                    Draw1x1Sprite(shots(buc, 4) + EXPLODEA_INDEX, shots(buc, 1), shots(buc, 2))
+                else
+                    if shots(buc, 3) < 3 then
+                         if shots(buc, 2) & 1 then 
+                            Draw1x1Sprite(VFIREA_INDEX, shots(buc, 1), shots(buc, 2))
+                        else
+                            Draw1x1Sprite(VFIREB_INDEX, shots(buc, 1), shots(buc, 2))
+                        end if
+                    else
+                        if shots(buc, 1) & 1 then 
+                            Draw1x1Sprite(HFIREA_INDEX, shots(buc, 1), shots(buc, 2))
+                        else
+                            Draw1x1Sprite(HFIREB_INDEX, shots(buc, 1), shots(buc, 2))
+                        end if
+                    end if
+                end if
+
+            end if
+
+        next buc
+
+    end if
+
+    if cursorVisible then
+        Draw1x1Sprite(CURSOR_INDEX, 2 + (cursorX << 1), 4 + (cursorY << 1))
+    end if
+
+    if activeEnemies <> 0 then
+
+        for buc = 1 to MAX_ENEMY_COUNT
+
+            if activeEnemies & (1 << (buc - 1)) then
+
+                if enemies(buc, 4) <> -1 then
+                    Draw1x1Sprite(enemies(buc, 4) + EXPLODEA_INDEX, enemies(buc, 1), enemies(buc, 2))
+                else
+
+                    if enemies(buc, 1) & 1 then 
+                        Draw1x1Sprite(ENEMB_INDEX, enemies(buc, 1), enemies(buc, 2))
+                    else
+                        Draw1x1Sprite(ENEMA_INDEX, enemies(buc, 1), enemies(buc, 2))
+                    end if
+
+                end if
+
+            end if
+    
+        next buc
+
+    end if
+
+    RenderFrame()
+
+end while

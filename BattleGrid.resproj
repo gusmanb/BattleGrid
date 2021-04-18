@@ -1,0 +1,514 @@
+{
+  "Name": "BattleGrid",
+  "Sprites": [
+    {
+      "Id": "5e312f33-1cd0-49a8-aaf6-58cd2ce80b07",
+      "Name": "Player",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GFqlvX5mWqU="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "fbbdf221-1035-47b5-b272-aa7109d9f67d",
+      "Name": "PlayerRight",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "CCoUHD42KlU="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "c2bcf3b7-88d0-4af0-a9ce-bdf5ffb8f252",
+      "Name": "PlayerLeft",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "EFQoOHxsVKo="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "43887fc6-2ed6-4ecb-aaf0-c77dc1e9d39d",
+      "Name": "VFireA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "IBgEGCAYBBg="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "03257d67-10ee-4c75-bbae-7bf3e3aca34a",
+      "Name": "VFireB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GAQYIBgEGCA="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "45bd46e9-76d6-499b-a033-976a1e83cbeb",
+      "Name": "HFireA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AABEqqoRAAA="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "265c8b8b-cfcd-499b-bb62-2b2d5de042db",
+      "Name": "HFireB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AAAiVVWIAAA="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "75a8caa9-3eba-4645-bf1f-e8bfe971d696",
+      "Name": "ExplodeA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AAAYPDwYAAA="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "a92bff65-f315-49f1-acf6-bfcb94840e59",
+      "Name": "ExplodeB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "ABgkWlokGAA="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "7d3f96e4-727f-4722-80a3-4fe6ca7b61ef",
+      "Name": "ExplodeC",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "PEKZpaWZQjw="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "06164420-97ed-4fe5-ba20-abefd79a1a01",
+      "Name": "ExplodeD",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "QoEkAAAkgUI="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "71eab5c2-a6c1-4a74-81ad-dc386a535378",
+      "Name": "Cursor",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GBAACBgec="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "4523a657-5970-4a97-bc80-f6d4858d24fc",
+      "Name": "EnemA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JH7/mdv/ZiQ="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "eded3150-7094-49ae-a421-91948d51cc43",
+      "Name": "EnemB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JH7/vdt+fhg="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    }
+  ],
+  "Tiles": [
+    {
+      "Id": "ada8f63b-4fae-4d06-b608-f8c4d4c98bef",
+      "Name": "Grid",
+      "Width": 3,
+      "Height": 3,
+      "Data": [
+        "P0CvmLOkqao=",
+        "qqKiqqqioqo=",
+        "qqmks5ivQD8=",
+        "/wD/AJkA/wA=",
+        "AAAAGBgAAAA=",
+        "AP8AmQD/AP8=",
+        "/AL1Gc0llVU=",
+        "VUVFVVVFRVU=",
+        "VZUlzRn1Avw="
+      ],
+      "ColorData": [
+        65,
+        65,
+        65,
+        65,
+        71,
+        65,
+        65,
+        65,
+        65
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "d8e47aee-3334-4de5-8e2e-2a5073423a4a",
+      "Name": "DeflectorA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "gMCgsKi8gv8="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "bcbb3f69-9f63-4179-acc2-8a43008d4913",
+      "Name": "DeflectorB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "/4K8qLCgwIA="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "8073f18f-07c4-4872-8b62-92abf5fac7fa",
+      "Name": "DeflectorC",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AQMFDRU9Qf8="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "a35673f0-740b-49f4-9284-1cd4c5ce9796",
+      "Name": "DeflectorD",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "/0E9FQ0FAwE="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "c1bf375c-bdb5-46a4-8346-f3a8f51be885",
+      "Name": "HBarrier",
+      "Width": 3,
+      "Height": 1,
+      "Data": [
+        "P3+q0dGqfz8=",
+        "//+lGBil//8=",
+        "/P5Vi4tV/vw="
+      ],
+      "ColorData": [
+        66,
+        66,
+        66
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "48e24a55-1951-454b-af27-16247570a0a0",
+      "Name": "VBarrier",
+      "Width": 1,
+      "Height": 3,
+      "Data": [
+        "PFrn2+fD59s=",
+        "58Pn29vnw+c=",
+        "2+fD59vnWjw="
+      ],
+      "ColorData": [
+        66,
+        66,
+        66
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "73242e38-d64a-419f-ad1d-843ebbff9713",
+      "Name": "Splitter",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JDzbfn7bPCQ="
+      ],
+      "ColorData": [
+        68
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "19a587ca-87a7-470f-89e7-677a810aaf88",
+      "Name": "Blocker",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "PEKZpaWZQjw="
+      ],
+      "ColorData": [
+        66
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "bb795bb3-18b0-4fd4-94ec-6b91db994400",
+      "Name": "Logo",
+      "Width": 8,
+      "Height": 4,
+      "Data": [
+        "AA8HBwcHBwc=",
+        "BwcHBw8AAPw=",
+        "/AAAAAAMDB4=",
+        "fx4/M0AAAAA=",
+        "AHgcHBwYcDg=",
+        "HBwdHXsAAAA=",
+        "AwwcHDw8PD0=",
+        "vTw8HJwMAwA=",
+        "AHh4uLi4vLw=",
+        "vPweHp8AAAA=",
+        "03ExMRERAfk=",
+        "8fHx8fHhgwA=",
+        "AN3dnJwcHBw=",
+        "HBwcHD4AAAA=",
+        "7ufn5+fn7u4=",
+        "5+fn5+fn8wA=",
+        "AO7uzs4ODg4=",
+        "Dg4OHh8AAAA=",
+        "Hw+Pj48PDw8=",
+        "D4+Pj8/PnwA=",
+        "AM/HR0cHBwc=",
+        "BwcHBw8AAAA=",
+        "vx8PDw8PDw8=",
+        "Dw8PDw8PnwA=",
+        "AA8HBwcHBwc=",
+        "BycnZ28AAAA=",
+        "YDA4ODw8PDw=",
+        "PTw8ODkwQAA=",
+        "AGBgIABAQEA=",
+        "QAAgYGAAAD8=",
+        "PwAAAAAwMHg=",
+        "/nj8zAIAAAA="
+      ],
+      "ColorData": [
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "f5742324-832a-4386-b8af-44808d8c9f1f",
+      "Name": "Mine",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AAAAADx+AAA="
+      ],
+      "ColorData": [
+        6
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "224b2304-c48d-4562-98a4-81364d134653",
+      "Name": "Target",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GGZavb1aZhg="
+      ],
+      "ColorData": [
+        67
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "c35dbe4d-c4a6-4831-96f9-b5ae36f0a401",
+      "Name": "Eraser",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "RACRQKTQ6fQ="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "af64ffdf-247f-4fcc-a654-04a9359eba72",
+      "Name": "BoxMine",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GBGDyBgec="
+      ],
+      "ColorData": [
+        6
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "409a2623-7b59-4628-bf4e-440ac7ae6f71",
+      "Name": "BoxBlocker",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GZPDyZgec="
+      ],
+      "ColorData": [
+        67
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "c47ecfaf-a4f1-4a03-b29a-9a1b9e2fb35d",
+      "Name": "BoxEraser",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GJJDC5gec="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": 0,
+      "SetType": 1
+    }
+  ],
+  "Screens": null
+}
