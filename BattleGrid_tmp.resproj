@@ -327,7 +327,8 @@
       "Sort": 0,
       "SetType": 1
     },
-    {
+
+	{
       "Id": "c1bf375c-bdb5-46a4-8346-f3a8f51be886",
       "Name": "HBarrierB",
       "Width": 1,
@@ -355,6 +356,26 @@
       "Sort": 0,
       "SetType": 1
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     {
       "Id": "48e24a55-1951-454b-af27-16247570a0a0",
       "Name": "VBarrierA",
@@ -397,6 +418,20 @@
       "Sort": 0,
       "SetType": 1
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     {
       "Id": "73242e38-d64a-419f-ad1d-843ebbff9713",
       "Name": "Splitter",
