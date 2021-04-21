@@ -417,10 +417,10 @@
       "Width": 1,
       "Height": 1,
       "Data": [
-        "PEKZpaWZQjw="
+        "Qu3bt0J+QkI="
       ],
       "ColorData": [
-        66
+        3
       ],
       "Sort": 0,
       "SetType": 1
@@ -517,25 +517,11 @@
     },
     {
       "Id": "224b2304-c48d-4562-98a4-81364d134653",
-      "Name": "Target",
+      "Name": "RadioTower",
       "Width": 1,
       "Height": 1,
       "Data": [
-        "GGZavb1aZhg="
-      ],
-      "ColorData": [
-        67
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "c35dbe4d-c4a6-4831-96f9-b5ae36f0a401",
-      "Name": "Eraser",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "RACRQKTQ6fQ="
+        "WiRaGCQ8Zts="
       ],
       "ColorData": [
         5
@@ -544,8 +530,22 @@
       "SetType": 1
     },
     {
+      "Id": "c35dbe4d-c4a6-4831-96f9-b5ae36f0a401",
+      "Name": "Bomb",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JBg8WkJaPBg="
+      ],
+      "ColorData": [
+        66
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
       "Id": "af64ffdf-247f-4fcc-a654-04a9359eba72",
-      "Name": "BoxMine",
+      "Name": "MineCrate",
       "Width": 1,
       "Height": 1,
       "Data": [
@@ -559,30 +559,86 @@
     },
     {
       "Id": "409a2623-7b59-4628-bf4e-440ac7ae6f71",
-      "Name": "BoxBlocker",
+      "Name": "BlockerCrate",
       "Width": 1,
       "Height": 1,
       "Data": [
-        "54GZPDyZgec="
+        "54G9PCSlgec="
       ],
       "ColorData": [
-        67
+        3
       ],
       "Sort": 0,
       "SetType": 1
     },
     {
       "Id": "c47ecfaf-a4f1-4a03-b29a-9a1b9e2fb35d",
-      "Name": "BoxEraser",
+      "Name": "BombCrate",
       "Width": 1,
       "Height": 1,
       "Data": [
-        "54GJJDC5gec="
+        "54GlGDyZgec="
       ],
       "ColorData": [
-        5
+        66
       ],
       "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "55a3125a-c862-4793-98d9-5f2e43a80a72",
+      "Name": "ChargedShot",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GSKYRBkimEQ="
+      ],
+      "ColorData": [
+        68
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "09a1ac60-4b2d-49fa-912e-dd7237f08443",
+      "Name": "ForceField",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "IUTwIkQPIoQ="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "7e690712-3367-4ff7-aa15-cef8c35d81b8",
+      "Name": "Mothership",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "PEL/PAAYAH4="
+      ],
+      "ColorData": [
+        7
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "cc7d7bc3-87d4-4826-94b4-3d96649020ab",
+      "Name": "Hangar",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GP8AmZkA/xg="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": -1,
       "SetType": 1
     }
   ],

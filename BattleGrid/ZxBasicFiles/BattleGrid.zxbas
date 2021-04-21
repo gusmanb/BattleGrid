@@ -62,7 +62,10 @@ cls
 #define CURSOR_INDEX 12
 #define ENEMA_INDEX 13
 #define ENEMB_INDEX 14
+#define TANKV_ADDRESS 15
+#define TANKH_ADDRESS 16
 
+'REM --SPRITE SECTION--
 #define PLAYER_ADDRESS (@spriteSet + 0)
 #define PLAYERRIGHT_ADDRESS (@spriteSet + 8)
 #define PLAYERLEFT_ADDRESS (@spriteSet + 16)
@@ -116,13 +119,17 @@ Dim spriteSet(16,8) as uByte => { _
 #define BLOCKER_INDEX 21
 #define LOGO_INDEX 22
 #define MINE_INDEX 54
-#define TARGET_INDEX 55
-#define ERASER_INDEX 56
-#define BOXMINE_INDEX 57
-#define BOXBLOCKER_INDEX 58
-#define BOXERASER_INDEX 59
+#define RADIOTOWER_INDEX 55
+#define BOMB_INDEX 56
+#define MINECRATE_INDEX 57
+#define BLOCKERCRATE_INDEX 58
+#define BOMBCRATE_INDEX 59
+#define CHARGEDSHOT_INDEX 60
+#define FORCEFIELD_INDEX 61
+#define MOTHERSHIP_INDEX 62
+#define HANGAR_INDEX 63
 
-Dim tileSet(60,8) as uByte => { _
+Dim tileSet(64,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $3F, $40, $AF, $98, $B3, $A4, $A9, $AA }, _
 { $AA, $A2, $A2, $AA, $AA, $A2, $A2, $AA }, _
@@ -144,7 +151,7 @@ Dim tileSet(60,8) as uByte => { _
 { $E7, $C3, $E7, $DB, $DB, $E7, $C3, $E7 }, _
 { $DB, $E7, $C3, $E7, $DB, $E7, $5A, $3C }, _
 { $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
-{ $3C, $42, $99, $A5, $A5, $99, $42, $3C }, _
+{ $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
 { $FC, $00, $00, $00, $00, $0C, $0C, $1E }, _
@@ -178,14 +185,18 @@ Dim tileSet(60,8) as uByte => { _
 { $3F, $00, $00, $00, $00, $30, $30, $78 }, _
 { $FE, $78, $FC, $CC, $02, $00, $00, $00 }, _
 { $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
-{ $18, $66, $5A, $BD, $BD, $5A, $66, $18 }, _
-{ $44, $00, $91, $40, $A4, $D0, $E9, $F4 }, _
+{ $5A, $24, $5A, $18, $24, $3C, $66, $DB }, _
+{ $24, $18, $3C, $5A, $42, $5A, $3C, $18 }, _
 { $E7, $81, $81, $18, $3C, $81, $81, $E7 }, _
-{ $E7, $81, $99, $3C, $3C, $99, $81, $E7 }, _
-{ $E7, $81, $89, $24, $30, $B9, $81, $E7 } _
+{ $E7, $81, $BD, $3C, $24, $A5, $81, $E7 }, _
+{ $E7, $81, $A5, $18, $3C, $99, $81, $E7 }, _
+{ $19, $22, $98, $44, $19, $22, $98, $44 }, _
+{ $21, $44, $F0, $22, $44, $0F, $22, $84 }, _
+{ $3C, $42, $FF, $3C, $00, $18, $00, $7E }, _
+{ $18, $FF, $00, $99, $99, $00, $FF, $18 } _
 }
 
-Dim tileColors(60) as ubyte => { $0, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $42, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $06, $43, $05, $06, $43, $05 }
+Dim tileColors(64) as ubyte => { $0, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $03, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $06, $05, $42, $06, $03, $42, $44, $46, $07, $47 }
 
 defines:
 #define CURSOR_FRAMES 10
@@ -304,6 +315,16 @@ sub DrawGrid()
 
     next tmpX
 
+    SetTile(BLOCKER_INDEX, tileColors(BLOCKER_INDEX + 1), 24, 18)
+    SetTile(MINE_INDEX, tileColors(MINE_INDEX + 1), 28, 18)
+    SetTile(BOMB_INDEX, tileColors(BOMB_INDEX + 1), 24, 20)
+    SetTile(CHARGEDSHOT_INDEX, tileColors(CHARGEDSHOT_INDEX + 1), 28, 20)
+
+    print at 18, 25;":0"
+    print at 18, 29;":0"
+    print at 20, 25;":0"
+    print at 20, 29;":0"
+
 end sub
 
 sub InitLevel()
@@ -362,6 +383,8 @@ sub InitLevel()
     enemies(4, 1) = 16
     enemies(4,2) = 4
     enemies(4,3) = 1
+
+    
 
 end sub
 
