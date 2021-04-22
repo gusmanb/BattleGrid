@@ -104,54 +104,35 @@ Dim spriteSet(16,8) as uByte => { _
 
 'REM --TILE SECTION--
 #define EMPTY_TILE_INDEX 0
-#define GRID_INDEX 1
-#define DEFLECTORA_INDEX 10
-#define DEFLECTORB_INDEX 11
-#define DEFLECTORC_INDEX 12
-#define DEFLECTORD_INDEX 13
-#define HBARRIERA_INDEX 14
-#define HBARRIERB_INDEX 15
-#define HBARRIERC_INDEX 16
-#define VBARRIERA_INDEX 17
-#define VBARRIERB_INDEX 18
-#define VBARRIERC_INDEX 19
-#define SPLITTER_INDEX 20
-#define BLOCKER_INDEX 21
-#define LOGO_INDEX 22
-#define MINE_INDEX 54
-#define RADIOTOWER_INDEX 55
-#define BOMB_INDEX 56
+#define LOGO_INDEX 1
+#define GRID_INDEX 33
+#define DEFLECTORA_INDEX 42
+#define DEFLECTORB_INDEX 43
+#define DEFLECTORC_INDEX 44
+#define DEFLECTORD_INDEX 45
+#define HBARRIERA_INDEX 46
+#define HBARRIERB_INDEX 47
+#define HBARRIERC_INDEX 48
+#define VBARRIERA_INDEX 49
+#define VBARRIERB_INDEX 50
+#define VBARRIERC_INDEX 51
+#define SPLITTER_INDEX 52
+#define MINE_INDEX 53
+#define BLOCKER_INDEX 54
+#define BOMB_INDEX 55
+#define CHARGEDSHOT_INDEX 56
 #define MINECRATE_INDEX 57
 #define BLOCKERCRATE_INDEX 58
 #define BOMBCRATE_INDEX 59
-#define CHARGEDSHOT_INDEX 60
+#define CHARGEDSHOTCRATE_INDEX 60
 #define FORCEFIELD_INDEX 61
-#define MOTHERSHIP_INDEX 62
-#define HANGAR_INDEX 63
+#define RADIOTOWER_INDEX 62
+#define MOTHERSHIP_INDEX 63
+#define HANGAR_INDEX 64
+#define NUMBERS_INDEX 65
 
-Dim tileSet(64,8) as uByte => { _
+Dim tileSet(75,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
-{ $3F, $40, $AF, $98, $B3, $A4, $A9, $AA }, _
-{ $AA, $A2, $A2, $AA, $AA, $A2, $A2, $AA }, _
-{ $AA, $A9, $A4, $B3, $98, $AF, $40, $3F }, _
-{ $FF, $00, $FF, $00, $99, $00, $FF, $00 }, _
-{ $00, $00, $00, $18, $18, $00, $00, $00 }, _
-{ $00, $FF, $00, $99, $00, $FF, $00, $FF }, _
-{ $FC, $02, $F5, $19, $CD, $25, $95, $55 }, _
-{ $55, $45, $45, $55, $55, $45, $45, $55 }, _
-{ $55, $95, $25, $CD, $19, $F5, $02, $FC }, _
-{ $80, $C0, $A0, $B0, $A8, $BC, $82, $FF }, _
-{ $FF, $82, $BC, $A8, $B0, $A0, $C0, $80 }, _
-{ $01, $03, $05, $0D, $15, $3D, $41, $FF }, _
-{ $FF, $41, $3D, $15, $0D, $05, $03, $01 }, _
-{ $3F, $7F, $AA, $D1, $D1, $AA, $7F, $3F }, _
-{ $FF, $FF, $A5, $18, $18, $A5, $FF, $FF }, _
-{ $FC, $FE, $55, $8B, $8B, $55, $FE, $FC }, _
-{ $3C, $5A, $E7, $DB, $E7, $C3, $E7, $DB }, _
-{ $E7, $C3, $E7, $DB, $DB, $E7, $C3, $E7 }, _
-{ $DB, $E7, $C3, $E7, $DB, $E7, $5A, $3C }, _
-{ $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
-{ $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
 { $FC, $00, $00, $00, $00, $0C, $0C, $1E }, _
@@ -184,19 +165,51 @@ Dim tileSet(64,8) as uByte => { _
 { $40, $00, $20, $60, $60, $00, $00, $3F }, _
 { $3F, $00, $00, $00, $00, $30, $30, $78 }, _
 { $FE, $78, $FC, $CC, $02, $00, $00, $00 }, _
+{ $3F, $40, $AF, $98, $B3, $A4, $A9, $AA }, _
+{ $AA, $A2, $A2, $AA, $AA, $A2, $A2, $AA }, _
+{ $AA, $A9, $A4, $B3, $98, $AF, $40, $3F }, _
+{ $FF, $00, $FF, $00, $99, $00, $FF, $00 }, _
+{ $00, $00, $00, $18, $18, $00, $00, $00 }, _
+{ $00, $FF, $00, $99, $00, $FF, $00, $FF }, _
+{ $FC, $02, $F5, $19, $CD, $25, $95, $55 }, _
+{ $55, $45, $45, $55, $55, $45, $45, $55 }, _
+{ $55, $95, $25, $CD, $19, $F5, $02, $FC }, _
+{ $80, $C0, $A0, $B0, $A8, $BC, $82, $FF }, _
+{ $FF, $82, $BC, $A8, $B0, $A0, $C0, $80 }, _
+{ $01, $03, $05, $0D, $15, $3D, $41, $FF }, _
+{ $FF, $41, $3D, $15, $0D, $05, $03, $01 }, _
+{ $3F, $7F, $AA, $D1, $D1, $AA, $7F, $3F }, _
+{ $FF, $FF, $A5, $18, $18, $A5, $FF, $FF }, _
+{ $FC, $FE, $55, $8B, $8B, $55, $FE, $FC }, _
+{ $3C, $5A, $E7, $DB, $E7, $C3, $E7, $DB }, _
+{ $E7, $C3, $E7, $DB, $DB, $E7, $C3, $E7 }, _
+{ $DB, $E7, $C3, $E7, $DB, $E7, $5A, $3C }, _
+{ $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
 { $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
-{ $5A, $24, $5A, $18, $24, $3C, $66, $DB }, _
+{ $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
 { $24, $18, $3C, $5A, $42, $5A, $3C, $18 }, _
+{ $19, $22, $98, $44, $19, $22, $98, $44 }, _
 { $E7, $81, $81, $18, $3C, $81, $81, $E7 }, _
 { $E7, $81, $BD, $3C, $24, $A5, $81, $E7 }, _
 { $E7, $81, $A5, $18, $3C, $99, $81, $E7 }, _
-{ $19, $22, $98, $44, $19, $22, $98, $44 }, _
+{ $E7, $81, $91, $48, $12, $89, $81, $E7 }, _
 { $21, $44, $F0, $22, $44, $0F, $22, $84 }, _
+{ $5A, $24, $5A, $18, $24, $3C, $66, $DB }, _
 { $3C, $42, $FF, $3C, $00, $18, $00, $7E }, _
-{ $18, $FF, $00, $99, $99, $00, $FF, $18 } _
+{ $18, $FF, $00, $99, $99, $00, $FF, $18 }, _
+{ $00, $3C, $72, $72, $42, $42, $3C, $00 }, _
+{ $00, $18, $38, $08, $08, $08, $08, $00 }, _
+{ $00, $7E, $62, $02, $7E, $40, $7E, $00 }, _
+{ $00, $7E, $62, $02, $1E, $42, $7E, $00 }, _
+{ $00, $1C, $2C, $44, $7C, $04, $04, $00 }, _
+{ $00, $7E, $46, $40, $7E, $02, $7E, $00 }, _
+{ $00, $7E, $40, $7E, $72, $62, $7E, $00 }, _
+{ $00, $7E, $62, $04, $08, $18, $18, $00 }, _
+{ $00, $3C, $2C, $24, $7E, $62, $7E, $00 }, _
+{ $00, $7E, $62, $7E, $02, $06, $7E, $00 } _
 }
 
-Dim tileColors(64) as ubyte => { $0, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $03, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $06, $05, $42, $06, $03, $42, $44, $46, $07, $47 }
+Dim tileColors(75) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $06, $03, $42, $44, $06, $03, $42, $44, $46, $05, $07, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47 }
 
 defines:
 #define CURSOR_FRAMES 10
@@ -221,6 +234,30 @@ SetTile(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
 #define CLEAR_GRID_CELL(X, Y) \
 activeMap(X,Y) = 0 \
 SetTileChecked(GRID_INDEX + 4, $47, X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
+
+#define EXPLODE_SHOT(INDEX) shots(INDEX, 4) = 0
+
+#define PRINT_DIGIT(X, Y, DIGIT) SetTile(NUMBERS_INDEX + DIGIT, tileColors(NUMBERS_INDEX + DIGIT + 1), X, Y)
+
+#define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 1 \
+PRINT_DIGIT(26, 18, availableBlockers)
+#define DECREASE_BLOCKERS() availableBlockers = availableBlockers - 1 \
+PRINT_DIGIT(26, 18, availableBlockers)
+
+#define INCREASE_MINES() availableMines = availableMines + 1 \
+PRINT_DIGIT(30, 18, availableMines)
+#define DECREASE_MINES() availableMines = availableMines - 1 \
+PRINT_DIGIT(30, 18, availableMines)
+
+#define INCREASE_BOMBS() availableBombs = availableBombs + 1 \
+PRINT_DIGIT(26, 20, availableBombs)
+#define DECREASE_BOMBS() availableBombs = availableBombs - 1 \
+PRINT_DIGIT(26, 20, availableBombs)
+
+#define INCREASE_SHOTS() availableChargedShots = availableChargedShots + 1 \
+PRINT_DIGIT(30, 20, availableChargedShots)
+#define DECREASE_SHOTS() availableChargedShots = availableChargedShots - 1 \
+PRINT_DIGIT(30, 20, availableChargedShots)
 
 vars:
 Dim playerX as uByte = 20
@@ -251,6 +288,13 @@ Dim enemies(MAX_ENEMY_COUNT,4) as Byte         'x,y,dir,explodePhase
 Dim activeEnemies as uByte
 Dim enemyFrame as uByte = ENEMY_SPEED
 
+
+Dim availableMines as uByte = 0
+Dim availableBombs as uByte = 0
+Dim availableBlockers as uByte = 0
+Dim availableChargedShots as uByte = 0
+
+
 funcs:
 sub InitGraphics()
 
@@ -271,6 +315,30 @@ sub InitGraphics()
     Create1x1Sprite(CURSOR_ADDRESS)
     Create1x1Sprite(ENEMA_ADDRESS)
     Create1x1Sprite(ENEMB_ADDRESS)
+
+end sub
+
+sub PrintPaddedNumber(x as ubyte, y as ubyte, value as uinteger, length as ubyte)
+
+    Dim strnum as string = str$(value)
+
+    Dim tmpVal as uByte = len(strnum)
+
+    if tmpVal >= length then 
+        strnum = strnum(1 TO length)
+    else
+         Dim lp as uByte
+
+        for lp = 1 to (length - tmpVal)
+            strnum = "0" + strnum
+        next lp
+    end if
+
+    for tmpVal = 1 to length
+
+        PRINT_DIGIT(x + tmpVal - 1, y, code(strnum(tmpVal to tmpVal)) - 48)
+
+    next tmpVal
 
 end sub
 
@@ -320,20 +388,26 @@ sub DrawGrid()
     SetTile(BOMB_INDEX, tileColors(BOMB_INDEX + 1), 24, 20)
     SetTile(CHARGEDSHOT_INDEX, tileColors(CHARGEDSHOT_INDEX + 1), 28, 20)
 
-    print at 18, 25;":0"
-    print at 18, 29;":0"
-    print at 20, 25;":0"
-    print at 20, 29;":0"
+    print at 18, 25;":"
+    PRINT_DIGIT(26, 18, 0)
+    print at 18, 29;":"
+    PRINT_DIGIT(30, 18, 0)
+    print at 20, 25;":"
+    PRINT_DIGIT(26, 20, 0)
+    print at 20, 29;":"
+    PRINT_DIGIT(30, 20, 0)
 
 end sub
 
 sub InitLevel()
 
     print at 9, 24; "LEVEL:"
-    print at 10, 24; "01"
+    PrintPaddedNumber(24, 10, 1, 2)
+    'print at 10, 24; "01"
 
     print at 12, 24; "SCORE:"
-    print at 13, 24; "000000"
+    PrintPaddedNumber(24, 13, 0, 6)
+    'print at 13, 24; "000000"
 
     print at 15, 24; "TOOL:"
     print at 16, 24; "NONE"
@@ -359,6 +433,11 @@ sub InitLevel()
 
     GRID_OBJECT(MINE_INDEX, 10, 16)
     GRID_OBJECT(MINE_INDEX, 11, 16)
+
+    GRID_OBJECT(BLOCKERCRATE_INDEX, 8, 17)
+    GRID_OBJECT(MINECRATE_INDEX, 10, 17)
+    GRID_OBJECT(BOMBCRATE_INDEX, 12, 17)
+    GRID_OBJECT(CHARGEDSHOTCRATE_INDEX, 14, 17)
 
     Dim buc as Ubyte
 
@@ -485,8 +564,39 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             shots(shotIndex, 4) = 0 'explodes
 
+            return
+
         end if
         end if 
+
+        if tmpCell >= MINECRATE_INDEX then
+        if tmpCell <= CHARGEDSHOTCRATE_INDEX then
+
+            CLEAR_GRID_CELL(cellX, cellY)
+            EXPLODE_SHOT(shotIndex)
+
+            if tmpCell = MINECRATE_INDEX then
+
+                INCREASE_MINES()
+
+            else if tmpCell = BOMBCRATE_INDEX then
+
+                INCREASE_BOMBS()
+
+            else if tmpCell = BLOCKERCRATE_INDEX then
+
+                INCREASE_BLOCKERS()
+
+            else if tmpCell = CHARGEDSHOTCRATE_INDEX then
+
+                INCREASE_SHOTS()
+
+            end if
+
+            return
+
+        end if
+        end if
 
     end if
 
