@@ -228,6 +228,82 @@
   ],
   "Tiles": [
     {
+      "Id": "bb795bb3-18b0-4fd4-94ec-6b91db994400",
+      "Name": "Logo",
+      "Width": 8,
+      "Height": 4,
+      "Data": [
+        "AA8HBwcHBwc=",
+        "BwcHBw8AAPw=",
+        "/AAAAAAMDB4=",
+        "fx4/M0AAAAA=",
+        "AHgcHBwYcDg=",
+        "HBwdHXsAAAA=",
+        "AwwcHDw8PD0=",
+        "vTw8HJwMAwA=",
+        "AHh4uLi4vLw=",
+        "vPweHp8AAAA=",
+        "03ExMRERAfk=",
+        "8fHx8fHhgwA=",
+        "AN3dnJwcHBw=",
+        "HBwcHD4AAAA=",
+        "7ufn5+fn7u4=",
+        "5+fn5+fn8wA=",
+        "AO7uzs4ODg4=",
+        "Dg4OHh8AAAA=",
+        "Hw+Pj48PDw8=",
+        "D4+Pj8/PnwA=",
+        "AM/HR0cHBwc=",
+        "BwcHBw8AAAA=",
+        "vx8PDw8PDw8=",
+        "Dw8PDw8PnwA=",
+        "AA8HBwcHBwc=",
+        "BycnZ28AAAA=",
+        "YDA4ODw8PDw=",
+        "PTw8ODkwQAA=",
+        "AGBgIABAQEA=",
+        "QAAgYGAAAD8=",
+        "PwAAAAAwMHg=",
+        "/nj8zAIAAAA="
+      ],
+      "ColorData": [
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
       "Id": "ada8f63b-4fae-4d06-b608-f8c4d4c98bef",
       "Name": "Grid",
       "Width": 3,
@@ -426,82 +502,6 @@
       "SetType": 1
     },
     {
-      "Id": "bb795bb3-18b0-4fd4-94ec-6b91db994400",
-      "Name": "Logo",
-      "Width": 8,
-      "Height": 4,
-      "Data": [
-        "AA8HBwcHBwc=",
-        "BwcHBw8AAPw=",
-        "/AAAAAAMDB4=",
-        "fx4/M0AAAAA=",
-        "AHgcHBwYcDg=",
-        "HBwdHXsAAAA=",
-        "AwwcHDw8PD0=",
-        "vTw8HJwMAwA=",
-        "AHh4uLi4vLw=",
-        "vPweHp8AAAA=",
-        "03ExMRERAfk=",
-        "8fHx8fHhgwA=",
-        "AN3dnJwcHBw=",
-        "HBwcHD4AAAA=",
-        "7ufn5+fn7u4=",
-        "5+fn5+fn8wA=",
-        "AO7uzs4ODg4=",
-        "Dg4OHh8AAAA=",
-        "Hw+Pj48PDw8=",
-        "D4+Pj8/PnwA=",
-        "AM/HR0cHBwc=",
-        "BwcHBw8AAAA=",
-        "vx8PDw8PDw8=",
-        "Dw8PDw8PnwA=",
-        "AA8HBwcHBwc=",
-        "BycnZ28AAAA=",
-        "YDA4ODw8PDw=",
-        "PTw8ODkwQAA=",
-        "AGBgIABAQEA=",
-        "QAAgYGAAAD8=",
-        "PwAAAAAwMHg=",
-        "/nj8zAIAAAA="
-      ],
-      "ColorData": [
-        66,
-        66,
-        70,
-        70,
-        66,
-        66,
-        70,
-        70,
-        66,
-        66,
-        70,
-        70,
-        66,
-        66,
-        70,
-        70,
-        66,
-        66,
-        70,
-        70,
-        66,
-        66,
-        70,
-        70,
-        66,
-        66,
-        70,
-        70,
-        66,
-        66,
-        70,
-        70
-      ],
-      "Sort": 0,
-      "SetType": 2
-    },
-    {
       "Id": "f5742324-832a-4386-b8af-44808d8c9f1f",
       "Name": "Mine",
       "Width": 1,
@@ -511,20 +511,6 @@
       ],
       "ColorData": [
         6
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "224b2304-c48d-4562-98a4-81364d134653",
-      "Name": "RadioTower",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "WiRaGCQ8Zts="
-      ],
-      "ColorData": [
-        5
       ],
       "Sort": 0,
       "SetType": 1
@@ -541,6 +527,20 @@
         66
       ],
       "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "55a3125a-c862-4793-98d9-5f2e43a80a72",
+      "Name": "ChargedShot",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GSKYRBkimEQ="
+      ],
+      "ColorData": [
+        68
+      ],
+      "Sort": -1,
       "SetType": 1
     },
     {
@@ -586,17 +586,31 @@
       "SetType": 1
     },
     {
-      "Id": "55a3125a-c862-4793-98d9-5f2e43a80a72",
-      "Name": "ChargedShot",
+      "Id": "14593bc1-1f66-449a-8091-1bb5800929dd",
+      "Name": "ChargedShotCrate",
       "Width": 1,
       "Height": 1,
       "Data": [
-        "GSKYRBkimEQ="
+        "54GRSBKJgec="
       ],
       "ColorData": [
         68
       ],
       "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "224b2304-c48d-4562-98a4-81364d134653",
+      "Name": "RadioTower",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "WiRaGCQ8Zts="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": 0,
       "SetType": 1
     },
     {
@@ -672,20 +686,6 @@
       ],
       "Sort": 1,
       "SetType": 2
-    },
-    {
-      "Id": "14593bc1-1f66-449a-8091-1bb5800929dd",
-      "Name": "ChargedShotCrate",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "54GRSBKJgec="
-      ],
-      "ColorData": [
-        68
-      ],
-      "Sort": -1,
-      "SetType": 1
     }
   ],
   "Screens": null

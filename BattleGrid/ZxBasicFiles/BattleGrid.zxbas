@@ -1,14 +1,14 @@
 REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
 'Total number of 1x1 defined sprites
-#define TOTAL_1x1_SPRITES 32
+#define TOTAL_1x1_SPRITES 20
 'Total number of 1x2 defined sprites
 #define TOTAL_1x2_SPRITES 0
 'Total number of 2x2 defined sprites
 #define TOTAL_2x2_SPRITES 0
 
 'Maximum on-screen 1x1 sprites
-#define ONSCREEN_1x1_SPRITES 24
+#define ONSCREEN_1x1_SPRITES 16
 'Maximum on-screen 1x2 sprites
 #define ONSCREEN_1x2_SPRITES 0
 'Maximum on-screen 2x2 sprites
@@ -28,6 +28,9 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --hea
 #include <keys.bas>
 #include "FastRND.zxbas"
 #include "BeepFX.zxbas"
+#include "InterruptInstaller.zxbas"
+
+InstallHandler()
 
 ink 7
 paper 0
@@ -62,8 +65,8 @@ cls
 #define CURSOR_INDEX 12
 #define ENEMA_INDEX 13
 #define ENEMB_INDEX 14
-#define TANKV_ADDRESS 15
-#define TANKH_ADDRESS 16
+#define TANKV_INDEX 15
+#define TANKH_INDEX 16
 
 'REM --SPRITE SECTION--
 #define PLAYER_ADDRESS (@spriteSet + 0)
@@ -218,8 +221,11 @@ defines:
 #define MAP_X_OFFSET 0
 #define MAP_Y_OFFSET 1
 
-#define MAX_ENEMY_COUNT 4
-#define ENEMY_SPEED 10
+#define MAX_ALIEN_COUNT 4
+#define ALIEN_SPEED 5
+
+#define MAX_TANK_COUNT 4
+#define TANK_SPEED 3
 
 #define TOOL_NONE 0
 
@@ -284,10 +290,15 @@ Dim reflectDirsD(4) as uByte => { 3, 1, 4, 2 }
 
 Dim maskTable(8) as uByte => { 1, 2, 4, 8, 16, 32, 64, 128  }
 
-Dim enemies(MAX_ENEMY_COUNT,4) as Byte         'x,y,dir,explodePhase
-Dim activeEnemies as uByte
-Dim enemyFrame as uByte = ENEMY_SPEED
+Dim aliens(MAX_ALIEN_COUNT,4) as Byte         'x,y,dir,explodePhase
+Dim activeAliens as uByte
+Dim alienFrame as uByte = ALIEN_SPEED
 
+Dim tanks(MAX_TANK_COUNT,4) as Byte         'x,y,dir,explodePhase
+Dim activeTanks as uByte
+Dim tankFrame as uByte = TANK_SPEED
+
+Dim activeTowers as uByte 
 
 Dim availableMines as uByte = 0
 Dim availableBombs as uByte = 0
@@ -315,6 +326,8 @@ sub InitGraphics()
     Create1x1Sprite(CURSOR_ADDRESS)
     Create1x1Sprite(ENEMA_ADDRESS)
     Create1x1Sprite(ENEMB_ADDRESS)
+    Create1x1Sprite(TANKV_ADDRESS)
+    Create1x1Sprite(TANKH_ADDRESS)
 
 end sub
 
@@ -439,31 +452,44 @@ sub InitLevel()
     GRID_OBJECT(BOMBCRATE_INDEX, 12, 17)
     GRID_OBJECT(CHARGEDSHOTCRATE_INDEX, 14, 17)
 
+    GRID_OBJECT(RADIOTOWER_INDEX, 10, 10)
+
     Dim buc as Ubyte
 
-    for buc = 1 to MAX_ENEMY_COUNT
-        enemies(buc, 4) = -1
+    for buc = 1 to MAX_ALIEN_COUNT
+        aliens(buc, 4) = -1
     next buc
 
-    activeEnemies = 00001111b
+    activeAliens = 00001111b
 
-    enemies(1, 1) = 4
-    enemies(1,2) = 4
-    enemies(1,3) = 1
+    aliens(1, 1) = 4
+    aliens(1,2) = 4
+    aliens(1,3) = 1
 
-    enemies(2, 1) = 8
-    enemies(2,2) = 4
-    enemies(2,3) = 1
+    aliens(2, 1) = 8
+    aliens(2,2) = 4
+    aliens(2,3) = 1
     
-    enemies(3, 1) = 12
-    enemies(3,2) = 4
-    enemies(3,3) = 1
+    aliens(3, 1) = 12
+    aliens(3,2) = 4
+    aliens(3,3) = 1
 
-    enemies(4, 1) = 16
-    enemies(4,2) = 4
-    enemies(4,3) = 1
+    aliens(4, 1) = 16
+    aliens(4,2) = 4
+    aliens(4,3) = 1
 
     
+    for buc = 1 to MAX_TANK_COUNT
+        tanks(buc, 4) = -1
+    next buc
+
+    activeTanks = 1
+
+    tanks(1,1) = 6
+    tanks(1,2) = 6
+    tanks(1,3) = 1
+
+    activeTowers = 1
 
 end sub
 
@@ -596,6 +622,13 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             return
 
         end if
+        end if
+
+        if tmpCell = RADIOTOWER_INDEX then
+
+            CLEAR_GRID_CELL(cellX, cellY)
+            EXPLODE_SHOT(shotIndex)
+
         end if
 
     end if
@@ -784,7 +817,7 @@ sub UpdateCursor()
             cursorMoved = 0
         end if
 
-    else if inkey$="" then
+    else if AnyKey() = 0 then
         cursorMoved = 0
     end if
 
@@ -798,15 +831,15 @@ CHECKCURSORFRAMES:
 end sub
 
 
-sub UpdateEnemies()
+sub UpdateAliens()
 
-    if activeEnemies = 0 then return
+    if activeAliens = 0 then return
 
-    enemyFrame = enemyFrame - 1
+    alienFrame = alienFrame - 1
 
-    if enemyFrame <> 0 then return
+    if alienFrame <> 0 then return
 
-    enemyFrame = ENEMY_SPEED
+    alienFrame = ALIEN_SPEED
 
     Dim buc as uByte
     Dim tmpExplode as byte
@@ -818,11 +851,11 @@ sub UpdateEnemies()
     Dim tmpMask as uByte
     Dim tmpCellValue as uByte
 
-    for buc = 1 to MAX_ENEMY_COUNT
+    for buc = 1 to MAX_ALIEN_COUNT
 
         tmpMask = TABLE_LOOKUP(@maskTable, buc)
 
-        if activeEnemies band tmpMask then 
+        if activeAliens band tmpMask then 
 
             'Movimiento del enemigo:
             /'
@@ -839,7 +872,7 @@ sub UpdateEnemies()
     
             '/
 
-            tmpExplode = enemies(buc, 4)
+            tmpExplode = aliens(buc, 4)
 
             if tmpExplode <> -1 then
 
@@ -847,16 +880,16 @@ sub UpdateEnemies()
 
                 if tmpExplode = 4 then
                     tmpExplode = -1
-                    activeEnemies = activeEnemies bxor tmpMask
+                    activeAliens = activeAliens bxor tmpMask
                 end if
 
-                enemies(buc, 4) = tmpExplode
+                aliens(buc, 4) = tmpExplode
 
             else
 
-                tmpX = enemies(buc, 1)
-                tmpY = enemies(buc, 2)
-                tmpDir = enemies(buc, 3)
+                tmpX = aliens(buc, 1)
+                tmpY = aliens(buc, 2)
+                tmpDir = aliens(buc, 3)
 
 
                 if tmpX & 1 then
@@ -880,7 +913,7 @@ sub UpdateEnemies()
                             goto ENDTESTCELL
                         else if tmpCellValue = MINE_INDEX then
                             CLEAR_GRID_CELL(tmpCellX + tmpDir, tmpCellY)
-                            enemies(buc, 4) = 0
+                            aliens(buc, 4) = 0
                             goto ENDTESTCELL
                         end if
 
@@ -896,7 +929,7 @@ sub UpdateEnemies()
                             goto ENDTESTCELL
                         else if tmpCellValue = MINE_INDEX then
                             CLEAR_GRID_CELL(tmpCellX, tmpCellY + 1)
-                            enemies(buc, 4) = 0
+                            aliens(buc, 4) = 0
                             goto ENDTESTCELL
                         end if
 
@@ -912,21 +945,198 @@ sub UpdateEnemies()
                             goto ENDTESTCELL
                         else if tmpCellValue = MINE_INDEX then
                             CLEAR_GRID_CELL(tmpCellX - tmpDir, tmpCellY)
-                            enemies(buc, 4) = 0
+                            aliens(buc, 4) = 0
                             goto ENDTESTCELL
                         end if
 
                     end if                'explotar
 
-                    enemies(buc, 4) = 0
+                    aliens(buc, 4) = 0
 
 ENDTESTCELL:
 
                 end if
 
-                enemies(buc, 1) = tmpX
-                enemies(buc, 2) = tmpY
-                enemies(buc, 3) = tmpDir
+                aliens(buc, 1) = tmpX
+                aliens(buc, 2) = tmpY
+                aliens(buc, 3) = tmpDir
+
+            end if
+
+        end if
+
+    next buc
+
+end sub
+
+sub UpdateTanks()
+
+    if activeTanks = 0 then return
+
+    tankFrame = tankFrame - 1
+
+    if tankFrame <> 0 then return
+
+    tankFrame = TANK_SPEED
+
+    Dim buc as uByte
+    Dim tmpExplode as byte
+    Dim tmpX as byte
+    Dim tmpY as byte
+    Dim tmpDir as byte
+    Dim tmpCellX as byte
+    Dim tmpCellY as byte
+    Dim tmpMask as uByte
+
+    Dim upCellValue as byte
+    Dim downCellValue as byte
+    Dim leftCellValue as byte
+    Dim rightCellValue as byte
+
+    for buc = 1 to MAX_TANK_COUNT
+
+        tmpMask = TABLE_LOOKUP(@maskTable, buc)
+
+        if activeTanks band tmpMask then 
+
+            tmpExplode = tanks(buc, 4)
+
+            if tmpExplode <> -1 then
+
+                tmpExplode = tmpExplode + 1
+
+                if tmpExplode = 4 then
+                    tmpExplode = -1
+                    activeTanks = activeTanks bxor tmpMask
+                end if
+
+                tanks(buc, 4) = tmpExplode
+
+            else
+
+                tmpX = tanks(buc, 1)
+                tmpY = tanks(buc, 2)
+                tmpDir = tanks(buc, 3)
+
+                'movimientos tanke: gira en sentido de las agujas del reloj
+                'Si queda bloqueado explota
+
+                if (tmpX & 1) or (tmpY & 1) then
+
+                    'Estamos en media celda, el movimiento continúa
+                    if tmpDir = 1 then
+                        tmpX = tmpX + 1
+                    else if tmpDir = 2 then
+                        tmpY = tmpY + 1
+                    else if tmpDir = 3 then
+                        tmpX = tmpX - 1
+                    else if tmpDir = 4 then
+                        tmpY = tmpY - 1
+                    end if 
+
+                else
+
+                    tmpCellX = (tmpX >> 1) - MAP_X_OFFSET
+                    tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
+
+                    if tmpCellX > 1 then leftCellValue = activeMap(tmpCellX - 1, tmpCellY) else leftCellValue = -1
+                    if tmpCellX < 20 then rightCellValue = activeMap(tmpCellX + 1, tmpCellY) else rightCellValue = -1
+                    if tmpCellY > 1 then upCellValue = activeMap(tmpCellX, tmpCellY - 1) else upCellValue = -1
+                    if tmpCellY < 19 then downCellValue = activeMap(tmpCellX, tmpCellY + 1) else downCellValue = -1
+
+TESTTANKLOOP:
+
+                    if leftCellValue = -1 then
+                    if rightCellValue = -1 then
+                    if upCellValue = -1 then
+                    if downCellValue = -1 then
+                        tanks(buc, 4) = 0
+                        goto ENDTESTCELLTANK
+                    end if
+                    end if
+                    end if
+                    end if
+
+
+                    if tmpDir = 1 then
+
+                        if rightCellValue = 0 then
+                            tmpX = tmpX + 1
+                            goto ENDTESTCELLTANK
+                        else 
+                            if rightCellValue = MINE_INDEX then
+                                CLEAR_GRID_CELL(tmpCellX + 1, tmpCellY)
+                                tanks(buc, 4) = 0
+                                goto ENDTESTCELLTANK
+                            else
+                                rightCellValue = -1
+                                tmpDir = 2
+                                goto TESTTANKLOOP
+                            end if
+                        end if
+                    end if
+
+                    if tmpDir = 2 then
+
+                        if downCellValue = 0 then
+                            tmpY = tmpY + 1
+                            goto ENDTESTCELLTANK
+                        else 
+                            if downCellValue = MINE_INDEX then
+                                CLEAR_GRID_CELL(tmpCellX, tmpCellY + 1)
+                                tanks(buc, 4) = 0
+                                goto ENDTESTCELLTANK
+                            else
+                                downCellValue = -1
+                                tmpDir = 3
+                                goto TESTTANKLOOP
+                            end if
+                        end if
+                    end if
+
+                    if tmpDir = 3 then
+
+                        if leftCellValue = 0 then
+                            tmpX = tmpX - 1
+                            goto ENDTESTCELLTANK
+                        else 
+                            if leftCellValue = MINE_INDEX then
+                                CLEAR_GRID_CELL(tmpCellX - 1, tmpCellY)
+                                tanks(buc, 4) = 0
+                                goto ENDTESTCELLTANK
+                            else
+                                leftCellValue = -1
+                                tmpDir = 4
+                                goto TESTTANKLOOP
+                            end if
+                        end if
+                    end if
+
+                    if tmpDir = 4 then
+
+                        if upCellValue = 0 then
+                            tmpY = tmpY - 1
+                            goto ENDTESTCELLTANK
+                        else 
+                            if upCellValue = MINE_INDEX then
+                                CLEAR_GRID_CELL(tmpCellX, tmpCellY - 1)
+                                tanks(buc, 4) = 0
+                                goto ENDTESTCELLTANK
+                            else
+                                upCellValue = -1
+                                tmpDir = 1
+                                goto TESTTANKLOOP
+                            end if
+                        end if
+                    end if
+
+ENDTESTCELLTANK:
+
+                end if
+
+                tanks(buc, 1) = tmpX
+                tanks(buc, 2) = tmpY
+                tanks(buc, 3) = tmpDir
 
             end if
 
@@ -972,20 +1182,20 @@ sub TestCollisions()
         tmpShot3Y = shots(3,2)
         activeShot3 = activeShots band 4
 
-        if activeEnemies then
+        if activeAliens then
 
-            for buc = 1 to MAX_ENEMY_COUNT
+            for buc = 1 to MAX_ALIEN_COUNT
 
-                if activeEnemies & TABLE_LOOKUP(@maskTable, buc) then
+                if activeAliens & TABLE_LOOKUP(@maskTable, buc) then
 
-                    tmpEnemX = enemies(buc, 1)
-                    tmpEnemY = enemies(buc, 2)
+                    tmpEnemX = aliens(buc, 1)
+                    tmpEnemY = aliens(buc, 2)
 
                     if activeShot1 then
                     if tmpEnemX = tmpShot1X then
                     if tmpEnemY = tmpShot1Y then
 
-                        enemies(buc, 4) = 0
+                        aliens(buc, 4) = 0
                         activeShots = activeShots band 11111110b
                         continue for
 
@@ -997,7 +1207,7 @@ sub TestCollisions()
                     if tmpEnemX = tmpShot2X then
                     if tmpEnemY = tmpShot2Y then
 
-                        enemies(buc, 4) = 0
+                        aliens(buc, 4) = 0
                         activeShots = activeShots band 11111101b
                         continue for
 
@@ -1009,7 +1219,58 @@ sub TestCollisions()
                     if tmpEnemX = tmpShot3X then
                     if tmpEnemY = tmpShot3Y then
 
-                        enemies(buc, 4) = 0
+                        aliens(buc, 4) = 0
+                        activeShots = activeShots band 11111011b
+                        continue for
+
+                    end if
+                    end if
+                    end if
+
+                end if 
+
+            next buc
+
+        end if
+
+        if activeTanks then
+
+            for buc = 1 to MAX_TANK_COUNT
+
+                if activeTanks & TABLE_LOOKUP(@maskTable, buc) then
+
+                    tmpEnemX = tanks(buc, 1)
+                    tmpEnemY = tanks(buc, 2)
+
+                    if activeShot1 then
+                    if tmpEnemX = tmpShot1X then
+                    if tmpEnemY = tmpShot1Y then
+
+                        tanks(buc, 4) = 0
+                        activeShots = activeShots band 11111110b
+                        continue for
+
+                    end if
+                    end if
+                    end if
+
+                    if activeShot2 then
+                    if tmpEnemX = tmpShot2X then
+                    if tmpEnemY = tmpShot2Y then
+
+                        tanks(buc, 4) = 0
+                        activeShots = activeShots band 11111101b
+                        continue for
+
+                    end if
+                    end if
+                    end if
+
+                    if activeShot3 then
+                    if tmpEnemX = tmpShot3X then
+                    if tmpEnemY = tmpShot3Y then
+
+                        tanks(buc, 4) = 0
                         activeShots = activeShots band 11111011b
                         continue for
 
@@ -1060,30 +1321,34 @@ sub TestCollisions()
         end if
 
 
-    else if activeEnemies then
+    else 
 
-        for buc = 1 to MAX_ENEMY_COUNT
+        if activeAliens then
 
-            tmpMask = TABLE_LOOKUP(@maskTable, buc)
+            for buc = 1 to MAX_ALIEN_COUNT
 
-            if activeEnemies & tmpMask then
+                tmpMask = TABLE_LOOKUP(@maskTable, buc)
 
-                tmpEnemX = enemies(buc, 1)
-                tmpEnemY = enemies(buc, 2)
+                if activeAliens & tmpMask then
 
-                if tmpEnemY = 42 then
-                if tmpEnemX = playerX then
+                    tmpEnemX = aliens(buc, 1)
+                    tmpEnemY = aliens(buc, 2)
 
-                    activeEnemies = activeEnemies bxor tmpMask
-                    dead = 1
-                    return
+                    if tmpEnemY = 42 then
+                    if tmpEnemX = playerX then
 
-                end if
-                end if
+                        activeAliens = activeAliens bxor tmpMask
+                        dead = 1
+                        return
 
-            end if 
+                    end if
+                    end if
 
-        next buc
+                end if 
+
+            next buc
+
+        end if
 
     end if
     
@@ -1101,11 +1366,13 @@ Dim buc as uByte
 
 while(1)
 
-    
+    frameCounter = 0
+
     UpdatePlayer()
     UpdateFire()
     UpdateCursor()
-    UpdateEnemies()
+    UpdateAliens()
+    UpdateTanks()
     TestCollisions()
 
     Draw1x1Sprite(playerSprite, playerX, 42)
@@ -1144,20 +1411,45 @@ while(1)
         Draw1x1Sprite(CURSOR_INDEX, 2 + (cursorX << 1), 4 + (cursorY << 1))
     end if
 
-    if activeEnemies <> 0 then
+    if activeAliens <> 0 then
 
-        for buc = 1 to MAX_ENEMY_COUNT
+        for buc = 1 to MAX_ALIEN_COUNT
 
-            if activeEnemies & TABLE_LOOKUP(@maskTable, buc) then
+            if activeAliens & TABLE_LOOKUP(@maskTable, buc) then
 
-                if enemies(buc, 4) <> -1 then
-                    Draw1x1Sprite(enemies(buc, 4) + EXPLODEA_INDEX, enemies(buc, 1), enemies(buc, 2))
+                if aliens(buc, 4) <> -1 then
+                    Draw1x1Sprite(aliens(buc, 4) + EXPLODEA_INDEX, aliens(buc, 1), aliens(buc, 2))
                 else
 
-                    if enemies(buc, 1) & 1 then 
-                        Draw1x1Sprite(ENEMB_INDEX, enemies(buc, 1), enemies(buc, 2))
+                    if aliens(buc, 1) & 1 then 
+                        Draw1x1Sprite(ENEMB_INDEX, aliens(buc, 1), aliens(buc, 2))
                     else
-                        Draw1x1Sprite(ENEMA_INDEX, enemies(buc, 1), enemies(buc, 2))
+                        Draw1x1Sprite(ENEMA_INDEX, aliens(buc, 1), aliens(buc, 2))
+                    end if
+
+                end if
+
+            end if
+    
+        next buc
+
+    end if
+
+
+    if activeTanks <> 0 then
+
+        for buc = 1 to MAX_TANK_COUNT
+
+            if activeTanks & TABLE_LOOKUP(@maskTable, buc) then
+
+                if tanks(buc, 4) <> -1 then
+                    Draw1x1Sprite(tanks(buc, 4) + EXPLODEA_INDEX, tanks(buc, 1), tanks(buc, 2))
+                else
+
+                    if tanks(buc, 3) & 1 then 
+                        Draw1x1Sprite(TANKH_INDEX, tanks(buc, 1), tanks(buc, 2))
+                    else
+                        Draw1x1Sprite(TANKV_INDEX, tanks(buc, 1), tanks(buc, 2))
                     end if
 
                 end if
@@ -1169,5 +1461,8 @@ while(1)
     end if
 
     RenderFrame()
+
+    while frameCounter < 2
+    end while
 
 end while
