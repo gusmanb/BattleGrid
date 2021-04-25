@@ -23,6 +23,7 @@
     <ZxBasic Include="ZxBasicFiles\MusicPlayer.zxbas" />
     <Z80Test Include="Z80UnitTests\UnitTest.z80test" />
     <Tzx Include="TapeFiles\Welcome.tzx" />
+    <ZxBasic Include="ZxBasicFiles\ZoomAnims.zxbas" />
   </ItemGroup>
   <Import Project="$(CustomProjectExtensionsPath)Spect.Net.CodeDiscover.targets" />
 </Project>

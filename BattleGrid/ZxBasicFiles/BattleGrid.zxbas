@@ -1,14 +1,14 @@
 REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
 'Total number of 1x1 defined sprites
-#define TOTAL_1x1_SPRITES 20
+#define TOTAL_1x1_SPRITES 16
 'Total number of 1x2 defined sprites
 #define TOTAL_1x2_SPRITES 0
 'Total number of 2x2 defined sprites
 #define TOTAL_2x2_SPRITES 0
 
 'Maximum on-screen 1x1 sprites
-#define ONSCREEN_1x1_SPRITES 16
+#define ONSCREEN_1x1_SPRITES 12
 'Maximum on-screen 1x2 sprites
 #define ONSCREEN_1x2_SPRITES 0
 'Maximum on-screen 2x2 sprites
@@ -29,16 +29,6 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --hea
 #include "FastRND.zxbas"
 #include "BeepFX.zxbas"
 #include "InterruptInstaller.zxbas"
-
-InstallHandler()
-InitFastRnd()
-
-ink 7
-paper 0
-border 0
-bright 1
-cls
-
 
 /' IDEAS
 
@@ -68,7 +58,6 @@ cls
 #define ENEMB_INDEX 14
 #define TANKV_INDEX 15
 #define TANKH_INDEX 16
-
 'REM --SPRITE SECTION--
 #define PLAYER_ADDRESS (@spriteSet + 0)
 #define PLAYERRIGHT_ADDRESS (@spriteSet + 8)
@@ -120,33 +109,36 @@ Dim spriteSet(16,8) as uByte => { _
 #define VBARRIERA_INDEX 49
 #define VBARRIERB_INDEX 50
 #define VBARRIERC_INDEX 51
-#define SPLITTER_INDEX 52
-#define BLOCKER_INDEX 53
-#define MINE_INDEX 54
-#define BOMB_INDEX 55
-#define CHARGEDSHOT_INDEX 56
-#define MINECRATE_INDEX 57
-#define BLOCKERCRATE_INDEX 58
-#define BOMBCRATE_INDEX 59
-#define CHARGEDSHOTCRATE_INDEX 60
-#define RADIOTOWER_INDEX 61
-#define FORCEFIELD_INDEX 62
-#define MOTHERSHIP_INDEX 63
-#define HANGAR_INDEX 64
-#define NUMBERS_INDEX 65
-#define SOLID_INDEX 75
-#define ZOOMALIENA_INDEX 76
-#define ZOOMALIENB_INDEX 80
-#define SHOTDEATHA_INDEX 84
-#define SHOTDEATHB_INDEX 88
-#define SHOTDEATHC_INDEX 92
-#define SHOTDEATHD_INDEX 96
-#define SHOTDEATHE_INDEX 100
-#define SHOTDEATHF_INDEX 104
-#define TANKDEATHA_INDEX 108
-#define TANKDEATHB_INDEX 112
+#define TERRAIN_INDEX 52
+#define BUILDINGS_INDEX 61
+#define SPLITTER_INDEX 70
+#define BLOCKER_INDEX 71
+#define MINE_INDEX 72
+#define BOMB_INDEX 73
+#define CHARGEDSHOT_INDEX 74
+#define MINECRATE_INDEX 75
+#define BLOCKERCRATE_INDEX 76
+#define BOMBCRATE_INDEX 77
+#define CHARGEDSHOTCRATE_INDEX 78
+#define RADIOTOWER_INDEX 79
+#define FORCEFIELD_INDEX 80
+#define MOTHERSHIP_INDEX 81
+#define HANGAR_INDEX 82
+#define NUMBERS_INDEX 83
+#define SOLID_INDEX 93
+#define ZOOMALIENA_INDEX 94
+#define ZOOMALIENB_INDEX 98
+#define SHOTDEATHA_INDEX 102
+#define SHOTDEATHB_INDEX 106
+#define SHOTDEATHC_INDEX 110
+#define SHOTDEATHD_INDEX 114
+#define SHOTDEATHE_INDEX 118
+#define SHOTDEATHF_INDEX 122
+#define SHOTDEATHG_INDEX 126
+#define TANKDEATHA_INDEX 130
+#define TANKDEATHB_INDEX 134
 
-Dim tileSet(116,8) as uByte => { _
+Dim tileSet(138,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
@@ -199,6 +191,24 @@ Dim tileSet(116,8) as uByte => { _
 { $3C, $5A, $E7, $DB, $E7, $C3, $E7, $DB }, _
 { $E7, $C3, $E7, $DB, $DB, $E7, $C3, $E7 }, _
 { $DB, $E7, $C3, $E7, $DB, $E7, $5A, $3C }, _
+{ $00, $A3, $05, $1A, $A5, $2A, $55, $6A }, _
+{ $00, $38, $D7, $AA, $55, $AA, $55, $AA }, _
+{ $00, $20, $00, $82, $60, $B0, $58, $AC }, _
+{ $35, $2A, $55, $2A, $35, $AA, $35, $6A }, _
+{ $AA, $45, $80, $11, $B8, $11, $82, $55 }, _
+{ $55, $AC, $56, $AA, $56, $AA, $56, $AC }, _
+{ $55, $2A, $15, $0A, $4D, $07, $08, $00 }, _
+{ $55, $AA, $55, $AA, $55, $EA, $1D, $47 }, _
+{ $54, $AC, $59, $A8, $48, $90, $60, $88 }, _
+{ $0F, $79, $F0, $FF, $E2, $88, $95, $9D }, _
+{ $99, $FF, $C3, $FF, $22, $88, $55, $DD }, _
+{ $F0, $9E, $0F, $FF, $23, $89, $55, $DD }, _
+{ $80, $91, $AA, $BB, $80, $88, $95, $9D }, _
+{ $00, $11, $AA, $BB, $00, $88, $55, $DD }, _
+{ $01, $11, $A9, $B9, $01, $89, $55, $DD }, _
+{ $80, $90, $AA, $BA, $80, $80, $98, $FF }, _
+{ $81, $3C, $7E, $66, $76, $66, $E7, $FF }, _
+{ $01, $09, $55, $5D, $01, $01, $19, $FF }, _
 { $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
 { $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
 { $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
@@ -231,41 +241,45 @@ Dim tileSet(116,8) as uByte => { _
 { $00, $F8, $9C, $7E, $E6, $86, $86, $86 }, _
 { $71, $3F, $27, $22, $20, $20, $15, $0F }, _
 { $8E, $FC, $E4, $44, $04, $04, $A8, $F0 }, _
-{ $18, $19, $0F, $06, $04, $07, $07, $0E }, _
-{ $18, $98, $F0, $60, $20, $E0, $E0, $70 }, _
-{ $1C, $1F, $1E, $1E, $19, $19, $66, $66 }, _
-{ $38, $F8, $78, $78, $98, $98, $66, $66 }, _
-{ $18, $19, $0F, $06, $04, $07, $07, $0E }, _
-{ $18, $9A, $F0, $63, $26, $EC, $E2, $70 }, _
-{ $1C, $1F, $1E, $1E, $19, $19, $66, $66 }, _
-{ $38, $F8, $78, $78, $98, $98, $66, $66 }, _
-{ $18, $19, $0F, $06, $04, $07, $07, $0E }, _
-{ $18, $98, $F0, $60, $3C, $C2, $DA, $5A }, _
-{ $1C, $1F, $1E, $1E, $19, $19, $66, $66 }, _
-{ $42, $BC, $78, $78, $98, $98, $66, $66 }, _
-{ $18, $19, $0F, $07, $04, $05, $07, $0E }, _
-{ $18, $99, $F0, $3C, $42, $99, $A5, $A5 }, _
-{ $1C, $1F, $1E, $1F, $19, $19, $66, $66 }, _
-{ $99, $42, $3C, $79, $98, $88, $66, $66 }, _
-{ $18, $18, $0D, $04, $05, $06, $06, $0C }, _
-{ $18, $C1, $18, $E2, $4D, $85, $50, $8B }, _
-{ $1E, $1C, $1C, $1E, $19, $19, $66, $66 }, _
-{ $99, $42, $BC, $01, $71, $CE, $60, $60 }, _
-{ $00, $16, $21, $24, $4A, $56, $28, $46 }, _
-{ $00, $88, $50, $08, $38, $45, $92, $AA }, _
-{ $24, $10, $2A, $24, $25, $10, $02, $06 }, _
-{ $91, $8A, $64, $A1, $39, $AA, $44, $18 }, _
-{ $00, $FE, $25, $25, $FE, $FE, $C6, $D2 }, _
-{ $00, $00, $00, $00, $C0, $C0, $7C, $7E }, _
-{ $D2, $C6, $FE, $FE, $25, $25, $FE, $00 }, _
-{ $7E, $7C, $C0, $80, $00, $00, $00, $00 }, _
-{ $00, $C0, $A0, $A0, $D8, $D8, $CF, $4F }, _
-{ $00, $04, $00, $20, $04, $00, $80, $CA }, _
-{ $4F, $CF, $D8, $D0, $A0, $A0, $C0, $00 }, _
-{ $D5, $80, $00, $04, $10, $00, $02, $00 } _
+{ $09, $1D, $0F, $06, $04, $07, $07, $0E }, _
+{ $90, $B8, $F0, $60, $20, $E0, $E0, $70 }, _
+{ $1C, $1F, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $38, $F8, $78, $38, $98, $D8, $66, $44 }, _
+{ $09, $1D, $0F, $06, $04, $07, $07, $0E }, _
+{ $90, $BA, $F0, $63, $26, $EC, $E2, $70 }, _
+{ $1C, $1F, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $38, $F8, $78, $38, $98, $D8, $66, $44 }, _
+{ $09, $1D, $0F, $06, $04, $07, $07, $0E }, _
+{ $90, $B8, $F0, $60, $3C, $C2, $DA, $5A }, _
+{ $1C, $1F, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $42, $BC, $78, $38, $98, $D8, $66, $44 }, _
+{ $09, $1D, $0F, $07, $04, $04, $06, $0E }, _
+{ $88, $99, $80, $3C, $42, $99, $A5, $A5 }, _
+{ $1C, $1E, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $99, $42, $3C, $01, $98, $C8, $66, $44 }, _
+{ $08, $18, $09, $02, $02, $00, $00, $08 }, _
+{ $0C, $82, $39, $45, $3C, $7E, $F7, $6F }, _
+{ $1A, $12, $12, $10, $19, $18, $66, $22 }, _
+{ $7E, $BC, $99, $4E, $30, $82, $6C, $00 }, _
+{ $21, $47, $06, $10, $19, $1A, $20, $28 }, _
+{ $0C, $4E, $25, $43, $05, $00, $98, $19 }, _
+{ $02, $32, $18, $19, $08, $42, $27, $01 }, _
+{ $82, $30, $01, $41, $17, $80, $69, $C2 }, _
+{ $00, $08, $00, $00, $20, $04, $00, $40 }, _
+{ $00, $40, $04, $00, $02, $00, $00, $80 }, _
+{ $00, $20, $04, $00, $40, $00, $08, $00 }, _
+{ $00, $08, $00, $22, $00, $40, $08, $00 }, _
+{ $4E, $4C, $78, $49, $4C, $76, $4B, $3F }, _
+{ $72, $32, $1E, $92, $32, $6E, $D2, $7C }, _
+{ $02, $03, $02, $03, $02, $03, $01, $00 }, _
+{ $C0, $40, $C0, $40, $C0, $40, $80, $00 }, _
+{ $76, $4B, $3F, $02, $03, $02, $03, $02 }, _
+{ $6E, $D2, $7C, $C0, $40, $C0, $40, $C0 }, _
+{ $03, $01, $04, $01, $11, $01, $45, $11 }, _
+{ $40, $80, $20, $80, $88, $A0, $82, $90 } _
 }
 
-Dim tileColors(116) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $46, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
+Dim tileColors(138) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $04, $04, $04, $04, $14, $04, $04, $04, $04, $0A, $0A, $0A, $0A, $0A, $0A, $0A, $02, $0A, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $CE, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
 
 defines:
 #define CURSOR_FRAMES 10
@@ -277,13 +291,20 @@ defines:
 #define MAX_ALIEN_COUNT 4
 #define ALIEN_SPEED 5
 
-#define MAX_TANK_COUNT 4
+#define MAX_TANK_COUNT 2
 #define TANK_SPEED 3
 
 #define MAX_SHIP_COUNT 4
 #define SHIP_SPEED 50
 
+#define MAX_HANGAR_COUNT 2
+#define HANGAR_SPEED 150
+
 #define TOOL_NONE 0
+#define TOOL_BLOCKER 1
+#define TOOL_MINE 2
+#define TOOL_BOMB 3
+#define TOOL_CHARGEDSHOT 4
 
 
 macros:
@@ -349,6 +370,15 @@ ships(TMPVAR, 3) = SPAWNDIRECTION \
 ships(TMPVAR, 4) = SHIP_SPEED \
 GRID_OBJECT(MOTHERSHIP_INDEX, X, Y)
 
+#define CREATE_HANGAR(X, Y, SPAWNDIRECTION, TMPVAR) \
+TMPVAR = FindEmptyBit(activeHangars) \
+activeHangars = activeHangars or TABLE_LOOKUP(@maskTable, TMPVAR) \
+hangars(TMPVAR, 1) = X \
+hangars(TMPVAR, 2) = Y \
+hangars(TMPVAR, 3) = SPAWNDIRECTION \
+hangars(TMPVAR, 4) = HANGAR_SPEED \
+GRID_OBJECT(HANGAR_INDEX, X, Y)
+
 vars:
 Dim playerX as uByte = 20
 Dim playerSprite as uByte = 0
@@ -395,7 +425,39 @@ Dim activeShips as uByte
 Dim ships(MAX_SHIP_COUNT,4) as uByte 'x,y,dir,frame
 Dim freezingShip as uByte = 1
 
+Dim activeHangars as uByte
+Dim hangars(MAX_HANGAR_COUNT,4) as uByte 'x,y,dir,frame
+Dim freezingHangar as uByte = 1
+
+init:
+
+#include "ZoomAnims.zxbas"
+
+InstallHandler()
+InitFastRnd()
+
+ink 7
+paper 0
+border 0
+bright 1
+cls
+
 funcs:
+function fastcall FindEmptyBit(InputByte as uByte) as uByte
+
+    asm
+
+        ld b, 0
+febloop:
+        inc b
+        srl a
+        jp c, febloop
+        ld a, b
+
+    end asm
+
+end function
+
 sub InitGraphics()
 
     InitGFXLib()
@@ -507,6 +569,8 @@ sub InitLevel()
     activeAliens = 0
     activeTanks = 0
     activeShips = 0
+    activeHangars = 0
+
     playerX = 20
     dead = 0
     tankProbability = 128
@@ -526,6 +590,10 @@ sub InitLevel()
     shots(2,4) = -1
     shots(3,4) = -1
 
+    
+    Dim buc as Ubyte
+
+
     GRID_OBJECT(SPLITTER_INDEX, 3, 3)
     GRID_OBJECT(SPLITTER_INDEX, 17, 3)
 
@@ -536,10 +604,51 @@ sub InitLevel()
     GRID_OBJECT(DEFLECTORA_INDEX, 1, 3)
     GRID_OBJECT(DEFLECTORB_INDEX, 1, 10)
 
-    GRID_OBJECT(HBARRIERA_INDEX, 9, 14)
-    GRID_OBJECT(HBARRIERB_INDEX, 10, 14)
-    GRID_OBJECT(HBARRIERB_INDEX, 11, 14)
-    GRID_OBJECT(HBARRIERC_INDEX, 12, 14)
+    'for buc = 1 to 8
+    '    GRID_OBJECT(FORCEFIELD_INDEX, buc, 14)
+    'next buc
+
+    'GRID_OBJECT(HBARRIERA_INDEX, 9, 14)
+    'GRID_OBJECT(HBARRIERB_INDEX, 10, 14)
+    'GRID_OBJECT(HBARRIERB_INDEX, 11, 14)
+    'GRID_OBJECT(HBARRIERC_INDEX, 12, 14)
+
+    GRID_OBJECT(BUILDINGS_INDEX, 9, 13)
+    GRID_OBJECT(BUILDINGS_INDEX + 1, 10, 13)
+    GRID_OBJECT(BUILDINGS_INDEX + 1, 11, 13)
+    GRID_OBJECT(BUILDINGS_INDEX + 2, 12, 13)
+    
+    GRID_OBJECT(BUILDINGS_INDEX + 3, 9, 14)
+    GRID_OBJECT(BUILDINGS_INDEX + 4, 10, 14)
+    GRID_OBJECT(BUILDINGS_INDEX + 4, 11, 14)
+    GRID_OBJECT(BUILDINGS_INDEX + 5, 12, 14)
+
+    GRID_OBJECT(BUILDINGS_INDEX + 6, 9, 15)
+    GRID_OBJECT(BUILDINGS_INDEX + 7, 10, 15)
+    GRID_OBJECT(BUILDINGS_INDEX + 7, 11, 15)
+    GRID_OBJECT(BUILDINGS_INDEX + 8, 12, 15)
+
+
+
+    GRID_OBJECT(TERRAIN_INDEX, 1, 14)
+    GRID_OBJECT(TERRAIN_INDEX + 1, 2, 14)
+    GRID_OBJECT(TERRAIN_INDEX + 1, 3, 14)
+    GRID_OBJECT(TERRAIN_INDEX + 2, 4, 14)
+    
+    GRID_OBJECT(TERRAIN_INDEX + 3, 1, 15)
+    GRID_OBJECT(TERRAIN_INDEX + 4, 2, 15)
+    GRID_OBJECT(TERRAIN_INDEX + 4, 3, 15)
+    GRID_OBJECT(TERRAIN_INDEX + 5, 4, 15)
+
+    GRID_OBJECT(TERRAIN_INDEX + 6, 1, 16)
+    GRID_OBJECT(TERRAIN_INDEX + 7, 2, 16)
+    GRID_OBJECT(TERRAIN_INDEX + 7, 3, 16)
+    GRID_OBJECT(TERRAIN_INDEX + 8, 4, 16)
+
+
+    for buc = 13 to 19
+        GRID_OBJECT(FORCEFIELD_INDEX, buc, 14)
+    next buc
 
     GRID_OBJECT(VBARRIERA_INDEX, 20, 14)
     GRID_OBJECT(VBARRIERB_INDEX, 20, 15)
@@ -555,22 +664,12 @@ sub InitLevel()
 
     GRID_OBJECT(RADIOTOWER_INDEX, 10, 10)
 
-    Dim buc as Ubyte
-
-    for buc = 1 to MAX_TANK_COUNT
-        tanks(buc, 4) = -1
-    next buc
-
-    activeTanks = 1
-
-    tanks(1,1) = 6
-    tanks(1,2) = 6
-    tanks(1,3) = 1
-
     activeTowers = 1
 
     CREATE_SHIP(7, 1, 3, buc)
     CREATE_SHIP(13, 1, 1, buc)
+
+    CREATE_HANGAR(10, 1, 2, buc)
 
 end sub
 
@@ -667,7 +766,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
         end if
 
         if tmpCell >= HBARRIERA_INDEX then 
-        if tmpCell <= VBARRIERC_INDEX then
+        if tmpCell <= BUILDINGS_INDEX + 8 then
 
             shots(shotIndex, 4) = 0 'explodes
 
@@ -714,6 +813,13 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
         end if
 
+        if tmpCell = FORCEFIELD_INDEX then
+
+            EXPLODE_SHOT(shotIndex)
+            return
+
+        end if
+
         if tmpCell = MOTHERSHIP_INDEX then
 
             CLEAR_GRID_CELL(cellX, cellY)
@@ -725,6 +831,26 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 if ships(tmpCell, 2) = cellY then
 
                     activeShips = activeShips bxor TABLE_LOOKUP(@maskTable, tmpCell)
+                    return
+
+                end if
+                end if
+
+            next tmpCell
+            
+        end if
+
+        if tmpCell = HANGAR_INDEX then
+
+            CLEAR_GRID_CELL(cellX, cellY)
+            EXPLODE_SHOT(shotIndex)
+
+            for tmpCell = 1 to MAX_HANGAR_COUNT
+
+                if hangars(tmpCell, 1) = cellX then
+                if hangars(tmpCell, 2) = cellY then
+
+                    activeHangars = activeHangars bxor TABLE_LOOKUP(@maskTable, tmpCell)
                     return
 
                 end if
@@ -859,6 +985,7 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
 
         if tmpItem = 0 then
             SetTileChecked(activeMap(mapX, mapY), tileColors(DEFLECTORA_INDEX + 1), mapX + MAP_X_OFFSET, mapY + MAP_Y_OFFSET)
+            DeflectorEffect()
         end if
 
     end if
@@ -939,7 +1066,7 @@ function LineOfSight(x as uinteger, y as uinteger) as ubyte
     DIm buc as ubyte
 
     for buc = 1 to 19 - y
-        if peek(address) <> 0 then return 0
+        if peek(address) <> 0 and peek(address) <> FORCEFIELD_INDEX then return 0
         address = address + 1
     next buc
 
@@ -1037,7 +1164,7 @@ TESTALIENDOWN:
 
                         tmpCellValue = activeMap(tmpCellX, tmpCellY + 1)
 
-                        if tmpCellValue = 0 then 'bajar
+                        if tmpCellValue = 0 or tmpCellValue = FORCEFIELD_INDEX then 'bajar
                             tmpDir = -tmpDir
                             tmpY = tmpY + 2 'verticalmente se mueve en celdas
                             goto ENDTESTCELL
@@ -1071,7 +1198,7 @@ ALIENCONTINUE:
 
                     tmpCellValue = activeMap(tmpCellX + tmpDir, tmpCellY)
 
-                    if tmpCellValue = 0 then
+                    if tmpCellValue = 0 or tmpCellValue = FORCEFIELD_INDEX then
                         tmpX = tmpX + tmpDir
                         goto ENDTESTCELL
                     else if tmpCellValue = MINE_INDEX then
@@ -1086,7 +1213,7 @@ ALIENINVERT:
 
                     tmpCellValue = activeMap(tmpCellX - tmpDir, tmpCellY) 
 
-                    if tmpCellValue = 0 then 'invertir (en la última fila explota)                       
+                    if tmpCellValue = 0 or tmpCellValue = FORCEFIELD_INDEX  then 'invertir (en la última fila explota)                       
                         tmpDir = -tmpDir
                         tmpX = tmpX + tmpDir
                         goto ENDTESTCELL
@@ -1106,7 +1233,11 @@ ENDTESTCELL:
                 aliens(buc, 2) = tmpY
                 aliens(buc, 3) = tmpDir
 
-                if tmpY = 42 then dead = 1
+                if tmpY = 42 then 
+                    dead = 1
+                else if aliens(buc, 4) = 0 then
+                    AlienDeathEffect()
+                end if
 
             end if
 
@@ -1203,6 +1334,11 @@ sub UpdateTanks()
                     if tmpCellX < 20 then rightCellValue = activeMap(tmpCellX + 1, tmpCellY) else rightCellValue = -1
                     if tmpCellY > 1 then upCellValue = activeMap(tmpCellX, tmpCellY - 1) else upCellValue = -1
                     if tmpCellY < 19 then downCellValue = activeMap(tmpCellX, tmpCellY + 1) else downCellValue = -1
+
+                    if leftCellValue = FORCEFIELD_INDEX then leftCellValue = 0
+                    if rightCellValue = FORCEFIELD_INDEX then rightCellValue = 0
+                    if upCellValue = FORCEFIELD_INDEX then upCellValue = 0
+                    if downCellValue = FORCEFIELD_INDEX then downCellValue = 0
 
 TESTTANKLOOP:
 
@@ -1371,6 +1507,7 @@ sub TestCollisions()
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111110b
+                        AlienDeathEffect()
                         continue for
 
                     end if
@@ -1383,6 +1520,7 @@ sub TestCollisions()
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111101b
+                        AlienDeathEffect()
                         continue for
 
                     end if
@@ -1395,6 +1533,7 @@ sub TestCollisions()
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111011b
+                        AlienDeathEffect()
                         continue for
 
                     end if
@@ -1550,129 +1689,99 @@ sub UpdateShips()
 
 end sub
 
-sub printZoomedTile(x as uByte, y as uByte, tileIndex as uinteger, attribute as ubyte)
+sub UpdateHangars()
 
-    dim tbyte as ubyte
-    dim tmpX as ubyte
-    dim tmpY as ubyte
+    if activeHangars = 0 then return
 
-    dim tileAddress as uinteger = tileIndex << 3
-    tileAddress = tileAddress + @tileSet
+    Dim buc as uByte
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpDir as uByte
+    Dim tmpVal as uByte
 
-    for tmpY = y to y + 7
+    for buc = freezingHangar to MAX_HANGAR_COUNT
+    
+        if activeHangars & TABLE_LOOKUP(@maskTable, buc) then
 
-        tbyte = peek(tileAddress)
-        tmpX = x
+            if hangars(buc, 4) > 0 then
+                hangars(buc, 4) = hangars(buc, 4) - 1
+            else
+                if AVAILABLE_SLOT(activeTanks, MAX_TANK_COUNT) then
+                    hangars(buc, 4) = HANGAR_SPEED
+                    tmpX = hangars(buc, 1)
+                    tmpY = hangars(buc, 2)
+                    tmpDir = hangars(buc, 3)
+                    
+                    if tmpDir = 1 then  'spawn derecha
+                        tmpX = tmpX + 1
+                    else if tmpDir = 2 then 'abajo
+                        tmpY = tmpY + 1
+                    else if tmpDir = 3 then
+                        tmpX = tmpX - 1
+                    else if tmpDir = 4 then
+                        tmpY = tmpY - 1
+                    end if
+                
+                    CREATE_TANK(tmpX, tmpY, tmpDir, tmpVal)
+                    freezingHangar = 1
+                else
+                    freezingHangar = buc
+                    return                                      'If a hangar is ready to generate tank but no free spot is available we freeze the generation timers
+                end if
+            end if
+        end if
 
-        if tbyte band 128 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        tmpX = tmpX + 1
-        if tbyte band 64 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        tmpX = tmpX + 1
-        if tbyte band 32 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        tmpX = tmpX + 1
-        if tbyte band 16 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        tmpX = tmpX + 1
-        if tbyte band 8 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        tmpX = tmpX + 1
-        if tbyte band 4 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        tmpX = tmpX + 1
-        if tbyte band 2 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        tmpX = tmpX + 1
-        if tbyte band 1 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
-        
-        tileAddress = tileAddress + 1
-
-    next tmpY
+    next buc
 
 end sub
 
+function ModulatedRand(mask as ubyte, adder as ubyte) as ubyte
 
-sub ShowZoomedFrame(index as ubyte, color as ubyte)
+    return (FastRnd() band mask) + adder
 
-    printZoomedTile(3, 4, index, color)
-    printZoomedTile(11, 4, index + 1, color)
-    printZoomedTile(3, 12, index + 2, color)
-    printZoomedTile(11, 12, index + 3, color)
+end function
 
-end sub
+sub BorderEffect(color1 as ubyte, color2 as ubyte, audMask as ubyte, audBase as ubyte, frames as ubyte)
 
-
-Dim attribsAlienA(6) as ubyte = { 0, 1, 65, 3, 4, 68 }
-Dim attribsAlienB(4) as ubyte = { 66, 2, 1, 0 }
-
-sub PlayDeathAlien()
-
+    
+    Dim tmpBorder as ubyte = 0
     Dim buc as ubyte
 
-    for buc = 1 to 6
+    'Dim cTable(2) as ubyte
+    'cTable(1) = color1
+    'cTable(2) = color2
 
-        ShowZoomedFrame(ZOOMALIENA_INDEX, attribsAlienA(buc))
+    while frameCounter < frames
 
-    next buc
+        'tmpBorder = cTable((FastRnd() band 1) + 1)
 
-    DoPause(50)
+        if FastRnd() band 1 then
+            tmpBorder = color1
+        else
+            tmpBorder = color2
+        end if
+        'tmpBorder = (FastRnd() band 7)
 
-    ShowZoomedFrame(ZOOMALIENB_INDEX, 68)
+        for buc = 1 to 4
+            out $fe, tmpBorder
+            ModulatedRand(audMask, audBase)
+            asm
+                ld b, a
+                DELAYLOOP1:
+                nop
+                djnz DELAYLOOP1
+            end asm
+            out $fe, tmpBorder bor 16
+            ModulatedRand(audMask, audBase)
+            asm
+                ld b, a
+                DELAYLOOP2:
+                nop
+                djnz DELAYLOOP2
+            end asm
+        next buc
 
-    DoPause(30)
-
-    for buc = 1 to 4
-
-        ShowZoomedFrame(ZOOMALIENB_INDEX, attribsAlienB(buc))
-
-    next buc
-
-    while frameCounter < 150
     end while
-
-end sub
-
-Dim colorsExp(3) as ubyte => { 66, 2, 0  }
-sub PlayDeathShot()
-
-    Dim currentIndex as ubyte
-    Dim buc as ubyte
-
-    currentIndex = SHOTDEATHA_INDEX
-
-    ShowZoomedFrame(SHOTDEATHA_INDEX, 6)
-
-    DoPause(30)
-
-    for buc = 1 to 6
-
-        ShowZoomedFrame(currentIndex, tileColors(currentIndex + 1))
-        DoPause(10)
-
-        currentIndex = currentIndex + 4
-
-    next buc
-
-    for buc = 1 to 3
-
-        ShowZoomedFrame(SHOTDEATHF_INDEX, colorsExp(buc))
-        DoPause(20)
-
-    next buc
-
-    DoPause(100)
-
-end sub
-
-sub PlayDeathTank()
-
-    ShowZoomedFrame(TANKDEATHA_INDEX, 7)
-    DoPause(10)
-    ShowZoomedFrame(TANKDEATHA_INDEX, 71)
-    DoPause(30)
-    ShowZoomedFrame(TANKDEATHB_INDEX, 114)
-    DoPause(10)
-    ShowZoomedFrame(TANKDEATHA_INDEX, 71)
-    DoPause(30)
-    ShowZoomedFrame(TANKDEATHA_INDEX, 0)
-    DoPause(10)
-
-    PlayDeathShot()
 
 end sub
 
@@ -1684,6 +1793,13 @@ InitLevel()
 
 Dim buc as uByte
 
+
+
+
+
+
+Dim tmpLoop as ubyte
+
 while(1)
 
     frameCounter = 0
@@ -1692,6 +1808,7 @@ while(1)
     UpdateAliens()
     UpdateTanks()
     UpdateShips()
+    UpdateHangars()
     UpdatePlayer()
     UpdateFire()
     TestCollisions()
@@ -1756,7 +1873,6 @@ while(1)
 
     end if
 
-
     if activeTanks <> 0 then
 
         for buc = 1 to MAX_TANK_COUNT
@@ -1782,6 +1898,9 @@ while(1)
     end if
 
     RenderFrame()
+
+    'tmpLoop = tmpLoop + 1
+    'BorderEffect(2,0,127,128,10)
 
     if dead <> 0 then
 

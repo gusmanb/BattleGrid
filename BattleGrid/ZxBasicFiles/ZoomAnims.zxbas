@@ -1,0 +1,133 @@
+﻿Dim attribsAlienA(6) as ubyte = { 0, 1, 65, 3, 4, 68 }
+Dim attribsAlienB(4) as ubyte = { 66, 2, 1, 0 }
+Dim colorsExp(4) as ubyte => { 66, 2, 1, 0  }
+
+sub printZoomedTile(x as uByte, y as uByte, tileIndex as uinteger, attribute as ubyte)
+
+    dim tbyte as ubyte
+    dim tmpX as ubyte
+    dim tmpY as ubyte
+
+    dim tileAddress as uinteger = tileIndex << 3
+    tileAddress = tileAddress + @tileSet
+
+    for tmpY = y to y + 7
+
+        tbyte = peek(tileAddress)
+        tmpX = x
+
+        if tbyte band 128 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 64 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 32 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 16 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 8 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 4 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 2 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 1 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        
+        tileAddress = tileAddress + 1
+
+    next tmpY
+
+end sub
+
+sub ShowZoomedFrame(index as ubyte, color as ubyte)
+
+    printZoomedTile(3, 4, index, color)
+    printZoomedTile(11, 4, index + 1, color)
+    printZoomedTile(3, 12, index + 2, color)
+    printZoomedTile(11, 12, index + 3, color)
+
+end sub
+
+sub PlayDeathAlien()
+
+    Dim buc as ubyte
+
+    for buc = 1 to 6
+
+        ShowZoomedFrame(ZOOMALIENA_INDEX, attribsAlienA(buc))
+
+    next buc
+
+    DoPause(50)
+
+    ShowZoomedFrame(ZOOMALIENB_INDEX, 68)
+
+    AlienDeathEffect()
+    DoPause(5)
+
+    for buc = 1 to 4
+
+        ShowZoomedFrame(ZOOMALIENB_INDEX, attribsAlienB(buc))
+
+    next buc
+
+    while frameCounter < 150
+    end while
+
+end sub
+
+sub PlayDeathShot()
+
+    Dim currentIndex as ubyte
+    Dim buc as ubyte
+
+    currentIndex = SHOTDEATHA_INDEX
+
+    ShowZoomedFrame(SHOTDEATHA_INDEX, 6)
+
+    DoPause(30)
+
+    for buc = 1 to 7
+
+        ShowZoomedFrame(currentIndex, tileColors(currentIndex + 1))
+        if buc < 3 then
+            DoPause(7)
+        else
+            ExplodeAnimEffect()
+        end if
+
+        currentIndex = currentIndex + 4
+
+    next buc
+
+    for buc = 1 to 4
+
+        ShowZoomedFrame(SHOTDEATHG_INDEX, colorsExp(buc))
+        DoPause(10)
+
+    next buc
+
+    DoPause(100)
+
+end sub
+
+sub PlayDeathTank()
+
+    ShowZoomedFrame(TANKDEATHA_INDEX, 1)
+    DoPause(10)
+    ShowZoomedFrame(TANKDEATHA_INDEX, 7)
+    DoPause(10)
+    ShowZoomedFrame(TANKDEATHA_INDEX, 71)
+    DoPause(30)
+    ShowZoomedFrame(TANKDEATHB_INDEX, 114)
+    'DoPause(15)
+    ExplodeAnimEffect()
+
+
+    ShowZoomedFrame(TANKDEATHA_INDEX, 71)
+    DoPause(30)
+    ShowZoomedFrame(TANKDEATHA_INDEX, 0)
+    DoPause(10)
+
+    PlayDeathShot()
+
+end sub

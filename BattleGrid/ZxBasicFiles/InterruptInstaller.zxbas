@@ -59,18 +59,3 @@ function fastcall AnyKey() AS UByte
         
     end asm
 end function
-
-function fastcall FindEmptyBit(InputByte as uByte) as uByte
-
-    asm
-
-        ld b, 0
-febloop:
-        inc b
-        srl a
-        jp c, febloop
-        ld a, b
-
-    end asm
-
-end function

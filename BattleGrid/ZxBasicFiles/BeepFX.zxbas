@@ -1,4 +1,6 @@
-﻿sub fastcall PlayFX(effectNumber as uByte)
+﻿Dim borderColors(4) as ubyte => { 0, 0, 0, 0 }
+
+function fastcall PlayFX(effectNumber as uByte) as ubyte
 
 asm
 
@@ -24,9 +26,9 @@ play:
 	rra
 	rra
 	and 7
-	ld (sfxRoutineToneBorder  +1),a
-	ld (sfxRoutineNoiseBorder +1),a
-	ld (sfxRoutineSampleBorder+1),a
+	;ld (sfxRoutineToneBorder  +1),a
+	;ld (sfxRoutineNoiseBorder +1),a
+	;ld (sfxRoutineSampleBorder+1),a
 
 
 readData:
@@ -106,9 +108,25 @@ sfxRoutineToneDuty:
 	sbc a,a
 	and 16
 sfxRoutineToneBorder:
-	or 0
-	out (254),a
+	;or 0
 
+	
+	push de
+	push hl
+	push af
+	ld a, r
+	and 3
+	ld de, _borderColors.__DATA__
+	ld l, a  
+	ld h, 0
+	add hl, de
+	ld l, (hl)
+	pop af
+	or l
+	pop hl
+	pop de
+
+	out (254),a
 	dec bc
 	ld a,b
 	or c
@@ -131,7 +149,7 @@ sfxRoutineToneBorder:
 	jr nz,sfxRT0
 
 	ld c,11
-	jr nextData
+	jp nextData
 
 
 
@@ -151,7 +169,26 @@ sfxRN1:
 	ld a,(hl)
 	and 16
 sfxRoutineNoiseBorder:
-	or 0
+	;or 0
+
+
+	push de
+	push hl
+	push af
+	ld a, r
+	and 3
+	ld de, _borderColors.__DATA__
+	ld l, a  
+	ld h, 0
+	add hl, de
+	ld l, (hl)
+	pop af
+	or l
+	pop hl
+	pop de
+
+
+
 	out (254),a
 	dec d
 	jr nz,sfxRN2
@@ -177,22 +214,88 @@ sfxRN2:
 	jr nz,sfxRN0
 
 	ld c,7
-	jr nextData
+	jp nextData
 
 
 sfxData:
 
 SoundEffectsData:
 	defw SoundEffect0Data
+	defw SoundEffect1Data
+	defw SoundEffect2Data
+	defw SoundEffect3Data
 
 SoundEffect0Data:
+	defb 2 ;noise
+	defw 10,1000,3074
+	defb 0
+SoundEffect1Data:
 	defb 1 ;tone
-	defw 3,1000,350,0,2688
+	defw 10,150,3000,220,32576
+	defb 0
+SoundEffect2Data:
+	defb 2 ;noise
+	defw 5,350,100
+	defb 0
+SoundEffect3Data:
 	defb 1 ;tone
-	defw 10,500,550,122,2688
+	defw 25,100,2000,65524,128
 	defb 0
 
-
 end asm
+
+	return borderColors(0) + borderColors(1)
+
+end function
+
+sub BombEffect()
+
+	borderColors(1) = 2
+	borderColors(2) = 0
+	borderColors(3) = 2
+	borderColors(4) = 0
+
+	PlayFX(0)
+
+	border 0
+
+end sub
+
+sub DeflectorEffect()
+
+	borderColors(1) = 1
+	borderColors(2) = 5
+	borderColors(3) = 1
+	borderColors(4) = 5
+
+	PlayFX(1)
+
+	border 0
+
+end sub
+
+sub ExplodeAnimEffect()
+
+	borderColors(1) = 2
+	borderColors(2) = 6
+	borderColors(3) = 2
+	borderColors(4) = 6
+
+	PlayFX(2)
+
+	border 0
+
+end sub
+
+sub AlienDeathEffect()
+
+	borderColors(1) = 4
+	borderColors(2) = 4
+	borderColors(3) = 2
+	borderColors(4) = 2
+
+	PlayFX(3)
+
+	border 0
 
 end sub

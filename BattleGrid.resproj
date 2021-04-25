@@ -474,6 +474,66 @@
       "SetType": 1
     },
     {
+      "Id": "7f234c13-4df8-4694-a9a5-729c6bae2291",
+      "Name": "Terrain",
+      "Width": 3,
+      "Height": 3,
+      "Data": [
+        "AKMFGqUqVWo=",
+        "ADjXqlWqVao=",
+        "ACAAgmCwWKw=",
+        "NSpVKjWqNWo=",
+        "qkWAEbgRglU=",
+        "VaxWqlaqVqw=",
+        "VSoVCk0HCAA=",
+        "VapVqlXqHUc=",
+        "VKxZqEiQYIg="
+      ],
+      "ColorData": [
+        20,
+        20,
+        20,
+        20,
+        34,
+        20,
+        20,
+        20,
+        20
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "c7120b29-8dbc-4a5d-bbab-245258065b60",
+      "Name": "Buildings",
+      "Width": 3,
+      "Height": 3,
+      "Data": [
+        "D3nw/+KIlZ0=",
+        "mf/D/yKIVd0=",
+        "8J4P/yOJVd0=",
+        "gJGqu4CIlZ0=",
+        "ABGquwCIVd0=",
+        "ARGpuQGJVd0=",
+        "gJCquoD///8=",
+        "ADx+ZnZmZv8=",
+        "AQlVXQH///8="
+      ],
+      "ColorData": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
       "Id": "73242e38-d64a-419f-ad1d-843ebbff9713",
       "Name": "Splitter",
       "Width": 1,
@@ -622,7 +682,7 @@
         "IUTwIkQPIoQ="
       ],
       "ColorData": [
-        70
+        206
       ],
       "Sort": -1,
       "SetType": 1
@@ -747,10 +807,10 @@
       "Width": 2,
       "Height": 2,
       "Data": [
-        "GBkPBgQHBw4=",
-        "GJjwYCDg4HA=",
-        "HB8eHhkZZmY=",
-        "OPh4eJiYZmY="
+        "CR0PBgQHBw4=",
+        "kLjwYCDg4HA=",
+        "HB8eHBkbZiI=",
+        "OPh4OJjYZkQ="
       ],
       "ColorData": [
         6,
@@ -767,10 +827,10 @@
       "Width": 2,
       "Height": 2,
       "Data": [
-        "GBkPBgQHBw4=",
-        "GJrwYybs4nA=",
-        "HB8eHhkZZmY=",
-        "OPh4eJiYZmY="
+        "CR0PBgQHBw4=",
+        "kLrwYybs4nA=",
+        "HB8eHBkbZiI=",
+        "OPh4OJjYZkQ="
       ],
       "ColorData": [
         70,
@@ -787,10 +847,10 @@
       "Width": 2,
       "Height": 2,
       "Data": [
-        "GBkPBgQHBw4=",
-        "GJjwYDzC2lo=",
-        "HB8eHhkZZmY=",
-        "Qrx4eJiYZmY="
+        "CR0PBgQHBw4=",
+        "kLjwYDzC2lo=",
+        "HB8eHBkbZiI=",
+        "Qrx4OJjYZkQ="
       ],
       "ColorData": [
         114,
@@ -807,10 +867,10 @@
       "Width": 2,
       "Height": 2,
       "Data": [
-        "GBkPBwQFBw4=",
-        "GJnwPEKZpaU=",
-        "HB8eHxkZZmY=",
-        "mUI8eZiIZmY="
+        "CR0PBwQEBg4=",
+        "iJmAPEKZpaU=",
+        "HB4eHBkbZiI=",
+        "mUI8AZjIZkQ="
       ],
       "ColorData": [
         86,
@@ -827,10 +887,10 @@
       "Width": 2,
       "Height": 2,
       "Data": [
-        "GBgNBAUGBgw=",
-        "GMEY4k2FUIs=",
-        "HhwcHhkZZmY=",
-        "mUK8AXHOYGA="
+        "CBgJAgIAAAg=",
+        "DII5RTx+928=",
+        "GhISEBkYZiI=",
+        "fryZTjCCbAA="
       ],
       "ColorData": [
         86,
@@ -842,15 +902,35 @@
       "SetType": 2
     },
     {
-      "Id": "9461639b-b01e-4491-94d1-bf5c6e9f9405",
+      "Id": "a98115ad-6319-4a32-aefc-ac61da9af57d",
       "Name": "ShotDeathF",
       "Width": 2,
       "Height": 2,
       "Data": [
-        "ABYhJEpWKEY=",
-        "AIhQCDhFkqo=",
-        "JBAqJCUQAgY=",
-        "kYpkoTmqRBg="
+        "IUcGEBkaICg=",
+        "DE4lQwUAmBk=",
+        "AjIYGQhCJwE=",
+        "gjABQReAacI="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "24658b23-0c22-4f85-893b-11bea2874a3a",
+      "Name": "ShotDeathG",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AAgAACAEAEA=",
+        "AEAEAAIAAIA=",
+        "ACAEAEAACAA=",
+        "AAgAIgBACAA="
       ],
       "ColorData": [
         86,
@@ -867,10 +947,10 @@
       "Width": 2,
       "Height": 2,
       "Data": [
-        "AP4lJf7+xtI=",
-        "AAAAAMDAfH4=",
-        "0sb+/iUl/gA=",
-        "fnzAgAAAAAA="
+        "Tkx4SUx2Sz8=",
+        "cjIekjJu0nw=",
+        "AgMCAwIDAQA=",
+        "wEDAQMBAgAA="
       ],
       "ColorData": [
         7,
@@ -882,15 +962,15 @@
       "SetType": 2
     },
     {
-      "Id": "43e2d530-9f6e-4651-a301-22ba75d291e8",
+      "Id": "b7a613c6-f2a0-4911-af98-95f82992a065",
       "Name": "TankDeathB",
       "Width": 2,
       "Height": 2,
       "Data": [
-        "AMCgoNjYz08=",
-        "AAQAIAQAgMo=",
-        "T8/Y0KCgwAA=",
-        "1YAABBAAAgA="
+        "dks/AgMCAwI=",
+        "btJ8wEDAQMA=",
+        "AwEEAREBRRE=",
+        "QIAggIiggpA="
       ],
       "ColorData": [
         114,
