@@ -686,6 +686,220 @@
       ],
       "Sort": 1,
       "SetType": 2
+    },
+    {
+      "Id": "37dd0deb-ea34-4a02-9bd0-15b4c80ce996",
+      "Name": "Solid",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "//////////8="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "f242fd44-fdf7-4678-baf0-332b05aa23dd",
+      "Name": "ZoomAlienA",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AB84Z35zYXE=",
+        "APgc5n7Oho4=",
+        "eT83MjA1Hw8=",
+        "nvzsTAys+PA="
+      ],
+      "ColorData": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "3cbe9777-f697-48d3-be7f-80d2a53368aa",
+      "Name": "ZoomAlienB",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AB85fmdhYWE=",
+        "APicfuaGhoY=",
+        "cT8nIiAgFQ8=",
+        "jvzkRAQEqPA="
+      ],
+      "ColorData": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "f9423718-8b07-4799-a7cf-4d4260bcc9fa",
+      "Name": "ShotDeathA",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "GBkPBgQHBw4=",
+        "GJjwYCDg4HA=",
+        "HB8eHhkZZmY=",
+        "OPh4eJiYZmY="
+      ],
+      "ColorData": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "3545d2f9-0640-4c8f-9576-38eb1fbf98fc",
+      "Name": "ShotDeathB",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "GBkPBgQHBw4=",
+        "GJrwYybs4nA=",
+        "HB8eHhkZZmY=",
+        "OPh4eJiYZmY="
+      ],
+      "ColorData": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "4fe6fc01-cf45-4664-bab0-c406a99948ba",
+      "Name": "ShotDeathC",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "GBkPBgQHBw4=",
+        "GJjwYDzC2lo=",
+        "HB8eHhkZZmY=",
+        "Qrx4eJiYZmY="
+      ],
+      "ColorData": [
+        114,
+        114,
+        114,
+        114
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "24e96da9-ee84-4c26-855c-d7474cf429a4",
+      "Name": "ShotDeathD",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "GBkPBwQFBw4=",
+        "GJnwPEKZpaU=",
+        "HB8eHxkZZmY=",
+        "mUI8eZiIZmY="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "fdb33c08-5bfd-4a2b-a1f9-e51677a955fb",
+      "Name": "ShotDeathE",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "GBgNBAUGBgw=",
+        "GMEY4k2FUIs=",
+        "HhwcHhkZZmY=",
+        "mUK8AXHOYGA="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "9461639b-b01e-4491-94d1-bf5c6e9f9405",
+      "Name": "ShotDeathF",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "ABYhJEpWKEY=",
+        "AIhQCDhFkqo=",
+        "JBAqJCUQAgY=",
+        "kYpkoTmqRBg="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "e5e96406-4ddd-4987-9054-9d812d12707c",
+      "Name": "TankDeathA",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AP4lJf7+xtI=",
+        "AAAAAMDAfH4=",
+        "0sb+/iUl/gA=",
+        "fnzAgAAAAAA="
+      ],
+      "ColorData": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "43e2d530-9f6e-4651-a301-22ba75d291e8",
+      "Name": "TankDeathB",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AMCgoNjYz08=",
+        "AAQAIAQAgMo=",
+        "T8/Y0KCgwAA=",
+        "1YAABBAAAgA="
+      ],
+      "ColorData": [
+        114,
+        114,
+        114,
+        114
+      ],
+      "Sort": 1,
+      "SetType": 2
     }
   ],
   "Screens": null

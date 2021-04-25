@@ -31,6 +31,7 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --hea
 #include "InterruptInstaller.zxbas"
 
 InstallHandler()
+InitFastRnd()
 
 ink 7
 paper 0
@@ -133,8 +134,19 @@ Dim spriteSet(16,8) as uByte => { _
 #define MOTHERSHIP_INDEX 63
 #define HANGAR_INDEX 64
 #define NUMBERS_INDEX 65
+#define SOLID_INDEX 75
+#define ZOOMALIENA_INDEX 76
+#define ZOOMALIENB_INDEX 80
+#define SHOTDEATHA_INDEX 84
+#define SHOTDEATHB_INDEX 88
+#define SHOTDEATHC_INDEX 92
+#define SHOTDEATHD_INDEX 96
+#define SHOTDEATHE_INDEX 100
+#define SHOTDEATHF_INDEX 104
+#define TANKDEATHA_INDEX 108
+#define TANKDEATHB_INDEX 112
 
-Dim tileSet(75,8) as uByte => { _
+Dim tileSet(116,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
@@ -209,10 +221,51 @@ Dim tileSet(75,8) as uByte => { _
 { $00, $7E, $40, $7E, $72, $62, $7E, $00 }, _
 { $00, $7E, $62, $04, $08, $18, $18, $00 }, _
 { $00, $3C, $2C, $24, $7E, $62, $7E, $00 }, _
-{ $00, $7E, $62, $7E, $02, $06, $7E, $00 } _
+{ $00, $7E, $62, $7E, $02, $06, $7E, $00 }, _
+{ $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF }, _
+{ $00, $1F, $38, $67, $7E, $73, $61, $71 }, _
+{ $00, $F8, $1C, $E6, $7E, $CE, $86, $8E }, _
+{ $79, $3F, $37, $32, $30, $35, $1F, $0F }, _
+{ $9E, $FC, $EC, $4C, $0C, $AC, $F8, $F0 }, _
+{ $00, $1F, $39, $7E, $67, $61, $61, $61 }, _
+{ $00, $F8, $9C, $7E, $E6, $86, $86, $86 }, _
+{ $71, $3F, $27, $22, $20, $20, $15, $0F }, _
+{ $8E, $FC, $E4, $44, $04, $04, $A8, $F0 }, _
+{ $18, $19, $0F, $06, $04, $07, $07, $0E }, _
+{ $18, $98, $F0, $60, $20, $E0, $E0, $70 }, _
+{ $1C, $1F, $1E, $1E, $19, $19, $66, $66 }, _
+{ $38, $F8, $78, $78, $98, $98, $66, $66 }, _
+{ $18, $19, $0F, $06, $04, $07, $07, $0E }, _
+{ $18, $9A, $F0, $63, $26, $EC, $E2, $70 }, _
+{ $1C, $1F, $1E, $1E, $19, $19, $66, $66 }, _
+{ $38, $F8, $78, $78, $98, $98, $66, $66 }, _
+{ $18, $19, $0F, $06, $04, $07, $07, $0E }, _
+{ $18, $98, $F0, $60, $3C, $C2, $DA, $5A }, _
+{ $1C, $1F, $1E, $1E, $19, $19, $66, $66 }, _
+{ $42, $BC, $78, $78, $98, $98, $66, $66 }, _
+{ $18, $19, $0F, $07, $04, $05, $07, $0E }, _
+{ $18, $99, $F0, $3C, $42, $99, $A5, $A5 }, _
+{ $1C, $1F, $1E, $1F, $19, $19, $66, $66 }, _
+{ $99, $42, $3C, $79, $98, $88, $66, $66 }, _
+{ $18, $18, $0D, $04, $05, $06, $06, $0C }, _
+{ $18, $C1, $18, $E2, $4D, $85, $50, $8B }, _
+{ $1E, $1C, $1C, $1E, $19, $19, $66, $66 }, _
+{ $99, $42, $BC, $01, $71, $CE, $60, $60 }, _
+{ $00, $16, $21, $24, $4A, $56, $28, $46 }, _
+{ $00, $88, $50, $08, $38, $45, $92, $AA }, _
+{ $24, $10, $2A, $24, $25, $10, $02, $06 }, _
+{ $91, $8A, $64, $A1, $39, $AA, $44, $18 }, _
+{ $00, $FE, $25, $25, $FE, $FE, $C6, $D2 }, _
+{ $00, $00, $00, $00, $C0, $C0, $7C, $7E }, _
+{ $D2, $C6, $FE, $FE, $25, $25, $FE, $00 }, _
+{ $7E, $7C, $C0, $80, $00, $00, $00, $00 }, _
+{ $00, $C0, $A0, $A0, $D8, $D8, $CF, $4F }, _
+{ $00, $04, $00, $20, $04, $00, $80, $CA }, _
+{ $4F, $CF, $D8, $D0, $A0, $A0, $C0, $00 }, _
+{ $D5, $80, $00, $04, $10, $00, $02, $00 } _
 }
 
-Dim tileColors(75) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $46, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47 }
+Dim tileColors(116) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $46, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
 
 defines:
 #define CURSOR_FRAMES 10
@@ -300,7 +353,7 @@ vars:
 Dim playerX as uByte = 20
 Dim playerSprite as uByte = 0
 Dim dir as byte = 0
-Dim dead as ubyte = 0
+Dim dead as ubyte = 0           '1 = muerte por disparo, 2 = muerte por tanque, 3 = muerte por alien
 
 Dim shots(3,4) as Byte         'x,y,dir,explodePhase
 Dim activeShots as uByte
@@ -329,6 +382,7 @@ Dim alienFrame as uByte = ALIEN_SPEED
 Dim tanks(MAX_TANK_COUNT,4) as Byte         'x,y,dir,explodePhase
 Dim activeTanks as uByte
 Dim tankFrame as uByte = TANK_SPEED
+Dim tankProbability as uByte
 
 Dim activeTowers as uByte 
 
@@ -339,6 +393,7 @@ Dim availableChargedShots as uByte = 0
 
 Dim activeShips as uByte
 Dim ships(MAX_SHIP_COUNT,4) as uByte 'x,y,dir,frame
+Dim freezingShip as uByte = 1
 
 funcs:
 sub InitGraphics()
@@ -448,6 +503,14 @@ end sub
 
 sub InitLevel()
 
+    activeShots = 0
+    activeAliens = 0
+    activeTanks = 0
+    activeShips = 0
+    playerX = 20
+    dead = 0
+    tankProbability = 128
+
     print at 9, 24; "LEVEL:"
     PrintPaddedNumber(24, 10, 1, 2)
     'print at 10, 24; "01"
@@ -478,6 +541,10 @@ sub InitLevel()
     GRID_OBJECT(HBARRIERB_INDEX, 11, 14)
     GRID_OBJECT(HBARRIERC_INDEX, 12, 14)
 
+    GRID_OBJECT(VBARRIERA_INDEX, 20, 14)
+    GRID_OBJECT(VBARRIERB_INDEX, 20, 15)
+    GRID_OBJECT(VBARRIERC_INDEX, 20, 16)
+
     GRID_OBJECT(MINE_INDEX, 10, 16)
     GRID_OBJECT(MINE_INDEX, 11, 16)
 
@@ -490,29 +557,6 @@ sub InitLevel()
 
     Dim buc as Ubyte
 
-    for buc = 1 to MAX_ALIEN_COUNT
-        aliens(buc, 4) = -1
-    next buc
-
-    activeAliens = 00001111b
-
-    aliens(1, 1) = 4
-    aliens(1,2) = 4
-    aliens(1,3) = 1
-
-    aliens(2, 1) = 8
-    aliens(2,2) = 4
-    aliens(2,3) = 1
-    
-    aliens(3, 1) = 12
-    aliens(3,2) = 4
-    aliens(3,3) = 1
-
-    aliens(4, 1) = 16
-    aliens(4,2) = 4
-    aliens(4,3) = 1
-
-    
     for buc = 1 to MAX_TANK_COUNT
         tanks(buc, 4) = -1
     next buc
@@ -525,7 +569,8 @@ sub InitLevel()
 
     activeTowers = 1
 
-    CREATE_SHIP(10, 1, 2, buc)
+    CREATE_SHIP(7, 1, 3, buc)
+    CREATE_SHIP(13, 1, 1, buc)
 
 end sub
 
@@ -888,6 +933,19 @@ CHECKCURSORFRAMES:
 
 end sub
 
+function LineOfSight(x as uinteger, y as uinteger) as ubyte
+
+    Dim address as uinteger = @activeMap + ((x - 1) * 20) + y
+    DIm buc as ubyte
+
+    for buc = 1 to 19 - y
+        if peek(address) <> 0 then return 0
+        address = address + 1
+    next buc
+
+    return 1
+
+end function
 
 sub UpdateAliens()
 
@@ -961,22 +1019,20 @@ sub UpdateAliens()
                     tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
 
                     'probamos a seguir OPTIMIZAR
-              
-                    if ((tmpCellX > 1 and tmpDir = -1) or (tmpCellX < 20 and tmpDir = 1)) then 'seguir
-                        
-                        tmpCellValue = activeMap(tmpCellX + tmpDir, tmpCellY)
+TESTALIENCONTINUE:
 
-                        if tmpCellValue = 0 then
-                            tmpX = tmpX + tmpDir
-                            goto ENDTESTCELL
-                        else if tmpCellValue = MINE_INDEX then
-                            CLEAR_GRID_CELL(tmpCellX + tmpDir, tmpCellY)
-                            aliens(buc, 4) = 0
-                            goto ENDTESTCELL
-                        end if
-
+                    if tmpCellX > 1 then
+                    if tmpDir = -1 then
+                        goto ALIENCONTINUE
+                    end if
                     end if
 
+                    if tmpCellX < 20 then
+                    if tmpDir = 1 then
+                        goto ALIENCONTINUE
+                    end if
+                    end if
+TESTALIENDOWN:
                     if tmpCellY < 20 then
 
                         tmpCellValue = activeMap(tmpCellX, tmpCellY + 1)
@@ -993,23 +1049,54 @@ sub UpdateAliens()
 
                     end if
 
-                    if tmpCellY < 20 and ((tmpCellX > 1 and tmpDir = 1) or (tmpCellX < 20 and tmpDir = -1)) then
+TESTALIENINVERT:
 
-                        tmpCellValue = activeMap(tmpCellX - tmpDir, tmpCellY) 
+                    if tmpCellX > 1 then
+                    if tmpDir = 1 then
+                        goto ALIENINVERT
+                    end if
+                    end if
 
-                        if tmpCellValue = 0 then 'invertir (en la última fila explota)                       
-                            tmpDir = -tmpDir
-                            tmpX = tmpX + tmpDir
-                            goto ENDTESTCELL
-                        else if tmpCellValue = MINE_INDEX then
-                            CLEAR_GRID_CELL(tmpCellX - tmpDir, tmpCellY)
-                            aliens(buc, 4) = 0
-                            goto ENDTESTCELL
-                        end if
+                    if tmpCellX < 20 then
+                    if tmpDir = -1 then
+                        goto ALIENINVERT
+                    end if
+                    end if
 
-                    end if                'explotar
-
+EXPLODEALIEN:
                     aliens(buc, 4) = 0
+                    goto ENDTESTCELL
+
+ALIENCONTINUE:
+
+                    tmpCellValue = activeMap(tmpCellX + tmpDir, tmpCellY)
+
+                    if tmpCellValue = 0 then
+                        tmpX = tmpX + tmpDir
+                        goto ENDTESTCELL
+                    else if tmpCellValue = MINE_INDEX then
+                        CLEAR_GRID_CELL(tmpCellX + tmpDir, tmpCellY)
+                        aliens(buc, 4) = 0
+                        goto ENDTESTCELL
+                    end if
+
+                    goto TESTALIENDOWN
+
+ALIENINVERT:
+
+                    tmpCellValue = activeMap(tmpCellX - tmpDir, tmpCellY) 
+
+                    if tmpCellValue = 0 then 'invertir (en la última fila explota)                       
+                        tmpDir = -tmpDir
+                        tmpX = tmpX + tmpDir
+                        goto ENDTESTCELL
+                    else if tmpCellValue = MINE_INDEX then
+                        CLEAR_GRID_CELL(tmpCellX - tmpDir, tmpCellY)
+                        aliens(buc, 4) = 0
+                        goto ENDTESTCELL
+                    end if
+        
+                    goto EXPLODEALIEN
 
 ENDTESTCELL:
 
@@ -1018,6 +1105,8 @@ ENDTESTCELL:
                 aliens(buc, 1) = tmpX
                 aliens(buc, 2) = tmpY
                 aliens(buc, 3) = tmpDir
+
+                if tmpY = 42 then dead = 1
 
             end if
 
@@ -1076,6 +1165,18 @@ sub UpdateTanks()
                 tmpY = tanks(buc, 2)
                 tmpDir = tanks(buc, 3)
 
+                tmpCellX = (tmpX >> 1) - MAP_X_OFFSET
+                tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
+
+                if tmpX + 1 >= playerX and tmpX - 1 <= playerX  then
+                if LineOfSight((playerX >> 1) - MAP_X_OFFSET, tmpCellY) then
+                    if FastRnd() <= tankProbability then
+                        dead = 2
+                        return
+                    end if
+                end if
+                end if
+
                 'movimientos tanke: gira en sentido de las agujas del reloj
                 'Si queda bloqueado explota
 
@@ -1092,10 +1193,11 @@ sub UpdateTanks()
                         tmpY = tmpY - 1
                     end if 
 
-                else
+                    'if FastRnd() = 1 then
+                    '    tmpDir = (FastRnd() band 3) + 1
+                    'end if
 
-                    tmpCellX = (tmpX >> 1) - MAP_X_OFFSET
-                    tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
+                else
 
                     if tmpCellX > 1 then leftCellValue = activeMap(tmpCellX - 1, tmpCellY) else leftCellValue = -1
                     if tmpCellX < 20 then rightCellValue = activeMap(tmpCellX + 1, tmpCellY) else rightCellValue = -1
@@ -1195,6 +1297,20 @@ ENDTESTCELLTANK:
                 tanks(buc, 1) = tmpX
                 tanks(buc, 2) = tmpY
                 tanks(buc, 3) = tmpDir
+
+                if tmpX + 1 >= playerX and tmpX - 1 <= playerX  then
+
+                    tmpCellX = (tmpX >> 1) - MAP_X_OFFSET
+                    tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
+
+                    if LineOfSight((playerX >> 1) - MAP_X_OFFSET, tmpCellY) then
+                        if FastRnd() <= tankProbability then
+                            dead = 2
+                            return
+                        end if
+                    end if
+
+                end if
 
             end if
 
@@ -1346,7 +1462,7 @@ sub TestCollisions()
         if playerX = tmpShot1X then
         if 42 = tmpShot1Y then
 
-            dead = 1
+            dead = 3
             activeShots = activeShots band 11111110b
             return
 
@@ -1358,7 +1474,7 @@ sub TestCollisions()
         if playerX = tmpShot2X then
         if 42 = tmpShot2Y then
 
-            dead = 1
+            dead = 3
             activeShots = activeShots band 11111101b
             return
 
@@ -1370,7 +1486,7 @@ sub TestCollisions()
         if playerX = tmpShot3X then
         if 42 = tmpShot3Y then
 
-            dead = 1
+            dead = 3
             activeShots = activeShots band 11111011b
             return
 
@@ -1378,40 +1494,8 @@ sub TestCollisions()
         end if
         end if
 
-
-    else 
-
-        if activeAliens then
-
-            for buc = 1 to MAX_ALIEN_COUNT
-
-                tmpMask = TABLE_LOOKUP(@maskTable, buc)
-
-                if activeAliens & tmpMask then
-
-                    tmpEnemX = aliens(buc, 1)
-                    tmpEnemY = aliens(buc, 2)
-
-                    if tmpEnemY = 42 then
-                    if tmpEnemX = playerX then
-
-                        activeAliens = activeAliens bxor tmpMask
-                        dead = 1
-                        return
-
-                    end if
-                    end if
-
-                end if 
-
-            next buc
-
-        end if
-
     end if
     
-
-
 end sub
 
 sub UpdateShips()
@@ -1424,7 +1508,7 @@ sub UpdateShips()
     Dim tmpY as uByte
     Dim tmpDir as uByte
 
-    for buc = 1 to MAX_SHIP_COUNT
+    for buc = freezingShip to MAX_SHIP_COUNT
     
         if activeShips & TABLE_LOOKUP(@maskTable, buc) then
 
@@ -1452,14 +1536,143 @@ sub UpdateShips()
                         tmpDir = -1
                     end if
                 
-                    print at 0,0; tmpY; "  "
                     CREATE_ALIEN(tmpX, tmpY, tmpDir, tmpVal)
-
+                    freezingShip = 1
+                else
+                    freezingShip = buc
+                    return                                      'If a ship is ready to generate aliens but no free spot is available we freeze the generation timers
+            
                 end if
             end if
         end if
 
     next buc
+
+end sub
+
+sub printZoomedTile(x as uByte, y as uByte, tileIndex as uinteger, attribute as ubyte)
+
+    dim tbyte as ubyte
+    dim tmpX as ubyte
+    dim tmpY as ubyte
+
+    dim tileAddress as uinteger = tileIndex << 3
+    tileAddress = tileAddress + @tileSet
+
+    for tmpY = y to y + 7
+
+        tbyte = peek(tileAddress)
+        tmpX = x
+
+        if tbyte band 128 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 64 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 32 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 16 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 8 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 4 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 2 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        tmpX = tmpX + 1
+        if tbyte band 1 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        
+        tileAddress = tileAddress + 1
+
+    next tmpY
+
+end sub
+
+
+sub ShowZoomedFrame(index as ubyte, color as ubyte)
+
+    printZoomedTile(3, 4, index, color)
+    printZoomedTile(11, 4, index + 1, color)
+    printZoomedTile(3, 12, index + 2, color)
+    printZoomedTile(11, 12, index + 3, color)
+
+end sub
+
+
+Dim attribsAlienA(6) as ubyte = { 0, 1, 65, 3, 4, 68 }
+Dim attribsAlienB(4) as ubyte = { 66, 2, 1, 0 }
+
+sub PlayDeathAlien()
+
+    Dim buc as ubyte
+
+    for buc = 1 to 6
+
+        ShowZoomedFrame(ZOOMALIENA_INDEX, attribsAlienA(buc))
+
+    next buc
+
+    DoPause(50)
+
+    ShowZoomedFrame(ZOOMALIENB_INDEX, 68)
+
+    DoPause(30)
+
+    for buc = 1 to 4
+
+        ShowZoomedFrame(ZOOMALIENB_INDEX, attribsAlienB(buc))
+
+    next buc
+
+    while frameCounter < 150
+    end while
+
+end sub
+
+Dim colorsExp(3) as ubyte => { 66, 2, 0  }
+sub PlayDeathShot()
+
+    Dim currentIndex as ubyte
+    Dim buc as ubyte
+
+    currentIndex = SHOTDEATHA_INDEX
+
+    ShowZoomedFrame(SHOTDEATHA_INDEX, 6)
+
+    DoPause(30)
+
+    for buc = 1 to 6
+
+        ShowZoomedFrame(currentIndex, tileColors(currentIndex + 1))
+        DoPause(10)
+
+        currentIndex = currentIndex + 4
+
+    next buc
+
+    for buc = 1 to 3
+
+        ShowZoomedFrame(SHOTDEATHF_INDEX, colorsExp(buc))
+        DoPause(20)
+
+    next buc
+
+    DoPause(100)
+
+end sub
+
+sub PlayDeathTank()
+
+    ShowZoomedFrame(TANKDEATHA_INDEX, 7)
+    DoPause(10)
+    ShowZoomedFrame(TANKDEATHA_INDEX, 71)
+    DoPause(30)
+    ShowZoomedFrame(TANKDEATHB_INDEX, 114)
+    DoPause(10)
+    ShowZoomedFrame(TANKDEATHA_INDEX, 71)
+    DoPause(30)
+    ShowZoomedFrame(TANKDEATHA_INDEX, 0)
+    DoPause(10)
+
+    PlayDeathShot()
 
 end sub
 
@@ -1475,12 +1688,12 @@ while(1)
 
     frameCounter = 0
 
-    UpdatePlayer()
-    UpdateFire()
     UpdateCursor()
     UpdateAliens()
     UpdateTanks()
     UpdateShips()
+    UpdatePlayer()
+    UpdateFire()
     TestCollisions()
 
     Draw1x1Sprite(playerSprite, playerX, 42)
@@ -1570,7 +1783,23 @@ while(1)
 
     RenderFrame()
 
+    if dead <> 0 then
+
+        if dead = 1 then
+            PlayDeathAlien()
+        else if dead = 2 then
+            PlayDeathTank()
+        else
+            PlayDeathShot()
+        end if
+
+        DrawGrid()
+        InitLevel()
+
+    end if
+
     while frameCounter < 2
     end while
+    
 
 end while

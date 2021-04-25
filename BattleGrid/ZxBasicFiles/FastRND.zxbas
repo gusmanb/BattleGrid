@@ -51,3 +51,10 @@ function fastcall FastRnd() as uByte
     end asm
 
 end function
+
+function fastcall FastRnd16() as uInteger
+
+	Dim result as uinteger = FastRnd()
+	result = (result << 8) bor FastRnd()
+
+end function
