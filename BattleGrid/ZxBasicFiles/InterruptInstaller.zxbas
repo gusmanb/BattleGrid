@@ -38,9 +38,15 @@ end asm
 end sub
 
 function fastcall AnyKey() AS UByte
+
     asm
         ld a, $FE
         in a, (0FEh)
+        ld b,a
+
+        ld a, $F7
+        in a, (0FEh)
+        and b
         ld b,a
 
         ld a, $DF
@@ -56,6 +62,7 @@ function fastcall AnyKey() AS UByte
         ld a, $7F
         in a, (0FEh)
         and b
-        
+        cpl
+
     end asm
 end function

@@ -224,6 +224,8 @@ SoundEffectsData:
 	defw SoundEffect1Data
 	defw SoundEffect2Data
 	defw SoundEffect3Data
+	defw SoundEffect4Data
+	defw SoundEffect5Data
 
 SoundEffect0Data:
 	defb 2 ;noise
@@ -241,7 +243,16 @@ SoundEffect3Data:
 	defb 1 ;tone
 	defw 25,100,2000,65524,128
 	defb 0
-
+SoundEffect4Data:
+	defb 1
+	defw 10,1000,8000,0,1664
+	defb 2
+	defw 2,1000,100
+	defb 0
+SoundEffect5Data:
+	defb 2 ;noise
+	defw 10,400,261
+	defb 0
 end asm
 
 	return borderColors(0) + borderColors(1)
@@ -287,7 +298,7 @@ sub ExplodeAnimEffect()
 
 end sub
 
-sub AlienDeathEffect()
+sub KilledAlienEffect()
 
 	borderColors(1) = 4
 	borderColors(2) = 4
@@ -295,6 +306,32 @@ sub AlienDeathEffect()
 	borderColors(4) = 2
 
 	PlayFX(3)
+
+	border 0
+
+end sub
+
+sub AlienDeathEffect()
+
+	borderColors(1) = 4
+	borderColors(2) = 4
+	borderColors(3) = 5
+	borderColors(4) = 5
+
+	PlayFX(4)
+
+	border 0
+
+end sub
+
+sub BuildTankDestroyedEffect()
+
+	borderColors(1) = 0
+	borderColors(2) = 0
+	borderColors(3) = 7
+	borderColors(4) = 7
+
+	PlayFX(5)
 
 	border 0
 

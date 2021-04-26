@@ -60,6 +60,8 @@ _tankFrame:
 	DEFB 03h
 _tankProbability:
 	DEFB 00
+_activeTowers:
+	DEFB 00
 _availableMines:
 	DEFB 00h
 _availableBombs:
@@ -79,7 +81,7 @@ _freezingHangar:
 _buc:
 	DEFB 00
 _borderColors:
-	DEFW __LABEL560
+	DEFW __LABEL589
 _borderColors.__DATA__.__PTR__:
 	DEFW _borderColors.__DATA__
 _borderColors.__DATA__:
@@ -87,11 +89,11 @@ _borderColors.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-__LABEL560:
+__LABEL589:
 	DEFW 0000h
 	DEFB 01h
 _spriteSet:
-	DEFW __LABEL561
+	DEFW __LABEL590
 _spriteSet.__DATA__.__PTR__:
 	DEFW _spriteSet.__DATA__
 _spriteSet.__DATA__:
@@ -223,12 +225,12 @@ _spriteSet.__DATA__:
 	DEFB 0FFh
 	DEFB 18h
 	DEFB 18h
-__LABEL561:
+__LABEL590:
 	DEFW 0001h
 	DEFW 0008h
 	DEFB 01h
 _tileSet:
-	DEFW __LABEL562
+	DEFW __LABEL591
 _tileSet.__DATA__.__PTR__:
 	DEFW _tileSet.__DATA__
 _tileSet.__DATA__:
@@ -680,14 +682,14 @@ _tileSet.__DATA__:
 	DEFB 0AAh
 	DEFB 35h
 	DEFB 6Ah
-	DEFB 0AAh
-	DEFB 45h
-	DEFB 80h
-	DEFB 11h
-	DEFB 0B8h
-	DEFB 11h
-	DEFB 82h
 	DEFB 55h
+	DEFB 82h
+	DEFB 41h
+	DEFB 90h
+	DEFB 39h
+	DEFB 90h
+	DEFB 05h
+	DEFB 0AAh
 	DEFB 55h
 	DEFB 0ACh
 	DEFB 56h
@@ -792,6 +794,94 @@ _tileSet.__DATA__:
 	DEFB 01h
 	DEFB 19h
 	DEFB 0FFh
+	DEFB 0FFh
+	DEFB 0FFh
+	DEFB 0FFh
+	DEFB 0FCh
+	DEFB 0F6h
+	DEFB 0D6h
+	DEFB 0E7h
+	DEFB 0C5h
+	DEFB 0FFh
+	DEFB 0FBh
+	DEFB 3Bh
+	DEFB 57h
+	DEFB 0EBh
+	DEFB 83h
+	DEFB 00h
+	DEFB 00h
+	DEFB 0FFh
+	DEFB 0FBh
+	DEFB 0BFh
+	DEFB 0FFh
+	DEFB 0BFh
+	DEFB 53h
+	DEFB 0BFh
+	DEFB 0BFh
+	DEFB 0EAh
+	DEFB 0B8h
+	DEFB 0B8h
+	DEFB 80h
+	DEFB 0B0h
+	DEFB 0F4h
+	DEFB 0C8h
+	DEFB 0BCh
+	DEFB 34h
+	DEFB 7Ah
+	DEFB 0FBh
+	DEFB 0EDh
+	DEFB 0F7h
+	DEFB 0CDh
+	DEFB 7Ah
+	DEFB 24h
+	DEFB 7Bh
+	DEFB 77h
+	DEFB 2Fh
+	DEFB 1Fh
+	DEFB 1Fh
+	DEFB 3Fh
+	DEFB 3Fh
+	DEFB 1Fh
+	DEFB 0BCh
+	DEFB 0DAh
+	DEFB 0D8h
+	DEFB 0F7h
+	DEFB 0E3h
+	DEFB 0FBh
+	DEFB 0FFh
+	DEFB 0FFh
+	DEFB 00h
+	DEFB 80h
+	DEFB 0CFh
+	DEFB 0CEh
+	DEFB 92h
+	DEFB 74h
+	DEFB 77h
+	DEFB 0DFh
+	DEFB 67h
+	DEFB 0FFh
+	DEFB 1Dh
+	DEFB 0DFh
+	DEFB 0F5h
+	DEFB 0EBh
+	DEFB 5Fh
+	DEFB 0FFh
+	DEFB 66h
+	DEFB 99h
+	DEFB 2Ch
+	DEFB 4Ah
+	DEFB 08h
+	DEFB 68h
+	DEFB 0DDh
+	DEFB 0FFh
+	DEFB 16h
+	DEFB 1Fh
+	DEFB 85h
+	DEFB 0DFh
+	DEFB 0A5h
+	DEFB 0FFh
+	DEFB 0A5h
+	DEFB 0E7h
 	DEFB 24h
 	DEFB 3Ch
 	DEFB 0DBh
@@ -1336,12 +1426,12 @@ _tileSet.__DATA__:
 	DEFB 0A0h
 	DEFB 82h
 	DEFB 90h
-__LABEL562:
+__LABEL591:
 	DEFW 0001h
 	DEFW 0008h
 	DEFB 01h
 _tileColors:
-	DEFW __LABEL563
+	DEFW __LABEL592
 _tileColors.__DATA__.__PTR__:
 	DEFW _tileColors.__DATA__
 _tileColors.__DATA__:
@@ -1415,6 +1505,17 @@ _tileColors.__DATA__:
 	DEFB 0Ah
 	DEFB 02h
 	DEFB 0Ah
+	DEFB 10h
+	DEFB 10h
+	DEFB 10h
+	DEFB 10h
+	DEFB 16h
+	DEFB 10h
+	DEFB 10h
+	DEFB 10h
+	DEFB 10h
+	DEFB 04h
+	DEFB 02h
 	DEFB 44h
 	DEFB 03h
 	DEFB 06h
@@ -1483,11 +1584,11 @@ _tileColors.__DATA__:
 	DEFB 72h
 	DEFB 72h
 	DEFB 72h
-__LABEL563:
+__LABEL592:
 	DEFW 0000h
 	DEFB 01h
 _shots:
-	DEFW __LABEL564
+	DEFW __LABEL593
 _shots.__DATA__.__PTR__:
 	DEFW _shots.__DATA__
 _shots.__DATA__:
@@ -1503,12 +1604,12 @@ _shots.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-__LABEL564:
+__LABEL593:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
 _activeMap:
-	DEFW __LABEL565
+	DEFW __LABEL594
 _activeMap.__DATA__.__PTR__:
 	DEFW _activeMap.__DATA__
 _activeMap.__DATA__:
@@ -1912,12 +2013,12 @@ _activeMap.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-__LABEL565:
+__LABEL594:
 	DEFW 0001h
 	DEFW 0014h
 	DEFB 01h
 _reflectDirsA:
-	DEFW __LABEL566
+	DEFW __LABEL595
 _reflectDirsA.__DATA__.__PTR__:
 	DEFW _reflectDirsA.__DATA__
 _reflectDirsA.__DATA__:
@@ -1925,11 +2026,11 @@ _reflectDirsA.__DATA__:
 	DEFB 04h
 	DEFB 01h
 	DEFB 03h
-__LABEL566:
+__LABEL595:
 	DEFW 0000h
 	DEFB 01h
 _reflectDirsB:
-	DEFW __LABEL567
+	DEFW __LABEL596
 _reflectDirsB.__DATA__.__PTR__:
 	DEFW _reflectDirsB.__DATA__
 _reflectDirsB.__DATA__:
@@ -1937,11 +2038,11 @@ _reflectDirsB.__DATA__:
 	DEFB 01h
 	DEFB 02h
 	DEFB 03h
-__LABEL567:
+__LABEL596:
 	DEFW 0000h
 	DEFB 01h
 _reflectDirsC:
-	DEFW __LABEL568
+	DEFW __LABEL597
 _reflectDirsC.__DATA__.__PTR__:
 	DEFW _reflectDirsC.__DATA__
 _reflectDirsC.__DATA__:
@@ -1949,11 +2050,11 @@ _reflectDirsC.__DATA__:
 	DEFB 03h
 	DEFB 04h
 	DEFB 01h
-__LABEL568:
+__LABEL597:
 	DEFW 0000h
 	DEFB 01h
 _reflectDirsD:
-	DEFW __LABEL569
+	DEFW __LABEL598
 _reflectDirsD.__DATA__.__PTR__:
 	DEFW _reflectDirsD.__DATA__
 _reflectDirsD.__DATA__:
@@ -1961,11 +2062,11 @@ _reflectDirsD.__DATA__:
 	DEFB 01h
 	DEFB 04h
 	DEFB 02h
-__LABEL569:
+__LABEL598:
 	DEFW 0000h
 	DEFB 01h
 _maskTable:
-	DEFW __LABEL570
+	DEFW __LABEL599
 _maskTable.__DATA__.__PTR__:
 	DEFW _maskTable.__DATA__
 _maskTable.__DATA__:
@@ -1977,11 +2078,11 @@ _maskTable.__DATA__:
 	DEFB 20h
 	DEFB 40h
 	DEFB 80h
-__LABEL570:
+__LABEL599:
 	DEFW 0000h
 	DEFB 01h
 _bitTable:
-	DEFW __LABEL571
+	DEFW __LABEL600
 _bitTable.__DATA__.__PTR__:
 	DEFW _bitTable.__DATA__
 _bitTable.__DATA__:
@@ -1993,11 +2094,11 @@ _bitTable.__DATA__:
 	DEFB 3Fh
 	DEFB 7Fh
 	DEFB 00h
-__LABEL571:
+__LABEL600:
 	DEFW 0000h
 	DEFB 01h
 _aliens:
-	DEFW __LABEL572
+	DEFW __LABEL601
 _aliens.__DATA__.__PTR__:
 	DEFW _aliens.__DATA__
 _aliens.__DATA__:
@@ -2017,12 +2118,12 @@ _aliens.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-__LABEL572:
+__LABEL601:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
 _tanks:
-	DEFW __LABEL573
+	DEFW __LABEL602
 _tanks.__DATA__.__PTR__:
 	DEFW _tanks.__DATA__
 _tanks.__DATA__:
@@ -2034,12 +2135,12 @@ _tanks.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-__LABEL573:
+__LABEL602:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
 _ships:
-	DEFW __LABEL574
+	DEFW __LABEL603
 _ships.__DATA__.__PTR__:
 	DEFW _ships.__DATA__
 _ships.__DATA__:
@@ -2059,12 +2160,12 @@ _ships.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-__LABEL574:
+__LABEL603:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
 _hangars:
-	DEFW __LABEL575
+	DEFW __LABEL604
 _hangars.__DATA__.__PTR__:
 	DEFW _hangars.__DATA__
 _hangars.__DATA__:
@@ -2076,12 +2177,12 @@ _hangars.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-__LABEL575:
+__LABEL604:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
 _attribsAlienA:
-	DEFW __LABEL576
+	DEFW __LABEL605
 _attribsAlienA.__DATA__.__PTR__:
 	DEFW _attribsAlienA.__DATA__
 _attribsAlienA.__DATA__:
@@ -2091,11 +2192,11 @@ _attribsAlienA.__DATA__:
 	DEFB 03h
 	DEFB 04h
 	DEFB 44h
-__LABEL576:
+__LABEL605:
 	DEFW 0000h
 	DEFB 01h
 _attribsAlienB:
-	DEFW __LABEL577
+	DEFW __LABEL606
 _attribsAlienB.__DATA__.__PTR__:
 	DEFW _attribsAlienB.__DATA__
 _attribsAlienB.__DATA__:
@@ -2103,11 +2204,11 @@ _attribsAlienB.__DATA__:
 	DEFB 02h
 	DEFB 01h
 	DEFB 00h
-__LABEL577:
+__LABEL606:
 	DEFW 0000h
 	DEFB 01h
 _colorsExp:
-	DEFW __LABEL578
+	DEFW __LABEL607
 _colorsExp.__DATA__.__PTR__:
 	DEFW _colorsExp.__DATA__
 _colorsExp.__DATA__:
@@ -2115,26 +2216,33 @@ _colorsExp.__DATA__:
 	DEFB 02h
 	DEFB 01h
 	DEFB 00h
-__LABEL578:
+__LABEL607:
 	DEFW 0000h
 	DEFB 01h
 ZXBASIC_USER_DATA_END:
 __MAIN_PROGRAM__:
-#line 31 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 35 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 42 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 49 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 54 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 63 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 67 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 77 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 92 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 133 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 138 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 144 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 151 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 159 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 169 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 34 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 38 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 45 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 52 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 57 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 66 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 70 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 80 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 95 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 136 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 141 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 147 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 154 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 162 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 172 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 178 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 182 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 183 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 185 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 189 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 190 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 192 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		SPRITE_1x1_BUFFER_SIZE equ (6 * 8)
 		SPRITE_1x2_BUFFER_SIZE equ (9 * 8)
 		SPRITE_2x2_BUFFER_SIZE equ (15 * 8)
@@ -2146,7 +2254,7 @@ __MAIN_PROGRAM__:
 		TOTAL_2x2_OPS equ (0 * SPRITE_2x2_SHIFTED_SIZE)
 		TOTAL_DRAW_OPS equ ((TOTAL_1x1_OPS + TOTAL_1x2_OPS + TOTAL_2x2_OPS) * 2)
 		DRAW_OP_SIZE equ 5
-#line 190 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 213 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		DRAW_OPS_SIZE equ (TOTAL_DRAW_OPS * DRAW_OP_SIZE)
 		DRAW_OPS_DATA_SIZE equ (TOTAL_DRAW_OPS * 8)
 		SPRITE_BUFFER_SIZE equ ((16 * SPRITE_1x1_BUFFER_SIZE)+(0 * SPRITE_1x2_BUFFER_SIZE)+(0 * SPRITE_2x2_BUFFER_SIZE))
@@ -2182,55 +2290,55 @@ SPRITE_INDEX:
 		defs SPRITE_INDEX_SIZE
 SPRITE_COUNT:
 		defb 0
-#line 259 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 282 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 TILE_SET:
 		defw 0
 TILE_MAP:
 		defs 768
-#line 268 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 291 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		PROC
 INIT_GFX_LIB:
-#line 278 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 301 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld hl, DRAW_OPS_A
 		ld (CURRENT_DRAW_OPS), hl
-#line 280
+#line 303
 		ld hl, DRAW_OPS_B
 		ld (CURRENT_CLEAR_OPS), hl
-#line 281
+#line 304
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
-#line 283
+#line 306
 		ld hl, CELL_MAP_A
 		ld (CURRENT_DRAW_MAP), hl
-#line 285
+#line 308
 		ld hl, CELL_MAP_B
 		ld (CURRENT_CLEAR_MAP), hl
-#line 286
+#line 309
 		ld hl, SPRITE_BUFFER
 		ld (SPRITE_INDEX), hl
-#line 288
+#line 311
 		ret
 		ENDP
 		PROC
 RESET_GFX_LIB:
 		ld hl, DRAW_OPS_A
 		ld (CURRENT_DRAW_OPS), hl
-#line 296
+#line 319
 		ld hl, DRAW_OPS_B
 		ld (CURRENT_CLEAR_OPS), hl
-#line 297
+#line 320
 		ld hl, CELL_MAP_A
 		ld (CURRENT_DRAW_MAP), hl
-#line 299
+#line 322
 		ld hl, CELL_MAP_B
 		ld (CURRENT_CLEAR_MAP), hl
-#line 300
+#line 323
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
-#line 302
+#line 325
 		ld hl, SPRITE_BUFFER
 		ld (SPRITE_INDEX), hl
-#line 304
+#line 327
 		xor a
 		ld (CURRENT_DRAW_COUNT), a
 		ld (CURRENT_CLEAR_COUNT), a
@@ -2241,7 +2349,7 @@ RESET_GFX_LIB:
 		ld hl, SPRITE_BUFFER
 		ld bc, SPRITE_BUFFER_SIZE - 1
 		ldir
-#line 310
+#line 333
 		xor a
 		ld de, CELL_MAP_A
 		ld (de), a
@@ -2249,7 +2357,7 @@ RESET_GFX_LIB:
 		ld hl, CELL_MAP_A
 		ld bc, 768 - 1
 		ldir
-#line 311
+#line 334
 		xor a
 		ld de, CELL_MAP_B
 		ld (de), a
@@ -2257,7 +2365,7 @@ RESET_GFX_LIB:
 		ld hl, CELL_MAP_B
 		ld bc, 768 - 1
 		ldir
-#line 312
+#line 335
 		xor a
 		ld de, TILE_MAP
 		ld (de), a
@@ -2265,27 +2373,27 @@ RESET_GFX_LIB:
 		ld hl, TILE_MAP
 		ld bc, 768 - 1
 		ldir
-#line 315
-#line 316 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 338
+#line 339 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ret
 		ENDP
 		PROC
 CLEAR_SCREEN:
 		ld hl, DRAW_OPS_A
 		ld (CURRENT_DRAW_OPS), hl
-#line 324
+#line 347
 		ld hl, DRAW_OPS_B
 		ld (CURRENT_CLEAR_OPS), hl
-#line 325
+#line 348
 		ld hl, CELL_MAP_A
 		ld (CURRENT_DRAW_MAP), hl
-#line 327
+#line 350
 		ld hl, CELL_MAP_B
 		ld (CURRENT_CLEAR_MAP), hl
-#line 328
+#line 351
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
-#line 330
+#line 353
 		xor a
 		ld (CURRENT_DRAW_COUNT), a
 		ld (CURRENT_CLEAR_COUNT), a
@@ -2296,7 +2404,7 @@ CLEAR_SCREEN:
 		ld hl, CELL_MAP_A
 		ld bc, 768 - 1
 		ldir
-#line 336
+#line 359
 		xor a
 		ld de, CELL_MAP_B
 		ld (de), a
@@ -2304,7 +2412,7 @@ CLEAR_SCREEN:
 		ld hl, CELL_MAP_B
 		ld bc, 768 - 1
 		ldir
-#line 337
+#line 360
 		xor a
 		ld de, TILE_MAP
 		ld (de), a
@@ -2312,16 +2420,16 @@ CLEAR_SCREEN:
 		ld hl, TILE_MAP
 		ld bc, 768 - 1
 		ldir
-#line 340
-#line 341 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 363
+#line 364 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ret
 		ENDP
 		PROC
 		LOCAL RENDER_LOOP, END_RENDER, RESTORE_STACK
 RENDER_FRAME:
-#line 352 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 375 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		halt
-#line 356 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 379 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld a, (CURRENT_DRAW_COUNT)
 		cp 0
 		jp z, END_RENDER
@@ -2333,18 +2441,18 @@ RENDER_LOOP:
 		inc hl
 		ld d, (hl)
 		inc hl
-#line 370
+#line 393
 		ld c, (hl)
 		inc hl
 		ld b, (hl)
 		inc hl
-#line 371
+#line 394
 		inc hl
-#line 375 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 398 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		push hl
 		ld h, b
 		ld l, c
-#line 379
+#line 402
 		ld (RESTORE_STACK + 1), sp
 		ld sp, hl
 		ex de, hl
@@ -2395,7 +2503,7 @@ END_RENDER:
 		ld (CURRENT_CLEAR_COUNT), a
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
-#line 443
+#line 466
 		ret
 		ENDP
 		PROC
@@ -2410,7 +2518,7 @@ CREATE_SPRITE_BUFFER:
 		inc hl
 		ld d, (hl)
 		inc hl
-#line 459
+#line 482
 		push de
 		ex de, hl
 		add hl, bc
@@ -2419,7 +2527,7 @@ CREATE_SPRITE_BUFFER:
 		inc hl
 		ld (hl), d
 		inc hl
-#line 467
+#line 490
 		ld hl, SPRITE_COUNT
 		inc (hl)
 		pop hl
@@ -2444,7 +2552,7 @@ CREATE_1x1_SPRITE:
 		ldi
 		ldi
 		ldi
-#line 494
+#line 518
 		ld hl, 8
 		add hl, de
 		ex de, hl
@@ -2461,7 +2569,7 @@ LOOP:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 515
+#line 539
 		ex de, hl
 		ld (ix+0), d
 		ld (ix+16), e
@@ -2470,144 +2578,9 @@ LOOP:
 		ld a, (SPRITE_COUNT)
 		ret
 		ENDP
-		PROC
-		LOCAL LOOP
-CREATE_1x2_SPRITE:
-		push hl
-		ld bc, SPRITE_1x2_BUFFER_SIZE
-		call CREATE_SPRITE_BUFFER
-		ld de, 4
-		add hl, de
-		pop de
-		push de
-		ex de, hl
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-#line 546
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-#line 547
-		ld hl, 8
-		add hl, de
-		ex de, hl
-		pop hl
-		ld ixh, d
-		ld ixl, e
-		ld b, 16
-LOOP:
-		ld e, (hl)
-		ld d, 0
-		inc hl
-		ex de, hl
-		add hl, hl
-		add hl, hl
-		add hl, hl
-		add hl, hl
-#line 569
-		ex de, hl
-		ld (ix+0), d
-		ld (ix+24), e
-		inc ix
-		djnz LOOP
-		ld a, (SPRITE_COUNT)
-		ret
-		ENDP
-		PROC
-		LOCAL LOOP
-CREATE_2x2_SPRITE:
-		push hl
-		ld bc, SPRITE_2x2_BUFFER_SIZE
-		call CREATE_SPRITE_BUFFER
-		ld de, 4
-		add hl, de
-		pop de
-		push de
-		ex de, hl
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-#line 600
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-#line 601
-		ex de, hl
-		ld bc, 8
-		add hl, bc
-		ex de, hl
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-#line 611
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-		ldi
-#line 612
-		ld hl, 8
-		add hl, de
-		ex de, hl
-		pop iy
-		ld ixh, d
-		ld ixl, e
-		ld b, 16
-LOOP:
-		ld c, (iy+0)
-		ld d, (iy+16)
-		ld e, 0
-		srl c
-		rr d
-		rr e
-		srl c
-		rr d
-		rr e
-		srl c
-		rr d
-		rr e
-		srl c
-		rr d
-		rr e
-#line 633
-		ld (ix+0), c
-		ld (ix+24), d
-		ld (ix+48), e
-		inc iy
-		inc ix
-		djnz LOOP
-		ld a, (SPRITE_COUNT)
-		ret
-		ENDP
+#line 553 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 611 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 680 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		PROC
 		LOCAL EXISTING_OP, REAL_EXISTING_OP
 CREATE_DRAW_OP:
@@ -2620,7 +2593,7 @@ CREATE_DRAW_OP:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 661
+#line 694
 		ld c, b
 		ld b, 0
 		add hl, bc
@@ -2639,12 +2612,12 @@ CREATE_DRAW_OP:
 		ld h, 0
 		ld d, h
 		ld e, l
-#line 689
+#line 722
 		add hl, hl
 		add hl, hl
-#line 690
+#line 723
 		add hl, de
-#line 695 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 728 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld bc, (CURRENT_DRAW_OPS)
 		add hl, bc
 		pop de
@@ -2669,7 +2642,7 @@ CREATE_DRAW_OP:
 		inc hl
 		ld (hl), d
 		inc hl
-#line 721
+#line 754
 		ld de, (DRAW_OPS_DATA_INDEX)
 		ld iyh, d
 		ld iyl, e
@@ -2677,9 +2650,9 @@ CREATE_DRAW_OP:
 		inc hl
 		ld (hl), d
 		inc hl
-#line 728
+#line 761
 		ld (hl), 1
-#line 734 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 767 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld l, 8
 		ld h, 0
 		add hl, de
@@ -2696,12 +2669,12 @@ CREATE_DRAW_OP:
 		ld h, 0
 		ld d, h
 		ld e, l
-#line 760
+#line 793
 		add hl, hl
 		add hl, hl
-#line 761
+#line 794
 		add hl, de
-#line 768 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 801 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld de, (CURRENT_CLEAR_OPS)
 		add hl, de
 		ld d, ixh
@@ -2710,7 +2683,7 @@ CREATE_DRAW_OP:
 		inc hl
 		ld (hl), d
 		inc hl
-#line 776
+#line 809
 		ex de, hl
 		ld hl, TILE_MAP
 		add hl, bc
@@ -2720,7 +2693,7 @@ CREATE_DRAW_OP:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 788
+#line 821
 		ld bc, (TILE_SET)
 		add hl, bc
 		ex de, hl
@@ -2728,9 +2701,9 @@ CREATE_DRAW_OP:
 		inc hl
 		ld (hl), d
 		inc hl
-#line 794
+#line 827
 		ld (hl), 2
-#line 805 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 838 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		pop hl
 		ld b, iyh
 		ld c, iyl
@@ -2779,7 +2752,7 @@ CREATE_DRAW_OP:
 		ld a, (de)
 		or (hl)
 		ld (bc), a
-#line 874 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 907 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ret
 EXISTING_OP:
 		dec a
@@ -2787,40 +2760,40 @@ EXISTING_OP:
 		ld h, 0
 		ld d, h
 		ld e, l
-#line 887
+#line 920
 		add hl, hl
 		add hl, hl
-#line 888
+#line 921
 		add hl, de
-#line 893 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 926 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld bc, (CURRENT_DRAW_OPS)
 		add hl, bc
 		ld c, (hl)
 		inc hl
 		ld b, (hl)
 		inc hl
-#line 899
+#line 932
 		push hl
 		push bc
 		ld e, (hl)
 		inc hl
 		ld d, (hl)
 		inc hl
-#line 904
+#line 937
 		push de
 		ld a, (hl)
 		and 2
 		jp z, REAL_EXISTING_OP
 		ld (hl), 1
-#line 921 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 954 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		pop af
-#line 935 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 968 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		pop bc
 		pop de
 		pop hl
 		push de
 		push af
-#line 944 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 977 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld de, (CURRENT_CLEAR_MAP)
 		add hl, de
 		ld a, (CURRENT_CLEAR_COUNT)
@@ -2832,41 +2805,41 @@ EXISTING_OP:
 		ld h, 0
 		ld d, h
 		ld e, l
-#line 966
+#line 999
 		add hl, hl
 		add hl, hl
-#line 967
+#line 1000
 		add hl, de
-#line 972 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1005 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld de, (CURRENT_CLEAR_OPS)
 		add hl, de
 		ld (hl), c
 		inc hl
 		ld (hl), b
 		inc hl
-#line 977
+#line 1010
 		pop de
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
-#line 982
+#line 1015
 		ld (hl), 2
-#line 993 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1026 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		pop hl
 		push de
-#line 999 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1032 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ld de, (DRAW_OPS_DATA_INDEX)
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
-#line 1005
+#line 1038
 		ld hl, 8
 		add hl, de
 		ld (DRAW_OPS_DATA_INDEX), hl
 		pop bc
-#line 1014 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1047 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		pop hl
 		pop hl
 		ld a, (bc)
@@ -2914,7 +2887,7 @@ EXISTING_OP:
 		ld a, (bc)
 		or (hl)
 		ld (de), a
-#line 1074 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1107 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		ret
 REAL_EXISTING_OP:
 		pop hl
@@ -2922,7 +2895,7 @@ REAL_EXISTING_OP:
 		pop hl
 		pop hl
 		pop hl
-#line 1087 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1120 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		pop hl
 		ex de, hl
 		ld a, (de)
@@ -2963,7 +2936,7 @@ REAL_EXISTING_OP:
 		ld a, (de)
 		or (hl)
 		ld (hl),  a
-#line 1093
+#line 1126
 		ret
 		ENDP
 		PROC
@@ -2997,7 +2970,7 @@ DRAW_1x1_SPRITE:
 		inc hl
 		ld d, (hl)
 		inc hl
-#line 1140
+#line 1173
 		ld a, b
 		or c
 		and 1
@@ -3050,163 +3023,9 @@ VERTICAL_SHIFT:
 		call DRAW_SPRITE_COLUMN
 		ret
 		ENDP
-		PROC
-		LOCAL TEST_SHIFTS, HORIZONTAL_SHIFT, VERTICAL_SHIFT
-DRAW_1x2_SPRITE:
-		dec a
-		add a, a
-		ld l, a
-		ld h, 0
-		ld de, SPRITE_INDEX
-		add hl, de
-		ld e, (hl)
-		inc hl
-		ld d, (hl)
-		inc hl
-#line 1236
-		ld a, b
-		or c
-		and 1
-		jp nz, TEST_SHIFTS
-		srl b
-		srl c
-		ld hl, 4
-		add hl, de
-		ld a, 2
-		call DRAW_SPRITE_COLUMN
-		ret
-TEST_SHIFTS:
-		ld a, c
-		and 1
-		jp z, HORIZONTAL_SHIFT
-		ld a, b
-		and 1
-		jp z, VERTICAL_SHIFT
-		srl b
-		srl c
-		ld hl, 24
-		add hl, de
-		push bc
-		ld a, 3
-		call DRAW_SPRITE_COLUMN
-		ld a,3
-		pop bc
-		inc b
-		call DRAW_SPRITE_COLUMN
-		ret
-HORIZONTAL_SHIFT:
-		srl b
-		srl c
-		ld hl, 28
-		add hl, de
-		push bc
-		ld a,2
-		call DRAW_SPRITE_COLUMN
-		pop bc
-		inc b
-		ld de, 8
-		add hl, de
-		ld a, 2
-		call DRAW_SPRITE_COLUMN
-		ret
-VERTICAL_SHIFT:
-		srl b
-		srl c
-		ex de, hl
-		ld a, 3
-		call DRAW_SPRITE_COLUMN
-		ret
-		ENDP
-		PROC
-DRAW_2x2_SPRITE:
-		dec a
-		add a, a
-		ld l, a
-		ld h, 0
-		ld de, SPRITE_INDEX
-		add hl, de
-		ld e, (hl)
-		inc hl
-		ld d, (hl)
-		inc hl
-#line 1326
-		ld a, b
-		or c
-		and 1
-		jp nz, TEST_SHIFTS
-		srl b
-		srl c
-		ld hl, 4
-		add hl, de
-		push bc
-		ld a, 2
-		call DRAW_SPRITE_COLUMN
-		pop bc
-		inc b
-		ld de, 8
-		add hl, de
-		ld a, 2
-		call DRAW_SPRITE_COLUMN
-		ret
-TEST_SHIFTS:
-		ld a, c
-		and 1
-		jp z, HORIZONTAL_SHIFT
-		ld a, b
-		and 1
-		jp z, VERTICAL_SHIFT
-		srl b
-		srl c
-		ld hl, 48
-		add hl, de
-		push bc
-		ld a, 3
-		call DRAW_SPRITE_COLUMN
-		ld a,3
-		pop bc
-		inc b
-		push bc
-		call DRAW_SPRITE_COLUMN
-		ld a,3
-		pop bc
-		inc b
-		call DRAW_SPRITE_COLUMN
-		ret
-HORIZONTAL_SHIFT:
-		srl b
-		srl c
-		ld hl, 52
-		add hl, de
-		push bc
-		ld a,2
-		call DRAW_SPRITE_COLUMN
-		pop bc
-		inc b
-		push bc
-		ld de, 8
-		add hl, de
-		ld a, 2
-		call DRAW_SPRITE_COLUMN
-		pop bc
-		inc b
-		ld de, 8
-		add hl, de
-		ld a, 2
-		call DRAW_SPRITE_COLUMN
-		ret
-VERTICAL_SHIFT:
-		srl b
-		srl c
-		ex de, hl
-		ld a, 3
-		push bc
-		call DRAW_SPRITE_COLUMN
-		ld a, 3
-		pop bc
-		inc b
-		call DRAW_SPRITE_COLUMN
-		ret
-		ENDP
+#line 1258 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1353 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1476 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		PROC
 SET_TILEMAP:
 		ld de, TILE_SET
@@ -3215,7 +3034,7 @@ SET_TILEMAP:
 		inc hl
 		ld (hl), d
 		inc hl
-#line 1441
+#line 1484
 		ret
 		ENDP
 		PROC
@@ -3225,7 +3044,7 @@ SET_TILE:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 1450
+#line 1493
 		add hl, de
 		ex de, hl
 		ld hl, TILE_MAP
@@ -3239,7 +3058,7 @@ SET_TILE:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 1469
+#line 1512
 		ld bc, (TILE_SET)
 		add hl, bc
 		ld a, d
@@ -3288,7 +3107,7 @@ SET_TILE_CHECKED:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 1522
+#line 1565
 		add hl, de
 		push hl
 		ex de, hl
@@ -3303,7 +3122,7 @@ SET_TILE_CHECKED:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 1543
+#line 1586
 		ld bc, (TILE_SET)
 		add hl, bc
 		push hl
@@ -3323,10 +3142,10 @@ REAL_OP:
 		ld h, 0
 		ld d, h
 		ld e, l
-#line 1572
+#line 1615
 		add hl, hl
 		add hl, hl
-#line 1573
+#line 1616
 		add hl, de
 		ld bc, (CURRENT_DRAW_OPS)
 		add hl, bc
@@ -3337,7 +3156,7 @@ REAL_OP:
 		inc hl
 		ld (hl), d
 		inc hl
-#line 1585
+#line 1628
 		ld a, 2
 		ld (hl), a
 		pop de
@@ -3393,7 +3212,7 @@ GET_TILE:
 		add hl, hl
 		add hl, hl
 		add hl, hl
-#line 1648
+#line 1691
 		add hl, de
 		ex de, hl
 		ld hl, TILE_MAP
@@ -3401,9 +3220,9 @@ GET_TILE:
 		ld a, (hl)
 		ret
 		ENDP
-#line 1662 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1705 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 GSPRITES_LIB_END:
-#line 1970 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1579 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 __LABEL__defines:
 __LABEL__macros:
 __LABEL__vars:
@@ -3950,29 +3769,29 @@ __END_PROGRAM:
 	ei
 	ret
 _InitGFXLib:
-#line 1671 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1714 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		call INIT_GFX_LIB
-#line 1675 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1718 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _InitGFXLib__leave:
 	ret
 _RenderFrame:
-#line 1691 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1734 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		call RENDER_FRAME
-#line 1695 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1738 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _RenderFrame__leave:
 	ret
 _Create1x1Sprite:
-#line 1701 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1746 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		push ix
 		push iy
 		call CREATE_1x1_SPRITE
 		pop iy
 		pop ix
-#line 1709 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1754 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _Create1x1Sprite__leave:
 	ret
 _Draw1x1Sprite:
-#line 1715 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1760 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		exx
 		pop hl
 		exx
@@ -3987,17 +3806,17 @@ _Draw1x1Sprite:
 		call DRAW_1x1_SPRITE
 		pop iy
 		pop ix
-#line 1733 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1778 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _Draw1x1Sprite__leave:
 	ret
 _SetTileset:
-#line 1838 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1893 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		call SET_TILEMAP
-#line 1840 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1895 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _SetTileset__leave:
 	ret
 _SetTile:
-#line 1846 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1901 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		exx
 		pop hl
 		exx
@@ -4008,11 +3827,11 @@ _SetTile:
 		push hl
 		exx
 		call SET_TILE
-#line 1857 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1912 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _SetTile__leave:
 	ret
 _SetTileChecked:
-#line 1863 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1918 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		exx
 		pop hl
 		exx
@@ -4023,7 +3842,7 @@ _SetTileChecked:
 		push hl
 		exx
 		call SET_TILE_CHECKED
-#line 1874 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1929 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _SetTileChecked__leave:
 	ret
 _MultiKeys:
@@ -4255,6 +4074,8 @@ SoundEffectsData:
 		defw SoundEffect1Data
 		defw SoundEffect2Data
 		defw SoundEffect3Data
+		defw SoundEffect4Data
+		defw SoundEffect5Data
 SoundEffect0Data:
 		defb 2
 		defw 10,1000,3074
@@ -4271,7 +4092,17 @@ SoundEffect3Data:
 		defb 1
 		defw 25,100,2000,65524,128
 		defb 0
-#line 246 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/BeepFX.zxbas"
+SoundEffect4Data:
+		defb 1
+		defw 10,1000,8000,0,1664
+		defb 2
+		defw 2,1000,100
+		defb 0
+SoundEffect5Data:
+		defb 2
+		defw 10,400,261
+		defb 0
+#line 257 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/BeepFX.zxbas"
 	ld a, (_borderColors.__DATA__ + -1)
 	ld hl, (_borderColors.__DATA__ + 0 - 1)
 	add a, h
@@ -4307,7 +4138,7 @@ _ExplodeAnimEffect:
 	call BORDER
 _ExplodeAnimEffect__leave:
 	ret
-_AlienDeathEffect:
+_KilledAlienEffect:
 	ld a, 4
 	ld (_borderColors.__DATA__ + 0), a
 	ld (_borderColors.__DATA__ + 1), a
@@ -4318,7 +4149,33 @@ _AlienDeathEffect:
 	call _PlayFX
 	xor a
 	call BORDER
+_KilledAlienEffect__leave:
+	ret
+_AlienDeathEffect:
+	ld a, 4
+	ld (_borderColors.__DATA__ + 0), a
+	ld (_borderColors.__DATA__ + 1), a
+	ld a, 5
+	ld (_borderColors.__DATA__ + 2), a
+	ld (_borderColors.__DATA__ + 3), a
+	ld a, 4
+	call _PlayFX
+	xor a
+	call BORDER
 _AlienDeathEffect__leave:
+	ret
+_BuildTankDestroyedEffect:
+	xor a
+	ld (_borderColors.__DATA__ + 0), a
+	ld (_borderColors.__DATA__ + 1), a
+	ld a, 7
+	ld (_borderColors.__DATA__ + 2), a
+	ld (_borderColors.__DATA__ + 3), a
+	ld a, 5
+	call _PlayFX
+	xor a
+	call BORDER
+_BuildTankDestroyedEffect__leave:
 	ret
 _DoPause:
 	push ix
@@ -4365,9 +4222,13 @@ INT_HANDLER:
 _InstallHandler__leave:
 	ret
 _AnyKey:
-#line 42 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+#line 43 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 		ld a, $FE
 		in a, (0FEh)
+		ld b,a
+		ld a, $F7
+		in a, (0FEh)
+		and b
 		ld b,a
 		ld a, $DF
 		in a, (0FEh)
@@ -4380,7 +4241,8 @@ _AnyKey:
 		ld a, $7F
 		in a, (0FEh)
 		and b
-#line 61 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+		cpl
+#line 68 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 _AnyKey__leave:
 	ret
 _printZoomedTile:
@@ -4424,7 +4286,7 @@ __LABEL60:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL63
 __LABEL62:
@@ -4455,7 +4317,7 @@ __LABEL63:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL65
 __LABEL64:
@@ -4486,7 +4348,7 @@ __LABEL65:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL67
 __LABEL66:
@@ -4517,7 +4379,7 @@ __LABEL67:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL69
 __LABEL68:
@@ -4548,7 +4410,7 @@ __LABEL69:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL71
 __LABEL70:
@@ -4579,7 +4441,7 @@ __LABEL71:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL73
 __LABEL72:
@@ -4610,7 +4472,7 @@ __LABEL73:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL75
 __LABEL74:
@@ -4641,7 +4503,7 @@ __LABEL75:
 	ld a, (ix+11)
 	ld l, a
 	push hl
-	ld a, 93
+	ld a, 104
 	call _SetTile
 	jp __LABEL77
 __LABEL76:
@@ -4760,7 +4622,7 @@ __LABEL81:
 	call __ARRAY
 	ld a, (hl)
 	push af
-	ld a, 94
+	ld a, 105
 	push af
 	call _ShowZoomedFrame
 	inc (ix-1)
@@ -4773,7 +4635,7 @@ __LABEL78:
 	call _DoPause
 	ld a, 68
 	push af
-	ld a, 98
+	ld a, 109
 	push af
 	call _ShowZoomedFrame
 	call _AlienDeathEffect
@@ -4792,7 +4654,7 @@ __LABEL86:
 	call __ARRAY
 	ld a, (hl)
 	push af
-	ld a, 98
+	ld a, 109
 	push af
 	call _ShowZoomedFrame
 	inc (ix-1)
@@ -4816,10 +4678,10 @@ _PlayDeathShot:
 	add ix, sp
 	ld hl, 0
 	push hl
-	ld (ix-1), 102
+	ld (ix-1), 113
 	ld a, 6
 	push af
-	ld a, 102
+	ld a, 113
 	push af
 	call _ShowZoomedFrame
 	ld hl, 30
@@ -4871,7 +4733,7 @@ __LABEL100:
 	call __ARRAY
 	ld a, (hl)
 	push af
-	ld a, 126
+	ld a, 137
 	push af
 	call _ShowZoomedFrame
 	ld hl, 10
@@ -4892,7 +4754,7 @@ _PlayDeathShot__leave:
 _PlayDeathTank:
 	ld a, 1
 	push af
-	ld a, 130
+	ld a, 141
 	push af
 	call _ShowZoomedFrame
 	ld hl, 10
@@ -4900,7 +4762,7 @@ _PlayDeathTank:
 	call _DoPause
 	ld a, 7
 	push af
-	ld a, 130
+	ld a, 141
 	push af
 	call _ShowZoomedFrame
 	ld hl, 10
@@ -4908,7 +4770,7 @@ _PlayDeathTank:
 	call _DoPause
 	ld a, 71
 	push af
-	ld a, 130
+	ld a, 141
 	push af
 	call _ShowZoomedFrame
 	ld hl, 30
@@ -4916,13 +4778,13 @@ _PlayDeathTank:
 	call _DoPause
 	ld a, 114
 	push af
-	ld a, 134
+	ld a, 145
 	push af
 	call _ShowZoomedFrame
 	call _ExplodeAnimEffect
 	ld a, 71
 	push af
-	ld a, 130
+	ld a, 141
 	push af
 	call _ShowZoomedFrame
 	ld hl, 30
@@ -4930,7 +4792,7 @@ _PlayDeathTank:
 	call _DoPause
 	xor a
 	push af
-	ld a, 130
+	ld a, 141
 	push af
 	call _ShowZoomedFrame
 	ld hl, 10
@@ -4940,14 +4802,14 @@ _PlayDeathTank:
 _PlayDeathTank__leave:
 	ret
 _FindEmptyBit:
-#line 449 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 473 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 		ld b, 0
 febloop:
 		inc b
 		srl a
 		jp c, febloop
 		ld a, b
-#line 458 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 482 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 _FindEmptyBit__leave:
 	ret
 _InitGraphics:
@@ -5077,7 +4939,7 @@ __LABEL113:
 	call __STRSLICE
 	ld a, 1
 	call __ASC
-	add a, 83
+	add a, 94
 	sub 48
 	inc a
 	ld l, a
@@ -5106,7 +4968,7 @@ __LABEL113:
 	call __STRSLICE
 	ld a, 1
 	call __ASC
-	add a, 83
+	add a, 94
 	sub 48
 	call _SetTile
 	inc (ix-1)
@@ -5375,37 +5237,37 @@ __LABEL132:
 	push hl
 	ld hl, 24
 	push hl
-	ld a, (_tileColors.__DATA__ + 71)
+	ld a, (_tileColors.__DATA__ + 82)
 	ld l, a
 	push hl
-	ld a, 71
+	ld a, 82
 	call _SetTile
 	ld hl, 18
 	push hl
 	ld hl, 28
 	push hl
-	ld a, (_tileColors.__DATA__ + 72)
+	ld a, (_tileColors.__DATA__ + 83)
 	ld l, a
 	push hl
-	ld a, 72
+	ld a, 83
 	call _SetTile
 	ld hl, 20
 	push hl
 	ld hl, 24
 	push hl
-	ld a, (_tileColors.__DATA__ + 73)
+	ld a, (_tileColors.__DATA__ + 84)
 	ld l, a
 	push hl
-	ld a, 73
+	ld a, 84
 	call _SetTile
 	ld hl, 20
 	push hl
 	ld hl, 28
 	push hl
-	ld a, (_tileColors.__DATA__ + 74)
+	ld a, (_tileColors.__DATA__ + 85)
 	ld l, a
 	push hl
-	ld a, 74
+	ld a, 85
 	call _SetTile
 	ld a, 18
 	push af
@@ -5419,10 +5281,10 @@ __LABEL132:
 	push hl
 	ld hl, 26
 	push hl
-	ld a, (_tileColors.__DATA__ + 83)
+	ld a, (_tileColors.__DATA__ + 94)
 	ld l, a
 	push hl
-	ld a, 83
+	ld a, 94
 	call _SetTile
 	ld a, 18
 	push af
@@ -5436,10 +5298,10 @@ __LABEL132:
 	push hl
 	ld hl, 30
 	push hl
-	ld a, (_tileColors.__DATA__ + 83)
+	ld a, (_tileColors.__DATA__ + 94)
 	ld l, a
 	push hl
-	ld a, 83
+	ld a, 94
 	call _SetTile
 	ld a, 20
 	push af
@@ -5453,10 +5315,10 @@ __LABEL132:
 	push hl
 	ld hl, 26
 	push hl
-	ld a, (_tileColors.__DATA__ + 83)
+	ld a, (_tileColors.__DATA__ + 94)
 	ld l, a
 	push hl
-	ld a, 83
+	ld a, 94
 	call _SetTile
 	ld a, 20
 	push af
@@ -5470,10 +5332,10 @@ __LABEL132:
 	push hl
 	ld hl, 30
 	push hl
-	ld a, (_tileColors.__DATA__ + 83)
+	ld a, (_tileColors.__DATA__ + 94)
 	ld l, a
 	push hl
-	ld a, 83
+	ld a, 94
 	call _SetTile
 _DrawGrid__leave:
 	ld sp, ix
@@ -5492,6 +5354,7 @@ _InitLevel:
 	ld (_activeTanks), a
 	ld (_activeShips), a
 	ld (_activeHangars), a
+	ld (_activeTowers), a
 	ld a, 20
 	ld (_playerX), a
 	xor a
@@ -5552,27 +5415,27 @@ _InitLevel:
 	ld (_shots.__DATA__ + 3), a
 	ld (_shots.__DATA__ + 7), a
 	ld (_shots.__DATA__ + 11), a
-	ld a, 70
+	ld a, 81
 	ld (_activeMap.__DATA__ + 42), a
 	ld hl, 4
 	push hl
 	dec hl
 	push hl
-	ld a, (_tileColors.__DATA__ + 70)
+	ld a, (_tileColors.__DATA__ + 81)
 	ld l, a
 	push hl
-	ld a, 70
+	ld a, 81
 	call _SetTile
-	ld a, 70
+	ld a, 81
 	ld (_activeMap.__DATA__ + 322), a
 	ld hl, 4
 	push hl
 	ld hl, 17
 	push hl
-	ld a, (_tileColors.__DATA__ + 70)
+	ld a, (_tileColors.__DATA__ + 81)
 	ld l, a
 	push hl
-	ld a, 70
+	ld a, 81
 	call _SetTile
 	ld a, 42
 	ld (_activeMap.__DATA__ + 89), a
@@ -5915,16 +5778,16 @@ __LABEL145:
 	push hl
 	ld hl, _activeMap
 	call __ARRAY
-	ld (hl), 80
+	ld (hl), 91
 	ld hl, 15
 	push hl
 	ld a, (ix-1)
 	ld l, a
 	push hl
-	ld a, (_tileColors.__DATA__ + 80)
+	ld a, (_tileColors.__DATA__ + 91)
 	ld l, a
 	push hl
-	ld a, 80
+	ld a, 91
 	call _SetTile
 	inc (ix-1)
 __LABEL142:
@@ -5964,20 +5827,132 @@ __LABEL142:
 	push hl
 	ld a, 51
 	call _SetTile
-	ld a, 72
+	ld a, 83
 	ld (_activeMap.__DATA__ + 195), a
 	ld hl, 17
 	push hl
 	ld hl, 10
 	push hl
-	ld a, (_tileColors.__DATA__ + 72)
+	ld a, (_tileColors.__DATA__ + 83)
 	ld l, a
 	push hl
-	ld a, 72
+	ld a, 83
 	call _SetTile
-	ld a, 72
+	ld a, 83
 	ld (_activeMap.__DATA__ + 215), a
 	ld hl, 17
+	push hl
+	ld hl, 11
+	push hl
+	ld a, (_tileColors.__DATA__ + 83)
+	ld l, a
+	push hl
+	ld a, 83
+	call _SetTile
+	ld a, 87
+	ld (_activeMap.__DATA__ + 156), a
+	ld hl, 18
+	push hl
+	ld hl, 8
+	push hl
+	ld a, (_tileColors.__DATA__ + 87)
+	ld l, a
+	push hl
+	ld a, 87
+	call _SetTile
+	ld a, 86
+	ld (_activeMap.__DATA__ + 196), a
+	ld hl, 18
+	push hl
+	ld hl, 10
+	push hl
+	ld a, (_tileColors.__DATA__ + 86)
+	ld l, a
+	push hl
+	ld a, 86
+	call _SetTile
+	ld a, 88
+	ld (_activeMap.__DATA__ + 236), a
+	ld hl, 18
+	push hl
+	ld hl, 12
+	push hl
+	ld a, (_tileColors.__DATA__ + 88)
+	ld l, a
+	push hl
+	ld a, 88
+	call _SetTile
+	ld a, 89
+	ld (_activeMap.__DATA__ + 276), a
+	ld hl, 18
+	push hl
+	ld hl, 14
+	push hl
+	ld a, (_tileColors.__DATA__ + 89)
+	ld l, a
+	push hl
+	ld a, 89
+	call _SetTile
+	ld a, 90
+	ld (_activeMap.__DATA__ + 189), a
+	ld hl, 11
+	push hl
+	dec hl
+	push hl
+	ld a, (_tileColors.__DATA__ + 90)
+	ld l, a
+	push hl
+	ld a, 90
+	call _SetTile
+	ld hl, _activeTowers
+	inc (hl)
+	ld a, 80
+	ld (_activeMap.__DATA__ + 386), a
+	ld hl, 8
+	push hl
+	ld hl, 20
+	push hl
+	ld a, (_tileColors.__DATA__ + 80)
+	ld l, a
+	push hl
+	ld a, 80
+	call _SetTile
+	ld a, 79
+	ld (_activeMap.__DATA__ + 4), a
+	ld hl, 6
+	push hl
+	ld hl, 1
+	push hl
+	ld a, (_tileColors.__DATA__ + 79)
+	ld l, a
+	push hl
+	ld a, 79
+	call _SetTile
+	ld a, 70
+	ld (_activeMap.__DATA__ + 164), a
+	ld hl, 6
+	push hl
+	ld hl, 9
+	push hl
+	ld a, (_tileColors.__DATA__ + 70)
+	ld l, a
+	push hl
+	ld a, 70
+	call _SetTile
+	ld a, 71
+	ld (_activeMap.__DATA__ + 184), a
+	ld hl, 6
+	push hl
+	ld hl, 10
+	push hl
+	ld a, (_tileColors.__DATA__ + 71)
+	ld l, a
+	push hl
+	ld a, 71
+	call _SetTile
+	ld a, 72
+	ld (_activeMap.__DATA__ + 204), a
+	ld hl, 6
 	push hl
 	ld hl, 11
 	push hl
@@ -5986,33 +5961,55 @@ __LABEL142:
 	push hl
 	ld a, 72
 	call _SetTile
-	ld a, 76
-	ld (_activeMap.__DATA__ + 156), a
-	ld hl, 18
+	ld a, 73
+	ld (_activeMap.__DATA__ + 165), a
+	ld hl, 7
 	push hl
-	ld hl, 8
+	ld hl, 9
 	push hl
-	ld a, (_tileColors.__DATA__ + 76)
+	ld a, (_tileColors.__DATA__ + 73)
 	ld l, a
 	push hl
-	ld a, 76
+	ld a, 73
 	call _SetTile
-	ld a, 75
-	ld (_activeMap.__DATA__ + 196), a
-	ld hl, 18
+	ld a, 74
+	ld (_activeMap.__DATA__ + 185), a
+	ld hl, 7
 	push hl
 	ld hl, 10
+	push hl
+	ld a, (_tileColors.__DATA__ + 74)
+	ld l, a
+	push hl
+	ld a, 74
+	call _SetTile
+	ld a, 75
+	ld (_activeMap.__DATA__ + 205), a
+	ld hl, 7
+	push hl
+	ld hl, 11
 	push hl
 	ld a, (_tileColors.__DATA__ + 75)
 	ld l, a
 	push hl
 	ld a, 75
 	call _SetTile
-	ld a, 77
-	ld (_activeMap.__DATA__ + 236), a
-	ld hl, 18
+	ld a, 76
+	ld (_activeMap.__DATA__ + 166), a
+	ld hl, 8
 	push hl
-	ld hl, 12
+	inc hl
+	push hl
+	ld a, (_tileColors.__DATA__ + 76)
+	ld l, a
+	push hl
+	ld a, 76
+	call _SetTile
+	ld a, 77
+	ld (_activeMap.__DATA__ + 186), a
+	ld hl, 8
+	push hl
+	ld hl, 10
 	push hl
 	ld a, (_tileColors.__DATA__ + 77)
 	ld l, a
@@ -6020,26 +6017,15 @@ __LABEL142:
 	ld a, 77
 	call _SetTile
 	ld a, 78
-	ld (_activeMap.__DATA__ + 276), a
-	ld hl, 18
+	ld (_activeMap.__DATA__ + 206), a
+	ld hl, 8
 	push hl
-	ld hl, 14
+	ld hl, 11
 	push hl
 	ld a, (_tileColors.__DATA__ + 78)
 	ld l, a
 	push hl
 	ld a, 78
-	call _SetTile
-	ld a, 79
-	ld (_activeMap.__DATA__ + 189), a
-	ld hl, 11
-	push hl
-	dec hl
-	push hl
-	ld a, (_tileColors.__DATA__ + 79)
-	ld l, a
-	push hl
-	ld a, 79
 	call _SetTile
 	ld a, (_activeShips)
 	call _FindEmptyBit
@@ -6089,16 +6075,16 @@ __LABEL142:
 	ld hl, _ships
 	call __ARRAY
 	ld (hl), 50
-	ld a, 81
+	ld a, 92
 	ld (_activeMap.__DATA__ + 120), a
 	ld hl, 2
 	push hl
 	ld hl, 7
 	push hl
-	ld a, (_tileColors.__DATA__ + 81)
+	ld a, (_tileColors.__DATA__ + 92)
 	ld l, a
 	push hl
-	ld a, 81
+	ld a, 92
 	call _SetTile
 	ld a, (_activeShips)
 	call _FindEmptyBit
@@ -6148,16 +6134,16 @@ __LABEL142:
 	ld hl, _ships
 	call __ARRAY
 	ld (hl), 50
-	ld a, 81
+	ld a, 92
 	ld (_activeMap.__DATA__ + 240), a
 	ld hl, 2
 	push hl
 	ld hl, 13
 	push hl
-	ld a, (_tileColors.__DATA__ + 81)
+	ld a, (_tileColors.__DATA__ + 92)
 	ld l, a
 	push hl
-	ld a, 81
+	ld a, 92
 	call _SetTile
 	ld a, (_activeHangars)
 	call _FindEmptyBit
@@ -6207,16 +6193,16 @@ __LABEL142:
 	ld hl, _hangars
 	call __ARRAY
 	ld (hl), 150
-	ld a, 82
+	ld a, 93
 	ld (_activeMap.__DATA__ + 180), a
 	ld hl, 2
 	push hl
 	ld hl, 10
 	push hl
-	ld a, (_tileColors.__DATA__ + 82)
+	ld a, (_tileColors.__DATA__ + 93)
 	ld l, a
 	push hl
-	ld a, 82
+	ld a, 93
 	call _SetTile
 _InitLevel__leave:
 	ld sp, ix
@@ -6308,8 +6294,8 @@ _CheckShotItems:
 	ld hl, _activeMap
 	call __ARRAY
 	ld a, (hl)
-	ld (ix-1), a
-	sub 70
+	ld (ix-4), a
+	sub 81
 	jp nz, __LABEL160
 	ld a, (ix+5)
 	ld l, a
@@ -6332,7 +6318,7 @@ _CheckShotItems:
 	ld hl, _shots
 	call __ARRAY
 	ld a, (hl)
-	ld (ix-2), a
+	ld (ix-1), a
 	ld hl, 1
 	push hl
 	ld a, (ix+5)
@@ -6342,7 +6328,7 @@ _CheckShotItems:
 	ld hl, _shots
 	call __ARRAY
 	ld a, (hl)
-	ld (ix-3), a
+	ld (ix-2), a
 	ld hl, 2
 	push hl
 	ld a, (ix+5)
@@ -6352,7 +6338,7 @@ _CheckShotItems:
 	ld hl, _shots
 	call __ARRAY
 	ld a, (hl)
-	ld (ix-4), a
+	ld (ix-3), a
 	dec a
 	jp nz, __LABEL163
 	ld a, 1
@@ -6363,7 +6349,7 @@ _CheckShotItems:
 	ld (_shots.__DATA__ + 10), a
 	jp __LABEL164
 __LABEL163:
-	ld a, (ix-4)
+	ld a, (ix-3)
 	sub 2
 	jp nz, __LABEL165
 	ld a, 2
@@ -6374,7 +6360,7 @@ __LABEL163:
 	ld (_shots.__DATA__ + 10), a
 	jp __LABEL164
 __LABEL165:
-	ld a, (ix-4)
+	ld a, (ix-3)
 	sub 3
 	jp nz, __LABEL167
 	ld a, 1
@@ -6385,7 +6371,7 @@ __LABEL165:
 	ld (_shots.__DATA__ + 10), a
 	jp __LABEL164
 __LABEL167:
-	ld a, (ix-4)
+	ld a, (ix-3)
 	sub 4
 	jp nz, __LABEL164
 	ld a, 1
@@ -6395,11 +6381,11 @@ __LABEL167:
 	ld a, 4
 	ld (_shots.__DATA__ + 10), a
 __LABEL164:
-	ld a, (ix-2)
+	ld a, (ix-1)
 	ld (_shots.__DATA__ + 0), a
 	ld (_shots.__DATA__ + 4), a
 	ld (_shots.__DATA__ + 8), a
-	ld a, (ix-3)
+	ld a, (ix-2)
 	ld (_shots.__DATA__ + 1), a
 	ld (_shots.__DATA__ + 5), a
 	ld (_shots.__DATA__ + 9), a
@@ -6417,15 +6403,15 @@ __LABEL161:
 __LABEL162:
 	jp _CheckShotItems__leave
 __LABEL160:
-	ld a, (ix-1)
+	ld a, (ix-4)
 	sub 42
 	ccf
 	jp nc, __LABEL172
 	ld a, 45
-	sub (ix-1)
+	sub (ix-4)
 	ccf
 	jp nc, __LABEL172
-	ld a, (ix-1)
+	ld a, (ix-4)
 	sub 42
 	jp nz, __LABEL175
 	ld hl, 2
@@ -6459,7 +6445,7 @@ __LABEL160:
 	ld (hl), a
 	jp _CheckShotItems__leave
 __LABEL175:
-	ld a, (ix-1)
+	ld a, (ix-4)
 	sub 43
 	jp nz, __LABEL177
 	ld hl, 2
@@ -6493,7 +6479,7 @@ __LABEL175:
 	ld (hl), a
 	jp _CheckShotItems__leave
 __LABEL177:
-	ld a, (ix-1)
+	ld a, (ix-4)
 	sub 44
 	jp nz, __LABEL179
 	ld hl, 2
@@ -6559,12 +6545,12 @@ __LABEL179:
 __LABEL176:
 	jp _CheckShotItems__leave
 __LABEL172:
-	ld a, (ix-1)
+	ld a, (ix-4)
 	sub 46
 	ccf
 	jp nc, __LABEL182
-	ld a, 69
-	sub (ix-1)
+	ld a, 80
+	sub (ix-4)
 	ccf
 	jp nc, __LABEL182
 	ld hl, 3
@@ -6578,12 +6564,12 @@ __LABEL172:
 	ld (hl), 0
 	jp _CheckShotItems__leave
 __LABEL182:
-	ld a, (ix-1)
-	sub 75
+	ld a, (ix-4)
+	sub 86
 	ccf
 	jp nc, __LABEL186
-	ld a, 78
-	sub (ix-1)
+	ld a, 89
+	sub (ix-4)
 	ccf
 	jp nc, __LABEL186
 	ld a, (ix+9)
@@ -6620,8 +6606,8 @@ __LABEL182:
 	ld hl, _shots
 	call __ARRAY
 	ld (hl), 0
-	ld a, (ix-1)
-	sub 75
+	ld a, (ix-4)
+	sub 86
 	jp nz, __LABEL189
 	ld hl, _availableMines
 	inc (hl)
@@ -6630,7 +6616,7 @@ __LABEL182:
 	ld hl, 30
 	push hl
 	ld a, (_availableMines)
-	add a, 83
+	add a, 94
 	inc a
 	ld l, a
 	dec hl
@@ -6642,12 +6628,12 @@ __LABEL182:
 	ld h, 0
 	push hl
 	ld a, (_availableMines)
-	add a, 83
+	add a, 94
 	call _SetTile
 	jp _CheckShotItems__leave
 __LABEL189:
-	ld a, (ix-1)
-	sub 77
+	ld a, (ix-4)
+	sub 88
 	jp nz, __LABEL191
 	ld hl, _availableBombs
 	inc (hl)
@@ -6656,7 +6642,7 @@ __LABEL189:
 	ld hl, 26
 	push hl
 	ld a, (_availableBombs)
-	add a, 83
+	add a, 94
 	inc a
 	ld l, a
 	dec hl
@@ -6668,12 +6654,12 @@ __LABEL189:
 	ld h, 0
 	push hl
 	ld a, (_availableBombs)
-	add a, 83
+	add a, 94
 	call _SetTile
 	jp _CheckShotItems__leave
 __LABEL191:
-	ld a, (ix-1)
-	sub 76
+	ld a, (ix-4)
+	sub 87
 	jp nz, __LABEL193
 	ld hl, _availableBlockers
 	inc (hl)
@@ -6682,7 +6668,7 @@ __LABEL191:
 	ld hl, 26
 	push hl
 	ld a, (_availableBlockers)
-	add a, 83
+	add a, 94
 	inc a
 	ld l, a
 	dec hl
@@ -6694,12 +6680,12 @@ __LABEL191:
 	ld h, 0
 	push hl
 	ld a, (_availableBlockers)
-	add a, 83
+	add a, 94
 	call _SetTile
 	jp _CheckShotItems__leave
 __LABEL193:
-	ld a, (ix-1)
-	sub 78
+	ld a, (ix-4)
+	sub 89
 	jp nz, _CheckShotItems__leave
 	ld hl, _availableChargedShots
 	inc (hl)
@@ -6708,7 +6694,7 @@ __LABEL193:
 	ld hl, 30
 	push hl
 	ld a, (_availableChargedShots)
-	add a, 83
+	add a, 94
 	inc a
 	ld l, a
 	dec hl
@@ -6720,13 +6706,13 @@ __LABEL193:
 	ld h, 0
 	push hl
 	ld a, (_availableChargedShots)
-	add a, 83
+	add a, 94
 	call _SetTile
 __LABEL190:
 	jp _CheckShotItems__leave
 __LABEL186:
-	ld a, (ix-1)
-	sub 79
+	ld a, (ix-4)
+	sub 90
 	jp nz, __LABEL198
 	ld a, (ix+9)
 	ld l, a
@@ -6762,11 +6748,75 @@ __LABEL186:
 	ld hl, _shots
 	call __ARRAY
 	ld (hl), 0
+	call _BuildTankDestroyedEffect
+	ld hl, _activeTowers
+	dec (hl)
+	ld a, (_activeTowers)
+	or a
+	jp nz, _CheckShotItems__leave
+	ld (ix-1), 1
+	jp __LABEL201
+__LABEL204:
+	ld (ix-2), 1
+	jp __LABEL206
+__LABEL209:
+	ld a, (ix-2)
+	ld l, a
+	ld h, 0
+	dec hl
+	push hl
+	ld a, (ix-1)
+	ld l, a
+	ld h, 0
+	dec hl
+	push hl
+	ld hl, _activeMap
+	call __ARRAY
+	ld a, (hl)
+	sub 91
+	jp nz, __LABEL210
+	ld a, (ix-2)
+	ld l, a
+	ld h, 0
+	dec hl
+	push hl
+	ld a, (ix-1)
+	ld l, a
+	ld h, 0
+	dec hl
+	push hl
+	ld hl, _activeMap
+	call __ARRAY
+	ld (hl), 0
+	ld a, (ix-2)
+	inc a
+	ld l, a
+	ld h, 0
+	push hl
+	ld a, (ix-1)
+	ld l, a
+	push hl
+	ld hl, 71
+	push hl
+	ld a, 37
+	call _SetTileChecked
+__LABEL210:
+	inc (ix-2)
+__LABEL206:
+	ld a, 20
+	cp (ix-2)
+	jp nc, __LABEL209
+	inc (ix-1)
+__LABEL201:
+	ld a, 20
+	cp (ix-1)
+	jp nc, __LABEL204
+__LABEL200:
 	jp _CheckShotItems__leave
 __LABEL198:
-	ld a, (ix-1)
-	sub 80
-	jp nz, __LABEL200
+	ld a, (ix-4)
+	sub 91
+	jp nz, __LABEL214
 	ld hl, 3
 	push hl
 	ld a, (ix+5)
@@ -6777,10 +6827,10 @@ __LABEL198:
 	call __ARRAY
 	ld (hl), 0
 	jp _CheckShotItems__leave
-__LABEL200:
-	ld a, (ix-1)
-	sub 81
-	jp nz, __LABEL202
+__LABEL214:
+	ld a, (ix-4)
+	sub 92
+	jp nz, __LABEL216
 	ld a, (ix+9)
 	ld l, a
 	ld h, 0
@@ -6815,12 +6865,13 @@ __LABEL200:
 	ld hl, _shots
 	call __ARRAY
 	ld (hl), 0
-	ld (ix-1), 1
-	jp __LABEL203
-__LABEL206:
+	call _BuildTankDestroyedEffect
+	ld (ix-4), 1
+	jp __LABEL217
+__LABEL220:
 	ld hl, 0
 	push hl
-	ld a, (ix-1)
+	ld a, (ix-4)
 	ld l, a
 	dec hl
 	push hl
@@ -6828,10 +6879,10 @@ __LABEL206:
 	call __ARRAY
 	ld a, (hl)
 	sub (ix+7)
-	jp nz, __LABEL207
+	jp nz, __LABEL221
 	ld hl, 1
 	push hl
-	ld a, (ix-1)
+	ld a, (ix-4)
 	ld l, a
 	dec hl
 	push hl
@@ -6839,8 +6890,8 @@ __LABEL206:
 	call __ARRAY
 	ld a, (hl)
 	sub (ix+9)
-	jp nz, __LABEL207
-	ld a, (ix-1)
+	jp nz, __LABEL221
+	ld a, (ix-4)
 	ld l, a
 	ld h, 0
 	ex de, hl
@@ -6851,15 +6902,15 @@ __LABEL206:
 	xor (hl)
 	ld (_activeShips), a
 	jp _CheckShotItems__leave
-__LABEL207:
-	inc (ix-1)
-__LABEL203:
+__LABEL221:
+	inc (ix-4)
+__LABEL217:
 	ld a, 4
-	cp (ix-1)
-	jp nc, __LABEL206
-__LABEL202:
-	ld a, (ix-1)
-	sub 82
+	cp (ix-4)
+	jp nc, __LABEL220
+__LABEL216:
+	ld a, (ix-4)
+	sub 93
 	jp nz, _CheckShotItems__leave
 	ld a, (ix+9)
 	ld l, a
@@ -6895,12 +6946,13 @@ __LABEL202:
 	ld hl, _shots
 	call __ARRAY
 	ld (hl), 0
-	ld (ix-1), 1
-	jp __LABEL214
-__LABEL217:
+	call _BuildTankDestroyedEffect
+	ld (ix-4), 1
+	jp __LABEL228
+__LABEL231:
 	ld hl, 0
 	push hl
-	ld a, (ix-1)
+	ld a, (ix-4)
 	ld l, a
 	dec hl
 	push hl
@@ -6908,10 +6960,10 @@ __LABEL217:
 	call __ARRAY
 	ld a, (hl)
 	sub (ix+7)
-	jp nz, __LABEL218
+	jp nz, __LABEL232
 	ld hl, 1
 	push hl
-	ld a, (ix-1)
+	ld a, (ix-4)
 	ld l, a
 	dec hl
 	push hl
@@ -6919,8 +6971,8 @@ __LABEL217:
 	call __ARRAY
 	ld a, (hl)
 	sub (ix+9)
-	jp nz, __LABEL218
-	ld a, (ix-1)
+	jp nz, __LABEL232
+	ld a, (ix-4)
 	ld l, a
 	ld h, 0
 	ex de, hl
@@ -6931,12 +6983,12 @@ __LABEL217:
 	xor (hl)
 	ld (_activeHangars), a
 	jp _CheckShotItems__leave
-__LABEL218:
-	inc (ix-1)
-__LABEL214:
+__LABEL232:
+	inc (ix-4)
+__LABEL228:
 	ld a, 2
-	cp (ix-1)
-	jp nc, __LABEL217
+	cp (ix-4)
+	jp nc, __LABEL231
 _CheckShotItems__leave:
 	ld sp, ix
 	pop ix
@@ -6962,7 +7014,7 @@ _UpdateFire:
 	ldir
 	ld a, (_activeShots)
 	or a
-	jp nz, __LABEL223
+	jp nz, __LABEL237
 	ld a, (_dir)
 	or a
 	jp nz, _UpdateFire__leave
@@ -6977,14 +7029,14 @@ _UpdateFire:
 	ld a, 1
 	ld (_shots.__DATA__ + 2), a
 	ld (_activeShots), a
-__LABEL226:
+__LABEL240:
 	jp _UpdateFire__leave
-__LABEL223:
+__LABEL237:
 	ld a, (_activeShots)
 	ld (ix-7), a
 	ld (ix-1), 1
-	jp __LABEL229
-__LABEL232:
+	jp __LABEL243
+__LABEL246:
 	ld a, (ix-1)
 	ld l, a
 	add a, a
@@ -6998,7 +7050,7 @@ __LABEL232:
 	ld (ix-6), a
 	ld a, (ix-7)
 	and (ix-6)
-	jp z, __LABEL233
+	jp z, __LABEL247
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -7013,16 +7065,16 @@ __LABEL232:
 	ld a, (hl)
 	ld (ix-5), a
 	sub 255
-	jp z, __LABEL236
+	jp z, __LABEL250
 	inc (ix-5)
 	ld a, (ix-5)
 	sub 4
-	jp nz, __LABEL239
+	jp nz, __LABEL253
 	ld (ix-5), 255
 	ld a, (_activeShots)
 	xor (ix-6)
 	ld (_activeShots), a
-__LABEL239:
+__LABEL253:
 	ld a, (ix-5)
 	push af
 	ld hl, 3
@@ -7038,8 +7090,8 @@ __LABEL239:
 	call __ARRAY
 	pop af
 	ld (hl), a
-	jp __LABEL233
-__LABEL236:
+	jp __LABEL247
+__LABEL250:
 	ld hl, 0
 	push hl
 	ld a, (ix-1)
@@ -7080,12 +7132,12 @@ __LABEL236:
 	ld a, (hl)
 	ld (ix-4), a
 	dec a
-	jp nz, __LABEL240
+	jp nz, __LABEL254
 	ld a, (ix-3)
 	ld h, 4
 	call __LEI8
 	or a
-	jp z, __LABEL242
+	jp z, __LABEL256
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -7099,20 +7151,20 @@ __LABEL236:
 	call __ARRAY
 	ld (hl), 0
 	ld (ix-3), 4
-	jp __LABEL241
-__LABEL242:
+	jp __LABEL255
+__LABEL256:
 	dec (ix-3)
-__LABEL243:
-	jp __LABEL241
-__LABEL240:
+__LABEL257:
+	jp __LABEL255
+__LABEL254:
 	ld a, (ix-4)
 	sub 2
-	jp nz, __LABEL244
+	jp nz, __LABEL258
 	ld h, (ix-3)
 	ld a, 42
 	call __LEI8
 	or a
-	jp z, __LABEL246
+	jp z, __LABEL260
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -7126,20 +7178,20 @@ __LABEL240:
 	call __ARRAY
 	ld (hl), 0
 	ld (ix-3), 42
-	jp __LABEL241
-__LABEL246:
+	jp __LABEL255
+__LABEL260:
 	inc (ix-3)
-__LABEL247:
-	jp __LABEL241
-__LABEL244:
+__LABEL261:
+	jp __LABEL255
+__LABEL258:
 	ld a, (ix-4)
 	sub 3
-	jp nz, __LABEL248
+	jp nz, __LABEL262
 	ld a, (ix-2)
 	ld h, 2
 	call __LEI8
 	or a
-	jp z, __LABEL250
+	jp z, __LABEL264
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -7153,20 +7205,20 @@ __LABEL244:
 	call __ARRAY
 	ld (hl), 0
 	ld (ix-2), 2
-	jp __LABEL241
-__LABEL250:
+	jp __LABEL255
+__LABEL264:
 	dec (ix-2)
-__LABEL251:
-	jp __LABEL241
-__LABEL248:
+__LABEL265:
+	jp __LABEL255
+__LABEL262:
 	ld a, (ix-4)
 	sub 4
-	jp nz, __LABEL241
+	jp nz, __LABEL255
 	ld h, (ix-2)
 	ld a, 40
 	call __LEI8
 	or a
-	jp z, __LABEL254
+	jp z, __LABEL268
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -7180,10 +7232,10 @@ __LABEL248:
 	call __ARRAY
 	ld (hl), 0
 	ld (ix-2), 40
-	jp __LABEL241
-__LABEL254:
+	jp __LABEL255
+__LABEL268:
 	inc (ix-2)
-__LABEL241:
+__LABEL255:
 	ld a, (ix-2)
 	push af
 	ld hl, 0
@@ -7227,14 +7279,14 @@ __LABEL241:
 	call __ARRAY
 	ld a, (hl)
 	sub 255
-	jp nz, __LABEL233
+	jp nz, __LABEL247
 	ld a, (ix-2)
 	and 1
 	ld d, a
 	ld a, (ix-3)
 	and 1
 	or d
-	jp nz, __LABEL233
+	jp nz, __LABEL247
 	ld a, (ix-3)
 	sra a
 	dec a
@@ -7245,14 +7297,14 @@ __LABEL241:
 	ld a, (ix-1)
 	push af
 	call _CheckShotItems
-__LABEL233:
+__LABEL247:
 	inc (ix-1)
-__LABEL229:
+__LABEL243:
 	ld h, (ix-1)
 	ld a, 3
 	call __LTI8
 	or a
-	jp z, __LABEL232
+	jp z, __LABEL246
 _UpdateFire__leave:
 	ld sp, ix
 	pop ix
@@ -7284,7 +7336,7 @@ _CheckCursorAction:
 	jp z, _CheckCursorAction__leave
 	ld a, (ix-1)
 	sub 42
-	jp nz, __LABEL264
+	jp nz, __LABEL278
 	ld a, (ix+7)
 	ld l, a
 	ld h, 0
@@ -7299,11 +7351,11 @@ _CheckCursorAction:
 	call __ARRAY
 	ld (hl), 43
 	ld (ix-1), 0
-	jp __LABEL263
-__LABEL264:
+	jp __LABEL277
+__LABEL278:
 	ld a, (ix-1)
 	sub 43
-	jp nz, __LABEL266
+	jp nz, __LABEL280
 	ld a, (ix+7)
 	ld l, a
 	ld h, 0
@@ -7318,11 +7370,11 @@ __LABEL264:
 	call __ARRAY
 	ld (hl), 45
 	ld (ix-1), 0
-	jp __LABEL263
-__LABEL266:
+	jp __LABEL277
+__LABEL280:
 	ld a, (ix-1)
 	sub 45
-	jp nz, __LABEL268
+	jp nz, __LABEL282
 	ld a, (ix+7)
 	ld l, a
 	ld h, 0
@@ -7337,11 +7389,11 @@ __LABEL266:
 	call __ARRAY
 	ld (hl), 44
 	ld (ix-1), 0
-	jp __LABEL263
-__LABEL268:
+	jp __LABEL277
+__LABEL282:
 	ld a, (ix-1)
 	sub 44
-	jp nz, __LABEL263
+	jp nz, __LABEL277
 	ld a, (ix+7)
 	ld l, a
 	ld h, 0
@@ -7356,7 +7408,7 @@ __LABEL268:
 	call __ARRAY
 	ld (hl), 42
 	ld (ix-1), 0
-__LABEL263:
+__LABEL277:
 	ld a, (ix-1)
 	or a
 	jp nz, _CheckCursorAction__leave
@@ -7395,6 +7447,85 @@ _CheckCursorAction__leave:
 	exx
 	ret
 _UpdateCursor:
+	ld hl, 63233
+	call _MultiKeys
+	or a
+	jp z, __LABEL288
+	xor a
+	ld (_cursorTool), a
+	ld a, 16
+	push af
+	ld a, 24
+	call PRINT_AT
+	ld hl, __LABEL290
+	xor a
+	call __PRINTSTR
+	call PRINT_EOL
+	jp __LABEL289
+__LABEL288:
+	ld hl, 63234
+	call _MultiKeys
+	or a
+	jp z, __LABEL291
+	ld a, 1
+	ld (_cursorTool), a
+	ld a, 16
+	push af
+	ld a, 24
+	call PRINT_AT
+	ld hl, __LABEL293
+	xor a
+	call __PRINTSTR
+	call PRINT_EOL
+	jp __LABEL289
+__LABEL291:
+	ld hl, 63236
+	call _MultiKeys
+	or a
+	jp z, __LABEL294
+	ld a, 2
+	ld (_cursorTool), a
+	ld a, 16
+	push af
+	ld a, 24
+	call PRINT_AT
+	ld hl, __LABEL296
+	xor a
+	call __PRINTSTR
+	call PRINT_EOL
+	jp __LABEL289
+__LABEL294:
+	ld hl, 63240
+	call _MultiKeys
+	or a
+	jp z, __LABEL297
+	ld a, 3
+	ld (_cursorTool), a
+	ld a, 16
+	push af
+	ld a, 24
+	call PRINT_AT
+	ld hl, __LABEL299
+	xor a
+	call __PRINTSTR
+	call PRINT_EOL
+	jp __LABEL289
+__LABEL297:
+	ld hl, 63248
+	call _MultiKeys
+	or a
+	jp z, __LABEL289
+	ld a, 4
+	ld (_cursorTool), a
+	ld a, 16
+	push af
+	ld a, 24
+	call PRINT_AT
+	ld hl, __LABEL302
+	xor a
+	call __PRINTSTR
+	call PRINT_EOL
+__LABEL289:
 	ld hl, _cursorFrames
 	dec (hl)
 	ld a, (_cursorMoved)
@@ -7405,15 +7536,15 @@ _UpdateCursor:
 	sub 1
 	sbc a, a
 	or d
-	jp z, __LABEL274
+	jp z, __LABEL303
 	xor a
 	ld hl, (_cursorX - 1)
 	cp h
-	jp nc, __LABEL277
+	jp nc, __LABEL306
 	ld hl, 48904
 	call _MultiKeys
 	or a
-	jp z, __LABEL277
+	jp z, __LABEL306
 	ld hl, _cursorX
 	dec (hl)
 	ld a, 1
@@ -7422,14 +7553,14 @@ _UpdateCursor:
 	ld a, 5
 	ld (_cursorFrames), a
 	jp __LABEL__CHECKCURSORFRAMES
-__LABEL277:
+__LABEL306:
 	ld a, (_cursorX)
 	cp 19
-	jp nc, __LABEL281
+	jp nc, __LABEL310
 	ld hl, 48898
 	call _MultiKeys
 	or a
-	jp z, __LABEL281
+	jp z, __LABEL310
 	ld hl, _cursorX
 	inc (hl)
 	ld a, 1
@@ -7438,15 +7569,15 @@ __LABEL277:
 	ld a, 5
 	ld (_cursorFrames), a
 	jp __LABEL__CHECKCURSORFRAMES
-__LABEL281:
+__LABEL310:
 	xor a
 	ld hl, (_cursorY - 1)
 	cp h
-	jp nc, __LABEL285
+	jp nc, __LABEL314
 	ld hl, 57092
 	call _MultiKeys
 	or a
-	jp z, __LABEL285
+	jp z, __LABEL314
 	ld hl, _cursorY
 	dec (hl)
 	ld a, 1
@@ -7455,14 +7586,14 @@ __LABEL281:
 	ld a, 5
 	ld (_cursorFrames), a
 	jp __LABEL__CHECKCURSORFRAMES
-__LABEL285:
+__LABEL314:
 	ld a, (_cursorY)
 	cp 19
-	jp nc, __LABEL289
+	jp nc, __LABEL318
 	ld hl, 48900
 	call _MultiKeys
 	or a
-	jp z, __LABEL289
+	jp z, __LABEL318
 	ld hl, _cursorY
 	inc (hl)
 	ld a, 1
@@ -7471,11 +7602,11 @@ __LABEL285:
 	ld a, 5
 	ld (_cursorFrames), a
 	jp __LABEL__CHECKCURSORFRAMES
-__LABEL289:
+__LABEL318:
 	ld hl, 32513
 	call _MultiKeys
 	or a
-	jp z, __LABEL292
+	jp z, __LABEL321
 	ld a, (_cursorY)
 	inc a
 	push af
@@ -7489,15 +7620,15 @@ __LABEL289:
 	ld a, 5
 	ld (_cursorFrames), a
 	jp __LABEL__CHECKCURSORFRAMES
-__LABEL292:
+__LABEL321:
 	xor a
 	ld (_cursorMoved), a
-__LABEL293:
+__LABEL322:
 	jp __LABEL__CHECKCURSORFRAMES
-__LABEL274:
+__LABEL303:
 	call _AnyKey
 	or a
-	jp nz, __LABEL__CHECKCURSORFRAMES
+	jp z, __LABEL__CHECKCURSORFRAMES
 	xor a
 	ld (_cursorMoved), a
 __LABEL__CHECKCURSORFRAMES:
@@ -7537,30 +7668,30 @@ _LineOfSight:
 	ld (ix-3), l
 	ld (ix-2), h
 	ld (ix-1), 1
-	jp __LABEL298
-__LABEL301:
+	jp __LABEL327
+__LABEL330:
 	ld l, (ix-3)
 	ld h, (ix-2)
 	ld a, (hl)
 	push af
-	sub 80
+	sub 91
 	ld h, a
 	pop af
 	or a
-	jr z, __LABEL557
+	jr z, __LABEL586
 	ld a, h
-__LABEL557:
+__LABEL586:
 	or a
-	jp z, __LABEL304
+	jp z, __LABEL333
 	xor a
 	jp _LineOfSight__leave
-__LABEL304:
+__LABEL333:
 	ld h, (ix-2)
 	inc hl
 	ld (ix-3), l
 	ld (ix-2), h
 	inc (ix-1)
-__LABEL298:
+__LABEL327:
 	ld a, (ix-1)
 	push af
 	ld l, (ix+6)
@@ -7572,7 +7703,7 @@ __LABEL298:
 	ld a, l
 	pop hl
 	cp h
-	jp nc, __LABEL301
+	jp nc, __LABEL330
 	ld a, 1
 _LineOfSight__leave:
 	ld sp, ix
@@ -7607,8 +7738,8 @@ _UpdateAliens:
 	ld a, 5
 	ld (_alienFrame), a
 	ld (ix-1), 1
-	jp __LABEL309
-__LABEL312:
+	jp __LABEL338
+__LABEL341:
 	ld a, (ix-1)
 	ld l, a
 	ld h, 0
@@ -7621,7 +7752,7 @@ __LABEL312:
 	ld h, a
 	ld a, (_activeAliens)
 	and h
-	jp z, __LABEL313
+	jp z, __LABEL342
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -7633,16 +7764,16 @@ __LABEL312:
 	ld a, (hl)
 	ld (ix-2), a
 	sub 255
-	jp z, __LABEL316
+	jp z, __LABEL345
 	inc (ix-2)
 	ld a, (ix-2)
 	sub 4
-	jp nz, __LABEL319
+	jp nz, __LABEL348
 	ld (ix-2), 255
 	ld a, (_activeAliens)
 	xor (ix-8)
 	ld (_activeAliens), a
-__LABEL319:
+__LABEL348:
 	ld a, (ix-2)
 	push af
 	ld hl, 3
@@ -7655,8 +7786,8 @@ __LABEL319:
 	call __ARRAY
 	pop af
 	ld (hl), a
-	jp __LABEL313
-__LABEL316:
+	jp __LABEL342
+__LABEL345:
 	ld hl, 0
 	push hl
 	ld a, (ix-1)
@@ -7689,12 +7820,12 @@ __LABEL316:
 	ld (ix-5), a
 	ld a, (ix-3)
 	and 1
-	jp z, __LABEL320
+	jp z, __LABEL349
 	ld a, (ix-3)
 	add a, (ix-5)
 	ld (ix-3), a
 	jp __LABEL__ENDTESTCELL
-__LABEL320:
+__LABEL349:
 	ld a, (ix-3)
 	sra a
 	ld (ix-6), a
@@ -7707,11 +7838,11 @@ __LABEL__TESTALIENCONTINUE:
 	ld a, 1
 	call __LTI8
 	or a
-	jp z, __LABEL323
+	jp z, __LABEL352
 	ld a, (ix-5)
 	sub 255
 	jp z, __LABEL__ALIENCONTINUE
-__LABEL323:
+__LABEL352:
 	ld a, (ix-6)
 	ld h, 20
 	call __LTI8
@@ -7749,11 +7880,11 @@ __LABEL__TESTALIENDOWN:
 	sbc a, a
 	ld d, a
 	ld a, (ix-9)
-	sub 80
+	sub 91
 	sub 1
 	sbc a, a
 	or d
-	jp z, __LABEL332
+	jp z, __LABEL361
 	ld a, (ix-5)
 	neg
 	ld (ix-5), a
@@ -7761,9 +7892,9 @@ __LABEL__TESTALIENDOWN:
 	add a, 2
 	ld (ix-4), a
 	jp __LABEL__ENDTESTCELL
-__LABEL332:
+__LABEL361:
 	ld a, (ix-9)
-	sub 72
+	sub 83
 	jp nz, __LABEL__TESTALIENINVERT
 	ld a, (ix-7)
 	inc a
@@ -7816,11 +7947,11 @@ __LABEL__TESTALIENINVERT:
 	ld a, 1
 	call __LTI8
 	or a
-	jp z, __LABEL337
+	jp z, __LABEL366
 	ld a, (ix-5)
 	dec a
 	jp z, __LABEL__ALIENINVERT
-__LABEL337:
+__LABEL366:
 	ld a, (ix-6)
 	ld h, 20
 	call __LTI8
@@ -7864,18 +7995,18 @@ __LABEL__ALIENCONTINUE:
 	sbc a, a
 	ld d, a
 	ld a, (ix-9)
-	sub 80
+	sub 91
 	sub 1
 	sbc a, a
 	or d
-	jp z, __LABEL344
+	jp z, __LABEL373
 	ld a, (ix-3)
 	add a, (ix-5)
 	ld (ix-3), a
 	jp __LABEL__ENDTESTCELL
-__LABEL344:
+__LABEL373:
 	ld a, (ix-9)
-	sub 72
+	sub 83
 	jp nz, __LABEL__TESTALIENDOWN
 	ld a, (ix-7)
 	ld l, a
@@ -7923,7 +8054,7 @@ __LABEL344:
 	call __ARRAY
 	ld (hl), 0
 	jp __LABEL__ENDTESTCELL
-__LABEL345:
+__LABEL374:
 	jp __LABEL__TESTALIENDOWN
 __LABEL__ALIENINVERT:
 	ld a, (ix-7)
@@ -7949,11 +8080,11 @@ __LABEL__ALIENINVERT:
 	sbc a, a
 	ld d, a
 	ld a, (ix-9)
-	sub 80
+	sub 91
 	sub 1
 	sbc a, a
 	or d
-	jp z, __LABEL348
+	jp z, __LABEL377
 	ld a, (ix-5)
 	neg
 	ld (ix-5), a
@@ -7961,9 +8092,9 @@ __LABEL__ALIENINVERT:
 	add a, (ix-5)
 	ld (ix-3), a
 	jp __LABEL__ENDTESTCELL
-__LABEL348:
+__LABEL377:
 	ld a, (ix-9)
-	sub 72
+	sub 83
 	jp nz, __LABEL__EXPLODEALIEN
 	ld a, (ix-7)
 	ld l, a
@@ -8011,7 +8142,7 @@ __LABEL348:
 	call __ARRAY
 	ld (hl), 0
 	jp __LABEL__ENDTESTCELL
-__LABEL349:
+__LABEL378:
 	jp __LABEL__EXPLODEALIEN
 __LABEL__ENDTESTCELL:
 	ld a, (ix-3)
@@ -8052,11 +8183,11 @@ __LABEL__ENDTESTCELL:
 	ld (hl), a
 	ld a, (ix-4)
 	sub 42
-	jp nz, __LABEL352
+	jp nz, __LABEL381
 	ld a, 1
 	ld (_dead), a
-	jp __LABEL313
-__LABEL352:
+	jp __LABEL342
+__LABEL381:
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8067,14 +8198,14 @@ __LABEL352:
 	call __ARRAY
 	ld a, (hl)
 	or a
-	jp nz, __LABEL313
-	call _AlienDeathEffect
-__LABEL313:
+	jp nz, __LABEL342
+	call _KilledAlienEffect
+__LABEL342:
 	inc (ix-1)
-__LABEL309:
+__LABEL338:
 	ld a, 4
 	cp (ix-1)
-	jp nc, __LABEL312
+	jp nc, __LABEL341
 _UpdateAliens__leave:
 	ld sp, ix
 	pop ix
@@ -8103,8 +8234,8 @@ _UpdateTanks:
 	ld a, 3
 	ld (_tankFrame), a
 	ld (ix-1), 1
-	jp __LABEL360
-__LABEL363:
+	jp __LABEL389
+__LABEL392:
 	ld a, (ix-1)
 	ld l, a
 	ld h, 0
@@ -8117,7 +8248,7 @@ __LABEL363:
 	ld h, a
 	ld a, (_activeTanks)
 	and h
-	jp z, __LABEL364
+	jp z, __LABEL393
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8129,16 +8260,16 @@ __LABEL363:
 	ld a, (hl)
 	ld (ix-2), a
 	sub 255
-	jp z, __LABEL367
+	jp z, __LABEL396
 	inc (ix-2)
 	ld a, (ix-2)
 	sub 4
-	jp nz, __LABEL370
+	jp nz, __LABEL399
 	ld (ix-2), 255
 	ld a, (_activeTanks)
 	xor (ix-8)
 	ld (_activeTanks), a
-__LABEL370:
+__LABEL399:
 	ld a, (ix-2)
 	push af
 	ld hl, 3
@@ -8151,8 +8282,8 @@ __LABEL370:
 	call __ARRAY
 	pop af
 	ld (hl), a
-	jp __LABEL364
-__LABEL367:
+	jp __LABEL393
+__LABEL396:
 	ld hl, 0
 	push hl
 	ld a, (ix-1)
@@ -8203,11 +8334,11 @@ __LABEL367:
 	ld h, a
 	pop af
 	or a
-	jr z, __LABEL558
+	jr z, __LABEL587
 	ld a, h
-__LABEL558:
+__LABEL587:
 	or a
-	jp z, __LABEL372
+	jp z, __LABEL401
 	ld a, (ix-7)
 	ld l, a
 	add a, a
@@ -8221,54 +8352,54 @@ __LABEL558:
 	push hl
 	call _LineOfSight
 	or a
-	jp z, __LABEL372
+	jp z, __LABEL401
 	call _FastRnd
 	ld h, a
 	ld a, (_tankProbability)
 	sub h
 	ccf
-	jp nc, __LABEL372
+	jp nc, __LABEL401
 	ld a, 2
 	ld (_dead), a
 	jp _UpdateTanks__leave
-__LABEL372:
+__LABEL401:
 	ld a, (ix-3)
 	and 1
 	ld d, a
 	ld a, (ix-4)
 	and 1
 	or d
-	jp z, __LABEL377
+	jp z, __LABEL406
 	ld a, (ix-5)
 	dec a
-	jp nz, __LABEL379
+	jp nz, __LABEL408
 	inc (ix-3)
 	jp __LABEL__ENDTESTCELLTANK
-__LABEL379:
+__LABEL408:
 	ld a, (ix-5)
 	sub 2
-	jp nz, __LABEL381
+	jp nz, __LABEL410
 	inc (ix-4)
 	jp __LABEL__ENDTESTCELLTANK
-__LABEL381:
+__LABEL410:
 	ld a, (ix-5)
 	sub 3
-	jp nz, __LABEL383
+	jp nz, __LABEL412
 	dec (ix-3)
 	jp __LABEL__ENDTESTCELLTANK
-__LABEL383:
+__LABEL412:
 	ld a, (ix-5)
 	sub 4
 	jp nz, __LABEL__ENDTESTCELLTANK
 	dec (ix-4)
-__LABEL380:
+__LABEL409:
 	jp __LABEL__ENDTESTCELLTANK
-__LABEL377:
+__LABEL406:
 	ld h, (ix-6)
 	ld a, 1
 	call __LTI8
 	or a
-	jp z, __LABEL387
+	jp z, __LABEL416
 	ld a, (ix-7)
 	ld l, a
 	add a, a
@@ -8288,15 +8419,15 @@ __LABEL377:
 	call __ARRAY
 	ld a, (hl)
 	ld (ix-11), a
-	jp __LABEL388
-__LABEL387:
+	jp __LABEL417
+__LABEL416:
 	ld (ix-11), 255
-__LABEL388:
+__LABEL417:
 	ld a, (ix-6)
 	ld h, 20
 	call __LTI8
 	or a
-	jp z, __LABEL389
+	jp z, __LABEL418
 	ld a, (ix-7)
 	ld l, a
 	add a, a
@@ -8316,15 +8447,15 @@ __LABEL388:
 	call __ARRAY
 	ld a, (hl)
 	ld (ix-12), a
-	jp __LABEL390
-__LABEL389:
+	jp __LABEL419
+__LABEL418:
 	ld (ix-12), 255
-__LABEL390:
+__LABEL419:
 	ld h, (ix-7)
 	ld a, 1
 	call __LTI8
 	or a
-	jp z, __LABEL391
+	jp z, __LABEL420
 	ld a, (ix-7)
 	dec a
 	ld l, a
@@ -8344,15 +8475,15 @@ __LABEL390:
 	call __ARRAY
 	ld a, (hl)
 	ld (ix-9), a
-	jp __LABEL392
-__LABEL391:
+	jp __LABEL421
+__LABEL420:
 	ld (ix-9), 255
-__LABEL392:
+__LABEL421:
 	ld a, (ix-7)
 	ld h, 19
 	call __LTI8
 	or a
-	jp z, __LABEL393
+	jp z, __LABEL422
 	ld a, (ix-7)
 	inc a
 	ld l, a
@@ -8372,290 +8503,42 @@ __LABEL392:
 	call __ARRAY
 	ld a, (hl)
 	ld (ix-10), a
-	jp __LABEL394
-__LABEL393:
+	jp __LABEL423
+__LABEL422:
 	ld (ix-10), 255
-__LABEL394:
+__LABEL423:
 	ld a, (ix-11)
-	sub 80
-	jp nz, __LABEL396
+	sub 91
+	jp nz, __LABEL425
 	ld (ix-11), 0
-__LABEL396:
+__LABEL425:
 	ld a, (ix-12)
-	sub 80
-	jp nz, __LABEL398
+	sub 91
+	jp nz, __LABEL427
 	ld (ix-12), 0
-__LABEL398:
+__LABEL427:
 	ld a, (ix-9)
-	sub 80
-	jp nz, __LABEL400
+	sub 91
+	jp nz, __LABEL429
 	ld (ix-9), 0
-__LABEL400:
+__LABEL429:
 	ld a, (ix-10)
-	sub 80
+	sub 91
 	jp nz, __LABEL__TESTTANKLOOP
 	ld (ix-10), 0
 __LABEL__TESTTANKLOOP:
 	ld a, (ix-11)
 	sub 255
-	jp nz, __LABEL404
-	ld a, (ix-12)
-	sub 255
-	jp nz, __LABEL404
-	ld a, (ix-9)
-	sub 255
-	jp nz, __LABEL404
-	ld a, (ix-10)
-	sub 255
-	jp nz, __LABEL404
-	ld hl, 3
-	push hl
-	ld a, (ix-1)
-	ld l, a
-	dec hl
-	push hl
-	ld hl, _tanks
-	call __ARRAY
-	ld (hl), 0
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL404:
-	ld a, (ix-5)
-	dec a
-	jp nz, __LABEL412
-	ld a, (ix-12)
-	or a
-	jp nz, __LABEL413
-	inc (ix-3)
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL413:
-	ld a, (ix-12)
-	sub 72
-	jp nz, __LABEL415
-	ld a, (ix-7)
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld a, (ix-6)
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld hl, _activeMap
-	call __ARRAY
-	ld (hl), 0
-	ld a, (ix-7)
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld a, (ix-6)
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld hl, 71
-	push hl
-	ld a, 37
-	call _SetTileChecked
-	ld hl, 3
-	push hl
-	ld a, (ix-1)
-	ld l, a
-	dec hl
-	push hl
-	ld hl, _tanks
-	call __ARRAY
-	ld (hl), 0
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL415:
-	ld (ix-12), 255
-	ld (ix-5), 2
-	jp __LABEL__TESTTANKLOOP
-__LABEL412:
-	ld a, (ix-5)
-	sub 2
-	jp nz, __LABEL418
-	ld a, (ix-10)
-	or a
-	jp nz, __LABEL419
-	inc (ix-4)
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL419:
-	ld a, (ix-10)
-	sub 72
-	jp nz, __LABEL421
-	ld a, (ix-7)
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld a, (ix-6)
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld hl, _activeMap
-	call __ARRAY
-	ld (hl), 0
-	ld a, (ix-7)
-	inc a
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld a, (ix-6)
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld hl, 71
-	push hl
-	ld a, 37
-	call _SetTileChecked
-	ld hl, 3
-	push hl
-	ld a, (ix-1)
-	ld l, a
-	dec hl
-	push hl
-	ld hl, _tanks
-	call __ARRAY
-	ld (hl), 0
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL421:
-	ld (ix-10), 255
-	ld (ix-5), 3
-	jp __LABEL__TESTTANKLOOP
-__LABEL418:
-	ld a, (ix-5)
-	sub 3
-	jp nz, __LABEL424
-	ld a, (ix-11)
-	or a
-	jp nz, __LABEL425
-	dec (ix-3)
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL425:
-	ld a, (ix-11)
-	sub 72
-	jp nz, __LABEL427
-	ld a, (ix-7)
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld a, (ix-6)
-	dec a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld hl, _activeMap
-	call __ARRAY
-	ld (hl), 0
-	ld a, (ix-7)
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld a, (ix-6)
-	dec a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld hl, 71
-	push hl
-	ld a, 37
-	call _SetTileChecked
-	ld hl, 3
-	push hl
-	ld a, (ix-1)
-	ld l, a
-	dec hl
-	push hl
-	ld hl, _tanks
-	call __ARRAY
-	ld (hl), 0
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL427:
-	ld (ix-11), 255
-	ld (ix-5), 4
-	jp __LABEL__TESTTANKLOOP
-__LABEL424:
-	ld a, (ix-5)
-	sub 4
-	jp nz, __LABEL__ENDTESTCELLTANK
-	ld a, (ix-9)
-	or a
-	jp nz, __LABEL431
-	dec (ix-4)
-	jp __LABEL__ENDTESTCELLTANK
-__LABEL431:
-	ld a, (ix-9)
-	sub 72
 	jp nz, __LABEL433
-	ld a, (ix-7)
-	dec a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld a, (ix-6)
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld hl, _activeMap
-	call __ARRAY
-	ld (hl), 0
-	ld a, (ix-7)
-	dec a
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld a, (ix-6)
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	push hl
-	ld hl, 71
-	push hl
-	ld a, 37
-	call _SetTileChecked
+	ld a, (ix-12)
+	sub 255
+	jp nz, __LABEL433
+	ld a, (ix-9)
+	sub 255
+	jp nz, __LABEL433
+	ld a, (ix-10)
+	sub 255
+	jp nz, __LABEL433
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8667,6 +8550,254 @@ __LABEL431:
 	ld (hl), 0
 	jp __LABEL__ENDTESTCELLTANK
 __LABEL433:
+	ld a, (ix-5)
+	dec a
+	jp nz, __LABEL441
+	ld a, (ix-12)
+	or a
+	jp nz, __LABEL442
+	inc (ix-3)
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL442:
+	ld a, (ix-12)
+	sub 83
+	jp nz, __LABEL444
+	ld a, (ix-7)
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld a, (ix-6)
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld hl, _activeMap
+	call __ARRAY
+	ld (hl), 0
+	ld a, (ix-7)
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld a, (ix-6)
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld hl, 71
+	push hl
+	ld a, 37
+	call _SetTileChecked
+	ld hl, 3
+	push hl
+	ld a, (ix-1)
+	ld l, a
+	dec hl
+	push hl
+	ld hl, _tanks
+	call __ARRAY
+	ld (hl), 0
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL444:
+	ld (ix-12), 255
+	ld (ix-5), 2
+	jp __LABEL__TESTTANKLOOP
+__LABEL441:
+	ld a, (ix-5)
+	sub 2
+	jp nz, __LABEL447
+	ld a, (ix-10)
+	or a
+	jp nz, __LABEL448
+	inc (ix-4)
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL448:
+	ld a, (ix-10)
+	sub 83
+	jp nz, __LABEL450
+	ld a, (ix-7)
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld a, (ix-6)
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld hl, _activeMap
+	call __ARRAY
+	ld (hl), 0
+	ld a, (ix-7)
+	inc a
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld a, (ix-6)
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld hl, 71
+	push hl
+	ld a, 37
+	call _SetTileChecked
+	ld hl, 3
+	push hl
+	ld a, (ix-1)
+	ld l, a
+	dec hl
+	push hl
+	ld hl, _tanks
+	call __ARRAY
+	ld (hl), 0
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL450:
+	ld (ix-10), 255
+	ld (ix-5), 3
+	jp __LABEL__TESTTANKLOOP
+__LABEL447:
+	ld a, (ix-5)
+	sub 3
+	jp nz, __LABEL453
+	ld a, (ix-11)
+	or a
+	jp nz, __LABEL454
+	dec (ix-3)
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL454:
+	ld a, (ix-11)
+	sub 83
+	jp nz, __LABEL456
+	ld a, (ix-7)
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld a, (ix-6)
+	dec a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld hl, _activeMap
+	call __ARRAY
+	ld (hl), 0
+	ld a, (ix-7)
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld a, (ix-6)
+	dec a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld hl, 71
+	push hl
+	ld a, 37
+	call _SetTileChecked
+	ld hl, 3
+	push hl
+	ld a, (ix-1)
+	ld l, a
+	dec hl
+	push hl
+	ld hl, _tanks
+	call __ARRAY
+	ld (hl), 0
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL456:
+	ld (ix-11), 255
+	ld (ix-5), 4
+	jp __LABEL__TESTTANKLOOP
+__LABEL453:
+	ld a, (ix-5)
+	sub 4
+	jp nz, __LABEL__ENDTESTCELLTANK
+	ld a, (ix-9)
+	or a
+	jp nz, __LABEL460
+	dec (ix-4)
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL460:
+	ld a, (ix-9)
+	sub 83
+	jp nz, __LABEL462
+	ld a, (ix-7)
+	dec a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld a, (ix-6)
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld hl, _activeMap
+	call __ARRAY
+	ld (hl), 0
+	ld a, (ix-7)
+	dec a
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld a, (ix-6)
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	push hl
+	ld hl, 71
+	push hl
+	ld a, 37
+	call _SetTileChecked
+	ld hl, 3
+	push hl
+	ld a, (ix-1)
+	ld l, a
+	dec hl
+	push hl
+	ld hl, _tanks
+	call __ARRAY
+	ld (hl), 0
+	jp __LABEL__ENDTESTCELLTANK
+__LABEL462:
 	ld (ix-9), 255
 	ld (ix-5), 1
 	jp __LABEL__TESTTANKLOOP
@@ -8720,11 +8851,11 @@ __LABEL__ENDTESTCELLTANK:
 	ld h, a
 	pop af
 	or a
-	jr z, __LABEL559
+	jr z, __LABEL588
 	ld a, h
-__LABEL559:
+__LABEL588:
 	or a
-	jp z, __LABEL364
+	jp z, __LABEL393
 	ld a, (ix-3)
 	sra a
 	ld (ix-6), a
@@ -8744,22 +8875,22 @@ __LABEL559:
 	push hl
 	call _LineOfSight
 	or a
-	jp z, __LABEL364
+	jp z, __LABEL393
 	call _FastRnd
 	ld h, a
 	ld a, (_tankProbability)
 	sub h
 	ccf
-	jp nc, __LABEL364
+	jp nc, __LABEL393
 	ld a, 2
 	ld (_dead), a
 	jp _UpdateTanks__leave
-__LABEL364:
+__LABEL393:
 	inc (ix-1)
-__LABEL360:
+__LABEL389:
 	ld a, 2
 	cp (ix-1)
-	jp nc, __LABEL363
+	jp nc, __LABEL392
 _UpdateTanks__leave:
 	ld sp, ix
 	pop ix
@@ -8803,10 +8934,10 @@ _TestCollisions:
 	ld (ix-10), a
 	ld a, (_activeAliens)
 	or a
-	jp z, __LABEL444
+	jp z, __LABEL473
 	ld (ix-1), 1
-	jp __LABEL445
-__LABEL448:
+	jp __LABEL474
+__LABEL477:
 	ld a, (ix-1)
 	ld l, a
 	ld h, 0
@@ -8816,7 +8947,7 @@ __LABEL448:
 	dec hl
 	ld a, (_activeAliens)
 	and (hl)
-	jp z, __LABEL449
+	jp z, __LABEL478
 	ld hl, 0
 	push hl
 	ld a, (ix-1)
@@ -8839,13 +8970,13 @@ __LABEL448:
 	ld (ix-12), a
 	ld a, (ix-8)
 	or a
-	jp z, __LABEL453
+	jp z, __LABEL482
 	ld a, (ix-11)
 	sub (ix-2)
-	jp nz, __LABEL453
+	jp nz, __LABEL482
 	ld a, (ix-12)
 	sub (ix-3)
-	jp nz, __LABEL453
+	jp nz, __LABEL482
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8858,18 +8989,18 @@ __LABEL448:
 	ld a, (_activeShots)
 	and 254
 	ld (_activeShots), a
-	call _AlienDeathEffect
-	jp __LABEL449
-__LABEL453:
+	call _KilledAlienEffect
+	jp __LABEL478
+__LABEL482:
 	ld a, (ix-9)
 	or a
-	jp z, __LABEL459
+	jp z, __LABEL488
 	ld a, (ix-11)
 	sub (ix-4)
-	jp nz, __LABEL459
+	jp nz, __LABEL488
 	ld a, (ix-12)
 	sub (ix-5)
-	jp nz, __LABEL459
+	jp nz, __LABEL488
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8882,18 +9013,18 @@ __LABEL453:
 	ld a, (_activeShots)
 	and 253
 	ld (_activeShots), a
-	call _AlienDeathEffect
-	jp __LABEL449
-__LABEL459:
+	call _KilledAlienEffect
+	jp __LABEL478
+__LABEL488:
 	ld a, (ix-10)
 	or a
-	jp z, __LABEL449
+	jp z, __LABEL478
 	ld a, (ix-11)
 	sub (ix-6)
-	jp nz, __LABEL449
+	jp nz, __LABEL478
 	ld a, (ix-12)
 	sub (ix-7)
-	jp nz, __LABEL449
+	jp nz, __LABEL478
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8906,20 +9037,20 @@ __LABEL459:
 	ld a, (_activeShots)
 	and 251
 	ld (_activeShots), a
-	call _AlienDeathEffect
-__LABEL449:
+	call _KilledAlienEffect
+__LABEL478:
 	inc (ix-1)
-__LABEL445:
+__LABEL474:
 	ld a, 4
 	cp (ix-1)
-	jp nc, __LABEL448
-__LABEL444:
+	jp nc, __LABEL477
+__LABEL473:
 	ld a, (_activeTanks)
 	or a
-	jp z, __LABEL471
+	jp z, __LABEL500
 	ld (ix-1), 1
-	jp __LABEL472
-__LABEL475:
+	jp __LABEL501
+__LABEL504:
 	ld a, (ix-1)
 	ld l, a
 	ld h, 0
@@ -8929,7 +9060,7 @@ __LABEL475:
 	dec hl
 	ld a, (_activeTanks)
 	and (hl)
-	jp z, __LABEL476
+	jp z, __LABEL505
 	ld hl, 0
 	push hl
 	ld a, (ix-1)
@@ -8952,13 +9083,13 @@ __LABEL475:
 	ld (ix-12), a
 	ld a, (ix-8)
 	or a
-	jp z, __LABEL480
+	jp z, __LABEL509
 	ld a, (ix-11)
 	sub (ix-2)
-	jp nz, __LABEL480
+	jp nz, __LABEL509
 	ld a, (ix-12)
 	sub (ix-3)
-	jp nz, __LABEL480
+	jp nz, __LABEL509
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8971,17 +9102,18 @@ __LABEL475:
 	ld a, (_activeShots)
 	and 254
 	ld (_activeShots), a
-	jp __LABEL476
-__LABEL480:
+	call _BuildTankDestroyedEffect
+	jp __LABEL505
+__LABEL509:
 	ld a, (ix-9)
 	or a
-	jp z, __LABEL486
+	jp z, __LABEL515
 	ld a, (ix-11)
 	sub (ix-4)
-	jp nz, __LABEL486
+	jp nz, __LABEL515
 	ld a, (ix-12)
 	sub (ix-5)
-	jp nz, __LABEL486
+	jp nz, __LABEL515
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -8994,17 +9126,18 @@ __LABEL480:
 	ld a, (_activeShots)
 	and 253
 	ld (_activeShots), a
-	jp __LABEL476
-__LABEL486:
+	call _BuildTankDestroyedEffect
+	jp __LABEL505
+__LABEL515:
 	ld a, (ix-10)
 	or a
-	jp z, __LABEL476
+	jp z, __LABEL505
 	ld a, (ix-11)
 	sub (ix-6)
-	jp nz, __LABEL476
+	jp nz, __LABEL505
 	ld a, (ix-12)
 	sub (ix-7)
-	jp nz, __LABEL476
+	jp nz, __LABEL505
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -9017,45 +9150,46 @@ __LABEL486:
 	ld a, (_activeShots)
 	and 251
 	ld (_activeShots), a
-__LABEL476:
+	call _BuildTankDestroyedEffect
+__LABEL505:
 	inc (ix-1)
-__LABEL472:
+__LABEL501:
 	ld a, 2
 	cp (ix-1)
-	jp nc, __LABEL475
-__LABEL471:
+	jp nc, __LABEL504
+__LABEL500:
 	ld a, (ix-8)
 	or a
-	jp z, __LABEL498
+	jp z, __LABEL527
 	ld a, (_playerX)
 	sub (ix-2)
-	jp nz, __LABEL498
+	jp nz, __LABEL527
 	ld a, 42
 	sub (ix-3)
-	jp nz, __LABEL498
+	jp nz, __LABEL527
 	ld a, 3
 	ld (_dead), a
 	ld a, (_activeShots)
 	and 254
 	ld (_activeShots), a
 	jp _TestCollisions__leave
-__LABEL498:
+__LABEL527:
 	ld a, (ix-9)
 	or a
-	jp z, __LABEL504
+	jp z, __LABEL533
 	ld a, (_playerX)
 	sub (ix-4)
-	jp nz, __LABEL504
+	jp nz, __LABEL533
 	ld a, 42
 	sub (ix-5)
-	jp nz, __LABEL504
+	jp nz, __LABEL533
 	ld a, 3
 	ld (_dead), a
 	ld a, (_activeShots)
 	and 253
 	ld (_activeShots), a
 	jp _TestCollisions__leave
-__LABEL504:
+__LABEL533:
 	ld a, (ix-10)
 	or a
 	jp z, _TestCollisions__leave
@@ -9088,8 +9222,8 @@ _UpdateShips:
 	jp z, _UpdateShips__leave
 	ld a, (_freezingShip)
 	ld (ix-1), a
-	jp __LABEL517
-__LABEL520:
+	jp __LABEL546
+__LABEL549:
 	ld a, (ix-1)
 	ld l, a
 	ld h, 0
@@ -9099,7 +9233,7 @@ __LABEL520:
 	dec hl
 	ld a, (_activeShips)
 	and (hl)
-	jp z, __LABEL521
+	jp z, __LABEL550
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -9112,7 +9246,7 @@ __LABEL520:
 	ld h, a
 	xor a
 	cp h
-	jp nc, __LABEL524
+	jp nc, __LABEL553
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -9134,12 +9268,12 @@ __LABEL520:
 	call __ARRAY
 	pop af
 	ld (hl), a
-	jp __LABEL521
-__LABEL524:
+	jp __LABEL550
+__LABEL553:
 	ld a, (_bitTable.__DATA__ + 3)
 	ld hl, (_activeAliens - 1)
 	xor h
-	jp z, __LABEL526
+	jp z, __LABEL555
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -9180,31 +9314,31 @@ __LABEL524:
 	ld a, (hl)
 	ld (ix-2), a
 	dec a
-	jp nz, __LABEL528
+	jp nz, __LABEL557
 	inc (ix-3)
 	ld (ix-5), 1
-	jp __LABEL529
-__LABEL528:
+	jp __LABEL558
+__LABEL557:
 	ld a, (ix-2)
 	sub 2
-	jp nz, __LABEL530
+	jp nz, __LABEL559
 	inc (ix-4)
 	ld (ix-5), 1
-	jp __LABEL529
-__LABEL530:
+	jp __LABEL558
+__LABEL559:
 	ld a, (ix-2)
 	sub 3
-	jp nz, __LABEL532
+	jp nz, __LABEL561
 	dec (ix-3)
 	ld (ix-5), 255
-	jp __LABEL529
-__LABEL532:
+	jp __LABEL558
+__LABEL561:
 	ld a, (ix-2)
 	sub 4
-	jp nz, __LABEL529
+	jp nz, __LABEL558
 	dec (ix-4)
 	ld (ix-5), 255
-__LABEL529:
+__LABEL558:
 	ld a, (_activeAliens)
 	call _FindEmptyBit
 	ld (ix-2), a
@@ -9267,17 +9401,17 @@ __LABEL529:
 	ld (hl), 255
 	ld a, 1
 	ld (_freezingShip), a
-	jp __LABEL521
-__LABEL526:
+	jp __LABEL550
+__LABEL555:
 	ld a, (ix-1)
 	ld (_freezingShip), a
 	jp _UpdateShips__leave
-__LABEL521:
+__LABEL550:
 	inc (ix-1)
-__LABEL517:
+__LABEL546:
 	ld a, 4
 	cp (ix-1)
-	jp nc, __LABEL520
+	jp nc, __LABEL549
 _UpdateShips__leave:
 	ld sp, ix
 	pop ix
@@ -9296,8 +9430,8 @@ _UpdateHangars:
 	jp z, _UpdateHangars__leave
 	ld a, (_freezingHangar)
 	ld (ix-1), a
-	jp __LABEL538
-__LABEL541:
+	jp __LABEL567
+__LABEL570:
 	ld a, (ix-1)
 	ld l, a
 	ld h, 0
@@ -9307,7 +9441,7 @@ __LABEL541:
 	dec hl
 	ld a, (_activeHangars)
 	and (hl)
-	jp z, __LABEL542
+	jp z, __LABEL571
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -9320,7 +9454,7 @@ __LABEL541:
 	ld h, a
 	xor a
 	cp h
-	jp nc, __LABEL545
+	jp nc, __LABEL574
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -9342,12 +9476,12 @@ __LABEL541:
 	call __ARRAY
 	pop af
 	ld (hl), a
-	jp __LABEL542
-__LABEL545:
+	jp __LABEL571
+__LABEL574:
 	ld a, (_bitTable.__DATA__ + 1)
 	ld hl, (_activeTanks - 1)
 	xor h
-	jp z, __LABEL547
+	jp z, __LABEL576
 	ld hl, 3
 	push hl
 	ld a, (ix-1)
@@ -9388,27 +9522,27 @@ __LABEL545:
 	ld a, (hl)
 	ld (ix-4), a
 	dec a
-	jp nz, __LABEL549
+	jp nz, __LABEL578
 	inc (ix-2)
-	jp __LABEL550
-__LABEL549:
+	jp __LABEL579
+__LABEL578:
 	ld a, (ix-4)
 	sub 2
-	jp nz, __LABEL551
+	jp nz, __LABEL580
 	inc (ix-3)
-	jp __LABEL550
-__LABEL551:
+	jp __LABEL579
+__LABEL580:
 	ld a, (ix-4)
 	sub 3
-	jp nz, __LABEL553
+	jp nz, __LABEL582
 	dec (ix-2)
-	jp __LABEL550
-__LABEL553:
+	jp __LABEL579
+__LABEL582:
 	ld a, (ix-4)
 	sub 4
-	jp nz, __LABEL550
+	jp nz, __LABEL579
 	dec (ix-3)
-__LABEL550:
+__LABEL579:
 	ld a, (_activeTanks)
 	call _FindEmptyBit
 	ld (ix-5), a
@@ -9471,17 +9605,17 @@ __LABEL550:
 	ld (hl), 255
 	ld a, 1
 	ld (_freezingHangar), a
-	jp __LABEL542
-__LABEL547:
+	jp __LABEL571
+__LABEL576:
 	ld a, (ix-1)
 	ld (_freezingHangar), a
 	jp _UpdateHangars__leave
-__LABEL542:
+__LABEL571:
 	inc (ix-1)
-__LABEL538:
+__LABEL567:
 	ld a, 2
 	cp (ix-1)
-	jp nc, __LABEL541
+	jp nc, __LABEL570
 _UpdateHangars__leave:
 	ld sp, ix
 	pop ix
@@ -9509,11 +9643,10 @@ __LABEL139:
 	DEFB 45h
 	DEFB 3Ah
 __LABEL140:
-	DEFW 0005h
+	DEFW 0004h
+	DEFB 53h
+	DEFB 41h
 	DEFB 54h
-	DEFB 4Fh
-	DEFB 4Fh
-	DEFB 4Ch
 	DEFB 3Ah
 __LABEL141:
 	DEFW 0004h
@@ -9521,6 +9654,51 @@ __LABEL141:
 	DEFB 4Fh
 	DEFB 4Eh
 	DEFB 45h
+__LABEL290:
+	DEFW 0007h
+	DEFB 4Eh
+	DEFB 4Fh
+	DEFB 4Eh
+	DEFB 45h
+	DEFB 20h
+	DEFB 20h
+	DEFB 20h
+__LABEL293:
+	DEFW 0007h
+	DEFB 42h
+	DEFB 41h
+	DEFB 52h
+	DEFB 52h
+	DEFB 49h
+	DEFB 45h
+	DEFB 52h
+__LABEL296:
+	DEFW 0007h
+	DEFB 4Dh
+	DEFB 49h
+	DEFB 4Eh
+	DEFB 45h
+	DEFB 20h
+	DEFB 20h
+	DEFB 20h
+__LABEL299:
+	DEFW 0007h
+	DEFB 42h
+	DEFB 4Fh
+	DEFB 4Dh
+	DEFB 42h
+	DEFB 20h
+	DEFB 20h
+	DEFB 20h
+__LABEL302:
+	DEFW 0007h
+	DEFB 4Ch
+	DEFB 41h
+	DEFB 53h
+	DEFB 45h
+	DEFB 52h
+	DEFB 20h
+	DEFB 20h
 	;; --- end of user code ---
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/array.asm"
 ; vim: ts=4:et:sw=4:
@@ -9689,7 +9867,7 @@ TMP_ARR_PTR:
 
 		ENDP
 
-#line 7404 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7481 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/asc.asm"
 	; Returns the ascii code for the given str
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/free.asm"
@@ -10042,7 +10220,7 @@ __ASC_END:
 
 		ret
 		ENDP
-#line 7405 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7482 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/border.asm"
 	; __FASTCALL__ Routine to change de border
 	; Parameter (color) specified in A register
@@ -10051,7 +10229,7 @@ __ASC_END:
 
 	; Nothing to do! (Directly from the ZX Spectrum ROM)
 
-#line 7406 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7483 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/bright.asm"
 	; Sets bright flag in ATTR_P permanently
 ; Parameter: Paper color in A register
@@ -10106,7 +10284,7 @@ BRIGHT_TMP:
 		ld hl, ATTR_T
 		jr __SET_BRIGHT
 	    ENDP
-#line 7407 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7484 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/cls.asm"
 	; JUMPS directly to spectrum CLS
 	; This routine does not clear lower screen
@@ -10187,7 +10365,7 @@ __CLS_SCR:
 								    ; to get the start of the screen
 		ENDP
 
-#line 7408 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7485 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/copy_attr.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/print.asm"
@@ -11241,7 +11419,7 @@ __REFRESH_TMP:
 
 		ENDP
 
-#line 7409 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7486 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lei8.asm"
@@ -11266,10 +11444,10 @@ checkParity:
 	    inc a       ; True
 	    ret
 	    ENDP
-#line 7412 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7489 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lti8.asm"
 
-#line 7413 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7490 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 
 
@@ -11330,7 +11508,7 @@ __PRINT_STR:
 
 			ENDP
 
-#line 7417 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7494 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr2.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -11387,7 +11565,7 @@ __PSTORE_STR2:
 	    add hl, bc
 	    jp __STORE_STR2
 
-#line 7418 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7495 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/str.asm"
 	; The STR$( ) BASIC function implementation
 
@@ -11695,7 +11873,7 @@ __STR_END:
 
 		ENDP
 
-#line 7419 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7496 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strcat.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strlen.asm"
@@ -11840,7 +12018,7 @@ __STRCATEND:
 
 			ENDP
 
-#line 7420 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7497 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strslice.asm"
 	; String slicing library
@@ -11949,7 +12127,7 @@ __FREE_ON_EXIT:
 
 		ENDP
 
-#line 7422 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7499 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/u32tofreg.asm"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/neg32.asm"
 __ABS32:
@@ -12071,6 +12249,6 @@ __U32TOFREG_END:
 		ret
 	    ENDP
 
-#line 7423 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 7500 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 	END

@@ -483,22 +483,22 @@
         "ADjXqlWqVao=",
         "ACAAgmCwWKw=",
         "NSpVKjWqNWo=",
-        "qkWAEbgRglU=",
+        "VYJBkDmQBao=",
         "VaxWqlaqVqw=",
         "VSoVCk0HCAA=",
         "VapVqlXqHUc=",
         "VKxZqEiQYIg="
       ],
       "ColorData": [
+        4,
+        4,
+        4,
+        4,
         20,
-        20,
-        20,
-        20,
-        34,
-        20,
-        20,
-        20,
-        20
+        4,
+        4,
+        4,
+        4
       ],
       "Sort": 1,
       "SetType": 2
@@ -515,23 +515,81 @@
         "gJGqu4CIlZ0=",
         "ABGquwCIVd0=",
         "ARGpuQGJVd0=",
-        "gJCquoD///8=",
-        "ADx+ZnZmZv8=",
-        "AQlVXQH///8="
+        "gJCquoCAmP8=",
+        "gTx+ZnZm5/8=",
+        "AQlVXQEBGf8="
       ],
       "ColorData": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
         2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2,
-        2
+        10
       ],
       "Sort": 1,
       "SetType": 2
+    },
+    {
+      "Id": "12ddb969-4447-4dc0-b42c-d9801fbdedb8",
+      "Name": "ExplosionCrater",
+      "Width": 3,
+      "Height": 3,
+      "Data": [
+        "/////PbW58U=",
+        "//s7V+uDAAA=",
+        "//u//79Tv78=",
+        "6ri4gLD0yLw=",
+        "NHr77ffNeiQ=",
+        "e3cvHx8/Px8=",
+        "vNrY9+P7//8=",
+        "AIDPzpJ0d98=",
+        "Z/8d3/XrX/8="
+      ],
+      "ColorData": [
+        16,
+        16,
+        16,
+        16,
+        22,
+        16,
+        16,
+        16,
+        16
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "bdb88072-c8f1-4be4-a4f1-481558590321",
+      "Name": "Tree",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "ZpksSgho3f8="
+      ],
+      "ColorData": [
+        4
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "084e7155-e09b-437e-a724-2d40ee799bb1",
+      "Name": "SmallBuilding",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "Fh+F36X/pec="
+      ],
+      "ColorData": [
+        2
+      ],
+      "Sort": -1,
+      "SetType": 1
     },
     {
       "Id": "73242e38-d64a-419f-ad1d-843ebbff9713",

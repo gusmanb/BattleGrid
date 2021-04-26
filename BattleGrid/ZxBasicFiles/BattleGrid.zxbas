@@ -1,5 +1,9 @@
 REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
+#define ENABLE_1x1_SPRITES
+'#define ENABLE_1x2_SPRITES
+'#define ENABLE_2x2_SPRITES
+
 'Total number of 1x1 defined sprites
 #define TOTAL_1x1_SPRITES 16
 'Total number of 1x2 defined sprites
@@ -58,6 +62,7 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --hea
 #define ENEMB_INDEX 14
 #define TANKV_INDEX 15
 #define TANKH_INDEX 16
+
 'REM --SPRITE SECTION--
 #define PLAYER_ADDRESS (@spriteSet + 0)
 #define PLAYERRIGHT_ADDRESS (@spriteSet + 8)
@@ -111,34 +116,37 @@ Dim spriteSet(16,8) as uByte => { _
 #define VBARRIERC_INDEX 51
 #define TERRAIN_INDEX 52
 #define BUILDINGS_INDEX 61
-#define SPLITTER_INDEX 70
-#define BLOCKER_INDEX 71
-#define MINE_INDEX 72
-#define BOMB_INDEX 73
-#define CHARGEDSHOT_INDEX 74
-#define MINECRATE_INDEX 75
-#define BLOCKERCRATE_INDEX 76
-#define BOMBCRATE_INDEX 77
-#define CHARGEDSHOTCRATE_INDEX 78
-#define RADIOTOWER_INDEX 79
-#define FORCEFIELD_INDEX 80
-#define MOTHERSHIP_INDEX 81
-#define HANGAR_INDEX 82
-#define NUMBERS_INDEX 83
-#define SOLID_INDEX 93
-#define ZOOMALIENA_INDEX 94
-#define ZOOMALIENB_INDEX 98
-#define SHOTDEATHA_INDEX 102
-#define SHOTDEATHB_INDEX 106
-#define SHOTDEATHC_INDEX 110
-#define SHOTDEATHD_INDEX 114
-#define SHOTDEATHE_INDEX 118
-#define SHOTDEATHF_INDEX 122
-#define SHOTDEATHG_INDEX 126
-#define TANKDEATHA_INDEX 130
-#define TANKDEATHB_INDEX 134
+#define EXPLOSIONCRATER_INDEX 70
+#define TREE_INDEX 79
+#define SMALLBUILDING_INDEX 80
+#define SPLITTER_INDEX 81
+#define BLOCKER_INDEX 82
+#define MINE_INDEX 83
+#define BOMB_INDEX 84
+#define CHARGEDSHOT_INDEX 85
+#define MINECRATE_INDEX 86
+#define BLOCKERCRATE_INDEX 87
+#define BOMBCRATE_INDEX 88
+#define CHARGEDSHOTCRATE_INDEX 89
+#define RADIOTOWER_INDEX 90
+#define FORCEFIELD_INDEX 91
+#define MOTHERSHIP_INDEX 92
+#define HANGAR_INDEX 93
+#define NUMBERS_INDEX 94
+#define SOLID_INDEX 104
+#define ZOOMALIENA_INDEX 105
+#define ZOOMALIENB_INDEX 109
+#define SHOTDEATHA_INDEX 113
+#define SHOTDEATHB_INDEX 117
+#define SHOTDEATHC_INDEX 121
+#define SHOTDEATHD_INDEX 125
+#define SHOTDEATHE_INDEX 129
+#define SHOTDEATHF_INDEX 133
+#define SHOTDEATHG_INDEX 137
+#define TANKDEATHA_INDEX 141
+#define TANKDEATHB_INDEX 145
 
-Dim tileSet(138,8) as uByte => { _
+Dim tileSet(149,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
@@ -195,7 +203,7 @@ Dim tileSet(138,8) as uByte => { _
 { $00, $38, $D7, $AA, $55, $AA, $55, $AA }, _
 { $00, $20, $00, $82, $60, $B0, $58, $AC }, _
 { $35, $2A, $55, $2A, $35, $AA, $35, $6A }, _
-{ $AA, $45, $80, $11, $B8, $11, $82, $55 }, _
+{ $55, $82, $41, $90, $39, $90, $05, $AA }, _
 { $55, $AC, $56, $AA, $56, $AA, $56, $AC }, _
 { $55, $2A, $15, $0A, $4D, $07, $08, $00 }, _
 { $55, $AA, $55, $AA, $55, $EA, $1D, $47 }, _
@@ -209,6 +217,17 @@ Dim tileSet(138,8) as uByte => { _
 { $80, $90, $AA, $BA, $80, $80, $98, $FF }, _
 { $81, $3C, $7E, $66, $76, $66, $E7, $FF }, _
 { $01, $09, $55, $5D, $01, $01, $19, $FF }, _
+{ $FF, $FF, $FF, $FC, $F6, $D6, $E7, $C5 }, _
+{ $FF, $FB, $3B, $57, $EB, $83, $00, $00 }, _
+{ $FF, $FB, $BF, $FF, $BF, $53, $BF, $BF }, _
+{ $EA, $B8, $B8, $80, $B0, $F4, $C8, $BC }, _
+{ $34, $7A, $FB, $ED, $F7, $CD, $7A, $24 }, _
+{ $7B, $77, $2F, $1F, $1F, $3F, $3F, $1F }, _
+{ $BC, $DA, $D8, $F7, $E3, $FB, $FF, $FF }, _
+{ $00, $80, $CF, $CE, $92, $74, $77, $DF }, _
+{ $67, $FF, $1D, $DF, $F5, $EB, $5F, $FF }, _
+{ $66, $99, $2C, $4A, $08, $68, $DD, $FF }, _
+{ $16, $1F, $85, $DF, $A5, $FF, $A5, $E7 }, _
 { $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
 { $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
 { $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
@@ -279,7 +298,7 @@ Dim tileSet(138,8) as uByte => { _
 { $40, $80, $20, $80, $88, $A0, $82, $90 } _
 }
 
-Dim tileColors(138) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $04, $04, $04, $04, $14, $04, $04, $04, $04, $0A, $0A, $0A, $0A, $0A, $0A, $0A, $02, $0A, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $CE, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
+Dim tileColors(149) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $04, $04, $04, $04, $14, $04, $04, $04, $04, $0A, $0A, $0A, $0A, $0A, $0A, $0A, $02, $0A, $10, $10, $10, $10, $16, $10, $10, $10, $10, $04, $02, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $CE, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
 
 defines:
 #define CURSOR_FRAMES 10
@@ -378,6 +397,11 @@ hangars(TMPVAR, 2) = Y \
 hangars(TMPVAR, 3) = SPAWNDIRECTION \
 hangars(TMPVAR, 4) = HANGAR_SPEED \
 GRID_OBJECT(HANGAR_INDEX, X, Y)
+
+#define CREATE_TOWER(X, Y) \
+GRID_OBJECT(RADIOTOWER_INDEX, X, Y) \
+activeTowers = activeTowers + 1 \
+
 
 vars:
 Dim playerX as uByte = 20
@@ -570,6 +594,7 @@ sub InitLevel()
     activeTanks = 0
     activeShips = 0
     activeHangars = 0
+    activeTowers = 0
 
     playerX = 20
     dead = 0
@@ -583,7 +608,7 @@ sub InitLevel()
     PrintPaddedNumber(24, 13, 0, 6)
     'print at 13, 24; "000000"
 
-    print at 15, 24; "TOOL:"
+    print at 15, 24; "SAT:"
     print at 16, 24; "NONE"
 
     shots(1,4) = -1
@@ -662,9 +687,22 @@ sub InitLevel()
     GRID_OBJECT(BOMBCRATE_INDEX, 12, 17)
     GRID_OBJECT(CHARGEDSHOTCRATE_INDEX, 14, 17)
 
-    GRID_OBJECT(RADIOTOWER_INDEX, 10, 10)
+    CREATE_TOWER(10, 10)
 
-    activeTowers = 1
+    GRID_OBJECT(SMALLBUILDING_INDEX, 20, 7)
+    GRID_OBJECT(TREE_INDEX, 1, 5)
+
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX, 9, 5)
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 1, 10, 5)
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 2, 11, 5)
+    
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 3, 9, 6)
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 4, 10, 6)
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 5, 11, 6)
+
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 6, 9, 7)
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 7, 10, 7)
+    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 8, 11, 7)
 
     CREATE_SHIP(7, 1, 3, buc)
     CREATE_SHIP(13, 1, 1, buc)
@@ -674,6 +712,9 @@ sub InitLevel()
 end sub
 
 sub UpdatePlayer()
+
+    if dead <> 0 then return
+
     playerSprite = PLAYER_INDEX
 
     if MultiKeys(KEYZ) then
@@ -696,6 +737,10 @@ end sub
 
 sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpDir as uByte
+
     if activeMap(cellX, cellY) then
 
         Dim tmpCell as uByte = activeMap(cellX, cellY)
@@ -705,9 +750,9 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             if (activeShots bxor TABLE_LOOKUP(@maskTable, shotIndex)) = 0 then 'Only one active shot?
 
                 activeShots = 7 '111, all three shots
-                Dim tmpX as uByte = shots(shotIndex, 1)
-                Dim tmpY as uByte = shots(shotIndex, 2)
-                Dim tmpDir as uByte = shots(shotIndex, 3) 
+                tmpX = shots(shotIndex, 1)
+                tmpY = shots(shotIndex, 2)
+                tmpDir = shots(shotIndex, 3) 
 
                 if tmpDir = 1 then
                     shots(1,3) = 1
@@ -766,7 +811,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
         end if
 
         if tmpCell >= HBARRIERA_INDEX then 
-        if tmpCell <= BUILDINGS_INDEX + 8 then
+        if tmpCell <= SMALLBUILDING_INDEX then
 
             shots(shotIndex, 4) = 0 'explodes
 
@@ -808,6 +853,21 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             CLEAR_GRID_CELL(cellX, cellY)
             EXPLODE_SHOT(shotIndex)
+            BuildTankDestroyedEffect()             
+            activeTowers = activeTowers - 1
+
+            if activeTowers = 0 then 
+
+                for tmpX = 1 to 20
+                    for tmpY = 1 to 20
+                        if activeMap(tmpX, tmpY) = FORCEFIELD_INDEX then 
+                            CLEAR_GRID_CELL(tmpX, tmpY)
+                        end if
+                    next tmpY
+                next tmpX
+
+
+            end if
 
             return
 
@@ -824,6 +884,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             CLEAR_GRID_CELL(cellX, cellY)
             EXPLODE_SHOT(shotIndex)
+            BuildTankDestroyedEffect()
 
             for tmpCell = 1 to MAX_SHIP_COUNT
 
@@ -844,6 +905,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             CLEAR_GRID_CELL(cellX, cellY)
             EXPLODE_SHOT(shotIndex)
+            BuildTankDestroyedEffect()
 
             for tmpCell = 1 to MAX_HANGAR_COUNT
 
@@ -994,6 +1056,41 @@ end sub
 
 sub UpdateCursor()
 
+    #define TOOL_NONE 0
+#define TOOL_BLOCKER 1
+#define TOOL_MINE 2
+#define TOOL_BOMB 3
+#define TOOL_CHARGEDSHOT 4
+
+
+    if MultiKeys(KEY1) then
+
+        cursorTool = TOOL_NONE
+        print at 16, 24; "NONE   "
+        
+    else if MultiKeys(KEY2) then
+
+        cursorTool = TOOL_BLOCKER
+        print at 16, 24; "BARRIER"
+        
+
+    else if MultiKeys(KEY3) then
+
+        cursorTool = TOOL_MINE
+        print at 16, 24; "MINE   "
+
+    else if MultiKeys(KEY4) then
+        
+        cursorTool = TOOL_BOMB
+        print at 16, 24; "BOMB   "
+
+    else if MultiKeys(KEY5) then
+
+        cursorTool = TOOL_CHARGEDSHOT
+        print at 16, 24; "LASER  "
+
+    end if
+
     cursorFrames = cursorFrames - 1
 
     if cursorMoved = 0 or cursorFrames = 0 then
@@ -1047,7 +1144,7 @@ sub UpdateCursor()
             cursorMoved = 0
         end if
 
-    else if AnyKey() = 0 then
+    else if AnyKey() <> 0 then
         cursorMoved = 0
     end if
 
@@ -1236,7 +1333,7 @@ ENDTESTCELL:
                 if tmpY = 42 then 
                     dead = 1
                 else if aliens(buc, 4) = 0 then
-                    AlienDeathEffect()
+                    KilledAlienEffect()
                 end if
 
             end if
@@ -1507,7 +1604,7 @@ sub TestCollisions()
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111110b
-                        AlienDeathEffect()
+                        KilledAlienEffect()
                         continue for
 
                     end if
@@ -1520,7 +1617,7 @@ sub TestCollisions()
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111101b
-                        AlienDeathEffect()
+                        KilledAlienEffect()
                         continue for
 
                     end if
@@ -1533,7 +1630,7 @@ sub TestCollisions()
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111011b
-                        AlienDeathEffect()
+                        KilledAlienEffect()
                         continue for
 
                     end if
@@ -1561,6 +1658,7 @@ sub TestCollisions()
 
                         tanks(buc, 4) = 0
                         activeShots = activeShots band 11111110b
+                        BuildTankDestroyedEffect()
                         continue for
 
                     end if
@@ -1573,6 +1671,7 @@ sub TestCollisions()
 
                         tanks(buc, 4) = 0
                         activeShots = activeShots band 11111101b
+                        BuildTankDestroyedEffect()
                         continue for
 
                     end if
@@ -1585,6 +1684,7 @@ sub TestCollisions()
 
                         tanks(buc, 4) = 0
                         activeShots = activeShots band 11111011b
+                        BuildTankDestroyedEffect()
                         continue for
 
                     end if
@@ -1898,9 +1998,6 @@ while(1)
     end if
 
     RenderFrame()
-
-    'tmpLoop = tmpLoop + 1
-    'BorderEffect(2,0,127,128,10)
 
     if dead <> 0 then
 
