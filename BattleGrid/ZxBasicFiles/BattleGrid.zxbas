@@ -108,45 +108,43 @@ Dim spriteSet(16,8) as uByte => { _
 #define DEFLECTORB_INDEX 43
 #define DEFLECTORC_INDEX 44
 #define DEFLECTORD_INDEX 45
-#define HBARRIERA_INDEX 46
-#define HBARRIERB_INDEX 47
-#define HBARRIERC_INDEX 48
-#define VBARRIERA_INDEX 49
-#define VBARRIERB_INDEX 50
-#define VBARRIERC_INDEX 51
-#define TERRAIN_INDEX 52
-#define BUILDINGS_INDEX 61
-#define EXPLOSIONCRATER_INDEX 70
-#define TREE_INDEX 79
-#define SMALLBUILDING_INDEX 80
-#define SPLITTER_INDEX 81
-#define BLOCKER_INDEX 82
-#define MINE_INDEX 83
-#define BOMB_INDEX 84
-#define CHARGEDSHOT_INDEX 85
-#define MINECRATE_INDEX 86
-#define BLOCKERCRATE_INDEX 87
-#define BOMBCRATE_INDEX 88
-#define CHARGEDSHOTCRATE_INDEX 89
-#define RADIOTOWER_INDEX 90
-#define FORCEFIELD_INDEX 91
-#define MOTHERSHIP_INDEX 92
-#define HANGAR_INDEX 93
-#define NUMBERS_INDEX 94
-#define SOLID_INDEX 104
-#define ZOOMALIENA_INDEX 105
-#define ZOOMALIENB_INDEX 109
-#define SHOTDEATHA_INDEX 113
-#define SHOTDEATHB_INDEX 117
-#define SHOTDEATHC_INDEX 121
-#define SHOTDEATHD_INDEX 125
-#define SHOTDEATHE_INDEX 129
-#define SHOTDEATHF_INDEX 133
-#define SHOTDEATHG_INDEX 137
-#define TANKDEATHA_INDEX 141
-#define TANKDEATHB_INDEX 145
+#define HBARRIER_INDEX 46
+#define VBARRIER_INDEX 49
+#define BIGBUILDING_INDEX 52
+#define MEDIUMBUILDING_INDEX 61
+#define TALLBUILDING_INDEX 67
+#define WIDEBUILDING_INDEX 69
+#define SMALLBUILDING_INDEX 71
+#define EXPLOSIONCRATER_INDEX 72
+#define TOXICWASTE_INDEX 81
+#define SPLITTER_INDEX 82
+#define BLOCKER_INDEX 83
+#define MINE_INDEX 84
+#define BOMB_INDEX 85
+#define CHARGEDSHOT_INDEX 86
+#define MINECRATE_INDEX 87
+#define BLOCKERCRATE_INDEX 88
+#define BOMBCRATE_INDEX 89
+#define CHARGEDSHOTCRATE_INDEX 90
+#define RADIOTOWER_INDEX 91
+#define FORCEFIELD_INDEX 92
+#define MOTHERSHIP_INDEX 93
+#define HANGAR_INDEX 94
+#define NUMBERS_INDEX 95
+#define SOLID_INDEX 105
+#define ZOOMALIENA_INDEX 106
+#define ZOOMALIENB_INDEX 110
+#define SHOTDEATHA_INDEX 114
+#define SHOTDEATHB_INDEX 118
+#define SHOTDEATHC_INDEX 122
+#define SHOTDEATHD_INDEX 126
+#define SHOTDEATHE_INDEX 130
+#define SHOTDEATHF_INDEX 134
+#define SHOTDEATHG_INDEX 138
+#define TANKDEATHA_INDEX 142
+#define TANKDEATHB_INDEX 146
 
-Dim tileSet(149,8) as uByte => { _
+Dim tileSet(150,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
@@ -193,30 +191,32 @@ Dim tileSet(149,8) as uByte => { _
 { $FF, $82, $BC, $A8, $B0, $A0, $C0, $80 }, _
 { $01, $03, $05, $0D, $15, $3D, $41, $FF }, _
 { $FF, $41, $3D, $15, $0D, $05, $03, $01 }, _
-{ $3F, $7F, $AA, $D1, $D1, $AA, $7F, $3F }, _
-{ $FF, $FF, $A5, $18, $18, $A5, $FF, $FF }, _
-{ $FC, $FE, $55, $8B, $8B, $55, $FE, $FC }, _
-{ $3C, $5A, $E7, $DB, $E7, $C3, $E7, $DB }, _
-{ $E7, $C3, $E7, $DB, $DB, $E7, $C3, $E7 }, _
-{ $DB, $E7, $C3, $E7, $DB, $E7, $5A, $3C }, _
-{ $00, $A3, $05, $1A, $A5, $2A, $55, $6A }, _
-{ $00, $38, $D7, $AA, $55, $AA, $55, $AA }, _
-{ $00, $20, $00, $82, $60, $B0, $58, $AC }, _
-{ $35, $2A, $55, $2A, $35, $AA, $35, $6A }, _
-{ $55, $82, $41, $90, $39, $90, $05, $AA }, _
-{ $55, $AC, $56, $AA, $56, $AA, $56, $AC }, _
-{ $55, $2A, $15, $0A, $4D, $07, $08, $00 }, _
-{ $55, $AA, $55, $AA, $55, $EA, $1D, $47 }, _
-{ $54, $AC, $59, $A8, $48, $90, $60, $88 }, _
-{ $0F, $79, $F0, $FF, $E2, $88, $95, $9D }, _
-{ $99, $FF, $C3, $FF, $22, $88, $55, $DD }, _
-{ $F0, $9E, $0F, $FF, $23, $89, $55, $DD }, _
-{ $80, $91, $AA, $BB, $80, $88, $95, $9D }, _
-{ $00, $11, $AA, $BB, $00, $88, $55, $DD }, _
-{ $01, $11, $A9, $B9, $01, $89, $55, $DD }, _
-{ $80, $90, $AA, $BA, $80, $80, $98, $FF }, _
-{ $81, $3C, $7E, $66, $76, $66, $E7, $FF }, _
-{ $01, $09, $55, $5D, $01, $01, $19, $FF }, _
+{ $42, $A5, $7E, $2F, $37, $7E, $A5, $42 }, _
+{ $00, $99, $66, $DB, $BD, $66, $99, $00 }, _
+{ $42, $A5, $7E, $F4, $EC, $7E, $A5, $42 }, _
+{ $42, $A5, $7E, $34, $2C, $7E, $BD, $5A }, _
+{ $5A, $24, $34, $5A, $5A, $34, $24, $5A }, _
+{ $5A, $BD, $7E, $2C, $34, $7E, $A5, $42 }, _
+{ $00, $02, $03, $07, $09, $09, $1F, $09 }, _
+{ $00, $7E, $FF, $FF, $24, $24, $FF, $24 }, _
+{ $00, $40, $C0, $F0, $90, $90, $FC, $92 }, _
+{ $09, $3F, $61, $7F, $09, $09, $3F, $49 }, _
+{ $24, $FF, $00, $FF, $24, $24, $FF, $24 }, _
+{ $92, $FE, $82, $FE, $92, $92, $FC, $90 }, _
+{ $49, $7F, $41, $7F, $7F, $67, $67, $27 }, _
+{ $24, $FF, $3C, $E7, $DB, $A5, $A5, $A5 }, _
+{ $90, $FE, $82, $FE, $FE, $E6, $E4, $E0 }, _
+{ $00, $00, $03, $03, $06, $05, $27, $36 }, _
+{ $3C, $3C, $E7, $A5, $BD, $E7, $A5, $BD }, _
+{ $00, $7C, $82, $CA, $6A, $A2, $FA, $6A }, _
+{ $76, $5E, $5A, $7F, $27, $2F, $D8, $3F }, _
+{ $E7, $A5, $BD, $E7, $FF, $E7, $C3, $C3 }, _
+{ $6E, $7E, $5E, $FE, $E6, $F6, $1E, $FE }, _
+{ $60, $F0, $A0, $B8, $A4, $BC, $A6, $BD }, _
+{ $A5, $BD, $A5, $BD, $A5, $FD, $E7, $E7 }, _
+{ $28, $3E, $26, $E7, $BE, $E7, $A6, $FE }, _
+{ $06, $1F, $05, $C7, $7D, $E7, $65, $7F }, _
+{ $16, $1F, $85, $DF, $A5, $FF, $A5, $E7 }, _
 { $FF, $FF, $FF, $FC, $F6, $D6, $E7, $C5 }, _
 { $FF, $FB, $3B, $57, $EB, $83, $00, $00 }, _
 { $FF, $FB, $BF, $FF, $BF, $53, $BF, $BF }, _
@@ -226,8 +226,7 @@ Dim tileSet(149,8) as uByte => { _
 { $BC, $DA, $D8, $F7, $E3, $FB, $FF, $FF }, _
 { $00, $80, $CF, $CE, $92, $74, $77, $DF }, _
 { $67, $FF, $1D, $DF, $F5, $EB, $5F, $FF }, _
-{ $66, $99, $2C, $4A, $08, $68, $DD, $FF }, _
-{ $16, $1F, $85, $DF, $A5, $FF, $A5, $E7 }, _
+{ $70, $F8, $9F, $0C, $61, $B2, $EF, $46 }, _
 { $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
 { $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
 { $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
@@ -298,7 +297,7 @@ Dim tileSet(149,8) as uByte => { _
 { $40, $80, $20, $80, $88, $A0, $82, $90 } _
 }
 
-Dim tileColors(149) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $42, $42, $42, $42, $42, $42, $04, $04, $04, $04, $14, $04, $04, $04, $04, $0A, $0A, $0A, $0A, $0A, $0A, $0A, $02, $0A, $10, $10, $10, $10, $16, $10, $10, $10, $10, $04, $02, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $CE, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
+Dim tileColors(150) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $CE, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
 
 defines:
 #define CURSOR_FRAMES 10
@@ -633,51 +632,50 @@ sub InitLevel()
     '    GRID_OBJECT(FORCEFIELD_INDEX, buc, 14)
     'next buc
 
-    'GRID_OBJECT(HBARRIERA_INDEX, 9, 14)
-    'GRID_OBJECT(HBARRIERB_INDEX, 10, 14)
-    'GRID_OBJECT(HBARRIERB_INDEX, 11, 14)
-    'GRID_OBJECT(HBARRIERC_INDEX, 12, 14)
+    GRID_OBJECT(HBARRIER_INDEX, 9, 11)
+    GRID_OBJECT(HBARRIER_INDEX + 1, 10, 11)
+    GRID_OBJECT(HBARRIER_INDEX + 1, 11, 11)
+    GRID_OBJECT(HBARRIER_INDEX + 2, 12, 11)
 
-    GRID_OBJECT(BUILDINGS_INDEX, 9, 13)
-    GRID_OBJECT(BUILDINGS_INDEX + 1, 10, 13)
-    GRID_OBJECT(BUILDINGS_INDEX + 1, 11, 13)
-    GRID_OBJECT(BUILDINGS_INDEX + 2, 12, 13)
+    GRID_OBJECT(BIGBUILDING_INDEX, 9, 13)
+    GRID_OBJECT(BIGBUILDING_INDEX + 1, 10, 13)
+    GRID_OBJECT(BIGBUILDING_INDEX + 1, 11, 13)
+    GRID_OBJECT(BIGBUILDING_INDEX + 2, 12, 13)
     
-    GRID_OBJECT(BUILDINGS_INDEX + 3, 9, 14)
-    GRID_OBJECT(BUILDINGS_INDEX + 4, 10, 14)
-    GRID_OBJECT(BUILDINGS_INDEX + 4, 11, 14)
-    GRID_OBJECT(BUILDINGS_INDEX + 5, 12, 14)
+    GRID_OBJECT(BIGBUILDING_INDEX + 3, 9, 14)
+    GRID_OBJECT(BIGBUILDING_INDEX + 4, 10, 14)
+    GRID_OBJECT(BIGBUILDING_INDEX + 4, 11, 14)
+    GRID_OBJECT(BIGBUILDING_INDEX + 5, 12, 14)
 
-    GRID_OBJECT(BUILDINGS_INDEX + 6, 9, 15)
-    GRID_OBJECT(BUILDINGS_INDEX + 7, 10, 15)
-    GRID_OBJECT(BUILDINGS_INDEX + 7, 11, 15)
-    GRID_OBJECT(BUILDINGS_INDEX + 8, 12, 15)
+    GRID_OBJECT(BIGBUILDING_INDEX + 6, 9, 15)
+    GRID_OBJECT(BIGBUILDING_INDEX + 7, 10, 15)
+    GRID_OBJECT(BIGBUILDING_INDEX + 7, 11, 15)
+    GRID_OBJECT(BIGBUILDING_INDEX + 8, 12, 15)
 
 
 
-    GRID_OBJECT(TERRAIN_INDEX, 1, 14)
-    GRID_OBJECT(TERRAIN_INDEX + 1, 2, 14)
-    GRID_OBJECT(TERRAIN_INDEX + 1, 3, 14)
-    GRID_OBJECT(TERRAIN_INDEX + 2, 4, 14)
+    GRID_OBJECT(MEDIUMBUILDING_INDEX, 1, 14)
+    GRID_OBJECT(MEDIUMBUILDING_INDEX + 1, 2, 14)
+    GRID_OBJECT(MEDIUMBUILDING_INDEX + 2, 3, 14)
     
-    GRID_OBJECT(TERRAIN_INDEX + 3, 1, 15)
-    GRID_OBJECT(TERRAIN_INDEX + 4, 2, 15)
-    GRID_OBJECT(TERRAIN_INDEX + 4, 3, 15)
-    GRID_OBJECT(TERRAIN_INDEX + 5, 4, 15)
+    GRID_OBJECT(MEDIUMBUILDING_INDEX + 3, 1, 15)
+    GRID_OBJECT(MEDIUMBUILDING_INDEX + 4, 2, 15)
+    GRID_OBJECT(MEDIUMBUILDING_INDEX + 5, 3, 15)
 
-    GRID_OBJECT(TERRAIN_INDEX + 6, 1, 16)
-    GRID_OBJECT(TERRAIN_INDEX + 7, 2, 16)
-    GRID_OBJECT(TERRAIN_INDEX + 7, 3, 16)
-    GRID_OBJECT(TERRAIN_INDEX + 8, 4, 16)
+    GRID_OBJECT(WIDEBUILDING_INDEX, 1, 17)
+    GRID_OBJECT(WIDEBUILDING_INDEX + 1, 2, 17)
+
+    GRID_OBJECT(TALLBUILDING_INDEX, 5, 17)
+    GRID_OBJECT(TALLBUILDING_INDEX + 1, 5, 18)
 
 
     for buc = 13 to 19
         GRID_OBJECT(FORCEFIELD_INDEX, buc, 14)
     next buc
 
-    GRID_OBJECT(VBARRIERA_INDEX, 20, 14)
-    GRID_OBJECT(VBARRIERB_INDEX, 20, 15)
-    GRID_OBJECT(VBARRIERC_INDEX, 20, 16)
+    GRID_OBJECT(VBARRIER_INDEX, 20, 14)
+    GRID_OBJECT(VBARRIER_INDEX + 1, 20, 15)
+    GRID_OBJECT(VBARRIER_INDEX + 2, 20, 16)
 
     GRID_OBJECT(MINE_INDEX, 10, 16)
     GRID_OBJECT(MINE_INDEX, 11, 16)
@@ -690,7 +688,7 @@ sub InitLevel()
     CREATE_TOWER(10, 10)
 
     GRID_OBJECT(SMALLBUILDING_INDEX, 20, 7)
-    GRID_OBJECT(TREE_INDEX, 1, 5)
+    GRID_OBJECT(TOXICWASTE_INDEX, 1, 5)
 
     GRID_OBJECT(EXPLOSIONCRATER_INDEX, 9, 5)
     GRID_OBJECT(EXPLOSIONCRATER_INDEX + 1, 10, 5)
@@ -810,8 +808,8 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
         end if
         end if
 
-        if tmpCell >= HBARRIERA_INDEX then 
-        if tmpCell <= SMALLBUILDING_INDEX then
+        if tmpCell >= HBARRIER_INDEX then 
+        if tmpCell <= EXPLOSIONCRATER_INDEX + 8 then
 
             shots(shotIndex, 4) = 0 'explodes
 
@@ -825,6 +823,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             CLEAR_GRID_CELL(cellX, cellY)
             EXPLODE_SHOT(shotIndex)
+            CrateDestroyedEffect()
 
             if tmpCell = MINECRATE_INDEX then
 
@@ -1050,6 +1049,8 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
             DeflectorEffect()
         end if
 
+    else if 
+
     end if
 
 end sub
@@ -1057,10 +1058,10 @@ end sub
 sub UpdateCursor()
 
     #define TOOL_NONE 0
-#define TOOL_BLOCKER 1
-#define TOOL_MINE 2
-#define TOOL_BOMB 3
-#define TOOL_CHARGEDSHOT 4
+    #define TOOL_BLOCKER 1
+    #define TOOL_MINE 2
+    #define TOOL_BOMB 3
+    #define TOOL_CHARGEDSHOT 4
 
 
     if MultiKeys(KEY1) then
@@ -1163,7 +1164,7 @@ function LineOfSight(x as uinteger, y as uinteger) as ubyte
     DIm buc as ubyte
 
     for buc = 1 to 19 - y
-        if peek(address) <> 0 and peek(address) <> FORCEFIELD_INDEX then return 0
+        if peek(address) <> 0 and peek(address) <> FORCEFIELD_INDEX and peek(address) <> TOXICWASTE_INDEX then return 0
         address = address + 1
     next buc
 
@@ -1432,10 +1433,10 @@ sub UpdateTanks()
                     if tmpCellY > 1 then upCellValue = activeMap(tmpCellX, tmpCellY - 1) else upCellValue = -1
                     if tmpCellY < 19 then downCellValue = activeMap(tmpCellX, tmpCellY + 1) else downCellValue = -1
 
-                    if leftCellValue = FORCEFIELD_INDEX then leftCellValue = 0
-                    if rightCellValue = FORCEFIELD_INDEX then rightCellValue = 0
-                    if upCellValue = FORCEFIELD_INDEX then upCellValue = 0
-                    if downCellValue = FORCEFIELD_INDEX then downCellValue = 0
+                    if leftCellValue = FORCEFIELD_INDEX or leftCellValue = TOXICWASTE_INDEX then leftCellValue = 0
+                    if rightCellValue = FORCEFIELD_INDEX or rightCellValue = TOXICWASTE_INDEX then rightCellValue = 0
+                    if upCellValue = FORCEFIELD_INDEX or upCellValue = TOXICWASTE_INDEX then upCellValue = 0
+                    if downCellValue = FORCEFIELD_INDEX or downCellValue = TOXICWASTE_INDEX then downCellValue = 0
 
 TESTTANKLOOP:
 

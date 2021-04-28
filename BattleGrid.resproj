@@ -390,148 +390,140 @@
       "SetType": 1
     },
     {
-      "Id": "c1bf375c-bdb5-46a4-8346-f3a8f51be885",
-      "Name": "HBarrierA",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "P3+q0dGqfz8="
-      ],
-      "ColorData": [
-        66
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "c1bf375c-bdb5-46a4-8346-f3a8f51be886",
-      "Name": "HBarrierB",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "//+lGBil//8="
-      ],
-      "ColorData": [
-        66
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "c1bf375c-bdb5-46a4-8346-f3a8f51be887",
-      "Name": "HBarrierC",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "/P5Vi4tV/vw="
-      ],
-      "ColorData": [
-        66
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "48e24a55-1951-454b-af27-16247570a0a0",
-      "Name": "VBarrierA",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "PFrn2+fD59s="
-      ],
-      "ColorData": [
-        66
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "48e24a55-1951-454b-af27-16247570a0a1",
-      "Name": "VBarrierB",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "58Pn29vnw+c="
-      ],
-      "ColorData": [
-        66
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "48e24a55-1951-454b-af27-16247570a0a2",
-      "Name": "VBarrierC",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "2+fD59vnWjw="
-      ],
-      "ColorData": [
-        66
-      ],
-      "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "7f234c13-4df8-4694-a9a5-729c6bae2291",
-      "Name": "Terrain",
+      "Id": "a9306c5e-a32e-4a6f-b50e-a1d3b3612484",
+      "Name": "HBarrier",
       "Width": 3,
-      "Height": 3,
+      "Height": 1,
       "Data": [
-        "AKMFGqUqVWo=",
-        "ADjXqlWqVao=",
-        "ACAAgmCwWKw=",
-        "NSpVKjWqNWo=",
-        "VYJBkDmQBao=",
-        "VaxWqlaqVqw=",
-        "VSoVCk0HCAA=",
-        "VapVqlXqHUc=",
-        "VKxZqEiQYIg="
+        "QqV+Lzd+pUI=",
+        "AJlm271mmQA=",
+        "QqV+9Ox+pUI="
       ],
       "ColorData": [
-        4,
-        4,
-        4,
-        4,
-        20,
-        4,
-        4,
-        4,
-        4
+        7,
+        71,
+        7
       ],
       "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "56372e97-7984-4e83-b1d7-d8c48a9b5aca",
+      "Name": "VBarrier",
+      "Width": 1,
+      "Height": 3,
+      "Data": [
+        "QqV+NCx+vVo=",
+        "WiQ0Wlo0JFo=",
+        "Wr1+LDR+pUI="
+      ],
+      "ColorData": [
+        7,
+        71,
+        7
+      ],
+      "Sort": 0,
       "SetType": 2
     },
     {
       "Id": "c7120b29-8dbc-4a5d-bbab-245258065b60",
-      "Name": "Buildings",
+      "Name": "BigBuilding",
       "Width": 3,
       "Height": 3,
       "Data": [
-        "D3nw/+KIlZ0=",
-        "mf/D/yKIVd0=",
-        "8J4P/yOJVd0=",
-        "gJGqu4CIlZ0=",
-        "ABGquwCIVd0=",
-        "ARGpuQGJVd0=",
-        "gJCquoCAmP8=",
-        "gTx+ZnZm5/8=",
-        "AQlVXQEBGf8="
+        "AAIDBwkJHwk=",
+        "AH7//yQk/yQ=",
+        "AEDA8JCQ/JI=",
+        "CT9hfwkJP0k=",
+        "JP8A/yQk/yQ=",
+        "kv6C/pKS/JA=",
+        "SX9Bf39nZyc=",
+        "JP8859ulpaU=",
+        "kP6C/v7m5OA="
       ],
       "ColorData": [
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
-        10,
+        3,
+        3,
         2,
-        10
+        3,
+        2,
+        2,
+        2,
+        2,
+        2
       ],
       "Sort": 1,
       "SetType": 2
+    },
+    {
+      "Id": "53079e7d-45d9-41f7-ba60-de2534fdf532",
+      "Name": "MediumBuilding",
+      "Width": 3,
+      "Height": 2,
+      "Data": [
+        "AAADAwYFJzY=",
+        "PDznpb3npb0=",
+        "AHyCymqi+mo=",
+        "dl5afycv2D8=",
+        "56W95//nw8M=",
+        "bn5e/ub2Hv4="
+      ],
+      "ColorData": [
+        3,
+        3,
+        2,
+        3,
+        2,
+        2
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "31124311-e408-449b-9606-4f12078124f5",
+      "Name": "TallBuilding",
+      "Width": 1,
+      "Height": 2,
+      "Data": [
+        "YPCguKS8pr0=",
+        "pb2lvaX95+c="
+      ],
+      "ColorData": [
+        3,
+        2
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "ca0d1b5a-ff59-4c28-98c0-0680dc10e0e6",
+      "Name": "WideBuilding",
+      "Width": 2,
+      "Height": 1,
+      "Data": [
+        "KD4m577npv4=",
+        "Bh8Fx33nZX8="
+      ],
+      "ColorData": [
+        3,
+        2
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "084e7155-e09b-437e-a724-2d40ee799bb1",
+      "Name": "SmallBuilding",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "Fh+F36X/pec="
+      ],
+      "ColorData": [
+        2
+      ],
+      "Sort": -1,
+      "SetType": 1
     },
     {
       "Id": "12ddb969-4447-4dc0-b42c-d9801fbdedb8",
@@ -565,28 +557,14 @@
     },
     {
       "Id": "bdb88072-c8f1-4be4-a4f1-481558590321",
-      "Name": "Tree",
+      "Name": "ToxicWaste",
       "Width": 1,
       "Height": 1,
       "Data": [
-        "ZpksSgho3f8="
+        "cPifDGGy70Y="
       ],
       "ColorData": [
-        4
-      ],
-      "Sort": -1,
-      "SetType": 1
-    },
-    {
-      "Id": "084e7155-e09b-437e-a724-2d40ee799bb1",
-      "Name": "SmallBuilding",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "Fh+F36X/pec="
-      ],
-      "ColorData": [
-        2
+        6
       ],
       "Sort": -1,
       "SetType": 1
