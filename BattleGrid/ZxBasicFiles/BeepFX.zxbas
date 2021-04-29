@@ -227,6 +227,7 @@ SoundEffectsData:
 	defw SoundEffect4Data
 	defw SoundEffect5Data
 	defw SoundEffect6Data
+	defw SoundEffect7Data
 
 SoundEffect0Data:
 	defb 2 ;noise
@@ -259,6 +260,10 @@ SoundEffect5Data:
 SoundEffect6Data:
 	defb 2
 	defw 2,2000,64262
+	defb 0
+SoundEffect7Data:
+	defb 2
+	defw 1,2000,1
 	defb 0
 end asm
 
@@ -352,6 +357,19 @@ sub CrateDestroyedEffect()
 	borderColors(4) = 2
 
 	PlayFX(6)
+
+	border 0
+
+end sub
+
+sub MinePlacedEffect()
+
+	borderColors(1) = 5
+	borderColors(2) = 6
+	borderColors(3) = 6
+	borderColors(4) = 5
+
+	PlayFX(7)
 
 	border 0
 

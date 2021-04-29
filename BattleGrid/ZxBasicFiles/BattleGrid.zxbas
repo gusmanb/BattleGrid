@@ -326,15 +326,7 @@ defines:
 
 
 macros:
-#define GRID_OBJECT(INDEX, X, Y) \
-activeMap(X,Y) = INDEX \
-SetTile(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
-
 #define TABLE_LOOKUP(Array, Index) (peek (Array + Index - 1))
-
-#define CLEAR_GRID_CELL(X, Y) \
-activeMap(X,Y) = 0 \
-SetTileChecked(GRID_INDEX + 4, $47, X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
 
 #define EXPLODE_SHOT(INDEX) shots(INDEX, 4) = 0
 
@@ -386,7 +378,7 @@ ships(TMPVAR, 1) = X \
 ships(TMPVAR, 2) = Y \
 ships(TMPVAR, 3) = SPAWNDIRECTION \
 ships(TMPVAR, 4) = SHIP_SPEED \
-GRID_OBJECT(MOTHERSHIP_INDEX, X, Y)
+GridObject(MOTHERSHIP_INDEX, X, Y)
 
 #define CREATE_HANGAR(X, Y, SPAWNDIRECTION, TMPVAR) \
 TMPVAR = FindEmptyBit(activeHangars) \
@@ -395,10 +387,10 @@ hangars(TMPVAR, 1) = X \
 hangars(TMPVAR, 2) = Y \
 hangars(TMPVAR, 3) = SPAWNDIRECTION \
 hangars(TMPVAR, 4) = HANGAR_SPEED \
-GRID_OBJECT(HANGAR_INDEX, X, Y)
+GridObject(HANGAR_INDEX, X, Y)
 
 #define CREATE_TOWER(X, Y) \
-GRID_OBJECT(RADIOTOWER_INDEX, X, Y) \
+GridObject(RADIOTOWER_INDEX, X, Y) \
 activeTowers = activeTowers + 1 \
 
 
@@ -466,6 +458,19 @@ bright 1
 cls
 
 funcs:
+
+sub GridObject(INDEX as ubyte, X as ubyte, Y as ubyte)
+
+activeMap(X,Y) = INDEX
+SetTileChecked(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
+
+end sub
+
+sub ClearGridCell(X as ubyte, Y as ubyte)
+    activeMap(X,Y) = 0
+    SetTileChecked(GRID_INDEX + 4, $47, X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
+end sub
+
 function fastcall FindEmptyBit(InputByte as uByte) as uByte
 
     asm
@@ -529,11 +534,49 @@ sub PrintPaddedNumber(x as ubyte, y as ubyte, value as uinteger, length as ubyte
 
 end sub
 
+sub InitInterface()
+
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+
+    for tmpX = 0 to 31 step 4
+
+        SetTile(LOGO_INDEX + tmpX, tileColors(LOGO_INDEX + tmpX + 1), (tmpX >> 2) + 23, 2)
+        SetTile(LOGO_INDEX + tmpX + 1, tileColors(LOGO_INDEX + tmpX + 2), (tmpX >> 2) + 23, 3)
+        SetTile(LOGO_INDEX + tmpX + 2, tileColors(LOGO_INDEX + tmpX + 3), (tmpX >> 2) + 23, 4)
+        SetTile(LOGO_INDEX + tmpX + 3, tileColors(LOGO_INDEX + tmpX + 4), (tmpX >> 2) + 23, 5)
+
+    next tmpX
+
+    SetTile(BLOCKER_INDEX, tileColors(BLOCKER_INDEX + 1), 24, 18)
+    SetTile(MINE_INDEX, tileColors(MINE_INDEX + 1), 28, 18)
+    SetTile(BOMB_INDEX, tileColors(BOMB_INDEX + 1), 24, 20)
+    SetTile(CHARGEDSHOT_INDEX, tileColors(CHARGEDSHOT_INDEX + 1), 28, 20)
+
+    print at 18, 25;":"
+    print at 18, 29;":"
+    print at 20, 25;":"    
+    print at 20, 29;":"
+
+    print at 9, 24; "LEVEL:"
+    print at 12, 24; "SCORE:"
+    print at 15, 24; "SAT:"
+
+end sub
+
 sub DrawGrid()
 
     Dim tmpX as uByte
     Dim tmpY as uByte
     Dim tmpColor as uByte
+
+    for tmpX = 1 to 20
+        for tmpY = 1 to 20
+            activeMap(tmpX, tmpY) = 0
+        next tmpY
+    next tmpX
+
+
     SetTile(GRID_INDEX, tileColors(GRID_INDEX + 1), 0, 1)
     SetTile(GRID_INDEX + 6, tileColors(GRID_INDEX + 7), 21, 1)
     SetTile(GRID_INDEX + 2, tileColors(GRID_INDEX + 3), 0, 22)
@@ -561,29 +604,6 @@ sub DrawGrid()
 
     next tmpY
 
-    for tmpX = 0 to 31 step 4
-
-        SetTile(LOGO_INDEX + tmpX, tileColors(LOGO_INDEX + tmpX + 1), (tmpX >> 2) + 23, 2)
-        SetTile(LOGO_INDEX + tmpX + 1, tileColors(LOGO_INDEX + tmpX + 2), (tmpX >> 2) + 23, 3)
-        SetTile(LOGO_INDEX + tmpX + 2, tileColors(LOGO_INDEX + tmpX + 3), (tmpX >> 2) + 23, 4)
-        SetTile(LOGO_INDEX + tmpX + 3, tileColors(LOGO_INDEX + tmpX + 4), (tmpX >> 2) + 23, 5)
-
-    next tmpX
-
-    SetTile(BLOCKER_INDEX, tileColors(BLOCKER_INDEX + 1), 24, 18)
-    SetTile(MINE_INDEX, tileColors(MINE_INDEX + 1), 28, 18)
-    SetTile(BOMB_INDEX, tileColors(BOMB_INDEX + 1), 24, 20)
-    SetTile(CHARGEDSHOT_INDEX, tileColors(CHARGEDSHOT_INDEX + 1), 28, 20)
-
-    print at 18, 25;":"
-    PRINT_DIGIT(26, 18, 0)
-    print at 18, 29;":"
-    PRINT_DIGIT(30, 18, 0)
-    print at 20, 25;":"
-    PRINT_DIGIT(26, 20, 0)
-    print at 20, 29;":"
-    PRINT_DIGIT(30, 20, 0)
-
 end sub
 
 sub InitLevel()
@@ -594,21 +614,27 @@ sub InitLevel()
     activeShips = 0
     activeHangars = 0
     activeTowers = 0
+    availableBlockers = 0
+    availableBombs = 0
+    availableMines = 0
+    availableChargedShots = 0
+    cursorTool = TOOL_NONE
+
+    PRINT_DIGIT(26, 18, 0)
+    PRINT_DIGIT(30, 18, 0)
+    PRINT_DIGIT(26, 20, 0)
+    PRINT_DIGIT(30, 20, 0)
 
     playerX = 20
     dead = 0
     tankProbability = 128
 
-    print at 9, 24; "LEVEL:"
+    
     PrintPaddedNumber(24, 10, 1, 2)
-    'print at 10, 24; "01"
-
-    print at 12, 24; "SCORE:"
     PrintPaddedNumber(24, 13, 0, 6)
-    'print at 13, 24; "000000"
 
-    print at 15, 24; "SAT:"
-    print at 16, 24; "NONE"
+    
+    print at 16, 24; "NONE   "
 
     shots(1,4) = -1
     shots(2,4) = -1
@@ -618,89 +644,89 @@ sub InitLevel()
     Dim buc as Ubyte
 
 
-    GRID_OBJECT(SPLITTER_INDEX, 3, 3)
-    GRID_OBJECT(SPLITTER_INDEX, 17, 3)
+    GridObject(SPLITTER_INDEX, 3, 3)
+    GridObject(SPLITTER_INDEX, 17, 3)
 
-    GRID_OBJECT(DEFLECTORA_INDEX, 5, 10)
-    GRID_OBJECT(DEFLECTORB_INDEX, 5, 1)
-    GRID_OBJECT(DEFLECTORC_INDEX, 3, 1)
-    GRID_OBJECT(DEFLECTORD_INDEX, 15, 10)
-    GRID_OBJECT(DEFLECTORA_INDEX, 1, 3)
-    GRID_OBJECT(DEFLECTORB_INDEX, 1, 10)
+    GridObject(DEFLECTORA_INDEX, 5, 10)
+    GridObject(DEFLECTORB_INDEX, 5, 1)
+    GridObject(DEFLECTORC_INDEX, 3, 1)
+    GridObject(DEFLECTORD_INDEX, 15, 10)
+    GridObject(DEFLECTORA_INDEX, 1, 3)
+    GridObject(DEFLECTORB_INDEX, 1, 10)
 
     'for buc = 1 to 8
-    '    GRID_OBJECT(FORCEFIELD_INDEX, buc, 14)
+    '    GridObject(FORCEFIELD_INDEX, buc, 14)
     'next buc
 
-    GRID_OBJECT(HBARRIER_INDEX, 9, 11)
-    GRID_OBJECT(HBARRIER_INDEX + 1, 10, 11)
-    GRID_OBJECT(HBARRIER_INDEX + 1, 11, 11)
-    GRID_OBJECT(HBARRIER_INDEX + 2, 12, 11)
+    GridObject(HBARRIER_INDEX, 9, 11)
+    GridObject(HBARRIER_INDEX + 1, 10, 11)
+    GridObject(HBARRIER_INDEX + 1, 11, 11)
+    GridObject(HBARRIER_INDEX + 2, 12, 11)
 
-    GRID_OBJECT(BIGBUILDING_INDEX, 9, 13)
-    GRID_OBJECT(BIGBUILDING_INDEX + 1, 10, 13)
-    GRID_OBJECT(BIGBUILDING_INDEX + 1, 11, 13)
-    GRID_OBJECT(BIGBUILDING_INDEX + 2, 12, 13)
+    GridObject(BIGBUILDING_INDEX, 9, 13)
+    GridObject(BIGBUILDING_INDEX + 1, 10, 13)
+    GridObject(BIGBUILDING_INDEX + 1, 11, 13)
+    GridObject(BIGBUILDING_INDEX + 2, 12, 13)
     
-    GRID_OBJECT(BIGBUILDING_INDEX + 3, 9, 14)
-    GRID_OBJECT(BIGBUILDING_INDEX + 4, 10, 14)
-    GRID_OBJECT(BIGBUILDING_INDEX + 4, 11, 14)
-    GRID_OBJECT(BIGBUILDING_INDEX + 5, 12, 14)
+    GridObject(BIGBUILDING_INDEX + 3, 9, 14)
+    GridObject(BIGBUILDING_INDEX + 4, 10, 14)
+    GridObject(BIGBUILDING_INDEX + 4, 11, 14)
+    GridObject(BIGBUILDING_INDEX + 5, 12, 14)
 
-    GRID_OBJECT(BIGBUILDING_INDEX + 6, 9, 15)
-    GRID_OBJECT(BIGBUILDING_INDEX + 7, 10, 15)
-    GRID_OBJECT(BIGBUILDING_INDEX + 7, 11, 15)
-    GRID_OBJECT(BIGBUILDING_INDEX + 8, 12, 15)
+    GridObject(BIGBUILDING_INDEX + 6, 9, 15)
+    GridObject(BIGBUILDING_INDEX + 7, 10, 15)
+    GridObject(BIGBUILDING_INDEX + 7, 11, 15)
+    GridObject(BIGBUILDING_INDEX + 8, 12, 15)
 
 
 
-    GRID_OBJECT(MEDIUMBUILDING_INDEX, 1, 14)
-    GRID_OBJECT(MEDIUMBUILDING_INDEX + 1, 2, 14)
-    GRID_OBJECT(MEDIUMBUILDING_INDEX + 2, 3, 14)
+    GridObject(MEDIUMBUILDING_INDEX, 1, 14)
+    GridObject(MEDIUMBUILDING_INDEX + 1, 2, 14)
+    GridObject(MEDIUMBUILDING_INDEX + 2, 3, 14)
     
-    GRID_OBJECT(MEDIUMBUILDING_INDEX + 3, 1, 15)
-    GRID_OBJECT(MEDIUMBUILDING_INDEX + 4, 2, 15)
-    GRID_OBJECT(MEDIUMBUILDING_INDEX + 5, 3, 15)
+    GridObject(MEDIUMBUILDING_INDEX + 3, 1, 15)
+    GridObject(MEDIUMBUILDING_INDEX + 4, 2, 15)
+    GridObject(MEDIUMBUILDING_INDEX + 5, 3, 15)
 
-    GRID_OBJECT(WIDEBUILDING_INDEX, 1, 17)
-    GRID_OBJECT(WIDEBUILDING_INDEX + 1, 2, 17)
+    GridObject(WIDEBUILDING_INDEX, 1, 17)
+    GridObject(WIDEBUILDING_INDEX + 1, 2, 17)
 
-    GRID_OBJECT(TALLBUILDING_INDEX, 5, 17)
-    GRID_OBJECT(TALLBUILDING_INDEX + 1, 5, 18)
+    GridObject(TALLBUILDING_INDEX, 5, 17)
+    GridObject(TALLBUILDING_INDEX + 1, 5, 18)
 
 
     for buc = 13 to 19
-        GRID_OBJECT(FORCEFIELD_INDEX, buc, 14)
+        GridObject(FORCEFIELD_INDEX, buc, 14)
     next buc
 
-    GRID_OBJECT(VBARRIER_INDEX, 20, 14)
-    GRID_OBJECT(VBARRIER_INDEX + 1, 20, 15)
-    GRID_OBJECT(VBARRIER_INDEX + 2, 20, 16)
+    GridObject(VBARRIER_INDEX, 20, 14)
+    GridObject(VBARRIER_INDEX + 1, 20, 15)
+    GridObject(VBARRIER_INDEX + 2, 20, 16)
 
-    GRID_OBJECT(MINE_INDEX, 10, 16)
-    GRID_OBJECT(MINE_INDEX, 11, 16)
+    GridObject(MINE_INDEX, 10, 16)
+    GridObject(MINE_INDEX, 11, 16)
 
-    GRID_OBJECT(BLOCKERCRATE_INDEX, 8, 17)
-    GRID_OBJECT(MINECRATE_INDEX, 10, 17)
-    GRID_OBJECT(BOMBCRATE_INDEX, 12, 17)
-    GRID_OBJECT(CHARGEDSHOTCRATE_INDEX, 14, 17)
+    GridObject(BLOCKERCRATE_INDEX, 8, 17)
+    GridObject(MINECRATE_INDEX, 10, 17)
+    GridObject(BOMBCRATE_INDEX, 12, 17)
+    GridObject(CHARGEDSHOTCRATE_INDEX, 14, 17)
 
     CREATE_TOWER(10, 10)
 
-    GRID_OBJECT(SMALLBUILDING_INDEX, 20, 7)
-    GRID_OBJECT(TOXICWASTE_INDEX, 1, 5)
+    GridObject(SMALLBUILDING_INDEX, 20, 7)
+    GridObject(TOXICWASTE_INDEX, 1, 5)
 
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX, 9, 5)
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 1, 10, 5)
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 2, 11, 5)
+    GridObject(EXPLOSIONCRATER_INDEX, 9, 5)
+    GridObject(EXPLOSIONCRATER_INDEX + 1, 10, 5)
+    GridObject(EXPLOSIONCRATER_INDEX + 2, 11, 5)
     
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 3, 9, 6)
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 4, 10, 6)
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 5, 11, 6)
+    GridObject(EXPLOSIONCRATER_INDEX + 3, 9, 6)
+    GridObject(EXPLOSIONCRATER_INDEX + 4, 10, 6)
+    GridObject(EXPLOSIONCRATER_INDEX + 5, 11, 6)
 
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 6, 9, 7)
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 7, 10, 7)
-    GRID_OBJECT(EXPLOSIONCRATER_INDEX + 8, 11, 7)
+    GridObject(EXPLOSIONCRATER_INDEX + 6, 9, 7)
+    GridObject(EXPLOSIONCRATER_INDEX + 7, 10, 7)
+    GridObject(EXPLOSIONCRATER_INDEX + 8, 11, 7)
 
     CREATE_SHIP(7, 1, 3, buc)
     CREATE_SHIP(13, 1, 1, buc)
@@ -743,116 +769,130 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
         Dim tmpCell as uByte = activeMap(cellX, cellY)
 
-        if tmpCell = SPLITTER_INDEX then
+        if shotIndex <> 255 then
 
-            if (activeShots bxor TABLE_LOOKUP(@maskTable, shotIndex)) = 0 then 'Only one active shot?
+            if tmpCell = SPLITTER_INDEX then
 
-                activeShots = 7 '111, all three shots
-                tmpX = shots(shotIndex, 1)
-                tmpY = shots(shotIndex, 2)
-                tmpDir = shots(shotIndex, 3) 
+                if (activeShots bxor TABLE_LOOKUP(@maskTable, shotIndex)) = 0 then 'Only one active shot?
 
-                if tmpDir = 1 then
-                    shots(1,3) = 1
-                    shots(2,3) = 3
-                    shots(3,3) = 4
-                else if tmpDir = 2 then
-                    shots(1,3) = 2
-                    shots(2,3) = 3
-                    shots(3,3) = 4
-                else if tmpDir = 3 then
-                    shots(1,3) = 1
-                    shots(2,3) = 2
-                    shots(3,3) = 3
-                else if tmpDir = 4 then
-                    shots(1,3) = 1
-                    shots(2,3) = 2
-                    shots(3,3) = 4
+                    activeShots = 7 '111, all three shots
+                    tmpX = shots(shotIndex, 1)
+                    tmpY = shots(shotIndex, 2)
+                    tmpDir = shots(shotIndex, 3) 
+
+                    if tmpDir = 1 then
+                        shots(1,3) = 1
+                        shots(2,3) = 3
+                        shots(3,3) = 4
+                    else if tmpDir = 2 then
+                        shots(1,3) = 2
+                        shots(2,3) = 3
+                        shots(3,3) = 4
+                    else if tmpDir = 3 then
+                        shots(1,3) = 1
+                        shots(2,3) = 2
+                        shots(3,3) = 3
+                    else if tmpDir = 4 then
+                        shots(1,3) = 1
+                        shots(2,3) = 2
+                        shots(3,3) = 4
+                    end if
+
+                    shots(1,1) = tmpX
+                    shots(2,1) = tmpX
+                    shots(3,1) = tmpX
+
+                    shots(1,2) = tmpY
+                    shots(2,2) = tmpY
+                    shots(3,2) = tmpY
+
+                else
+
+                    EXPLODE_SHOT(shotIndex)
+
                 end if
 
-                shots(1,1) = tmpX
-                shots(2,1) = tmpX
-                shots(3,1) = tmpX
-
-                shots(1,2) = tmpY
-                shots(2,2) = tmpY
-                shots(3,2) = tmpY
-
-            else
-
-                shots(shotIndex, 4) = 0 'explodes
+                return
 
             end if
-
-            return
-
-        end if
-
-        if tmpCell >= DEFLECTORA_INDEX then
-        if tmpCell <= DEFLECTORD_INDEX then
+        
+            if tmpCell >= DEFLECTORA_INDEX then
+            if tmpCell <= DEFLECTORD_INDEX then
 
             
-            if tmpCell = DEFLECTORA_INDEX then
-                shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsA, shots(shotIndex, 3))
-            else if tmpCell = DEFLECTORB_INDEX then
-                shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsB, shots(shotIndex, 3))
-            else if tmpCell = DEFLECTORC_INDEX then
-                shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsC, shots(shotIndex, 3))
-            else
-                shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsD, shots(shotIndex, 3))
+                if tmpCell = DEFLECTORA_INDEX then
+                    shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsA, shots(shotIndex, 3))
+                else if tmpCell = DEFLECTORB_INDEX then
+                    shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsB, shots(shotIndex, 3))
+                else if tmpCell = DEFLECTORC_INDEX then
+                    shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsC, shots(shotIndex, 3))
+                else
+                    shots(shotIndex, 3) = TABLE_LOOKUP(@reflectDirsD, shots(shotIndex, 3))
+                end if 
+
+                'shots(shotIndex, 3) = reflectDirs(tmpCell - DEFLECTORA_INDEX + 1, shots(shotIndex, 3))
+                return
+
+            end if
+            end if
+
+            if tmpCell >= HBARRIER_INDEX then 
+            if tmpCell <= EXPLOSIONCRATER_INDEX + 8 then
+
+                EXPLODE_SHOT(shotIndex)
+
+                return
+
+            end if
             end if 
+            
+            if tmpCell = FORCEFIELD_INDEX then
 
-            'shots(shotIndex, 3) = reflectDirs(tmpCell - DEFLECTORA_INDEX + 1, shots(shotIndex, 3))
-            return
-
-        end if
-        end if
-
-        if tmpCell >= HBARRIER_INDEX then 
-        if tmpCell <= EXPLOSIONCRATER_INDEX + 8 then
-
-            shots(shotIndex, 4) = 0 'explodes
-
-            return
-
-        end if
-        end if 
-
-        if tmpCell >= MINECRATE_INDEX then
-        if tmpCell <= CHARGEDSHOTCRATE_INDEX then
-
-            CLEAR_GRID_CELL(cellX, cellY)
-            EXPLODE_SHOT(shotIndex)
-            CrateDestroyedEffect()
-
-            if tmpCell = MINECRATE_INDEX then
-
-                INCREASE_MINES()
-
-            else if tmpCell = BOMBCRATE_INDEX then
-
-                INCREASE_BOMBS()
-
-            else if tmpCell = BLOCKERCRATE_INDEX then
-
-                INCREASE_BLOCKERS()
-
-            else if tmpCell = CHARGEDSHOTCRATE_INDEX then
-
-                INCREASE_SHOTS()
+                EXPLODE_SHOT(shotIndex)
+                return
 
             end if
 
-            return
+            if tmpCell >= MINECRATE_INDEX then
+            if tmpCell <= CHARGEDSHOTCRATE_INDEX then
 
-        end if
+                ClearGridCell(cellX, cellY)
+                CrateDestroyedEffect()
+                EXPLODE_SHOT(shotIndex)
+
+                if tmpCell = MINECRATE_INDEX then
+
+                    INCREASE_MINES()
+
+                else if tmpCell = BOMBCRATE_INDEX then
+
+                    INCREASE_BOMBS()
+
+                else if tmpCell = BLOCKERCRATE_INDEX then
+
+                    INCREASE_BLOCKERS()
+
+                else if tmpCell = CHARGEDSHOTCRATE_INDEX then
+
+                    INCREASE_SHOTS()
+
+                end if
+
+                return
+
+            end if
+            end if
+
         end if
 
         if tmpCell = RADIOTOWER_INDEX then
-
-            CLEAR_GRID_CELL(cellX, cellY)
-            EXPLODE_SHOT(shotIndex)
-            BuildTankDestroyedEffect()             
+ 
+            if shotIndex <> 255 then 
+                ClearGridCell(cellX, cellY)
+                BuildTankDestroyedEffect()            
+                EXPLODE_SHOT(shotIndex) 
+            end if
+            
             activeTowers = activeTowers - 1
 
             if activeTowers = 0 then 
@@ -860,11 +900,10 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 for tmpX = 1 to 20
                     for tmpY = 1 to 20
                         if activeMap(tmpX, tmpY) = FORCEFIELD_INDEX then 
-                            CLEAR_GRID_CELL(tmpX, tmpY)
+                            ClearGridCell(tmpX, tmpY)
                         end if
                     next tmpY
                 next tmpX
-
 
             end if
 
@@ -872,18 +911,13 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
         end if
 
-        if tmpCell = FORCEFIELD_INDEX then
-
-            EXPLODE_SHOT(shotIndex)
-            return
-
-        end if
-
         if tmpCell = MOTHERSHIP_INDEX then
 
-            CLEAR_GRID_CELL(cellX, cellY)
-            EXPLODE_SHOT(shotIndex)
-            BuildTankDestroyedEffect()
+            if shotIndex <> 255 then
+                ClearGridCell(cellX, cellY)
+                EXPLODE_SHOT(shotIndex)
+                BuildTankDestroyedEffect()
+            end if
 
             for tmpCell = 1 to MAX_SHIP_COUNT
 
@@ -902,9 +936,11 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
         if tmpCell = HANGAR_INDEX then
 
-            CLEAR_GRID_CELL(cellX, cellY)
-            EXPLODE_SHOT(shotIndex)
-            BuildTankDestroyedEffect()
+            if shotIndex <> 255 then
+                ClearGridCell(cellX, cellY)
+                EXPLODE_SHOT(shotIndex)
+                BuildTankDestroyedEffect()
+            end if
 
             for tmpCell = 1 to MAX_HANGAR_COUNT
 
@@ -1049,20 +1085,117 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
             DeflectorEffect()
         end if
 
-    else if 
+    else if cursorTool = TOOL_MINE then
+
+        if availableMines > 0 then
+
+            if activeMap(mapX, mapY) = 0 then
+
+                DECREASE_MINES()
+                GridObject(MINE_INDEX, mapX, mapY)
+                MinePlacedEffect()
+
+            end if
+
+        end if
+
+    else if cursorTool = TOOL_BLOCKER then
+
+        if availableBlockers > 0 then
+
+            if activeMap(mapX, mapY) = 0 then
+
+                DECREASE_BLOCKERS()
+                GridObject(BLOCKER_INDEX, mapX, mapY)
+                MinePlacedEffect()
+
+            end if
+
+        end if
+
+    else if cursorTool = TOOL_BOMB then
+
+        if availableBombs > 0 then
+
+            DECREASE_BOMBS()
+            BombEffect()
+
+            Dim tmpX as ubyte
+            Dim tmpY as ubyte
+            Dim buc as uByte
+            Dim cnt as ubyte = 255
+            Dim tmpMask as uByte
+
+            
+            for tmpY = mapY - 1 to mapY + 1
+                for tmpX = mapX - 1 to mapX + 1
+                    cnt = cnt + 1
+
+                    if tmpX < 1  then continue for
+                    if tmpY < 1  then continue for
+                    if tmpX > 20  then continue for
+                    if tmpX > 20  then continue for
+
+                    CheckShotItems(255, tmpX, tmpY)
+                    GridObject(EXPLOSIONCRATER_INDEX + cnt, tmpX, tmpY)
+
+
+                    if activeAliens then
+
+                        for buc = 1 to MAX_ALIEN_COUNT
+
+                            tmpMask = TABLE_LOOKUP(@maskTable, buc)
+
+                            if activeAliens & tmpMask then
+
+                                if aliens(buc, 1) = tmpX then
+                                if aliens(buc, 2) = tmpY then
+
+                                    activeAliens = activeAliens bxor tmpMask
+                                    continue for
+
+                                end if
+                                end if
+        
+                            end if
+
+                        next buc
+
+                    end if                                
+
+                    if activeTanks then
+
+                        for buc = 1 to MAX_TANK_COUNT
+
+                            tmpMask = TABLE_LOOKUP(@maskTable, buc)
+
+                            if activeTanks & tmpMask then
+
+                                if tanks(buc, 1) = tmpX then
+                                if tanks(buc, 2) = tmpY then
+
+                                    activeTanks = activeTanks bxor tmpMask
+                                    continue for
+
+                                end if
+                                end if
+        
+                            end if
+
+                        next buc
+
+                    end if
+
+                next tmpX
+            next tmpY
+
+        end if
 
     end if
 
 end sub
 
 sub UpdateCursor()
-
-    #define TOOL_NONE 0
-    #define TOOL_BLOCKER 1
-    #define TOOL_MINE 2
-    #define TOOL_BOMB 3
-    #define TOOL_CHARGEDSHOT 4
-
 
     if MultiKeys(KEY1) then
 
@@ -1267,7 +1400,7 @@ TESTALIENDOWN:
                             tmpY = tmpY + 2 'verticalmente se mueve en celdas
                             goto ENDTESTCELL
                         else if tmpCellValue = MINE_INDEX then
-                            CLEAR_GRID_CELL(tmpCellX, tmpCellY + 1)
+                            ClearGridCell(tmpCellX, tmpCellY + 1)
                             aliens(buc, 4) = 0
                             goto ENDTESTCELL
                         end if
@@ -1300,7 +1433,7 @@ ALIENCONTINUE:
                         tmpX = tmpX + tmpDir
                         goto ENDTESTCELL
                     else if tmpCellValue = MINE_INDEX then
-                        CLEAR_GRID_CELL(tmpCellX + tmpDir, tmpCellY)
+                        ClearGridCell(tmpCellX + tmpDir, tmpCellY)
                         aliens(buc, 4) = 0
                         goto ENDTESTCELL
                     end if
@@ -1316,7 +1449,7 @@ ALIENINVERT:
                         tmpX = tmpX + tmpDir
                         goto ENDTESTCELL
                     else if tmpCellValue = MINE_INDEX then
-                        CLEAR_GRID_CELL(tmpCellX - tmpDir, tmpCellY)
+                        ClearGridCell(tmpCellX - tmpDir, tmpCellY)
                         aliens(buc, 4) = 0
                         goto ENDTESTCELL
                     end if
@@ -1459,7 +1592,8 @@ TESTTANKLOOP:
                             goto ENDTESTCELLTANK
                         else 
                             if rightCellValue = MINE_INDEX then
-                                CLEAR_GRID_CELL(tmpCellX + 1, tmpCellY)
+                                BuildTankDestroyedEffect()
+                                ClearGridCell(tmpCellX + 1, tmpCellY)
                                 tanks(buc, 4) = 0
                                 goto ENDTESTCELLTANK
                             else
@@ -1477,7 +1611,8 @@ TESTTANKLOOP:
                             goto ENDTESTCELLTANK
                         else 
                             if downCellValue = MINE_INDEX then
-                                CLEAR_GRID_CELL(tmpCellX, tmpCellY + 1)
+                                BuildTankDestroyedEffect()
+                                ClearGridCell(tmpCellX, tmpCellY + 1)
                                 tanks(buc, 4) = 0
                                 goto ENDTESTCELLTANK
                             else
@@ -1495,7 +1630,8 @@ TESTTANKLOOP:
                             goto ENDTESTCELLTANK
                         else 
                             if leftCellValue = MINE_INDEX then
-                                CLEAR_GRID_CELL(tmpCellX - 1, tmpCellY)
+                                BuildTankDestroyedEffect()
+                                ClearGridCell(tmpCellX - 1, tmpCellY)
                                 tanks(buc, 4) = 0
                                 goto ENDTESTCELLTANK
                             else
@@ -1513,7 +1649,8 @@ TESTTANKLOOP:
                             goto ENDTESTCELLTANK
                         else 
                             if upCellValue = MINE_INDEX then
-                                CLEAR_GRID_CELL(tmpCellX, tmpCellY - 1)
+                                BuildTankDestroyedEffect()
+                                ClearGridCell(tmpCellX, tmpCellY - 1)
                                 tanks(buc, 4) = 0
                                 goto ENDTESTCELLTANK
                             else
@@ -1836,59 +1973,10 @@ sub UpdateHangars()
 
 end sub
 
-function ModulatedRand(mask as ubyte, adder as ubyte) as ubyte
-
-    return (FastRnd() band mask) + adder
-
-end function
-
-sub BorderEffect(color1 as ubyte, color2 as ubyte, audMask as ubyte, audBase as ubyte, frames as ubyte)
-
-    
-    Dim tmpBorder as ubyte = 0
-    Dim buc as ubyte
-
-    'Dim cTable(2) as ubyte
-    'cTable(1) = color1
-    'cTable(2) = color2
-
-    while frameCounter < frames
-
-        'tmpBorder = cTable((FastRnd() band 1) + 1)
-
-        if FastRnd() band 1 then
-            tmpBorder = color1
-        else
-            tmpBorder = color2
-        end if
-        'tmpBorder = (FastRnd() band 7)
-
-        for buc = 1 to 4
-            out $fe, tmpBorder
-            ModulatedRand(audMask, audBase)
-            asm
-                ld b, a
-                DELAYLOOP1:
-                nop
-                djnz DELAYLOOP1
-            end asm
-            out $fe, tmpBorder bor 16
-            ModulatedRand(audMask, audBase)
-            asm
-                ld b, a
-                DELAYLOOP2:
-                nop
-                djnz DELAYLOOP2
-            end asm
-        next buc
-
-    end while
-
-end sub
-
 main:
 
 InitGraphics()
+InitInterface()
 DrawGrid()
 InitLevel()
 
