@@ -228,6 +228,7 @@ SoundEffectsData:
 	defw SoundEffect5Data
 	defw SoundEffect6Data
 	defw SoundEffect7Data
+	defw SoundEffect8Data
 
 SoundEffect0Data:
 	defb 2 ;noise
@@ -264,6 +265,10 @@ SoundEffect6Data:
 SoundEffect7Data:
 	defb 2
 	defw 1,2000,1
+	defb 0
+SoundEffect8Data:
+	defb 1 ;tone
+	defw 10,750,6500,0,128
 	defb 0
 end asm
 
@@ -370,6 +375,19 @@ sub MinePlacedEffect()
 	borderColors(4) = 5
 
 	PlayFX(7)
+
+	border 0
+
+end sub
+
+sub SATShotEffect()
+
+	borderColors(1) = 4
+	borderColors(2) = 0
+	borderColors(3) = 0
+	borderColors(4) = 4
+
+	PlayFX(8)
 
 	border 0
 

@@ -1032,5 +1032,10 @@
       "SetType": 1
     }
   ],
-  "Screens": null
+  "StoredData": [
+    {
+      "OwnerPlugin": "cdddcdf9-9680-45b6-ada2-b2a47d96956f",
+      "SerializedData": "SGVsbG8h"
+    }
+  ]
 }

@@ -12,7 +12,7 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --hea
 #define TOTAL_2x2_SPRITES 0
 
 'Maximum on-screen 1x1 sprites
-#define ONSCREEN_1x1_SPRITES 12
+#define ONSCREEN_1x1_SPRITES 10
 'Maximum on-screen 1x2 sprites
 #define ONSCREEN_1x2_SPRITES 0
 'Maximum on-screen 2x2 sprites
@@ -85,10 +85,10 @@ Dim spriteSet(16,8) as uByte => { _
 { $18, $5A, $A5, $BD, $7E, $66, $5A, $A5 }, _
 { $08, $2A, $14, $1C, $3E, $36, $2A, $55 }, _
 { $10, $54, $28, $38, $7C, $6C, $54, $AA }, _
-{ $20, $18, $04, $18, $20, $18, $04, $18 }, _
-{ $18, $04, $18, $20, $18, $04, $18, $20 }, _
-{ $00, $00, $44, $AA, $AA, $11, $00, $00 }, _
-{ $00, $00, $22, $55, $55, $88, $00, $00 }, _
+{ $21, $18, $85, $18, $21, $18, $84, $18 }, _
+{ $18, $84, $18, $A1, $18, $84, $18, $21 }, _
+{ $15, $00, $44, $AA, $AA, $11, $00, $44 }, _
+{ $88, $00, $22, $55, $55, $88, $00, $2A }, _
 { $00, $00, $18, $3C, $3C, $18, $00, $00 }, _
 { $00, $18, $24, $5A, $5A, $24, $18, $00 }, _
 { $3C, $42, $99, $A5, $A5, $99, $42, $3C }, _
@@ -143,8 +143,9 @@ Dim spriteSet(16,8) as uByte => { _
 #define SHOTDEATHG_INDEX 138
 #define TANKDEATHA_INDEX 142
 #define TANKDEATHB_INDEX 146
+#define LIFE_INDEX 150
 
-Dim tileSet(150,8) as uByte => { _
+Dim tileSet(151,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
@@ -187,10 +188,10 @@ Dim tileSet(150,8) as uByte => { _
 { $FC, $02, $F5, $19, $CD, $25, $95, $55 }, _
 { $55, $45, $45, $55, $55, $45, $45, $55 }, _
 { $55, $95, $25, $CD, $19, $F5, $02, $FC }, _
-{ $80, $C0, $A0, $B0, $A8, $BC, $82, $FF }, _
-{ $FF, $82, $BC, $A8, $B0, $A0, $C0, $80 }, _
-{ $01, $03, $05, $0D, $15, $3D, $41, $FF }, _
-{ $FF, $41, $3D, $15, $0D, $05, $03, $01 }, _
+{ $80, $C0, $E0, $B0, $B8, $BC, $C6, $FF }, _
+{ $FF, $C6, $BC, $B8, $B0, $E0, $C0, $80 }, _
+{ $01, $03, $07, $0D, $1D, $3D, $63, $FF }, _
+{ $FF, $63, $3D, $1D, $0D, $07, $03, $01 }, _
 { $42, $A5, $7E, $2F, $37, $7E, $A5, $42 }, _
 { $00, $99, $66, $DB, $BD, $66, $99, $00 }, _
 { $42, $A5, $7E, $F4, $EC, $7E, $A5, $42 }, _
@@ -226,7 +227,7 @@ Dim tileSet(150,8) as uByte => { _
 { $BC, $DA, $D8, $F7, $E3, $FB, $FF, $FF }, _
 { $00, $80, $CF, $CE, $92, $74, $77, $DF }, _
 { $67, $FF, $1D, $DF, $F5, $EB, $5F, $FF }, _
-{ $70, $F8, $9F, $0C, $61, $B2, $EF, $46 }, _
+{ $80, $24, $7E, $3C, $11, $04, $4A, $24 }, _
 { $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
 { $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
 { $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
@@ -237,7 +238,7 @@ Dim tileSet(150,8) as uByte => { _
 { $E7, $81, $A5, $18, $3C, $99, $81, $E7 }, _
 { $E7, $81, $91, $48, $12, $89, $81, $E7 }, _
 { $5A, $24, $5A, $18, $24, $3C, $66, $DB }, _
-{ $21, $44, $F0, $22, $44, $0F, $22, $84 }, _
+{ $FF, $00, $FF, $55, $AA, $FF, $00, $FF }, _
 { $3C, $42, $FF, $3C, $00, $18, $00, $7E }, _
 { $18, $FF, $00, $99, $99, $00, $FF, $18 }, _
 { $00, $3C, $72, $72, $42, $42, $3C, $00 }, _
@@ -294,10 +295,11 @@ Dim tileSet(150,8) as uByte => { _
 { $76, $4B, $3F, $02, $03, $02, $03, $02 }, _
 { $6E, $D2, $7C, $C0, $40, $C0, $40, $C0 }, _
 { $03, $01, $04, $01, $11, $01, $45, $11 }, _
-{ $40, $80, $20, $80, $88, $A0, $82, $90 } _
+{ $40, $80, $20, $80, $88, $A0, $82, $90 }, _
+{ $00, $66, $FF, $FF, $7E, $3C, $18, $00 } _
 }
 
-Dim tileColors(150) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $CE, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72 }
+Dim tileColors(151) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $C6, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72, $02 }
 
 defines:
 #define CURSOR_FRAMES 10
@@ -397,6 +399,10 @@ activeTowers = activeTowers + 1 \
 vars:
 Dim playerX as uByte = 20
 Dim playerSprite as uByte = 0
+Dim score as uInteger
+Dim updateScore as uByte = 0
+Dim lifes as uByte = 4
+
 Dim dir as byte = 0
 Dim dead as ubyte = 0           '1 = muerte por disparo, 2 = muerte por tanque, 3 = muerte por alien
 
@@ -460,10 +466,8 @@ cls
 funcs:
 
 sub GridObject(INDEX as ubyte, X as ubyte, Y as ubyte)
-
-activeMap(X,Y) = INDEX
-SetTileChecked(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
-
+    activeMap(X,Y) = INDEX
+    SetTileChecked(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
 end sub
 
 sub ClearGridCell(X as ubyte, Y as ubyte)
@@ -485,6 +489,25 @@ febloop:
     end asm
 
 end function
+
+sub AddScore(ScoreToAdd as uinteger)
+    score = score + ScoreToAdd
+    updateScore = 1
+end sub
+
+sub ShowLifes()
+
+    Dim buc as uByte
+
+    for buc = 1 to 4
+        if lifes >= buc then
+            SetTile(LIFE_INDEX, tileColors(LIFE_INDEX + 1), 22 + (buc << 1), 22)
+        else
+            SetTile(EMPTY_TILE_INDEX, 0, 22 + (buc << 1), 22)
+        end if
+    next buc        
+
+end sub
 
 sub InitGraphics()
 
@@ -631,7 +654,8 @@ sub InitLevel()
 
     
     PrintPaddedNumber(24, 10, 1, 2)
-    PrintPaddedNumber(24, 13, 0, 6)
+    updateScore = 0
+    PrintPaddedNumber(24, 13, score, 6)
 
     
     print at 16, 24; "NONE   "
@@ -691,8 +715,8 @@ sub InitLevel()
     GridObject(WIDEBUILDING_INDEX, 1, 17)
     GridObject(WIDEBUILDING_INDEX + 1, 2, 17)
 
-    GridObject(TALLBUILDING_INDEX, 5, 17)
-    GridObject(TALLBUILDING_INDEX + 1, 5, 18)
+    GridObject(TALLBUILDING_INDEX, 6, 17)
+    GridObject(TALLBUILDING_INDEX + 1, 6, 18)
 
 
     for buc = 13 to 19
@@ -714,7 +738,9 @@ sub InitLevel()
     CREATE_TOWER(10, 10)
 
     GridObject(SMALLBUILDING_INDEX, 20, 7)
-    GridObject(TOXICWASTE_INDEX, 1, 5)
+    GridObject(TOXICWASTE_INDEX, 13, 6)
+    GridObject(TOXICWASTE_INDEX, 14, 6)
+    GridObject(TOXICWASTE_INDEX, 15, 6)
 
     GridObject(EXPLOSIONCRATER_INDEX, 9, 5)
     GridObject(EXPLOSIONCRATER_INDEX + 1, 10, 5)
@@ -732,6 +758,8 @@ sub InitLevel()
     CREATE_SHIP(13, 1, 1, buc)
 
     CREATE_HANGAR(10, 1, 2, buc)
+
+    ShowLifes()
 
 end sub
 
@@ -859,6 +887,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 ClearGridCell(cellX, cellY)
                 CrateDestroyedEffect()
                 EXPLODE_SHOT(shotIndex)
+                AddScore(5)
 
                 if tmpCell = MINECRATE_INDEX then
 
@@ -887,8 +916,9 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
         if tmpCell = RADIOTOWER_INDEX then
  
+            ClearGridCell(cellX, cellY)
+
             if shotIndex <> 255 then 
-                ClearGridCell(cellX, cellY)
                 BuildTankDestroyedEffect()            
                 EXPLODE_SHOT(shotIndex) 
             end if
@@ -925,6 +955,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 if ships(tmpCell, 2) = cellY then
 
                     activeShips = activeShips bxor TABLE_LOOKUP(@maskTable, tmpCell)
+                    AddScore(50)
                     return
 
                 end if
@@ -936,8 +967,9 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
         if tmpCell = HANGAR_INDEX then
 
+            ClearGridCell(cellX, cellY)
+
             if shotIndex <> 255 then
-                ClearGridCell(cellX, cellY)
                 EXPLODE_SHOT(shotIndex)
                 BuildTankDestroyedEffect()
             end if
@@ -948,6 +980,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 if hangars(tmpCell, 2) = cellY then
 
                     activeHangars = activeHangars bxor TABLE_LOOKUP(@maskTable, tmpCell)
+                    AddScore(75)
                     return
 
                 end if
@@ -1059,9 +1092,96 @@ sub UpdateFire()
 
 end sub
 
+sub CheckShotUnits(DirectKill as ubyte, cellX as ubyte, cellY as ubyte, squareOffset as ubyte)
+
+    Dim tmpMask as ubyte
+    Dim buc as ubyte
+
+    if not activeAliens and not activeTanks then return
+
+    Dim xMin as ubyte = (((cellX - squareOffset) + MAP_X_OFFSET) << 1) - 1
+    Dim xMax as ubyte = (((cellX + squareOffset) + MAP_X_OFFSET) << 1) + 1
+    Dim yMin as ubyte = (((cellY - squareOffset) + MAP_Y_OFFSET) << 1) - 1
+    Dim yMax as ubyte = (((cellY + squareOffset) + MAP_Y_OFFSET) << 1) + 1
+
+    if activeAliens then
+
+        for buc = 1 to MAX_ALIEN_COUNT
+
+            tmpMask = TABLE_LOOKUP(@maskTable, buc)
+
+            if activeAliens & tmpMask then
+
+                if aliens(buc, 1) <= xMax then
+                if aliens(buc, 1) >= xMin then
+                if aliens(buc, 2) <= yMax then
+                if aliens(buc, 2) >= yMin then
+
+                    if DirectKill then
+                        activeAliens = activeAliens bxor tmpMask
+                        AddScore(10)
+                    else
+                        aliens(buc, 4) = 0
+                    end if
+
+                    continue for
+
+                end if
+                end if
+                end if
+                end if
+
+            end if
+
+        next buc
+
+    end if                                
+
+    if activeTanks then
+
+        for buc = 1 to MAX_TANK_COUNT
+
+            tmpMask = TABLE_LOOKUP(@maskTable, buc)
+
+            if activeTanks & tmpMask then
+
+                if tanks(buc, 1) <= xMax then
+                if tanks(buc, 1) >= xMin then
+                if tanks(buc, 2) <= yMax then
+                if tanks(buc, 2) >= yMin then
+
+                    if DirectKill then
+                        activeTanks = activeTanks bxor tmpMask
+                        AddScore(25)
+                    else
+                        tanks(buc, 4) = 0
+                    end if
+
+                    continue for
+
+                end if
+                end if
+                end if
+                end if
+        
+            end if
+
+        next buc
+
+    end if
+
+end sub
+
 sub CheckCursorAction(mapX as uByte, mapY as uByte)
 
+    Dim tmpX as ubyte
+    Dim tmpY as ubyte
+    Dim buc as uByte
+    Dim cnt as ubyte = 255
+    Dim tmpMask as uByte
+
     if cursorTool = TOOL_NONE
+
         Dim tmpItem as uByte = activeMap(mapX, mapY)
         
         if not tmpItem then 
@@ -1120,13 +1240,8 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
             DECREASE_BOMBS()
             BombEffect()
 
-            Dim tmpX as ubyte
-            Dim tmpY as ubyte
-            Dim buc as uByte
-            Dim cnt as ubyte = 255
-            Dim tmpMask as uByte
+            CheckShotUnits(1, mapX, mapY, 1)
 
-            
             for tmpY = mapY - 1 to mapY + 1
                 for tmpX = mapX - 1 to mapX + 1
                     cnt = cnt + 1
@@ -1138,56 +1253,20 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
 
                     CheckShotItems(255, tmpX, tmpY)
                     GridObject(EXPLOSIONCRATER_INDEX + cnt, tmpX, tmpY)
-
-
-                    if activeAliens then
-
-                        for buc = 1 to MAX_ALIEN_COUNT
-
-                            tmpMask = TABLE_LOOKUP(@maskTable, buc)
-
-                            if activeAliens & tmpMask then
-
-                                if aliens(buc, 1) = tmpX then
-                                if aliens(buc, 2) = tmpY then
-
-                                    activeAliens = activeAliens bxor tmpMask
-                                    continue for
-
-                                end if
-                                end if
-        
-                            end if
-
-                        next buc
-
-                    end if                                
-
-                    if activeTanks then
-
-                        for buc = 1 to MAX_TANK_COUNT
-
-                            tmpMask = TABLE_LOOKUP(@maskTable, buc)
-
-                            if activeTanks & tmpMask then
-
-                                if tanks(buc, 1) = tmpX then
-                                if tanks(buc, 2) = tmpY then
-
-                                    activeTanks = activeTanks bxor tmpMask
-                                    continue for
-
-                                end if
-                                end if
-        
-                            end if
-
-                        next buc
-
-                    end if
-
                 next tmpX
             next tmpY
+
+        end if
+
+    else if cursorTool = TOOL_CHARGEDSHOT then
+
+        if availableChargedShots > 0 then
+
+            DECREASE_SHOTS()
+            SATShotEffect()
+
+            CheckShotItems(255, mapX, mapY)
+            CheckShotUnits(0, mapX, mapY, 0)
 
         end if
 
@@ -1355,6 +1434,7 @@ sub UpdateAliens()
                 if tmpExplode = 4 then
                     tmpExplode = -1
                     activeAliens = activeAliens bxor tmpMask
+                    AddScore(10)
                 end if
 
                 aliens(buc, 4) = tmpExplode
@@ -1515,8 +1595,11 @@ sub UpdateTanks()
                 tmpExplode = tmpExplode + 1
 
                 if tmpExplode = 4 then
+
                     tmpExplode = -1
                     activeTanks = activeTanks bxor tmpMask
+                    AddScore(25)
+
                 end if
 
                 tanks(buc, 4) = tmpExplode
@@ -1695,14 +1778,23 @@ sub TestCollisions()
 
     Dim buc as ubyte
 
-    Dim tmpShot1X as Byte
-    Dim tmpShot1Y as Byte
+    Dim tmpShot1XMin as Byte
+    Dim tmpShot1YMin as Byte
     
-    Dim tmpShot2X as Byte
-    Dim tmpShot2Y as Byte
+    Dim tmpShot1XMax as Byte
+    Dim tmpShot1YMax as Byte
+
+    Dim tmpShot2XMin as Byte
+    Dim tmpShot2YMin as Byte
     
-    Dim tmpShot3X as Byte
-    Dim tmpShot3Y as Byte
+    Dim tmpShot2XMax as Byte
+    Dim tmpShot2YMax as Byte
+
+    Dim tmpShot3XMin as Byte
+    Dim tmpShot3YMin as Byte
+
+    Dim tmpShot3XMax as Byte
+    Dim tmpShot3YMax as Byte
 
     Dim activeShot1 as Byte
     Dim activeShot2 as Byte
@@ -1715,16 +1807,25 @@ sub TestCollisions()
 
     if activeShots then
 
-        tmpShot1X = shots(1,1)
-        tmpShot1Y = shots(1,2)
+        tmpShot1XMin = shots(1,1) - 1
+        tmpShot1YMin = shots(1,2) - 1
+        tmpShot1XMax = tmpShot1XMin + 2
+        tmpShot1YMax = tmpShot1YMin + 2
+
         activeShot1 = activeShots band 1
 
-        tmpShot2X = shots(2,1)
-        tmpShot2Y = shots(2,2)
+        tmpShot2XMin = shots(2,1) - 1
+        tmpShot2YMin = shots(2,2) - 1
+        tmpShot2XMax = tmpShot2XMin + 2
+        tmpShot2YMax = tmpShot2YMin + 2
+
         activeShot2 = activeShots band 2
 
-        tmpShot3X = shots(3,1)
-        tmpShot3Y = shots(3,2)
+        tmpShot3XMin = shots(3,1)
+        tmpShot3YMin = shots(3,2)
+        tmpShot3XMax = tmpShot3XMin + 2
+        tmpShot3YMax = tmpShot3YMin + 2
+
         activeShot3 = activeShots band 4
 
         if activeAliens then
@@ -1737,8 +1838,10 @@ sub TestCollisions()
                     tmpEnemY = aliens(buc, 2)
 
                     if activeShot1 then
-                    if tmpEnemX = tmpShot1X then
-                    if tmpEnemY = tmpShot1Y then
+                    if tmpEnemX >= tmpShot1XMin then
+                    if tmpEnemX <= tmpShot1XMax then
+                    if tmpEnemY >= tmpShot1YMin then
+                    if tmpEnemY <= tmpShot1YMax then
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111110b
@@ -1748,10 +1851,14 @@ sub TestCollisions()
                     end if
                     end if
                     end if
+                    end if
+                    end if
 
                     if activeShot2 then
-                    if tmpEnemX = tmpShot2X then
-                    if tmpEnemY = tmpShot2Y then
+                    if tmpEnemX >= tmpShot2XMin then
+                    if tmpEnemX <= tmpShot2XMax then
+                    if tmpEnemY >= tmpShot2YMin then
+                    if tmpEnemY <= tmpShot2YMax then
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111101b
@@ -1761,16 +1868,22 @@ sub TestCollisions()
                     end if
                     end if
                     end if
+                    end if
+                    end if
 
                     if activeShot3 then
-                    if tmpEnemX = tmpShot3X then
-                    if tmpEnemY = tmpShot3Y then
+                    if tmpEnemX >= tmpShot3XMin then
+                    if tmpEnemX <= tmpShot3XMax then
+                    if tmpEnemY >= tmpShot3YMin then
+                    if tmpEnemY <= tmpShot3YMax then
 
                         aliens(buc, 4) = 0
                         activeShots = activeShots band 11111011b
                         KilledAlienEffect()
                         continue for
 
+                    end if
+                    end if
                     end if
                     end if
                     end if
@@ -1791,8 +1904,10 @@ sub TestCollisions()
                     tmpEnemY = tanks(buc, 2)
 
                     if activeShot1 then
-                    if tmpEnemX = tmpShot1X then
-                    if tmpEnemY = tmpShot1Y then
+                    if tmpEnemX >= tmpShot1XMin then
+                    if tmpEnemX <= tmpShot1XMax then
+                    if tmpEnemY >= tmpShot1YMin then
+                    if tmpEnemY <= tmpShot1YMax then
 
                         tanks(buc, 4) = 0
                         activeShots = activeShots band 11111110b
@@ -1802,10 +1917,14 @@ sub TestCollisions()
                     end if
                     end if
                     end if
+                    end if
+                    end if
 
                     if activeShot2 then
-                    if tmpEnemX = tmpShot2X then
-                    if tmpEnemY = tmpShot2Y then
+                    if tmpEnemX >= tmpShot2XMin then
+                    if tmpEnemX <= tmpShot2XMax then
+                    if tmpEnemY >= tmpShot2YMin then
+                    if tmpEnemY <= tmpShot2YMax then
 
                         tanks(buc, 4) = 0
                         activeShots = activeShots band 11111101b
@@ -1815,16 +1934,22 @@ sub TestCollisions()
                     end if
                     end if
                     end if
+                    end if
+                    end if
 
                     if activeShot3 then
-                    if tmpEnemX = tmpShot3X then
-                    if tmpEnemY = tmpShot3Y then
+                    if tmpEnemX >= tmpShot3XMin then
+                    if tmpEnemX <= tmpShot3XMax then
+                    if tmpEnemY >= tmpShot3YMin then
+                    if tmpEnemY <= tmpShot3YMax then
 
                         tanks(buc, 4) = 0
                         activeShots = activeShots band 11111011b
                         BuildTankDestroyedEffect()
                         continue for
 
+                    end if
+                    end if
                     end if
                     end if
                     end if
@@ -1836,8 +1961,8 @@ sub TestCollisions()
         end if
 
         if activeShot1 then
-        if playerX = tmpShot1X then
-        if 42 = tmpShot1Y then
+        if 41 = tmpShot1YMin then
+        if playerX - 1 = tmpShot1XMin then
 
             dead = 3
             activeShots = activeShots band 11111110b
@@ -1848,8 +1973,8 @@ sub TestCollisions()
         end if
 
         if activeShot2 then
-        if playerX = tmpShot2X then
-        if 42 = tmpShot2Y then
+        if 41 = tmpShot2YMin then
+        if playerX - 1 = tmpShot2XMin then
 
             dead = 3
             activeShots = activeShots band 11111101b
@@ -1860,8 +1985,8 @@ sub TestCollisions()
         end if
 
         if activeShot3 then
-        if playerX = tmpShot3X then
-        if 42 = tmpShot3Y then
+        if 41 = tmpShot3YMin then
+        if playerX - 1 = tmpShot3XMin then
 
             dead = 3
             activeShots = activeShots band 11111011b
@@ -1981,12 +2106,6 @@ DrawGrid()
 InitLevel()
 
 Dim buc as uByte
-
-
-
-
-
-
 Dim tmpLoop as ubyte
 
 while(1)
@@ -2088,6 +2207,11 @@ while(1)
 
     RenderFrame()
 
+    if updateScore then
+        updateScore = 0
+        PrintPaddedNumber(24, 13, score, 6)
+    end if
+
     if dead <> 0 then
 
         if dead = 1 then
@@ -2097,6 +2221,9 @@ while(1)
         else
             PlayDeathShot()
         end if
+
+        lifes = lifes - 1
+        ShowLifes()
 
         DrawGrid()
         InitLevel()
