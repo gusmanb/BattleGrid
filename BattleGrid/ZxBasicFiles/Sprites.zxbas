@@ -1,0 +1,389 @@
+﻿'REM --SPRITE SECTION--
+
+asm
+
+SPRITE_BUFFER:
+PLAYER_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 018h, 05Ah, 0A5h, 0BDh
+    DEFB 07Eh, 066h, 05Ah, 0A5h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 001h, 005h, 00Ah, 00Bh
+    DEFB 007h, 006h, 005h, 00Ah, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 080h, 0A0h, 050h, 0D0h
+    DEFB 0E0h, 060h, 0A0h, 050h, 000h, 000h, 000h, 000h
+
+PLAYERRIGHT_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 008h, 02Ah, 014h, 01Ch
+    DEFB 03Eh, 036h, 02Ah, 055h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 000h, 002h, 001h, 001h
+    DEFB 003h, 003h, 002h, 005h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 080h, 0A0h, 040h, 0C0h
+    DEFB 0E0h, 060h, 0A0h, 050h, 000h, 000h, 000h, 000h
+
+PLAYERLEFT_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 010h, 054h, 028h, 038h
+    DEFB 07Ch, 06Ch, 054h, 0AAh, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 001h, 005h, 002h, 003h
+    DEFB 007h, 006h, 005h, 00Ah, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 000h, 040h, 080h, 080h
+    DEFB 0C0h, 0C0h, 040h, 0A0h, 000h, 000h, 000h, 000h
+
+VFIREA_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 021h, 018h, 085h, 018h
+    DEFB 021h, 018h, 084h, 018h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 002h, 001h, 008h, 001h
+    DEFB 002h, 001h, 008h, 001h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 010h, 080h, 050h, 080h
+    DEFB 010h, 080h, 040h, 080h, 000h, 000h, 000h, 000h
+
+VFIREB_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 018h, 084h, 018h, 0A1h
+    DEFB 018h, 084h, 018h, 021h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 001h, 008h, 001h, 00Ah
+    DEFB 001h, 008h, 001h, 002h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 080h, 040h, 080h, 010h
+    DEFB 080h, 040h, 080h, 010h, 000h, 000h, 000h, 000h
+
+HFIREA_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 015h, 000h, 044h, 0AAh
+    DEFB 0AAh, 011h, 000h, 044h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 001h, 000h, 004h, 00Ah
+    DEFB 00Ah, 001h, 000h, 004h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 050h, 000h, 040h, 0A0h
+    DEFB 0A0h, 010h, 000h, 040h, 000h, 000h, 000h, 000h
+
+HFIREB_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 088h, 000h, 022h, 055h
+    DEFB 055h, 088h, 000h, 02Ah, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 008h, 000h, 002h, 005h
+    DEFB 005h, 008h, 000h, 002h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 080h, 000h, 020h, 050h
+    DEFB 050h, 080h, 000h, 0A0h, 000h, 000h, 000h, 000h
+
+EXPLODEA_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 000h, 000h, 018h, 03Ch
+    DEFB 03Ch, 018h, 000h, 000h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 000h, 000h, 001h, 003h
+    DEFB 003h, 001h, 000h, 000h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 000h, 000h, 080h, 0C0h
+    DEFB 0C0h, 080h, 000h, 000h, 000h, 000h, 000h, 000h
+
+EXPLODEB_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 000h, 018h, 024h, 05Ah
+    DEFB 05Ah, 024h, 018h, 000h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 000h, 001h, 002h, 005h
+    DEFB 005h, 002h, 001h, 000h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 000h, 080h, 040h, 0A0h
+    DEFB 0A0h, 040h, 080h, 000h, 000h, 000h, 000h, 000h
+
+EXPLODEC_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 03Ch, 042h, 099h, 0A5h
+    DEFB 0A5h, 099h, 042h, 03Ch, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 003h, 004h, 009h, 00Ah
+    DEFB 00Ah, 009h, 004h, 003h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 0C0h, 020h, 090h, 050h
+    DEFB 050h, 090h, 020h, 0C0h, 000h, 000h, 000h, 000h
+
+EXPLODED_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 042h, 081h, 024h, 000h
+    DEFB 000h, 024h, 081h, 042h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 004h, 008h, 002h, 000h
+    DEFB 000h, 002h, 008h, 004h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 020h, 010h, 040h, 000h
+    DEFB 000h, 040h, 010h, 020h, 000h, 000h, 000h, 000h
+
+CURSOR_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 0E7h, 081h, 081h, 000h
+    DEFB 000h, 081h, 081h, 0E7h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 00Eh, 008h, 008h, 000h
+    DEFB 000h, 008h, 008h, 00Eh, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 070h, 010h, 010h, 000h
+    DEFB 000h, 010h, 010h, 070h, 000h, 000h, 000h, 000h
+
+ENEMA_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 024h, 07Eh, 0FFh, 099h
+    DEFB 0DBh, 0FFh, 066h, 024h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 002h, 007h, 00Fh, 009h
+    DEFB 00Dh, 00Fh, 006h, 002h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 040h, 0E0h, 0F0h, 090h
+    DEFB 0B0h, 0F0h, 060h, 040h, 000h, 000h, 000h, 000h
+
+ENEMB_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 024h, 07Eh, 0FFh, 0BDh
+    DEFB 0DBh, 07Eh, 07Eh, 018h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 002h, 007h, 00Fh, 00Bh
+    DEFB 00Dh, 007h, 007h, 001h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 040h, 0E0h, 0F0h, 0D0h
+    DEFB 0B0h, 0E0h, 0E0h, 080h, 000h, 000h, 000h, 000h
+
+TANKV_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 05Ah, 07Eh, 066h, 05Ah
+    DEFB 05Ah, 066h, 05Ah, 018h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 005h, 007h, 006h, 005h
+    DEFB 005h, 006h, 005h, 001h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 0A0h, 0E0h, 060h, 0A0h
+    DEFB 0A0h, 060h, 0A0h, 080h, 000h, 000h, 000h, 000h
+
+TANKH_ADDRESS:
+    DEFB 000h, 000h, 000h, 000h, 0FFh, 066h, 0DBh, 0DBh
+    DEFB 066h, 0FFh, 018h, 018h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 00Fh, 006h, 00Dh, 00Dh
+    DEFB 006h, 00Fh, 001h, 001h, 000h, 000h, 000h, 000h
+    DEFB 000h, 000h, 000h, 000h, 0F0h, 060h, 0B0h, 0B0h
+    DEFB 060h, 0F0h, 080h, 080h, 000h, 000h, 000h, 000h
+
+SPRITE_INDEX:
+    DEFW (SPRITE_BUFFER + 0)
+    DEFW (SPRITE_BUFFER + 48)
+    DEFW (SPRITE_BUFFER + 96)
+    DEFW (SPRITE_BUFFER + 144)
+    DEFW (SPRITE_BUFFER + 192)
+    DEFW (SPRITE_BUFFER + 240)
+    DEFW (SPRITE_BUFFER + 288)
+    DEFW (SPRITE_BUFFER + 336)
+    DEFW (SPRITE_BUFFER + 384)
+    DEFW (SPRITE_BUFFER + 432)
+    DEFW (SPRITE_BUFFER + 480)
+    DEFW (SPRITE_BUFFER + 528)
+    DEFW (SPRITE_BUFFER + 576)
+    DEFW (SPRITE_BUFFER + 624)
+    DEFW (SPRITE_BUFFER + 672)
+    DEFW (SPRITE_BUFFER + 720)
+    DEFW (SPRITE_BUFFER + 768)
+
+SPRITE_COUNT:
+    DEFB 16
+
+end asm
+
+#define PLAYER_INDEX 1
+#define PLAYERRIGHT_INDEX 2
+#define PLAYERLEFT_INDEX 3
+#define VFIREA_INDEX 4
+#define VFIREB_INDEX 5
+#define HFIREA_INDEX 6
+#define HFIREB_INDEX 7
+#define EXPLODEA_INDEX 8
+#define EXPLODEB_INDEX 9
+#define EXPLODEC_INDEX 10
+#define EXPLODED_INDEX 11
+#define CURSOR_INDEX 12
+#define ENEMA_INDEX 13
+#define ENEMB_INDEX 14
+#define TANKV_INDEX 15
+#define TANKH_INDEX 16
+
+'REM --TILE SECTION--
+
+#define EMPTY_TILE_INDEX 0
+#define LOGO_INDEX 1
+#define GRID_INDEX 33
+#define DEFLECTORA_INDEX 42
+#define DEFLECTORB_INDEX 43
+#define DEFLECTORC_INDEX 44
+#define DEFLECTORD_INDEX 45
+#define HBARRIER_INDEX 46
+#define VBARRIER_INDEX 49
+#define BIGBUILDING_INDEX 52
+#define MEDIUMBUILDING_INDEX 61
+#define TALLBUILDING_INDEX 67
+#define WIDEBUILDING_INDEX 69
+#define SMALLBUILDING_INDEX 71
+#define MONUMENT_INDEX 72
+#define ROCKS_INDEX 73
+#define EXPLOSIONCRATER_INDEX 74
+#define TOXICWASTE_INDEX 83
+#define FLOOD_INDEX 84
+#define FIRE_INDEX 85
+#define FORCEFIELD_INDEX 86
+#define STREETLIGHT_INDEX 87
+#define BUSH_INDEX 88
+#define TREES_INDEX 89
+#define SPLITTER_INDEX 90
+#define BLOCKER_INDEX 91
+#define MINE_INDEX 92
+#define BOMB_INDEX 93
+#define CHARGEDSHOT_INDEX 94
+#define MINECRATE_INDEX 95
+#define BLOCKERCRATE_INDEX 96
+#define BOMBCRATE_INDEX 97
+#define CHARGEDSHOTCRATE_INDEX 98
+#define RADIOTOWER_INDEX 99
+#define MOTHERSHIP_INDEX 100
+#define HANGAR_INDEX 101
+#define NUMBERS_INDEX 102
+#define SOLID_INDEX 112
+#define ZOOMALIENA_INDEX 113
+#define ZOOMALIENB_INDEX 117
+#define SHOTDEATHA_INDEX 121
+#define SHOTDEATHB_INDEX 125
+#define SHOTDEATHC_INDEX 129
+#define SHOTDEATHD_INDEX 133
+#define SHOTDEATHE_INDEX 137
+#define SHOTDEATHF_INDEX 141
+#define SHOTDEATHG_INDEX 145
+#define TANKDEATHA_INDEX 149
+#define TANKDEATHB_INDEX 153
+#define LIFE_INDEX 157
+
+Dim tileSet(158,8) as uByte => { _
+{ $00, $00, $00, $00, $00, $00, $00, $00 }, _
+{ $00, $0F, $07, $07, $07, $07, $07, $07 }, _
+{ $07, $07, $07, $07, $0F, $00, $00, $FC }, _
+{ $FC, $00, $00, $00, $00, $0C, $0C, $1E }, _
+{ $7F, $1E, $3F, $33, $40, $00, $00, $00 }, _
+{ $00, $78, $1C, $1C, $1C, $18, $70, $38 }, _
+{ $1C, $1C, $1D, $1D, $7B, $00, $00, $00 }, _
+{ $03, $0C, $1C, $1C, $3C, $3C, $3C, $3D }, _
+{ $BD, $3C, $3C, $1C, $9C, $0C, $03, $00 }, _
+{ $00, $78, $78, $B8, $B8, $B8, $BC, $BC }, _
+{ $BC, $FC, $1E, $1E, $9F, $00, $00, $00 }, _
+{ $D3, $71, $31, $31, $11, $11, $01, $F9 }, _
+{ $F1, $F1, $F1, $F1, $F1, $E1, $83, $00 }, _
+{ $00, $DD, $DD, $9C, $9C, $1C, $1C, $1C }, _
+{ $1C, $1C, $1C, $1C, $3E, $00, $00, $00 }, _
+{ $EE, $E7, $E7, $E7, $E7, $E7, $EE, $EE }, _
+{ $E7, $E7, $E7, $E7, $E7, $E7, $F3, $00 }, _
+{ $00, $EE, $EE, $CE, $CE, $0E, $0E, $0E }, _
+{ $0E, $0E, $0E, $1E, $1F, $00, $00, $00 }, _
+{ $1F, $0F, $8F, $8F, $8F, $0F, $0F, $0F }, _
+{ $0F, $8F, $8F, $8F, $CF, $CF, $9F, $00 }, _
+{ $00, $CF, $C7, $47, $47, $07, $07, $07 }, _
+{ $07, $07, $07, $07, $0F, $00, $00, $00 }, _
+{ $BF, $1F, $0F, $0F, $0F, $0F, $0F, $0F }, _
+{ $0F, $0F, $0F, $0F, $0F, $0F, $9F, $00 }, _
+{ $00, $0F, $07, $07, $07, $07, $07, $07 }, _
+{ $07, $27, $27, $67, $6F, $00, $00, $00 }, _
+{ $60, $30, $38, $38, $3C, $3C, $3C, $3C }, _
+{ $3D, $3C, $3C, $38, $39, $30, $40, $00 }, _
+{ $00, $60, $60, $20, $00, $40, $40, $40 }, _
+{ $40, $00, $20, $60, $60, $00, $00, $3F }, _
+{ $3F, $00, $00, $00, $00, $30, $30, $78 }, _
+{ $FE, $78, $FC, $CC, $02, $00, $00, $00 }, _
+{ $3F, $40, $AF, $98, $B3, $A4, $A9, $AA }, _
+{ $AA, $A2, $A2, $AA, $AA, $A2, $A2, $AA }, _
+{ $AA, $A9, $A4, $B3, $98, $AF, $40, $3F }, _
+{ $FF, $00, $FF, $00, $99, $00, $FF, $00 }, _
+{ $00, $00, $00, $18, $18, $00, $00, $00 }, _
+{ $00, $FF, $00, $99, $00, $FF, $00, $FF }, _
+{ $FC, $02, $F5, $19, $CD, $25, $95, $55 }, _
+{ $55, $45, $45, $55, $55, $45, $45, $55 }, _
+{ $55, $95, $25, $CD, $19, $F5, $02, $FC }, _
+{ $80, $C0, $E0, $B0, $B8, $BC, $C6, $FF }, _
+{ $FF, $C6, $BC, $B8, $B0, $E0, $C0, $80 }, _
+{ $01, $03, $07, $0D, $1D, $3D, $63, $FF }, _
+{ $FF, $63, $3D, $1D, $0D, $07, $03, $01 }, _
+{ $42, $A5, $7E, $2F, $37, $7E, $A5, $42 }, _
+{ $00, $99, $66, $DB, $BD, $66, $99, $00 }, _
+{ $42, $A5, $7E, $F4, $EC, $7E, $A5, $42 }, _
+{ $42, $A5, $7E, $34, $2C, $7E, $BD, $5A }, _
+{ $5A, $24, $34, $5A, $5A, $34, $24, $5A }, _
+{ $5A, $BD, $7E, $2C, $34, $7E, $A5, $42 }, _
+{ $00, $02, $03, $07, $09, $09, $1F, $09 }, _
+{ $00, $7E, $FF, $FF, $24, $24, $FF, $24 }, _
+{ $00, $40, $C0, $F0, $90, $90, $FC, $92 }, _
+{ $09, $3F, $61, $7F, $09, $09, $3F, $49 }, _
+{ $24, $FF, $00, $FF, $24, $24, $FF, $24 }, _
+{ $92, $FE, $82, $FE, $92, $92, $FC, $90 }, _
+{ $49, $7F, $41, $7F, $7F, $67, $67, $27 }, _
+{ $24, $FF, $3C, $E7, $DB, $A5, $A5, $A5 }, _
+{ $90, $FE, $82, $FE, $FE, $E6, $E4, $E0 }, _
+{ $00, $00, $03, $03, $06, $05, $27, $36 }, _
+{ $3C, $3C, $E7, $A5, $BD, $E7, $A5, $BD }, _
+{ $00, $7C, $82, $CA, $6A, $A2, $FA, $6A }, _
+{ $76, $5E, $5A, $7F, $27, $2F, $D8, $3F }, _
+{ $E7, $A5, $BD, $E7, $FF, $E7, $C3, $C3 }, _
+{ $6E, $7E, $5E, $FE, $E6, $F6, $1E, $FE }, _
+{ $60, $F0, $A0, $B8, $A4, $BC, $A6, $BD }, _
+{ $A5, $BD, $A5, $BD, $A5, $FD, $E7, $E7 }, _
+{ $28, $3E, $26, $E7, $BE, $E7, $A6, $FE }, _
+{ $06, $1F, $05, $C7, $7D, $E7, $65, $7F }, _
+{ $16, $1F, $85, $DF, $A5, $FF, $A5, $E7 }, _
+{ $18, $3C, $18, $18, $24, $5A, $5A, $FF }, _
+{ $4E, $9A, $9C, $A1, $08, $9A, $73, $26 }, _
+{ $FF, $FF, $FF, $FC, $F6, $D6, $E7, $C5 }, _
+{ $FF, $FB, $3B, $57, $EB, $83, $00, $00 }, _
+{ $FF, $FB, $BF, $FF, $BF, $53, $BF, $BF }, _
+{ $EA, $B8, $B8, $80, $B0, $F4, $C8, $BC }, _
+{ $34, $7A, $FB, $ED, $F7, $CD, $7A, $24 }, _
+{ $7B, $77, $2F, $1F, $1F, $3F, $3F, $1F }, _
+{ $BC, $DA, $D8, $F7, $E3, $FB, $FF, $FF }, _
+{ $00, $80, $CF, $CE, $92, $74, $77, $DF }, _
+{ $67, $FF, $1D, $DF, $F5, $EB, $5F, $FF }, _
+{ $80, $24, $7E, $3C, $11, $04, $4A, $24 }, _
+{ $40, $01, $38, $CE, $E7, $77, $1E, $80 }, _
+{ $11, $43, $01, $AC, $1E, $36, $66, $3C }, _
+{ $FF, $00, $FF, $55, $AA, $FF, $00, $FF }, _
+{ $3F, $47, $82, $80, $8E, $96, $90, $90 }, _
+{ $00, $00, $3C, $76, $DA, $FB, $D5, $AB }, _
+{ $04, $0A, $55, $AA, $FF, $A4, $44, $44 }, _
+{ $24, $3C, $DB, $7E, $7E, $DB, $3C, $24 }, _
+{ $42, $ED, $DB, $B7, $42, $7E, $42, $42 }, _
+{ $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
+{ $24, $18, $3C, $5A, $42, $5A, $3C, $18 }, _
+{ $19, $22, $98, $44, $19, $22, $98, $44 }, _
+{ $E7, $81, $81, $18, $3C, $81, $81, $E7 }, _
+{ $E7, $81, $BD, $3C, $24, $A5, $81, $E7 }, _
+{ $E7, $81, $A5, $18, $3C, $99, $81, $E7 }, _
+{ $E7, $81, $91, $48, $12, $89, $81, $E7 }, _
+{ $5A, $24, $5A, $18, $24, $3C, $66, $DB }, _
+{ $3C, $42, $FF, $3C, $00, $18, $00, $7E }, _
+{ $18, $FF, $00, $99, $99, $00, $FF, $18 }, _
+{ $00, $3C, $72, $72, $42, $42, $3C, $00 }, _
+{ $00, $18, $38, $08, $08, $08, $08, $00 }, _
+{ $00, $7E, $62, $02, $7E, $40, $7E, $00 }, _
+{ $00, $7E, $62, $02, $1E, $42, $7E, $00 }, _
+{ $00, $1C, $2C, $44, $7C, $04, $04, $00 }, _
+{ $00, $7E, $46, $40, $7E, $02, $7E, $00 }, _
+{ $00, $7E, $40, $7E, $72, $62, $7E, $00 }, _
+{ $00, $7E, $62, $04, $08, $18, $18, $00 }, _
+{ $00, $3C, $2C, $24, $7E, $62, $7E, $00 }, _
+{ $00, $7E, $62, $7E, $02, $06, $7E, $00 }, _
+{ $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF }, _
+{ $00, $1F, $38, $67, $7E, $73, $61, $71 }, _
+{ $00, $F8, $1C, $E6, $7E, $CE, $86, $8E }, _
+{ $79, $3F, $37, $32, $30, $35, $1F, $0F }, _
+{ $9E, $FC, $EC, $4C, $0C, $AC, $F8, $F0 }, _
+{ $00, $1F, $39, $7E, $67, $61, $61, $61 }, _
+{ $00, $F8, $9C, $7E, $E6, $86, $86, $86 }, _
+{ $71, $3F, $27, $22, $20, $20, $15, $0F }, _
+{ $8E, $FC, $E4, $44, $04, $04, $A8, $F0 }, _
+{ $09, $1D, $0F, $06, $04, $07, $07, $0E }, _
+{ $90, $B8, $F0, $60, $20, $E0, $E0, $70 }, _
+{ $1C, $1F, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $38, $F8, $78, $38, $98, $D8, $66, $44 }, _
+{ $09, $1D, $0F, $06, $04, $07, $07, $0E }, _
+{ $90, $BA, $F0, $63, $26, $EC, $E2, $70 }, _
+{ $1C, $1F, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $38, $F8, $78, $38, $98, $D8, $66, $44 }, _
+{ $09, $1D, $0F, $06, $04, $07, $07, $0E }, _
+{ $90, $B8, $F0, $60, $3C, $C2, $DA, $5A }, _
+{ $1C, $1F, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $42, $BC, $78, $38, $98, $D8, $66, $44 }, _
+{ $09, $1D, $0F, $07, $04, $04, $06, $0E }, _
+{ $88, $99, $80, $3C, $42, $99, $A5, $A5 }, _
+{ $1C, $1E, $1E, $1C, $19, $1B, $66, $22 }, _
+{ $99, $42, $3C, $01, $98, $C8, $66, $44 }, _
+{ $08, $18, $09, $02, $02, $00, $00, $08 }, _
+{ $0C, $82, $39, $45, $3C, $7E, $F7, $6F }, _
+{ $1A, $12, $12, $10, $19, $18, $66, $22 }, _
+{ $7E, $BC, $99, $4E, $30, $82, $6C, $00 }, _
+{ $21, $47, $06, $10, $19, $1A, $20, $28 }, _
+{ $0C, $4E, $25, $43, $05, $00, $98, $19 }, _
+{ $02, $32, $18, $19, $08, $42, $27, $01 }, _
+{ $82, $30, $01, $41, $17, $80, $69, $C2 }, _
+{ $00, $08, $00, $00, $20, $04, $00, $40 }, _
+{ $00, $40, $04, $00, $02, $00, $00, $80 }, _
+{ $00, $20, $04, $00, $40, $00, $08, $00 }, _
+{ $00, $08, $00, $22, $00, $40, $08, $00 }, _
+{ $4E, $4C, $78, $49, $4C, $76, $4B, $3F }, _
+{ $72, $32, $1E, $92, $32, $6E, $D2, $7C }, _
+{ $02, $03, $02, $03, $02, $03, $01, $00 }, _
+{ $C0, $40, $C0, $40, $C0, $40, $80, $00 }, _
+{ $76, $4B, $3F, $02, $03, $02, $03, $02 }, _
+{ $6E, $D2, $7C, $C0, $40, $C0, $40, $C0 }, _
+{ $03, $01, $04, $01, $11, $01, $45, $11 }, _
+{ $40, $80, $20, $80, $88, $A0, $82, $90 }, _
+{ $00, $66, $FF, $FF, $7E, $3C, $18, $00 } _
+}
+
+Dim tileColors(158) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $05, $07, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $45, $F2, $C6, $05, $04, $04, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72, $42 }

@@ -526,6 +526,34 @@
       "SetType": 1
     },
     {
+      "Id": "5dee6f76-9c96-4314-8b49-969ea054b2ee",
+      "Name": "Monument",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GDwYGCRaWv8="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "3fd4a951-5dad-4660-b3cd-59aa43bde1f8",
+      "Name": "Rocks",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "TpqcoQiacyY="
+      ],
+      "ColorData": [
+        7
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
       "Id": "12ddb969-4447-4dc0-b42c-d9801fbdedb8",
       "Name": "ExplosionCrater",
       "Width": 3,
@@ -565,6 +593,90 @@
       ],
       "ColorData": [
         6
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "d90928b4-adf6-48c9-b078-e43ba877cc59",
+      "Name": "Flood",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "QAE4zud3HoA="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "3e50402f-e8f9-4f5a-85cf-c419c4a5ec68",
+      "Name": "Fire",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "EUMBrB42Zjw="
+      ],
+      "ColorData": [
+        242
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "09a1ac60-4b2d-49fa-912e-dd7237f08443",
+      "Name": "ForceField",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "/wD/Var/AP8="
+      ],
+      "ColorData": [
+        198
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "99d87bba-cf87-4f1a-babf-3e22a491d030",
+      "Name": "StreetLight",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "P0eCgI6WkJA="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "4eedc09d-725f-4b51-8b2d-4a98e3462a9f",
+      "Name": "Bush",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AAA8dtr71as="
+      ],
+      "ColorData": [
+        4
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "feb60bbe-8ddb-4d40-ab36-ce423f1c2a0c",
+      "Name": "Trees",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "BApVqv+kREQ="
+      ],
+      "ColorData": [
+        4
       ],
       "Sort": -1,
       "SetType": 1
@@ -707,20 +819,6 @@
         5
       ],
       "Sort": 0,
-      "SetType": 1
-    },
-    {
-      "Id": "09a1ac60-4b2d-49fa-912e-dd7237f08443",
-      "Name": "ForceField",
-      "Width": 1,
-      "Height": 1,
-      "Data": [
-        "/wD/Var/AP8="
-      ],
-      "ColorData": [
-        198
-      ],
-      "Sort": -1,
       "SetType": 1
     },
     {
@@ -1026,11 +1124,11 @@
         "AGb//348GAA="
       ],
       "ColorData": [
-        2
+        66
       ],
       "Sort": -1,
       "SetType": 1
     }
   ],
-  "Screens": null
+  "StoredData": []
 }

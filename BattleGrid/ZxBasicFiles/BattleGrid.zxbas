@@ -1,5 +1,8 @@
 REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
+#define PRECOMPUTED_SPRITES
+#define SPRITEDATA_FILE "Sprites.zxbas"
+
 #define ENABLE_1x1_SPRITES
 '#define ENABLE_1x2_SPRITES
 '#define ENABLE_2x2_SPRITES
@@ -43,7 +46,7 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --hea
     Celdas donde no se acepten poner objetos
 
 '/
-
+/'
 
 'REM --SPRITE SECTION--
 #define PLAYER_INDEX 1
@@ -99,6 +102,7 @@ Dim spriteSet(16,8) as uByte => { _
 { $5A, $7E, $66, $5A, $5A, $66, $5A, $18 }, _
 { $FF, $66, $DB, $DB, $66, $FF, $18, $18 } _
 }
+
 
 'REM --TILE SECTION--
 #define EMPTY_TILE_INDEX 0
@@ -300,6 +304,7 @@ Dim tileSet(151,8) as uByte => { _
 }
 
 Dim tileColors(151) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $C6, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72, $02 }
+'/
 
 defines:
 #define CURSOR_FRAMES 10
@@ -514,6 +519,7 @@ sub InitGraphics()
     InitGFXLib()
     SetTileset(@tileSet)
 
+    /'
     Create1x1Sprite(PLAYER_ADDRESS)
     Create1x1Sprite(PLAYERRIGHT_ADDRESS)
     Create1x1Sprite(PLAYERLEFT_ADDRESS)
@@ -530,6 +536,7 @@ sub InitGraphics()
     Create1x1Sprite(ENEMB_ADDRESS)
     Create1x1Sprite(TANKV_ADDRESS)
     Create1x1Sprite(TANKH_ADDRESS)
+    '/
 
 end sub
 
@@ -874,11 +881,13 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             end if
             end if 
             
-            if tmpCell = FORCEFIELD_INDEX then
+            if tmpCell >= FORCEFIELD_INDEX then
+            if tmpCell <= TREES_INDEX then
 
                 EXPLODE_SHOT(shotIndex)
                 return
-
+            
+            end if
             end if
 
             if tmpCell >= MINECRATE_INDEX then
@@ -1376,8 +1385,11 @@ function LineOfSight(x as uinteger, y as uinteger) as ubyte
     DIm buc as ubyte
 
     for buc = 1 to 19 - y
-        if peek(address) <> 0 and peek(address) <> FORCEFIELD_INDEX and peek(address) <> TOXICWASTE_INDEX then return 0
-        address = address + 1
+        if peek(address) = 0 or (peek(address) >= TOXICWASTE_INDEX and peek(address) <= FORCEFIELD_INDEX) then
+            address = address + 1
+        else
+            return 0
+        end if
     next buc
 
     return 1
@@ -1475,7 +1487,7 @@ TESTALIENDOWN:
 
                         tmpCellValue = activeMap(tmpCellX, tmpCellY + 1)
 
-                        if tmpCellValue = 0 or tmpCellValue = FORCEFIELD_INDEX then 'bajar
+                        if tmpCellValue = 0 or (tmpCellValue >= FORCEFIELD_INDEX and tmpCellValue <= TREES_INDEX) then 'bajar
                             tmpDir = -tmpDir
                             tmpY = tmpY + 2 'verticalmente se mueve en celdas
                             goto ENDTESTCELL
@@ -1509,7 +1521,7 @@ ALIENCONTINUE:
 
                     tmpCellValue = activeMap(tmpCellX + tmpDir, tmpCellY)
 
-                    if tmpCellValue = 0 or tmpCellValue = FORCEFIELD_INDEX then
+                    if tmpCellValue = 0 or (tmpCellValue >= FORCEFIELD_INDEX and tmpCellValue <= TREES_INDEX) then
                         tmpX = tmpX + tmpDir
                         goto ENDTESTCELL
                     else if tmpCellValue = MINE_INDEX then
@@ -1524,7 +1536,7 @@ ALIENINVERT:
 
                     tmpCellValue = activeMap(tmpCellX - tmpDir, tmpCellY) 
 
-                    if tmpCellValue = 0 or tmpCellValue = FORCEFIELD_INDEX  then 'invertir (en la última fila explota)                       
+                    if tmpCellValue = 0 or (tmpCellValue >= FORCEFIELD_INDEX and tmpCellValue <= TREES_INDEX)  then 'invertir (en la última fila explota)                       
                         tmpDir = -tmpDir
                         tmpX = tmpX + tmpDir
                         goto ENDTESTCELL
@@ -1649,10 +1661,10 @@ sub UpdateTanks()
                     if tmpCellY > 1 then upCellValue = activeMap(tmpCellX, tmpCellY - 1) else upCellValue = -1
                     if tmpCellY < 19 then downCellValue = activeMap(tmpCellX, tmpCellY + 1) else downCellValue = -1
 
-                    if leftCellValue = FORCEFIELD_INDEX or leftCellValue = TOXICWASTE_INDEX then leftCellValue = 0
-                    if rightCellValue = FORCEFIELD_INDEX or rightCellValue = TOXICWASTE_INDEX then rightCellValue = 0
-                    if upCellValue = FORCEFIELD_INDEX or upCellValue = TOXICWASTE_INDEX then upCellValue = 0
-                    if downCellValue = FORCEFIELD_INDEX or downCellValue = TOXICWASTE_INDEX then downCellValue = 0
+                    if (leftCellValue >= TOXICWASTE_INDEX and leftCellValue <= FLOOD_INDEX) or leftCellValue = FORCEFIELD_INDEX then leftCellValue = 0
+                    if (rightCellValue >= TOXICWASTE_INDEX and rightCellValue <= FLOOD_INDEX) or rightCellValue = FORCEFIELD_INDEX then rightCellValue = 0
+                    if (upCellValue >= TOXICWASTE_INDEX and upCellValue <= FLOOD_INDEX) or upCellValue = FORCEFIELD_INDEX then upCellValue = 0
+                    if (downCellValue >= TOXICWASTE_INDEX and downCellValue <= FLOOD_INDEX) or downCellValue = FORCEFIELD_INDEX then downCellValue = 0
 
 TESTTANKLOOP:
 

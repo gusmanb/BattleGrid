@@ -15,6 +15,7 @@
     <Z80Asm Include="ZxBasicFiles\BattleGrid.zxbas.z80asm">
       <DependentUpon>BattleGrid.zxbas</DependentUpon>
     </Z80Asm>
+    <Z80Asm Include="ZxBasicFiles\Sprites.zxbas" />
     <ZxBasic Include="ZxBasicFiles\BattleGrid.zxbas" />
     <ZxBasic Include="ZxBasicFiles\BeepFX.zxbas" />
     <ZxBasic Include="ZxBasicFiles\FastRND.zxbas" />
