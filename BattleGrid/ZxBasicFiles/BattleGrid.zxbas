@@ -1,7 +1,7 @@
 REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
 #define PRECOMPUTED_SPRITES
-#define SPRITEDATA_FILE "Sprites.zxbas"
+#define ENABLE_PRINT
 
 #define ENABLE_1x1_SPRITES
 '#define ENABLE_1x2_SPRITES
@@ -327,16 +327,25 @@ sub InitInterface()
     SetTile(CLEARSHOT_INDEX, tileColors(CLEARSHOT_INDEX + 1), 28, 20)
 
 
-    print at 16, 25;":"
-    print at 16, 29;":"
-    print at 18, 25;":"    
-    print at 18, 29;":"
-    print at 20, 25;":"    
-    print at 20, 29;":"
+    'print at 16, 25;":"
+    'print at 16, 29;":"
+    'print at 18, 25;":"    
+    'print at 18, 29;":"
+    'print at 20, 25;":"    
+    'print at 20, 29;":"
 
-    print at 7, 24; "LEVEL:"
-    print at 10, 24; "SCORE:"
-    print at 13, 24; "SAT:"
+    'print at 7, 24; "LEVEL:"
+    'print at 10, 24; "SCORE:"
+    'print at 13, 24; "SAT:"
+
+    for tmpX = 16 to 20 step 2
+        PrintString(":", CREATE_ATTRIB(7, 0, 1, 0), 25, tmpX)
+        PrintString(":", CREATE_ATTRIB(7, 0, 1, 0), 29, tmpX)
+    next tmpX
+
+    PrintString("LEVEL:", CREATE_ATTRIB(7, 0, 1, 0), 24, 7)
+    PrintString("SCORE:", CREATE_ATTRIB(7, 0, 1, 0), 24, 10)
+    PrintString("SAT:", CREATE_ATTRIB(7, 0, 1, 0), 24, 13)
 
 end sub
 
@@ -416,7 +425,9 @@ sub InitLevel()
     PrintPaddedNumber(24, 11, score, 6)
 
     
-    print at 14, 24; "NONE   "
+    'print at 14, 24; "NONE   "
+
+    PrintString("NONE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     shots(1,4) = -1
     shots(2,4) = -1
@@ -1091,38 +1102,37 @@ sub UpdateCursor()
     if MultiKeys(KEY1) then
 
         cursorTool = TOOL_NONE
-        print at 16, 24; "NONE   "
+        PrintString("NONE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
         
     else if MultiKeys(KEY2) then
 
         cursorTool = TOOL_BLOCKER
-        print at 16, 24; "BARRIER"
-        
+        PrintString("BARRIER", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)        
 
     else if MultiKeys(KEY3) then
 
         cursorTool = TOOL_MINE
-        print at 16, 24; "MINE   "
+        PrintString("MINE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY4) then
         
         cursorTool = TOOL_BOMB
-        print at 16, 24; "BOMB   "
+        PrintString("BOMB   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY5) then
 
         cursorTool = TOOL_CHARGEDSHOT
-        print at 16, 24; "LASER  "
+        PrintString("LASER  ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY6) then
 
         cursorTool = TOOL_FIRESHOT
-        print at 16, 24; "FIRE   "
+        PrintString("FIRE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY7) then
 
         cursorTool = TOOL_CLEARSHOT
-        print at 16, 24; "WIPE   "
+        PrintString("WIPE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     end if
 
@@ -2034,7 +2044,7 @@ while(1)
 
     if updateScore then
         updateScore = 0
-        PrintPaddedNumber(24, 13, score, 6)
+        PrintPaddedNumber(24, 11, score, 6)
     end if
 
     if dead <> 0 then

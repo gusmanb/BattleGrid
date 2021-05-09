@@ -1,6 +1,12 @@
 ﻿/'
 'CONFIG DEFINES
 
+'Enabling this define changes the merge of the sprites and tiles to be a XOR instead of an OR
+'#define MERGE_WITH_XOR
+
+'Enabling this define activates the fast print routines
+#define ENABLE_PRINT
+
 'Enabling this define instructs the library to 
 #define PRECOMPUTED_SPRITES
 
@@ -172,6 +178,8 @@ ldi \
 ldi \
 ldi \
 
+;LIB DEFINES
+
 #ifndef ENABLE_1x1_SPRITES
 
     #define TOTAL_1x1_SPRITES 0
@@ -193,7 +201,8 @@ ldi \
 
 #endif
 
-;LIB DEFINES
+#define ROM_CHARSET 3C00h
+
 SPRITE_1x1_BUFFER_SIZE equ (6 * 8)
 SPRITE_1x2_BUFFER_SIZE equ (9 * 8)
 SPRITE_2x2_BUFFER_SIZE equ (15 * 8)
@@ -219,6 +228,8 @@ DRAW_OPS_DATA_SIZE equ (TOTAL_DRAW_OPS * 8)
 
 SPRITE_BUFFER_SIZE equ ((TOTAL_1x1_SPRITES * SPRITE_1x1_BUFFER_SIZE)+(TOTAL_1x2_SPRITES * SPRITE_1x2_BUFFER_SIZE)+(TOTAL_2x2_SPRITES * SPRITE_2x2_BUFFER_SIZE))
 SPRITE_INDEX_SIZE equ ((TOTAL_1x1_SPRITES + TOTAL_1x2_SPRITES + TOTAL_2x2_SPRITES + 1) * 2)
+
+
 
 ;JUMP TO PROG START
 jp GSPRITES_LIB_END
@@ -1492,6 +1503,76 @@ ENDP
 
 #endif
 
+#ifdef ENABLE_PRINT
+
+PROC
+PRINT_CHAR:               ;input: a = char number, c = color, e = x, l = y, trashes bc, de, hl, a
+
+
+HL_POW2_5()              ;y * 32
+
+add hl, de              ;+ x
+
+ex de, hl
+
+ld hl, $5800
+add hl, de
+ld (hl), c              ;set tile color
+
+
+ld l, a                 ;get tile source address
+ld h, 0
+
+HL_POW2_3()
+
+ld bc, ROM_CHARSET
+add hl, bc
+
+
+ld a, d                 ;calculate screen address
+rla
+rla
+rla
+or %01000000
+ld d, a
+
+ld a, (hl)
+    ld (de), a
+    inc hl
+    inc d
+ld a, (hl)
+    ld (de), a
+    inc hl
+    inc d
+ld a, (hl)
+    ld (de), a
+    inc hl
+    inc d
+ld a, (hl)
+    ld (de), a
+    inc hl
+    inc d
+ld a, (hl)
+    ld (de), a
+    inc hl
+    inc d
+ld a, (hl)
+    ld (de), a
+    inc hl
+    inc d
+ld a, (hl)
+    ld (de), a
+    inc hl
+    inc d
+
+ld a, (hl)
+ld (de), a
+
+ret
+ENDP
+
+#endif
+
 #ifdef ENABLE_TILES
 PROC
 SET_TILEMAP:            ;input: hl = tile set address, trashes de, hl
@@ -1946,6 +2027,38 @@ sub ClearScreen(NewInk as uByte, NewPaper as uByte, NewBright as uByte)
     end asm
 
 end sub
+
+#ifdef ENABLE_PRINT
+
+sub PrintString(text as string, Color as uInteger, X as uInteger, Y as uInteger)
+
+    Dim buc as uByte
+    Dim tmpVal as uByte = len(text)
+
+    for buc = 1 to tmpVal
+        PrintChar(code(text(buc to buc)), Color, X + buc - 1, Y)
+    next buc 
+
+end sub
+
+sub fastcall PrintChar(CharNumber as uByte, Color as uInteger, X as uInteger, Y as uInteger)
+
+asm
+    exx
+    pop hl
+    exx
+    pop bc
+    pop de
+    pop hl
+    exx
+    push hl
+    exx
+    call PRINT_CHAR
+end asm
+
+end sub
+
+#endif
 
 #ifdef ENABLE_TILES
 
