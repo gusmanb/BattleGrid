@@ -203,29 +203,33 @@ end asm
 #define MINE_INDEX 92
 #define BOMB_INDEX 93
 #define CHARGEDSHOT_INDEX 94
-#define MINECRATE_INDEX 95
-#define BLOCKERCRATE_INDEX 96
-#define BOMBCRATE_INDEX 97
-#define CHARGEDSHOTCRATE_INDEX 98
-#define RADIOTOWER_INDEX 99
-#define MOTHERSHIP_INDEX 100
-#define HANGAR_INDEX 101
-#define NUMBERS_INDEX 102
-#define SOLID_INDEX 112
-#define ZOOMALIENA_INDEX 113
-#define ZOOMALIENB_INDEX 117
-#define SHOTDEATHA_INDEX 121
-#define SHOTDEATHB_INDEX 125
-#define SHOTDEATHC_INDEX 129
-#define SHOTDEATHD_INDEX 133
-#define SHOTDEATHE_INDEX 137
-#define SHOTDEATHF_INDEX 141
-#define SHOTDEATHG_INDEX 145
-#define TANKDEATHA_INDEX 149
-#define TANKDEATHB_INDEX 153
-#define LIFE_INDEX 157
+#define FIRESHOT_INDEX 95
+#define CLEARSHOT_INDEX 96
+#define MINECRATE_INDEX 97
+#define BLOCKERCRATE_INDEX 98
+#define BOMBCRATE_INDEX 99
+#define CHARGEDSHOTCRATE_INDEX 100
+#define FIRESHOTCRATE_INDEX 101
+#define CLEARSHOTCRATE_INDEX 102
+#define RADIOTOWER_INDEX 103
+#define MOTHERSHIP_INDEX 104
+#define HANGAR_INDEX 105
+#define NUMBERS_INDEX 106
+#define SOLID_INDEX 116
+#define ZOOMALIENA_INDEX 117
+#define ZOOMALIENB_INDEX 121
+#define SHOTDEATHA_INDEX 125
+#define SHOTDEATHB_INDEX 129
+#define SHOTDEATHC_INDEX 133
+#define SHOTDEATHD_INDEX 137
+#define SHOTDEATHE_INDEX 141
+#define SHOTDEATHF_INDEX 145
+#define SHOTDEATHG_INDEX 149
+#define TANKDEATHA_INDEX 153
+#define TANKDEATHB_INDEX 157
+#define LIFE_INDEX 161
 
-Dim tileSet(158,8) as uByte => { _
+Dim tileSet(162,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
@@ -321,10 +325,14 @@ Dim tileSet(158,8) as uByte => { _
 { $00, $00, $00, $00, $3C, $7E, $00, $00 }, _
 { $24, $18, $3C, $5A, $42, $5A, $3C, $18 }, _
 { $19, $22, $98, $44, $19, $22, $98, $44 }, _
+{ $24, $71, $24, $8E, $24, $71, $24, $8E }, _
+{ $28, $20, $14, $04, $28, $20, $14, $04 }, _
 { $E7, $81, $81, $18, $3C, $81, $81, $E7 }, _
 { $E7, $81, $BD, $3C, $24, $A5, $81, $E7 }, _
 { $E7, $81, $A5, $18, $3C, $99, $81, $E7 }, _
 { $E7, $81, $91, $48, $12, $89, $81, $E7 }, _
+{ $E7, $81, $89, $10, $08, $91, $81, $E7 }, _
+{ $E7, $81, $91, $0A, $50, $89, $81, $E7 }, _
 { $5A, $24, $5A, $18, $24, $3C, $66, $DB }, _
 { $3C, $42, $FF, $3C, $00, $18, $00, $7E }, _
 { $18, $FF, $00, $99, $99, $00, $FF, $18 }, _
@@ -386,4 +394,4 @@ Dim tileSet(158,8) as uByte => { _
 { $00, $66, $FF, $FF, $7E, $3C, $18, $00 } _
 }
 
-Dim tileColors(158) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $05, $07, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $45, $F2, $C6, $05, $04, $04, $44, $03, $06, $42, $44, $06, $03, $42, $44, $05, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72, $42 }
+Dim tileColors(162) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $05, $07, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $45, $F2, $C6, $05, $04, $04, $44, $03, $06, $42, $44, $46, $45, $06, $03, $42, $44, $46, $45, $05, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $38, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72, $42 }

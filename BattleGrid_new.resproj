@@ -1,0 +1,1195 @@
+{
+  "Name": "BattleGrid",
+  "Sprites": [
+    {
+      "Id": "5e312f33-1cd0-49a8-aaf6-58cd2ce80b07",
+      "Name": "Player",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GFqlvX5mWqU="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "fbbdf221-1035-47b5-b272-aa7109d9f67d",
+      "Name": "PlayerRight",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "CCoUHD42KlU="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "c2bcf3b7-88d0-4af0-a9ce-bdf5ffb8f252",
+      "Name": "PlayerLeft",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "EFQoOHxsVKo="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "43887fc6-2ed6-4ecb-aaf0-c77dc1e9d39d",
+      "Name": "VFireA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "IRiFGCEYhBg="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "03257d67-10ee-4c75-bbae-7bf3e3aca34a",
+      "Name": "VFireB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GIQYoRiEGCE="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "45bd46e9-76d6-499b-a033-976a1e83cbeb",
+      "Name": "HFireA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "FQBEqqoRAEQ="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "265c8b8b-cfcd-499b-bb62-2b2d5de042db",
+      "Name": "HFireB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "iAAiVVWIACo="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "75a8caa9-3eba-4645-bf1f-e8bfe971d696",
+      "Name": "ExplodeA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AAAYPDwYAAA="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "a92bff65-f315-49f1-acf6-bfcb94840e59",
+      "Name": "ExplodeB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "ABgkWlokGAA="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "7d3f96e4-727f-4722-80a3-4fe6ca7b61ef",
+      "Name": "ExplodeC",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "PEKZpaWZQjw="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "06164420-97ed-4fe5-ba20-abefd79a1a01",
+      "Name": "ExplodeD",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "QoEkAAAkgUI="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "71eab5c2-a6c1-4a74-81ad-dc386a535378",
+      "Name": "Cursor",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GBAACBgec="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "4523a657-5970-4a97-bc80-f6d4858d24fc",
+      "Name": "EnemA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JH7/mdv/ZiQ="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "eded3150-7094-49ae-a421-91948d51cc43",
+      "Name": "EnemB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JH7/vdt+fhg="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "5459d3a3-54f5-4cca-ae3f-191e67085f5e",
+      "Name": "TankV",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "Wn5mWlpmWhg="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    },
+    {
+      "Id": "3f4c7360-815d-4ec8-8607-47613af10a98",
+      "Name": "TankH",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "/2bb22b/GBg="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": 0,
+      "SetType": 0
+    }
+  ],
+  "Tiles": [
+    {
+      "Id": "bb795bb3-18b0-4fd4-94ec-6b91db994400",
+      "Name": "Logo",
+      "Width": 8,
+      "Height": 4,
+      "Data": [
+        "AA8HBwcHBwc=",
+        "BwcHBw8AAPw=",
+        "/AAAAAAMDB4=",
+        "fx4/M0AAAAA=",
+        "AHgcHBwYcDg=",
+        "HBwdHXsAAAA=",
+        "AwwcHDw8PD0=",
+        "vTw8HJwMAwA=",
+        "AHh4uLi4vLw=",
+        "vPweHp8AAAA=",
+        "03ExMRERAfk=",
+        "8fHx8fHhgwA=",
+        "AN3dnJwcHBw=",
+        "HBwcHD4AAAA=",
+        "7ufn5+fn7u4=",
+        "5+fn5+fn8wA=",
+        "AO7uzs4ODg4=",
+        "Dg4OHh8AAAA=",
+        "Hw+Pj48PDw8=",
+        "D4+Pj8/PnwA=",
+        "AM/HR0cHBwc=",
+        "BwcHBw8AAAA=",
+        "vx8PDw8PDw8=",
+        "Dw8PDw8PnwA=",
+        "AA8HBwcHBwc=",
+        "BycnZ28AAAA=",
+        "YDA4ODw8PDw=",
+        "PTw8ODkwQAA=",
+        "AGBgIABAQEA=",
+        "QAAgYGAAAD8=",
+        "PwAAAAAwMHg=",
+        "/nj8zAIAAAA="
+      ],
+      "ColorData": [
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70,
+        66,
+        66,
+        70,
+        70
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "ada8f63b-4fae-4d06-b608-f8c4d4c98bef",
+      "Name": "Grid",
+      "Width": 3,
+      "Height": 3,
+      "Data": [
+        "P0CvmLOkqao=",
+        "qqKiqqqioqo=",
+        "qqmks5ivQD8=",
+        "/wD/AJkA/wA=",
+        "AAAAGBgAAAA=",
+        "AP8AmQD/AP8=",
+        "/AL1Gc0llVU=",
+        "VUVFVVVFRVU=",
+        "VZUlzRn1Avw="
+      ],
+      "ColorData": [
+        65,
+        65,
+        65,
+        65,
+        71,
+        65,
+        65,
+        65,
+        65
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "d8e47aee-3334-4de5-8e2e-2a5073423a4a",
+      "Name": "DeflectorA",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "gMDgsLi8xv8="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "bcbb3f69-9f63-4179-acc2-8a43008d4913",
+      "Name": "DeflectorB",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "/8a8uLDgwIA="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "8073f18f-07c4-4872-8b62-92abf5fac7fa",
+      "Name": "DeflectorC",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AQMHDR09Y/8="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "a35673f0-740b-49f4-9284-1cd4c5ce9796",
+      "Name": "DeflectorD",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "/2M9HQ0HAwE="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "a9306c5e-a32e-4a6f-b50e-a1d3b3612484",
+      "Name": "HBarrier",
+      "Width": 3,
+      "Height": 1,
+      "Data": [
+        "QqV+Lzd+pUI=",
+        "AJlm271mmQA=",
+        "QqV+9Ox+pUI="
+      ],
+      "ColorData": [
+        7,
+        71,
+        7
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "56372e97-7984-4e83-b1d7-d8c48a9b5aca",
+      "Name": "VBarrier",
+      "Width": 1,
+      "Height": 3,
+      "Data": [
+        "QqV+NCx+vVo=",
+        "WiQ0Wlo0JFo=",
+        "Wr1+LDR+pUI="
+      ],
+      "ColorData": [
+        7,
+        71,
+        7
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "c7120b29-8dbc-4a5d-bbab-245258065b60",
+      "Name": "BigBuilding",
+      "Width": 3,
+      "Height": 3,
+      "Data": [
+        "AAIDBwkJHwk=",
+        "AH7//yQk/yQ=",
+        "AEDA8JCQ/JI=",
+        "CT9hfwkJP0k=",
+        "JP8A/yQk/yQ=",
+        "kv6C/pKS/JA=",
+        "SX9Bf39nZyc=",
+        "JP8859ulpaU=",
+        "kP6C/v7m5OA="
+      ],
+      "ColorData": [
+        3,
+        3,
+        2,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "53079e7d-45d9-41f7-ba60-de2534fdf532",
+      "Name": "MediumBuilding",
+      "Width": 3,
+      "Height": 2,
+      "Data": [
+        "AAADAwYFJzY=",
+        "PDznpb3npb0=",
+        "AHyCymqi+mo=",
+        "dl5afycv2D8=",
+        "56W95//nw8M=",
+        "bn5e/ub2Hv4="
+      ],
+      "ColorData": [
+        3,
+        3,
+        2,
+        3,
+        2,
+        2
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "31124311-e408-449b-9606-4f12078124f5",
+      "Name": "TallBuilding",
+      "Width": 1,
+      "Height": 2,
+      "Data": [
+        "YPCguKS8pr0=",
+        "pb2lvaX95+c="
+      ],
+      "ColorData": [
+        3,
+        2
+      ],
+      "Sort": 0,
+      "SetType": 2
+    },
+    {
+      "Id": "ca0d1b5a-ff59-4c28-98c0-0680dc10e0e6",
+      "Name": "WideBuilding",
+      "Width": 2,
+      "Height": 1,
+      "Data": [
+        "KD4m577npv4=",
+        "Bh8Fx33nZX8="
+      ],
+      "ColorData": [
+        3,
+        2
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "084e7155-e09b-437e-a724-2d40ee799bb1",
+      "Name": "SmallBuilding",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "Fh+F36X/pec="
+      ],
+      "ColorData": [
+        2
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "5dee6f76-9c96-4314-8b49-969ea054b2ee",
+      "Name": "Monument",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GDwYGCRaWv8="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "3fd4a951-5dad-4660-b3cd-59aa43bde1f8",
+      "Name": "Rocks",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "TpqcoQiacyY="
+      ],
+      "ColorData": [
+        7
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "12ddb969-4447-4dc0-b42c-d9801fbdedb8",
+      "Name": "ExplosionCrater",
+      "Width": 3,
+      "Height": 3,
+      "Data": [
+        "/////PbW58U=",
+        "//s7V+uDAAA=",
+        "//u//79Tv78=",
+        "6ri4gLD0yLw=",
+        "NHr77ffNeiQ=",
+        "e3cvHx8/Px8=",
+        "vNrY9+P7//8=",
+        "AIDPzpJ0d98=",
+        "Z/8d3/XrX/8="
+      ],
+      "ColorData": [
+        16,
+        16,
+        16,
+        16,
+        22,
+        16,
+        16,
+        16,
+        16
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "bdb88072-c8f1-4be4-a4f1-481558590321",
+      "Name": "ToxicWaste",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "gCR+PBEESiQ="
+      ],
+      "ColorData": [
+        6
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "d90928b4-adf6-48c9-b078-e43ba877cc59",
+      "Name": "Flood",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "QAE4zud3HoA="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "3e50402f-e8f9-4f5a-85cf-c419c4a5ec68",
+      "Name": "Fire",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "EUMBrB42Zjw="
+      ],
+      "ColorData": [
+        242
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "09a1ac60-4b2d-49fa-912e-dd7237f08443",
+      "Name": "ForceField",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "/wD/Var/AP8="
+      ],
+      "ColorData": [
+        198
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "99d87bba-cf87-4f1a-babf-3e22a491d030",
+      "Name": "StreetLight",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "P0eCgI6WkJA="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "4eedc09d-725f-4b51-8b2d-4a98e3462a9f",
+      "Name": "Bush",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AAA8dtr71as="
+      ],
+      "ColorData": [
+        4
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "feb60bbe-8ddb-4d40-ab36-ce423f1c2a0c",
+      "Name": "Trees",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "BApVqv+kREQ="
+      ],
+      "ColorData": [
+        4
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "73242e38-d64a-419f-ad1d-843ebbff9713",
+      "Name": "Splitter",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JDzbfn7bPCQ="
+      ],
+      "ColorData": [
+        68
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "19a587ca-87a7-470f-89e7-677a810aaf88",
+      "Name": "Blocker",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "Qu3bt0J+QkI="
+      ],
+      "ColorData": [
+        3
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "f5742324-832a-4386-b8af-44808d8c9f1f",
+      "Name": "Mine",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AAAAADx+AAA="
+      ],
+      "ColorData": [
+        6
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "c35dbe4d-c4a6-4831-96f9-b5ae36f0a401",
+      "Name": "Bomb",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JBg8WkJaPBg="
+      ],
+      "ColorData": [
+        66
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "55a3125a-c862-4793-98d9-5f2e43a80a72",
+      "Name": "ChargedShot",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GSKYRBkimEQ="
+      ],
+      "ColorData": [
+        68
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "1e57adf5-7197-4e54-b1bb-a71d3715f00f",
+      "Name": "FireShot",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "JHEkjiRxJI4="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "da4e45de-1580-4098-ae6e-f40cab6cf173",
+      "Name": "ClearShot",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "KCAUBCggFAQ="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "af64ffdf-247f-4fcc-a654-04a9359eba72",
+      "Name": "MineCrate",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GBGDyBgec="
+      ],
+      "ColorData": [
+        6
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "409a2623-7b59-4628-bf4e-440ac7ae6f71",
+      "Name": "BlockerCrate",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54G9PCSlgec="
+      ],
+      "ColorData": [
+        3
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "c47ecfaf-a4f1-4a03-b29a-9a1b9e2fb35d",
+      "Name": "BombCrate",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GlGDyZgec="
+      ],
+      "ColorData": [
+        66
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "14593bc1-1f66-449a-8091-1bb5800929dd",
+      "Name": "ChargedShotCrate",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GRSBKJgec="
+      ],
+      "ColorData": [
+        68
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "0c32f157-546a-415f-b30e-d7e0fbd955ce",
+      "Name": "FireShotCrate",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GJEAiRgec="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "21b1a647-894b-411a-89ae-f33c4e7e7b67",
+      "Name": "ClearShotCrate",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "54GRClCJgec="
+      ],
+      "ColorData": [
+        69
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "224b2304-c48d-4562-98a4-81364d134653",
+      "Name": "RadioTower",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "WiRaGCQ8Zts="
+      ],
+      "ColorData": [
+        5
+      ],
+      "Sort": 0,
+      "SetType": 1
+    },
+    {
+      "Id": "7e690712-3367-4ff7-aa15-cef8c35d81b8",
+      "Name": "Mothership",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "PEL/PAAYAH4="
+      ],
+      "ColorData": [
+        70
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "cc7d7bc3-87d4-4826-94b4-3d96649020ab",
+      "Name": "Hangar",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "GP8AmZkA/xg="
+      ],
+      "ColorData": [
+        71
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "e14da419-13b4-4ceb-927c-8bde00e49e70",
+      "Name": "Numbers",
+      "Width": 5,
+      "Height": 2,
+      "Data": [
+        "ADxyckJCPAA=",
+        "ABg4CAgICAA=",
+        "AH5iAn5AfgA=",
+        "AH5iAh5CfgA=",
+        "ABwsRHwEBAA=",
+        "AH5GQH4CfgA=",
+        "AH5AfnJifgA=",
+        "AH5iBAgYGAA=",
+        "ADwsJH5ifgA=",
+        "AH5ifgIGfgA="
+      ],
+      "ColorData": [
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71,
+        71
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "37dd0deb-ea34-4a02-9bd0-15b4c80ce996",
+      "Name": "Solid",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "//////////8="
+      ],
+      "ColorData": [
+        56
+      ],
+      "Sort": -1,
+      "SetType": 1
+    },
+    {
+      "Id": "f242fd44-fdf7-4678-baf0-332b05aa23dd",
+      "Name": "ZoomAlienA",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AB84Z35zYXE=",
+        "APgc5n7Oho4=",
+        "eT83MjA1Hw8=",
+        "nvzsTAys+PA="
+      ],
+      "ColorData": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "3cbe9777-f697-48d3-be7f-80d2a53368aa",
+      "Name": "ZoomAlienB",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AB85fmdhYWE=",
+        "APicfuaGhoY=",
+        "cT8nIiAgFQ8=",
+        "jvzkRAQEqPA="
+      ],
+      "ColorData": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "f9423718-8b07-4799-a7cf-4d4260bcc9fa",
+      "Name": "ShotDeathA",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "CR0PBgQHBw4=",
+        "kLjwYCDg4HA=",
+        "HB8eHBkbZiI=",
+        "OPh4OJjYZkQ="
+      ],
+      "ColorData": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "3545d2f9-0640-4c8f-9576-38eb1fbf98fc",
+      "Name": "ShotDeathB",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "CR0PBgQHBw4=",
+        "kLrwYybs4nA=",
+        "HB8eHBkbZiI=",
+        "OPh4OJjYZkQ="
+      ],
+      "ColorData": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "4fe6fc01-cf45-4664-bab0-c406a99948ba",
+      "Name": "ShotDeathC",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "CR0PBgQHBw4=",
+        "kLjwYDzC2lo=",
+        "HB8eHBkbZiI=",
+        "Qrx4OJjYZkQ="
+      ],
+      "ColorData": [
+        114,
+        114,
+        114,
+        114
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "24e96da9-ee84-4c26-855c-d7474cf429a4",
+      "Name": "ShotDeathD",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "CR0PBwQEBg4=",
+        "iJmAPEKZpaU=",
+        "HB4eHBkbZiI=",
+        "mUI8AZjIZkQ="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "fdb33c08-5bfd-4a2b-a1f9-e51677a955fb",
+      "Name": "ShotDeathE",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "CBgJAgIAAAg=",
+        "DII5RTx+928=",
+        "GhISEBkYZiI=",
+        "fryZTjCCbAA="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "a98115ad-6319-4a32-aefc-ac61da9af57d",
+      "Name": "ShotDeathF",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "IUcGEBkaICg=",
+        "DE4lQwUAmBk=",
+        "AjIYGQhCJwE=",
+        "gjABQReAacI="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "24658b23-0c22-4f85-893b-11bea2874a3a",
+      "Name": "ShotDeathG",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "AAgAACAEAEA=",
+        "AEAEAAIAAIA=",
+        "ACAEAEAACAA=",
+        "AAgAIgBACAA="
+      ],
+      "ColorData": [
+        86,
+        86,
+        86,
+        86
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "e5e96406-4ddd-4987-9054-9d812d12707c",
+      "Name": "TankDeathA",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "Tkx4SUx2Sz8=",
+        "cjIekjJu0nw=",
+        "AgMCAwIDAQA=",
+        "wEDAQMBAgAA="
+      ],
+      "ColorData": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "b7a613c6-f2a0-4911-af98-95f82992a065",
+      "Name": "TankDeathB",
+      "Width": 2,
+      "Height": 2,
+      "Data": [
+        "dks/AgMCAwI=",
+        "btJ8wEDAQMA=",
+        "AwEEAREBRRE=",
+        "QIAggIiggpA="
+      ],
+      "ColorData": [
+        114,
+        114,
+        114,
+        114
+      ],
+      "Sort": 1,
+      "SetType": 2
+    },
+    {
+      "Id": "cf57d28c-acd2-4f40-91db-78e9cc00a685",
+      "Name": "Life",
+      "Width": 1,
+      "Height": 1,
+      "Data": [
+        "AGb//348GAA="
+      ],
+      "ColorData": [
+        66
+      ],
+      "Sort": -1,
+      "SetType": 1
+    }
+  ],
+  "StoredData": [
+    {
+      "OwnerPlugin": "79a79da6-ab25-11eb-bcbc-0242ac130002",
+      "SerializedData": "bnVsbA=="
+    }
+  ]
+}

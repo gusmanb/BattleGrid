@@ -229,6 +229,7 @@ SoundEffectsData:
 	defw SoundEffect6Data
 	defw SoundEffect7Data
 	defw SoundEffect8Data
+	defw SoundEffect9Data
 
 SoundEffect0Data:
 	defb 2 ;noise
@@ -269,6 +270,12 @@ SoundEffect7Data:
 SoundEffect8Data:
 	defb 1 ;tone
 	defw 10,750,6500,0,128
+	defb 0
+SoundEffect9Data:
+	defb 1
+	defw 10,200,6500,24,7388
+	defb 2
+	defw 5,500,6
 	defb 0
 end asm
 
@@ -388,6 +395,19 @@ sub SATShotEffect()
 	borderColors(4) = 4
 
 	PlayFX(8)
+
+	border 0
+
+end sub
+
+sub BrokenDeflectorEffect()
+
+	borderColors(1) = 3
+	borderColors(2) = 5
+	borderColors(3) = 5
+	borderColors(4) = 3
+
+	PlayFX(9)
 
 	border 0
 
