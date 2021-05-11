@@ -47,6 +47,15 @@ sub ShowZoomedFrame(index as ubyte, color as ubyte)
 
 end sub
 
+sub ShowZoomedColoredFrame(index as ubyte)
+
+    printZoomedTile(3, 4, index, tileColors(index + 1))
+    printZoomedTile(11, 4, index + 1, tileColors(index + 2))
+    printZoomedTile(3, 12, index + 2, tileColors(index + 3))
+    printZoomedTile(11, 12, index + 3, tileColors(index + 4))
+
+end sub
+
 sub PlayDeathAlien()
 
     Dim buc as ubyte
@@ -70,8 +79,7 @@ sub PlayDeathAlien()
 
     next buc
 
-    while frameCounter < 150
-    end while
+    DoPause(50)
 
 end sub
 
@@ -106,7 +114,7 @@ sub PlayDeathShot()
 
     next buc
 
-    DoPause(100)
+    DoPause(50)
 
 end sub
 
@@ -129,5 +137,56 @@ sub PlayDeathTank()
     DoPause(10)
 
     PlayDeathShot()
+
+end sub
+
+sub PlayAlienTalk()
+
+    ShowZoomedColoredFrame(ALIENTALKA_INDEX)
+    DoPause(10)
+    ShowZoomedColoredFrame(ALIENTALKB_INDEX)
+    AlienTalkEffect()
+    ShowZoomedColoredFrame(ALIENTALKA_INDEX)
+    DoPause(15)
+    ShowZoomedColoredFrame(ALIENTALKB_INDEX)
+    AlienTalkEffect()
+    ShowZoomedColoredFrame(ALIENTALKA_INDEX)
+    DoPause(1)
+    ShowZoomedColoredFrame(ALIENTALKB_INDEX)
+    AlienTalkEffect()
+    ShowZoomedColoredFrame(ALIENTALKA_INDEX)
+    DoPause(10)
+
+end sub
+
+sub PlayComputerThink()
+
+    ShowZoomedColoredFrame(COMPUTERA_INDEX)
+    ComputerThinkAEffect()
+    ShowZoomedColoredFrame(COMPUTERB_INDEX)
+    DoPause(2)
+    ShowZoomedColoredFrame(COMPUTERA_INDEX)
+    ComputerThinkBEffect()
+    ShowZoomedColoredFrame(COMPUTERB_INDEX)
+    DoPause(10)
+
+end sub
+
+sub PlayAlienListen()
+
+    ShowZoomedColoredFrame(ALIENTALKC_INDEX)
+    DoPause(10)
+    ShowZoomedColoredFrame(ALIENTALKD_INDEX)
+    AlienListenEffect()
+    ShowZoomedColoredFrame(ALIENTALKC_INDEX)
+    DoPause(15)
+    ShowZoomedColoredFrame(ALIENTALKD_INDEX)
+    AlienListenEffect()
+    ShowZoomedColoredFrame(ALIENTALKC_INDEX)
+    DoPause(1)
+    ShowZoomedColoredFrame(ALIENTALKD_INDEX)
+    AlienListenEffect()
+    ShowZoomedColoredFrame(ALIENTALKC_INDEX)
+    DoPause(50)
 
 end sub

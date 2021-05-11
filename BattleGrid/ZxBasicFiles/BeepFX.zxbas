@@ -230,6 +230,10 @@ SoundEffectsData:
 	defw SoundEffect7Data
 	defw SoundEffect8Data
 	defw SoundEffect9Data
+	defw SoundEffect10Data
+	defw SoundEffect11Data
+	defw SoundEffect12Data
+	defw SoundEffect13Data
 
 SoundEffect0Data:
 	defb 2 ;noise
@@ -276,6 +280,22 @@ SoundEffect9Data:
 	defw 10,200,6500,24,7388
 	defb 2
 	defw 5,500,6
+	defb 0
+SoundEffect10Data:
+	defb 1 ;tone
+	defw 10,150,1500,65521,128
+	defb 0
+SoundEffect11Data:
+	defb 1 ;tone
+	defw 10,300,8000,0,128
+	defb 0
+SoundEffect12Data:
+	defb 1 ;tone
+	defw 10,300,5000,0,128
+	defb 0
+SoundEffect13Data:
+	defb 1 ;tone
+	defw 10,150,3500,65521,128
 	defb 0
 end asm
 
@@ -408,6 +428,58 @@ sub BrokenDeflectorEffect()
 	borderColors(4) = 3
 
 	PlayFX(9)
+
+	border 0
+
+end sub
+
+sub AlienTalkEffect()
+
+	borderColors(1) = 4
+	borderColors(2) = 5
+	borderColors(3) = 5
+	borderColors(4) = 4
+
+	PlayFX(10)
+
+	border 0
+
+end sub
+
+sub AlienListenEffect()
+
+	borderColors(1) = 4
+	borderColors(2) = 5
+	borderColors(3) = 5
+	borderColors(4) = 4
+
+	PlayFX(10)
+
+	border 0
+
+end sub
+
+sub ComputerThinkAEffect()
+
+	borderColors(1) = 2
+	borderColors(2) = 6
+	borderColors(3) = 6
+	borderColors(4) = 2
+
+	PlayFX(11)
+
+	border 0
+
+end sub
+
+sub ComputerThinkBEffect()
+
+	borderColors(1) = 4
+	borderColors(2) = 5
+	borderColors(3) = 5
+	borderColors(4) = 4
+
+	PlayFX(12)
 
 	border 0
 

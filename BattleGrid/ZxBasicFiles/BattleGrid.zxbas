@@ -1,4 +1,4 @@
-REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 32768 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
+REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24500 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
 #define PRECOMPUTED_SPRITES
 #define ENABLE_PRINT
@@ -54,17 +54,19 @@ defines:
 #define MAP_X_OFFSET 0
 #define MAP_Y_OFFSET 1
 
-#define MAX_ALIEN_COUNT 4
-#define ALIEN_SPEED 5
+#define MAX_ALIEN_COUNT 1
+#define ALIEN_SPEED 10
 
 #define MAX_TANK_COUNT 2
-#define TANK_SPEED 3
+#define TANK_SPEED 4
 
 #define MAX_SHIP_COUNT 4
 #define SHIP_SPEED 50
 
 #define MAX_HANGAR_COUNT 2
 #define HANGAR_SPEED 150
+
+#define MAX_DESTRUCTIBLES_COUNT 4
 
 #define TOOL_NONE 0
 #define TOOL_BLOCKER 1
@@ -82,7 +84,7 @@ macros:
 
 #define PRINT_DIGIT(X, Y, DIGIT) SetTile(NUMBERS_INDEX + DIGIT, tileColors(NUMBERS_INDEX + DIGIT + 1), X, Y)
 
-#define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 1 \
+#define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 10 \
 PRINT_DIGIT(26, 16, availableBlockers)
 #define DECREASE_BLOCKERS() availableBlockers = availableBlockers - 1 \
 PRINT_DIGIT(26, 16, availableBlockers)
@@ -118,7 +120,7 @@ PRINT_DIGIT(30, 20, availableClearShots)
 
 #define CREATE_ALIEN(X, Y, DIRECTION, TMPVAR) \
 TMPVAR = FindEmptyBit(activeAliens) \
-activeAliens = activeAliens or TABLE_LOOKUP(@maskTable, TMPVAR) \
+activeAliens = activeAliens bor TABLE_LOOKUP(@maskTable, TMPVAR) \
 aliens(TMPVAR, 1) = (X + MAP_X_OFFSET) << 1 \
 aliens(TMPVAR, 2) = (Y + MAP_Y_OFFSET) << 1 \
 aliens(TMPVAR, 3) = DIRECTION \
@@ -127,7 +129,7 @@ aliens(TMPVAR, 4) = -1 \
 
 #define CREATE_TANK(X, Y, DIRECTION, TMPVAR) \
 TMPVAR = FindEmptyBit(activeTanks) \
-activeTanks = activeTanks or TABLE_LOOKUP(@maskTable, TMPVAR) \
+activeTanks = activeTanks bor TABLE_LOOKUP(@maskTable, TMPVAR) \
 tanks(TMPVAR, 1) = (X + MAP_X_OFFSET) << 1 \
 tanks(TMPVAR, 2) = (Y + MAP_Y_OFFSET) << 1 \
 tanks(TMPVAR, 3) = DIRECTION \
@@ -155,7 +157,13 @@ GridObject(HANGAR_INDEX, X, Y)
 GridObject(RADIOTOWER_INDEX, X, Y) \
 activeTowers = activeTowers + 1 \
 
-#define MAKE_DESTRUCTIBLE(X, Y) SetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET, 67)
+#define MAKE_DESTRUCTIBLE(X, Y, TMPVAR) \
+SetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET, 67) \
+TMPVAR = FindEmptyBit(activeDestructibles) \
+activeDestructibles = activeDestructibles or TABLE_LOOKUP(@maskTable, TMPVAR) \
+destructibles(TMPVAR, 1) = X \
+destructibles(TMPVAR, 2) = Y
+
 #define IS_DESTRUCTIBLE(X, Y) (GetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET) = 67)
 
 vars:
@@ -179,6 +187,10 @@ Dim cursorMoved as uByte = 0
 Dim cursorTool as uByte = TOOL_NONE
 
 Dim activeMap(20, 20) as uByte
+
+'WARNING!! Path map is y/x not x/y and has an empty border
+Dim pathMap(22, 22) as ubyte
+
 
 Dim reflectDirsA(4) as uByte => { 2, 4, 1, 3 }
 Dim reflectDirsB(4) as uByte => { 4, 1, 2, 3 }
@@ -214,6 +226,11 @@ Dim freezingShip as uByte = 1
 Dim activeHangars as uByte
 Dim hangars(MAX_HANGAR_COUNT,4) as uByte 'x,y,dir,frame
 Dim freezingHangar as uByte = 1
+
+Dim refreshMap as uByte = 0
+
+Dim destructibles(MAX_DESTRUCTIBLES_COUNT,2) as uByte
+Dim activeDestructibles as uByte
 
 init:
 
@@ -393,6 +410,15 @@ end sub
 
 sub InitLevel()
 
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+
+    for tmpX = 1 to 20
+        for tmpY = 1 to 19
+            activeMap(tmpX, tmpY) = 0
+        next tmpY
+    next tmpX
+
     activeShots = 0
     activeAliens = 0
     activeTanks = 0
@@ -405,7 +431,8 @@ sub InitLevel()
     availableChargedShots = 0
     availableClearShots = 0
     availableFireShots = 0
-
+    freezingShip = 1
+    freezingHangar = 1
     cursorTool = TOOL_NONE
 
     PRINT_DIGIT(26, 16, 0)
@@ -447,8 +474,8 @@ sub InitLevel()
     GridObject(DEFLECTORA_INDEX, 1, 3)
     GridObject(DEFLECTORB_INDEX, 1, 10)
 
-    MAKE_DESTRUCTIBLE(15, 10)
-    MAKE_DESTRUCTIBLE(1, 3)
+    MAKE_DESTRUCTIBLE(15, 10, buc)
+    MAKE_DESTRUCTIBLE(1, 3, buc)
 
     'for buc = 1 to 8
     '    GridObject(FORCEFIELD_INDEX, buc, 14)
@@ -534,6 +561,8 @@ sub InitLevel()
     CREATE_HANGAR(10, 1, 2, buc)
 
     ShowLifes()
+
+    PathFind(10,20)
 
 end sub
 
@@ -635,6 +664,16 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 if IS_DESTRUCTIBLE(cellX, cellY) then 
                     BrokenDeflectorEffect()
                     ClearGridCell(cellX, cellY)
+                    for tmpDir = 1 to MAX_DESTRUCTIBLES_COUNT
+                        if destructibles(tmpDir, 1) = cellX then
+                        if destructibles(tmpDir, 2) = cellY then
+                            activeDestructibles = activeDestructibles bxor tmpDir
+                            destructibles(tmpDir, 1) = 0
+                            destructibles(tmpDir, 2) = 0
+                            exit for
+                        end if
+                        end if
+                    next tmpDir
                 end if
 
                 'shots(shotIndex, 3) = reflectDirs(tmpCell - DEFLECTORA_INDEX + 1, shots(shotIndex, 3))
@@ -654,7 +693,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             end if 
             
             if tmpCell >= FORCEFIELD_INDEX then
-            if tmpCell <= TREES_INDEX then
+            if tmpCell <= BLOCKER_INDEX then
 
                 EXPLODE_SHOT(shotIndex)
                 return
@@ -732,8 +771,9 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
         if tmpCell = MOTHERSHIP_INDEX then
 
+            ClearGridCell(cellX, cellY)
+
             if shotIndex <> 255 then
-                ClearGridCell(cellX, cellY)
                 EXPLODE_SHOT(shotIndex)
                 BuildTankDestroyedEffect()
             end if
@@ -1016,6 +1056,7 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
 
                 DECREASE_BLOCKERS()
                 GridObject(BLOCKER_INDEX, mapX, mapY)
+                pathMap(mapY + 1, mapX + 1) = 0
                 MinePlacedEffect()
 
             end if
@@ -1042,6 +1083,9 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
 
                     CheckShotItems(255, tmpX, tmpY)
                     GridObject(EXPLOSIONCRATER_INDEX + cnt, tmpX, tmpY)
+
+                    pathMap(tmpY + 1, tmpX + 1) = 0
+
                 next tmpX
             next tmpY
 
@@ -1068,6 +1112,9 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
                 DECREASE_FIRESHOTS()
                 SATShotEffect()
                 GridObject(FIRE_INDEX, mapX, mapY)
+
+                pathMap(mapY + 1, mapX + 1) = 0
+
                 CheckShotUnits(1, mapX, mapY, 0)
 
             end if
@@ -1081,12 +1128,13 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
             if activeMap(mapX, mapY) <> MOTHERSHIP_INDEX then
             if activeMap(mapX, mapY) <> HANGAR_INDEX then
             if activeMap(mapX, mapY) <> FORCEFIELD_INDEX then
+            if activeMap(mapX, mapY) <> RADIOTOWER_INDEX then
 
                 DECREASE_CLEARSHOTS()
                 SATShotEffect()
-                
                 ClearGridCell(mapX, mapY)
 
+            end if
             end if
             end if
             end if
@@ -1238,6 +1286,7 @@ sub UpdateAliens()
     Dim tmpCellY as byte
     Dim tmpMask as uByte
     Dim tmpCellValue as uByte
+    Dim tmpMine as uByte
 
     for buc = 1 to MAX_ALIEN_COUNT
 
@@ -1246,22 +1295,8 @@ sub UpdateAliens()
         if activeAliens band tmpMask then 
 
             'Movimiento del enemigo:
-            /'
-
-                El enemigo tiende a moverse hacia un lado, cuando encuentra un obstáculo intenta bajar.
-                Una vez baja invierte la dirección
-                Si no puede bajar invierte tb dirección
-                Nunca mueve hacia arriba
-
-                Si invierte dirección sin bajar y no puede mover explota (si encerramos al enemigo se muere)
-                
-                Dir: derecha = 1
-                     Izquierda = -1
-    
-            '/
-
             tmpExplode = aliens(buc, 4)
-
+            
             if tmpExplode <> -1 then
 
                 tmpExplode = tmpExplode + 1
@@ -1276,103 +1311,94 @@ sub UpdateAliens()
 
             else
 
+                
                 tmpX = aliens(buc, 1)
                 tmpY = aliens(buc, 2)
                 tmpDir = aliens(buc, 3)
+                
 
-
-                if tmpX & 1 then
-
-                    'Estamos en media celda, el movimiento continúa
-                    tmpX = tmpX + tmpDir
-
-                else
+                if (tmpX & 1) = 0 and (tmpY & 1) = 0 then
 
                     tmpCellX = (tmpX >> 1) - MAP_X_OFFSET
                     tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
 
-                    'probamos a seguir OPTIMIZAR
-TESTALIENCONTINUE:
+                    Dim currentWeight as uByte = pathMap(tmpCellY + 1, tmpCellX + 1)
+                    Dim tmpWeight as uByte
+                   
+                    tmpDir = 0
+                    
+                    'No comprobamos límites, nunca nos vamos a salir del mapa de caminos
+                    'ya que contiene un borde con 0's
 
-                    if tmpCellX > 1 then
-                    if tmpDir = -1 then
-                        goto ALIENCONTINUE
+                    'izquierda
+                    tmpWeight = pathMap(tmpCellY + 1, tmpCellX)
+                    if tmpWeight < currentWeight then
+                    if tmpWeight <> 0 then
+                            currentWeight = tmpWeight
+                            tmpDir = 1
                     end if
                     end if
 
-                    if tmpCellX < 20 then
-                    if tmpDir = 1 then
-                        goto ALIENCONTINUE
+cpderecha:
+                    'derecha
+                    tmpWeight = pathMap(tmpCellY + 1, tmpCellX + 2)
+                    if tmpWeight < currentWeight then
+                    if tmpWeight <> 0 then
+                            currentWeight = tmpWeight
+                            tmpDir = 2
                     end if
                     end if
-TESTALIENDOWN:
-                    if tmpCellY < 20 then
-
-                        tmpCellValue = activeMap(tmpCellX, tmpCellY + 1)
-
-                        if tmpCellValue = 0 or (tmpCellValue >= FORCEFIELD_INDEX and tmpCellValue <= TREES_INDEX) then 'bajar
-                            tmpDir = -tmpDir
-                            tmpY = tmpY + 2 'verticalmente se mueve en celdas
-                            goto ENDTESTCELL
-                        else if tmpCellValue = MINE_INDEX then
-                            ClearGridCell(tmpCellX, tmpCellY + 1)
-                            aliens(buc, 4) = 0
-                            goto ENDTESTCELL
-                        end if
-
-                    end if
-
-TESTALIENINVERT:
-
-                    if tmpCellX > 1 then
-                    if tmpDir = 1 then
-                        goto ALIENINVERT
+cparriba:
+                    'Arriba
+                    tmpWeight = pathMap(tmpCellY, tmpCellX + 1)
+                    if tmpWeight < currentWeight then
+                    if tmpWeight <> 0 then
+                            currentWeight = tmpWeight
+                            tmpDir = 3
                     end if
                     end if
 
-                    if tmpCellX < 20 then
-                    if tmpDir = -1 then
-                        goto ALIENINVERT
+cpabajo:
+                    'abajo
+                    tmpWeight = pathMap(tmpCellY + 2, tmpCellX + 1)
+                    if tmpWeight < currentWeight then
+                    if tmpWeight <> 0 then
+                            'print at 0,0; tmpWeight; "  "; tmpX ; "  "; tmpCellY + 1; "  "
+                            currentWeight = tmpWeight
+                            tmpDir = 4
                     end if
                     end if
+                
+                end if
 
-EXPLODEALIEN:
+                if tmpDir = 1 then
+                    tmpCellX = tmpCellX - 1
+                    tmpX = tmpX - 1
+                else if tmpDir = 2 then
+                    tmpCellX = tmpCellX + 1
+                    tmpX = tmpX + 1
+                else if tmpDir = 3 then
+                    tmpCellY = tmpCellY - 1
+                    tmpY = tmpY - 1
+                else if tmpDir = 4 then
+                    tmpCellY = tmpCellY + 1
+                    tmpY = tmpY + 1
+                else 
+
+                    
+                    PlayAlienTalk()
+                    PlayComputerThink()
+                    PathFind(10, 20)
+                    PlayComputerThink()
+                    PlayAlienListen()
+
+                    refreshMap = 1
+
+                end if
+
+                if activeMap(tmpCellX, tmpCellY) = MINE_INDEX then
                     aliens(buc, 4) = 0
-                    goto ENDTESTCELL
-
-ALIENCONTINUE:
-
-                    tmpCellValue = activeMap(tmpCellX + tmpDir, tmpCellY)
-
-                    if tmpCellValue = 0 or (tmpCellValue >= FORCEFIELD_INDEX and tmpCellValue <= TREES_INDEX) then
-                        tmpX = tmpX + tmpDir
-                        goto ENDTESTCELL
-                    else if tmpCellValue = MINE_INDEX then
-                        ClearGridCell(tmpCellX + tmpDir, tmpCellY)
-                        aliens(buc, 4) = 0
-                        goto ENDTESTCELL
-                    end if
-
-                    goto TESTALIENDOWN
-
-ALIENINVERT:
-
-                    tmpCellValue = activeMap(tmpCellX - tmpDir, tmpCellY) 
-
-                    if tmpCellValue = 0 or (tmpCellValue >= FORCEFIELD_INDEX and tmpCellValue <= TREES_INDEX)  then 'invertir (en la última fila explota)                       
-                        tmpDir = -tmpDir
-                        tmpX = tmpX + tmpDir
-                        goto ENDTESTCELL
-                    else if tmpCellValue = MINE_INDEX then
-                        ClearGridCell(tmpCellX - tmpDir, tmpCellY)
-                        aliens(buc, 4) = 0
-                        goto ENDTESTCELL
-                    end if
-        
-                    goto EXPLODEALIEN
-
-ENDTESTCELL:
-
+                    ClearGridCell(tmpCellX, tmpCellY)
                 end if
 
                 aliens(buc, 1) = tmpX
@@ -1386,7 +1412,7 @@ ENDTESTCELL:
                 end if
 
             end if
-
+            
         end if
 
     next buc
@@ -1669,58 +1695,62 @@ sub TestCollisions()
 
                 if activeAliens & TABLE_LOOKUP(@maskTable, buc) then
 
-                    tmpEnemX = aliens(buc, 1)
-                    tmpEnemY = aliens(buc, 2)
+                    if aliens(buc, 4) = -1 then
 
-                    if activeShot1 then
-                    if tmpEnemX >= tmpShot1XMin then
-                    if tmpEnemX <= tmpShot1XMax then
-                    if tmpEnemY >= tmpShot1YMin then
-                    if tmpEnemY <= tmpShot1YMax then
+                        tmpEnemX = aliens(buc, 1)
+                        tmpEnemY = aliens(buc, 2)
 
-                        aliens(buc, 4) = 0
-                        activeShots = activeShots band 11111110b
-                        KilledAlienEffect()
-                        continue for
+                        if activeShot1 then
+                        if tmpEnemX >= tmpShot1XMin then
+                        if tmpEnemX <= tmpShot1XMax then
+                        if tmpEnemY >= tmpShot1YMin then
+                        if tmpEnemY <= tmpShot1YMax then
 
-                    end if
-                    end if
-                    end if
-                    end if
-                    end if
+                            aliens(buc, 4) = 0
+                            activeShots = activeShots band 11111110b
+                            KilledAlienEffect()
+                            continue for
 
-                    if activeShot2 then
-                    if tmpEnemX >= tmpShot2XMin then
-                    if tmpEnemX <= tmpShot2XMax then
-                    if tmpEnemY >= tmpShot2YMin then
-                    if tmpEnemY <= tmpShot2YMax then
+                        end if
+                        end if
+                        end if
+                        end if
+                        end if
 
-                        aliens(buc, 4) = 0
-                        activeShots = activeShots band 11111101b
-                        KilledAlienEffect()
-                        continue for
+                        if activeShot2 then
+                        if tmpEnemX >= tmpShot2XMin then
+                        if tmpEnemX <= tmpShot2XMax then
+                        if tmpEnemY >= tmpShot2YMin then
+                        if tmpEnemY <= tmpShot2YMax then
 
-                    end if
-                    end if
-                    end if
-                    end if
-                    end if
+                            aliens(buc, 4) = 0
+                            activeShots = activeShots band 11111101b
+                            KilledAlienEffect()
+                            continue for
 
-                    if activeShot3 then
-                    if tmpEnemX >= tmpShot3XMin then
-                    if tmpEnemX <= tmpShot3XMax then
-                    if tmpEnemY >= tmpShot3YMin then
-                    if tmpEnemY <= tmpShot3YMax then
+                        end if
+                        end if
+                        end if
+                        end if
+                        end if
 
-                        aliens(buc, 4) = 0
-                        activeShots = activeShots band 11111011b
-                        KilledAlienEffect()
-                        continue for
+                        if activeShot3 then
+                        if tmpEnemX >= tmpShot3XMin then
+                        if tmpEnemX <= tmpShot3XMax then
+                        if tmpEnemY >= tmpShot3YMin then
+                        if tmpEnemY <= tmpShot3YMax then
 
-                    end if
-                    end if
-                    end if
-                    end if
+                            aliens(buc, 4) = 0
+                            activeShots = activeShots band 11111011b
+                            KilledAlienEffect()
+                            continue for
+
+                        end if
+                        end if
+                        end if
+                        end if
+                        end if
+
                     end if
 
                 end if 
@@ -1735,58 +1765,62 @@ sub TestCollisions()
 
                 if activeTanks & TABLE_LOOKUP(@maskTable, buc) then
 
-                    tmpEnemX = tanks(buc, 1)
-                    tmpEnemY = tanks(buc, 2)
+                    if aliens(buc, 4) = -1 then
 
-                    if activeShot1 then
-                    if tmpEnemX >= tmpShot1XMin then
-                    if tmpEnemX <= tmpShot1XMax then
-                    if tmpEnemY >= tmpShot1YMin then
-                    if tmpEnemY <= tmpShot1YMax then
+                        tmpEnemX = tanks(buc, 1)
+                        tmpEnemY = tanks(buc, 2)
 
-                        tanks(buc, 4) = 0
-                        activeShots = activeShots band 11111110b
-                        BuildTankDestroyedEffect()
-                        continue for
+                        if activeShot1 then
+                        if tmpEnemX >= tmpShot1XMin then
+                        if tmpEnemX <= tmpShot1XMax then
+                        if tmpEnemY >= tmpShot1YMin then
+                        if tmpEnemY <= tmpShot1YMax then
 
-                    end if
-                    end if
-                    end if
-                    end if
-                    end if
+                            tanks(buc, 4) = 0
+                            activeShots = activeShots band 11111110b
+                            BuildTankDestroyedEffect()
+                            continue for
 
-                    if activeShot2 then
-                    if tmpEnemX >= tmpShot2XMin then
-                    if tmpEnemX <= tmpShot2XMax then
-                    if tmpEnemY >= tmpShot2YMin then
-                    if tmpEnemY <= tmpShot2YMax then
+                        end if
+                        end if
+                        end if
+                        end if
+                        end if
 
-                        tanks(buc, 4) = 0
-                        activeShots = activeShots band 11111101b
-                        BuildTankDestroyedEffect()
-                        continue for
+                        if activeShot2 then
+                        if tmpEnemX >= tmpShot2XMin then
+                        if tmpEnemX <= tmpShot2XMax then
+                        if tmpEnemY >= tmpShot2YMin then
+                        if tmpEnemY <= tmpShot2YMax then
 
-                    end if
-                    end if
-                    end if
-                    end if
-                    end if
+                            tanks(buc, 4) = 0
+                            activeShots = activeShots band 11111101b
+                            BuildTankDestroyedEffect()
+                            continue for
 
-                    if activeShot3 then
-                    if tmpEnemX >= tmpShot3XMin then
-                    if tmpEnemX <= tmpShot3XMax then
-                    if tmpEnemY >= tmpShot3YMin then
-                    if tmpEnemY <= tmpShot3YMax then
+                        end if
+                        end if
+                        end if
+                        end if
+                        end if
 
-                        tanks(buc, 4) = 0
-                        activeShots = activeShots band 11111011b
-                        BuildTankDestroyedEffect()
-                        continue for
+                        if activeShot3 then
+                        if tmpEnemX >= tmpShot3XMin then
+                        if tmpEnemX <= tmpShot3XMax then
+                        if tmpEnemY >= tmpShot3YMin then
+                        if tmpEnemY <= tmpShot3YMax then
 
-                    end if
-                    end if
-                    end if
-                    end if
+                            tanks(buc, 4) = 0
+                            activeShots = activeShots band 11111011b
+                            BuildTankDestroyedEffect()
+                            continue for
+
+                        end if
+                        end if
+                        end if
+                        end if
+                        end if
+
                     end if
 
                 end if 
@@ -1852,8 +1886,9 @@ sub UpdateShips()
             if ships(buc, 4) > 0 then
                 ships(buc, 4) = ships(buc, 4) - 1
             else
+check_slot:
                 if AVAILABLE_SLOT(activeAliens, MAX_ALIEN_COUNT) then
-                    
+compute_alien_pos:
                     ships(buc, 4) = SHIP_SPEED
                     tmpX = ships(buc, 1)
                     tmpY = ships(buc, 2)
@@ -1861,19 +1896,20 @@ sub UpdateShips()
                     
                     if tmpVal = 1 then  'spawn derecha
                         tmpX = tmpX + 1
-                        tmpDir = 1      'alien mueve derecha
+                        tmpDir = 2      'alien mueve derecha
                     else if tmpVal = 2 then 'abajo
                         tmpY = tmpY + 1
-                        tmpDir = 1
+                        tmpDir = 4
                     else if tmpVal = 3 then
                         tmpX = tmpX - 1
-                        tmpDir = -1
+                        tmpDir = 1
                     else if tmpVal = 4 then
                         tmpY = tmpY - 1
-                        tmpDir = -1
+                        tmpDir = 3
                     end if
-                
+
                     CREATE_ALIEN(tmpX, tmpY, tmpDir, tmpVal)
+
                     freezingShip = 1
                 else
                     freezingShip = buc
@@ -1930,6 +1966,52 @@ sub UpdateHangars()
         end if
 
     next buc
+
+end sub
+
+sub RefreshMap()
+
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpI as uByte
+
+    for tmpX = 1 to 20
+        for tmpY = 1 to 20
+            if activeMap(tmpX, tmpY) = 0 then
+                ClearGridCell(tmpX, tmpY)
+            else
+                GridObject(activeMap(tmpX, tmpY), tmpX, tmpY)
+
+                if activeDestructibles <> 0 then
+
+                    if activeMap(tmpX, tmpY) >= DEFLECTORA_INDEX
+                    if activeMap(tmpX, tmpY) <= DEFLECTORD_INDEX
+
+                        for tmpI = 1 to MAX_DESTRUCTIBLES_COUNT
+
+                            if activeDestructibles band TABLE_LOOKUP(@maskTable, tmpI) then
+
+                                if destructibles(tmpI, 1) = tmpX
+                                if destructibles(tmpI, 2) = tmpY
+
+                                    SetTileColor(tmpX + MAP_X_OFFSET, tmpY + MAP_Y_OFFSET, 67)
+                                    exit for
+
+                                end if
+                                end if
+
+                            end if 
+    
+                        next tmpI
+
+                    end if
+                    end if
+
+                end if
+
+            end if
+        next tmpY
+    next tmpX
 
 end sub
 
@@ -2040,6 +2122,11 @@ while(1)
 
     end if
 
+    if refreshMap then
+        refreshMap = 0
+        RefreshMap()
+    end if
+
     RenderFrame()
 
     if updateScore then
@@ -2070,3 +2157,231 @@ while(1)
     
 
 end while
+
+sub PathFind(x as ubyte, y as ubyte)
+
+    Dim ex as uByte = x
+    Dim ey as uByte = y
+
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+
+    tmpX = ex
+    tmpY = ey
+
+    for tmpX = 1 to 22
+        for tmpY = 1 to 22
+            pathMap(tmpY, tmpX) = 0
+        next tmpY
+    next tmpX
+
+    for tmpX = 1 to 20
+        for tmpY = 1 to 20
+
+            if activeMap(tmpX, tmpY) = 0 or (activeMap(tmpX, tmpY) >= FORCEFIELD_INDEX and activeMap(tmpX, tmpY) <= TREES_INDEX) or activeMap(tmpX, tmpY) = MINE_INDEX then
+                pathMap(tmpY + 1, tmpX + 1) = 255
+            else
+                pathMap(tmpY + 1, tmpX + 1) = 0
+            end if
+
+        next tmpY
+    next tmpX
+
+asm
+
+PROC
+LOCAL pmap, worklist1, worklist2, save_sp
+LOCAL calc_distance, step_loop, skip_left, skip_right, skip_up, skip_down, swap_lists
+;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+; Calculate distance to all reachable cells from the given start cell (or
+; up to 'max_step' steps removed from the start cell).
+; 
+; In: D,E = x,y-coordinates of start position
+;     map-array: walls should have the value 0
+;                empty cells should have the value 255
+;
+; Out: pmap-array is filled in:
+;  - walls cells have value 0
+;  - unreachable cells (or not reached within 'max_steps') have value 255
+;  - the start cell is given the value '254-max_steps'
+;  - other cells are given an increasingly bigger value depending
+;    on the number of steps required to reach this cell
+;   (So start and reachable cells are given values in range [1..254])
+
+calc_distance:	; Copy map to helper map. Initially no cell is marked as
+		; reachable (they all have value=255). Except for walls,
+		; those have value=0.
+		; An alternative is to work on the original map, and reset
+		; all values!=0 back to 255 when a new distance-map needs
+		; to be calculated.
+		;exx
+		;ld	hl,map
+		;ld	de,pmap
+		;ld	bc,map_size
+		;ldir
+
+        ld d, (ix - 1)
+        ld e, (ix - 2)
+
+
+		;exx			; d,e = x,y-coord of start position
+        
+        di
+		ld	l,e		;;; can be removed if D,E input is swapped
+		ld	h,0		; hl = y-coord
+		ld	e,d
+		ld	d,h		; de = x-coord
+
+        ld c, l
+        ld b, h
+
+
+		add	hl,hl		; *2
+		add	hl,hl		; *4
+		add	hl,hl		; *8
+		add	hl,hl		; *16
+		
+        add hl, bc      ;+1
+        add hl, bc      ;+1
+        add hl, bc      ;+1
+        add hl, bc      ;+1, total 20
+        add hl, bc      ;+1
+        add hl, bc      ;+1, total 22
+
+		add	hl,de
+		ld	de,pmap
+		add	hl,de		; address of the start cell in pmap
+
+		ld	(save_sp),sp	; after this point we can't use 'normal'
+		ld	sp,worklist1+2	;   stack operations anymore
+		xor	a
+		ld	(worklist1+3),a	; mark end of list
+		ld	de,worklist2
+
+		ld	a,255-max_steps	; step-counter, starts at 2 instead of 1!!
+		ld	(hl),254-max_steps ; mark start cell
+
+		; At this point
+		;  A  = step-count = 2
+		;  HL = address of start cell
+		;  SP = address of next item in worklist1 (points to 0-byte
+		;       because the initial list only contains the start cell
+		;       and as an optimization we don't explicitly store that
+		;	cell in the list)
+		;  DE = worklist2 (newly reached cells will be stored here)
+		;  BC not in use
+
+step_loop	; at this point:
+		;  SP = address of next item in worklist
+		;  HL = address of current cell
+		dec	hl		; left neighbor cell
+		cp	(hl)		; (HL) <= A means:    (so not-carry)
+		jr	nc,skip_left	;  -> already marked or a wall
+		; new cell is reached, mark it and store it in the new worklist
+		ld	(hl),a		; mark cell with step-counter
+		ex	de,hl
+		ld	(hl),e
+		inc	hl
+		ld	(hl),d		; store cell in new worklist
+		inc	hl		; update to next free position in list
+		ex	de,hl
+skip_left
+		inc	hl
+		inc	hl		; right neighbor
+		cp	(hl)
+		jr	nc,skip_right
+		ld	(hl),a
+		ex	de,hl
+		ld	(hl),e
+		inc	hl
+		ld	(hl),d
+		inc	hl
+		ex	de,hl
+skip_right
+		ld	bc,-map_width-1
+		add	hl,bc		; up neighbor
+		cp	(hl)
+		jr	nc,skip_up
+		ld	(hl),a
+		ex	de,hl
+		ld	(hl),e
+		inc	hl
+		ld	(hl),d
+		inc	hl
+		ex	de,hl
+skip_up
+		ld	bc,map_width*2	; if (map_width < 128) -> B=0, see below
+		add	hl,bc		; down neighbor
+		cp	(hl)
+		jr	nc,skip_down
+		ld	(hl),a
+		ex	de,hl
+		ld	(hl),e
+		inc	hl
+		ld	(hl),d
+		inc	hl
+		ex	de,hl
+skip_down
+		pop	hl		; hl = next item from worklist
+		inc	h
+		dec	h		; upper-byte != 0
+		jr	nz,step_loop	;  -> end-of-list not yet reached
+
+		ex	de,hl
+		inc	hl
+		ld	(hl),b		; mark end of next worklist (B=0)
+
+		inc	a		; increase step count
+		ld	de,worklist2
+		ld	hl,worklist1
+		bit	0,a
+		jr	z,swap_lists	; Z/NZ depends on the initial step-count!
+		ex	de,hl		; swap lists (depends on odd/even step count)
+swap_lists	ld	sp,hl
+
+		; at this point:
+		;  SP = address of first item in the new worklist
+		;  DE = address of next worklist (this list does not need to cleared)
+		;  A  = step count
+		pop	hl
+		inc	h
+		dec	h		; h == 0?
+		jr	nz,step_loop
+
+		; We've just switched to a new worklist, and we're already
+		; at the end of that list (so list was empty). This means
+		; that all reachable cells have been marked.
+		ld	sp,(save_sp)	; restore stack pointer
+        ;ret 
+        jp end_path_proc
+;++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+map_width	equ	22	; must be strictly smaller than 128
+map_height	equ	22
+map_size	equ	map_width * map_height
+max_steps	equ	253	; must be odd (or else change Z/NZ condition below)
+                                ; must be <= 253
+min		equ	22	; min(map_width, map_height, max_steps)
+
+
+W		equ	0	; wall
+_		equ	255	; empty space
+
+pmap EQU _pathMap.__DATA__ ; :		ds	map_size
+worklist1:	ds	2*4*min
+worklist2:	ds	2*4*min
+save_sp		ds	2
+
+end_path_proc:
+
+ei
+
+ENDP
+
+end asm
+
+end sub
