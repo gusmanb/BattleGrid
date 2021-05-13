@@ -1,0 +1,190 @@
+﻿REM Write your ZX BASIC (Boriel's BASIC) code here
+
+#include "Maps.zxbas"
+
+Dim indexes(31, 2) as ubyte => _
+{ _
+    { DEFLECTORA_INDEX, 11 } , _
+    { DEFLECTORB_INDEX, 11 } , _
+    { DEFLECTORC_INDEX, 11 } , _
+    { DEFLECTORD_INDEX, 11 } , _
+    { HBARRIER_INDEX, 31 } , _
+    { VBARRIER_INDEX, 13 } , _
+    { BIGBUILDING_INDEX, 33 } , _
+    { MEDIUMBUILDING_INDEX, 32 } , _
+    { TALLBUILDING_INDEX, 12 } , _
+    { WIDEBUILDING_INDEX, 21 } , _
+    { SMALLBUILDING_INDEX, 11 } , _
+    { MONUMENT_INDEX, 11 } , _
+    { ROCKS_INDEX, 11 } , _
+    { EXPLOSIONCRATER_INDEX, 33 } , _
+    { TOXICWASTE_INDEX, 11 } , _
+    { FLOOD_INDEX, 11 } , _
+    { FIRE_INDEX, 11 } , _
+    { FORCEFIELD_INDEX, 11 } , _
+    { STREETLIGHT_INDEX, 11 } , _
+    { BUSH_INDEX, 11 } , _
+    { TREES_INDEX, 11 } , _
+    { SPLITTER_INDEX, 11 } , _
+    { MINECRATE_INDEX, 11 } , _
+    { BLOCKERCRATE_INDEX, 11 } , _
+    { BOMBCRATE_INDEX, 11 } , _
+    { CHARGEDSHOTCRATE_INDEX, 11 } , _
+    { FIRESHOTCRATE_INDEX, 11 } , _
+    { CLEARSHOTCRATE_INDEX, 11 } , _
+    { RADIOTOWER_INDEX, 11 } , _
+    { MOTHERSHIP_INDEX, 11 } , _
+    { HANGAR_INDEX, 11 } _
+}
+
+
+sub GridObject(INDEX as ubyte, X as ubyte, Y as ubyte)
+    activeMap(X,Y) = INDEX
+    SetTileChecked(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
+end sub
+
+sub ClearGridCell(X as ubyte, Y as ubyte)
+    activeMap(X,Y) = 0
+    SetTileChecked(GRID_INDEX + 4, $47, X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
+end sub
+
+
+sub DrawGrid()
+
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpColor as uByte
+
+    for tmpX = 1 to 20
+        for tmpY = 1 to 20
+            activeMap(tmpX, tmpY) = 0
+        next tmpY
+    next tmpX
+
+
+    SetTile(GRID_INDEX, tileColors(GRID_INDEX + 1), 0, 1)
+    SetTile(GRID_INDEX + 6, tileColors(GRID_INDEX + 7), 21, 1)
+    SetTile(GRID_INDEX + 2, tileColors(GRID_INDEX + 3), 0, 22)
+    SetTile(GRID_INDEX + 8, tileColors(GRID_INDEX + 9), 21, 22)
+
+    for tmpX = 1 to 20
+
+        SetTile(GRID_INDEX + 3, tileColors(GRID_INDEX + 4), tmpX, 1)
+        SetTile(GRID_INDEX + 5, tileColors(GRID_INDEX + 6), tmpX, 22)
+
+    next tmpX
+
+    for tmpY = 2 to 21
+    
+        SetTile(GRID_INDEX + 1, tileColors(GRID_INDEX + 2), 0, tmpY)
+        SetTile(GRID_INDEX + 7, tileColors(GRID_INDEX + 7), 21, tmpY)
+
+        if tmpY = 21 then tmpColor = $46 else tmpColor = $47
+
+        for tmpX = 1 to 20
+
+            SetTile(GRID_INDEX + 4, tmpColor, tmpX, tmpY)
+
+        next tmpX
+
+    next tmpY
+
+end sub
+
+
+function LoadObject(objectType as ubyte, objectX as ubyte, objectY as ubyte, offset as uInteger) as ubyte
+
+    Dim realIndex as ubyte
+    Dim size as uByte
+    Dim extraByte as ubyte
+    Dim tmpVar as ubyte
+
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+
+    realIndex = indexes(objectType, 1)
+    size = indexes(objectType, 2)
+
+    if realIndex >= DEFLECTORA_INDEX then
+    if realIndex <= DEFLECTORD_INDEX then
+
+        extraByte = peek(offset)
+
+        GridObject(realIndex, objectX, objectY)
+
+        if extraByte then 
+            MAKE_DESTRUCTIBLE(objectX, objectY, tmpVar)
+        end if
+
+        return 1
+
+    end if
+    end if
+
+    if realIndex = RADIOTOWER_INDEX then
+
+        CREATE_TOWER(objectX, objectY)
+        return 0
+
+    end if
+
+    if realIndex = MOTHERSHIP_INDEX then
+
+        extraByte = peek(offset)
+        CREATE_SHIP(objectX, objectY, extraByte, tmpVar)
+        return 1
+
+    end if
+
+    if realIndex = HANGAR_INDEX then
+
+        extraByte = peek(offset)
+        CREATE_HANGAR(objectX, objectY, extraByte, tmpVar)
+        return 1
+
+    end if
+
+    extraByte = size mod 10
+    size = size / 10
+
+    for tmpY = 1 to extraByte
+        for tmpX = 1 to size
+            GridObject(realIndex, objectX + tmpX - 1, objectY + tmpY - 1)
+            realIndex = realIndex + 1
+        next tmpX
+    next tmpY
+
+    return 0
+
+end function 
+
+sub LoadMap(mapNumber as uByte)
+
+    dim address as uInteger = @maps + mapIndexes(mapNumber)
+
+    Dim readVal as uInteger
+
+    Dim objectType as uByte
+    Dim objectX as ubyte
+    Dim objectY as ubyte
+
+    DrawGrid()
+
+
+    while 1
+
+        readVal = peek(uinteger, address)
+        address = address + 2
+        
+        objectType = readVal & 31
+        readVal = readVal >> 5
+        objectX = readVal & 31
+        readVal = readVal >> 5
+        objectY = readVal & 31
+
+        if objectType = 0 then return
+
+        if LoadObject(objectType, objectX, objectY, address) then address = address + 1
+    end while
+
+end sub

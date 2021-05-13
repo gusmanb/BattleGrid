@@ -1,0 +1,119 @@
+﻿
+defines:
+#define CURSOR_FRAMES 10
+#define CURSOR_SPEED 5
+
+#define MAP_X_OFFSET 0
+#define MAP_Y_OFFSET 1
+
+#define MAX_ALIEN_COUNT 4
+#define ALIEN_SPEED 10
+
+#define MAX_TANK_COUNT 2
+#define TANK_SPEED 4
+
+#define MAX_SHIP_COUNT 4
+#define SHIP_SPEED 50
+z
+#define MAX_HANGAR_COUNT 2
+#define HANGAR_SPEED 150
+
+#define MAX_DESTRUCTIBLES_COUNT 4
+
+#define TOOL_NONE 0
+#define TOOL_BLOCKER 1
+#define TOOL_MINE 2
+#define TOOL_BOMB 3
+#define TOOL_CHARGEDSHOT 4
+#define TOOL_FIRESHOT 5
+#define TOOL_CLEARSHOT 6
+
+
+macros:
+#define TABLE_LOOKUP(Array, Index) (peek (Array + Index - 1))
+
+#define EXPLODE_SHOT(INDEX) shots(INDEX, 4) = 0
+
+#define PRINT_DIGIT(X, Y, DIGIT) SetTile(NUMBERS_INDEX + DIGIT, tileColors(NUMBERS_INDEX + DIGIT + 1), X, Y)
+
+#define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 20 \
+PRINT_DIGIT(26, 16, availableBlockers)
+#define DECREASE_BLOCKERS() availableBlockers = availableBlockers - 1 \
+PRINT_DIGIT(26, 16, availableBlockers)
+
+#define INCREASE_MINES() availableMines = availableMines + 1 \
+PRINT_DIGIT(30, 16, availableMines)
+#define DECREASE_MINES() availableMines = availableMines - 1 \
+PRINT_DIGIT(30, 16, availableMines)
+
+#define INCREASE_BOMBS() availableBombs = availableBombs + 1 \
+PRINT_DIGIT(26, 18, availableBombs)
+#define DECREASE_BOMBS() availableBombs = availableBombs - 1 \
+PRINT_DIGIT(26, 18, availableBombs)
+
+#define INCREASE_CHARGEDSHOTS() availableChargedShots = availableChargedShots + 1 \
+PRINT_DIGIT(30, 18, availableChargedShots)
+#define DECREASE_CHARGEDSHOTS() availableChargedShots = availableChargedShots - 1 \
+PRINT_DIGIT(30, 18, availableChargedShots)
+
+#define INCREASE_FIRESHOTS() availableFireShots = availableFireShots + 1 \
+PRINT_DIGIT(26, 20, availableFireShots)
+#define DECREASE_FIRESHOTS() availableFireShots = availableFireShots - 1 \
+PRINT_DIGIT(26, 20, availableFireShots)
+
+#define INCREASE_CLEARSHOTS() availableClearShots = availableClearShots + 1 \
+PRINT_DIGIT(30, 20, availableClearShots)
+#define DECREASE_CLEARSHOTS() availableClearShots = availableClearShots - 1 \
+PRINT_DIGIT(30, 20, availableClearShots)
+
+
+
+#define AVAILABLE_SLOT(BITFIELD, MAXITEMS) (bitTable(MAXITEMS) bxor BITFIELD)
+
+#define CREATE_ALIEN(X, Y, DIRECTION, TMPVAR) \
+TMPVAR = FindEmptyBit(activeAliens) \
+activeAliens = activeAliens bor TABLE_LOOKUP(@maskTable, TMPVAR) \
+aliens(TMPVAR, 1) = (X + MAP_X_OFFSET) << 1 \
+aliens(TMPVAR, 2) = (Y + MAP_Y_OFFSET) << 1 \
+aliens(TMPVAR, 3) = DIRECTION \
+aliens(TMPVAR, 4) = -1 \
+
+
+#define CREATE_TANK(X, Y, DIRECTION, TMPVAR) \
+TMPVAR = FindEmptyBit(activeTanks) \
+activeTanks = activeTanks bor TABLE_LOOKUP(@maskTable, TMPVAR) \
+tanks(TMPVAR, 1) = (X + MAP_X_OFFSET) << 1 \
+tanks(TMPVAR, 2) = (Y + MAP_Y_OFFSET) << 1 \
+tanks(TMPVAR, 3) = DIRECTION \
+tanks(TMPVAR, 4) = -1 \
+
+#define CREATE_SHIP(X, Y, SPAWNDIRECTION, TMPVAR) \
+TMPVAR = FindEmptyBit(activeShips) \
+activeShips = activeShips or TABLE_LOOKUP(@maskTable, TMPVAR) \
+ships(TMPVAR, 1) = X \
+ships(TMPVAR, 2) = Y \
+ships(TMPVAR, 3) = SPAWNDIRECTION \
+ships(TMPVAR, 4) = SHIP_SPEED \
+GridObject(MOTHERSHIP_INDEX, X, Y)
+
+#define CREATE_HANGAR(X, Y, SPAWNDIRECTION, TMPVAR) \
+TMPVAR = FindEmptyBit(activeHangars) \
+activeHangars = activeHangars or TABLE_LOOKUP(@maskTable, TMPVAR) \
+hangars(TMPVAR, 1) = X \
+hangars(TMPVAR, 2) = Y \
+hangars(TMPVAR, 3) = SPAWNDIRECTION \
+hangars(TMPVAR, 4) = HANGAR_SPEED \
+GridObject(HANGAR_INDEX, X, Y)
+
+#define CREATE_TOWER(X, Y) \
+GridObject(RADIOTOWER_INDEX, X, Y) \
+activeTowers = activeTowers + 1 \
+
+#define MAKE_DESTRUCTIBLE(X, Y, TMPVAR) \
+SetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET, 67) \
+TMPVAR = FindEmptyBit(activeDestructibles) \
+activeDestructibles = activeDestructibles or TABLE_LOOKUP(@maskTable, TMPVAR) \
+destructibles(TMPVAR, 1) = X \
+destructibles(TMPVAR, 2) = Y
+
+#define IS_DESTRUCTIBLE(X, Y) (GetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET) = 67)

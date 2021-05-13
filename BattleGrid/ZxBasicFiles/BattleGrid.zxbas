@@ -36,7 +36,7 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24500 --hea
 #include "FastRND.zxbas"
 #include "BeepFX.zxbas"
 #include "InterruptInstaller.zxbas"
-
+#include "DefinesAndMacros.zxbas"
 /' IDEAS
 
     Espejos morados, solo soportan un disparo
@@ -45,126 +45,9 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24500 --hea
     Generadores de enemigos
     Celdas donde no se acepten poner objetos
 
+    https://github.com/migueldeicaza/gui.cs Hacer versión de consola??? :D
+
 '/
-
-defines:
-#define CURSOR_FRAMES 10
-#define CURSOR_SPEED 5
-
-#define MAP_X_OFFSET 0
-#define MAP_Y_OFFSET 1
-
-#define MAX_ALIEN_COUNT 1
-#define ALIEN_SPEED 10
-
-#define MAX_TANK_COUNT 2
-#define TANK_SPEED 4
-
-#define MAX_SHIP_COUNT 4
-#define SHIP_SPEED 50
-
-#define MAX_HANGAR_COUNT 2
-#define HANGAR_SPEED 150
-
-#define MAX_DESTRUCTIBLES_COUNT 4
-
-#define TOOL_NONE 0
-#define TOOL_BLOCKER 1
-#define TOOL_MINE 2
-#define TOOL_BOMB 3
-#define TOOL_CHARGEDSHOT 4
-#define TOOL_FIRESHOT 5
-#define TOOL_CLEARSHOT 6
-
-
-macros:
-#define TABLE_LOOKUP(Array, Index) (peek (Array + Index - 1))
-
-#define EXPLODE_SHOT(INDEX) shots(INDEX, 4) = 0
-
-#define PRINT_DIGIT(X, Y, DIGIT) SetTile(NUMBERS_INDEX + DIGIT, tileColors(NUMBERS_INDEX + DIGIT + 1), X, Y)
-
-#define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 10 \
-PRINT_DIGIT(26, 16, availableBlockers)
-#define DECREASE_BLOCKERS() availableBlockers = availableBlockers - 1 \
-PRINT_DIGIT(26, 16, availableBlockers)
-
-#define INCREASE_MINES() availableMines = availableMines + 1 \
-PRINT_DIGIT(30, 16, availableMines)
-#define DECREASE_MINES() availableMines = availableMines - 1 \
-PRINT_DIGIT(30, 16, availableMines)
-
-#define INCREASE_BOMBS() availableBombs = availableBombs + 1 \
-PRINT_DIGIT(26, 18, availableBombs)
-#define DECREASE_BOMBS() availableBombs = availableBombs - 1 \
-PRINT_DIGIT(26, 18, availableBombs)
-
-#define INCREASE_CHARGEDSHOTS() availableChargedShots = availableChargedShots + 1 \
-PRINT_DIGIT(30, 18, availableChargedShots)
-#define DECREASE_CHARGEDSHOTS() availableChargedShots = availableChargedShots - 1 \
-PRINT_DIGIT(30, 18, availableChargedShots)
-
-#define INCREASE_FIRESHOTS() availableFireShots = availableFireShots + 1 \
-PRINT_DIGIT(26, 20, availableFireShots)
-#define DECREASE_FIRESHOTS() availableFireShots = availableFireShots - 1 \
-PRINT_DIGIT(26, 20, availableFireShots)
-
-#define INCREASE_CLEARSHOTS() availableClearShots = availableClearShots + 1 \
-PRINT_DIGIT(30, 20, availableClearShots)
-#define DECREASE_CLEARSHOTS() availableClearShots = availableClearShots - 1 \
-PRINT_DIGIT(30, 20, availableClearShots)
-
-
-
-#define AVAILABLE_SLOT(BITFIELD, MAXITEMS) (bitTable(MAXITEMS) bxor BITFIELD)
-
-#define CREATE_ALIEN(X, Y, DIRECTION, TMPVAR) \
-TMPVAR = FindEmptyBit(activeAliens) \
-activeAliens = activeAliens bor TABLE_LOOKUP(@maskTable, TMPVAR) \
-aliens(TMPVAR, 1) = (X + MAP_X_OFFSET) << 1 \
-aliens(TMPVAR, 2) = (Y + MAP_Y_OFFSET) << 1 \
-aliens(TMPVAR, 3) = DIRECTION \
-aliens(TMPVAR, 4) = -1 \
-
-
-#define CREATE_TANK(X, Y, DIRECTION, TMPVAR) \
-TMPVAR = FindEmptyBit(activeTanks) \
-activeTanks = activeTanks bor TABLE_LOOKUP(@maskTable, TMPVAR) \
-tanks(TMPVAR, 1) = (X + MAP_X_OFFSET) << 1 \
-tanks(TMPVAR, 2) = (Y + MAP_Y_OFFSET) << 1 \
-tanks(TMPVAR, 3) = DIRECTION \
-tanks(TMPVAR, 4) = -1 \
-
-#define CREATE_SHIP(X, Y, SPAWNDIRECTION, TMPVAR) \
-TMPVAR = FindEmptyBit(activeShips) \
-activeShips = activeShips or TABLE_LOOKUP(@maskTable, TMPVAR) \
-ships(TMPVAR, 1) = X \
-ships(TMPVAR, 2) = Y \
-ships(TMPVAR, 3) = SPAWNDIRECTION \
-ships(TMPVAR, 4) = SHIP_SPEED \
-GridObject(MOTHERSHIP_INDEX, X, Y)
-
-#define CREATE_HANGAR(X, Y, SPAWNDIRECTION, TMPVAR) \
-TMPVAR = FindEmptyBit(activeHangars) \
-activeHangars = activeHangars or TABLE_LOOKUP(@maskTable, TMPVAR) \
-hangars(TMPVAR, 1) = X \
-hangars(TMPVAR, 2) = Y \
-hangars(TMPVAR, 3) = SPAWNDIRECTION \
-hangars(TMPVAR, 4) = HANGAR_SPEED \
-GridObject(HANGAR_INDEX, X, Y)
-
-#define CREATE_TOWER(X, Y) \
-GridObject(RADIOTOWER_INDEX, X, Y) \
-activeTowers = activeTowers + 1 \
-
-#define MAKE_DESTRUCTIBLE(X, Y, TMPVAR) \
-SetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET, 67) \
-TMPVAR = FindEmptyBit(activeDestructibles) \
-activeDestructibles = activeDestructibles or TABLE_LOOKUP(@maskTable, TMPVAR) \
-destructibles(TMPVAR, 1) = X \
-destructibles(TMPVAR, 2) = Y
-
-#define IS_DESTRUCTIBLE(X, Y) (GetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET) = 67)
 
 vars:
 Dim playerX as uByte = 20
@@ -234,7 +117,10 @@ Dim activeDestructibles as uByte
 
 init:
 
+
 #include "ZoomAnims.zxbas"
+#include "Tools.zxbas"
+#include "MapLoader.zxbas"
 
 InstallHandler()
 InitFastRnd()
@@ -247,30 +133,13 @@ cls
 
 funcs:
 
-sub GridObject(INDEX as ubyte, X as ubyte, Y as ubyte)
-    activeMap(X,Y) = INDEX
-    SetTileChecked(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
+sub InitGraphics()
+
+    InitGFXLib()
+    SetTileset(@tileSet)
+
 end sub
 
-sub ClearGridCell(X as ubyte, Y as ubyte)
-    activeMap(X,Y) = 0
-    SetTileChecked(GRID_INDEX + 4, $47, X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
-end sub
-
-function fastcall FindEmptyBit(InputByte as uByte) as uByte
-
-    asm
-
-        ld b, 0
-febloop:
-        inc b
-        srl a
-        jp c, febloop
-        ld a, b
-
-    end asm
-
-end function
 
 sub AddScore(ScoreToAdd as uinteger)
     score = score + ScoreToAdd
@@ -291,12 +160,6 @@ sub ShowLifes()
 
 end sub
 
-sub InitGraphics()
-
-    InitGFXLib()
-    SetTileset(@tileSet)
-
-end sub
 
 sub PrintPaddedNumber(x as ubyte, y as ubyte, value as uinteger, length as ubyte)
 
@@ -343,18 +206,6 @@ sub InitInterface()
     SetTile(FIRESHOT_INDEX, tileColors(FIRESHOT_INDEX + 1), 24, 20)
     SetTile(CLEARSHOT_INDEX, tileColors(CLEARSHOT_INDEX + 1), 28, 20)
 
-
-    'print at 16, 25;":"
-    'print at 16, 29;":"
-    'print at 18, 25;":"    
-    'print at 18, 29;":"
-    'print at 20, 25;":"    
-    'print at 20, 29;":"
-
-    'print at 7, 24; "LEVEL:"
-    'print at 10, 24; "SCORE:"
-    'print at 13, 24; "SAT:"
-
     for tmpX = 16 to 20 step 2
         PrintString(":", CREATE_ATTRIB(7, 0, 1, 0), 25, tmpX)
         PrintString(":", CREATE_ATTRIB(7, 0, 1, 0), 29, tmpX)
@@ -363,48 +214,6 @@ sub InitInterface()
     PrintString("LEVEL:", CREATE_ATTRIB(7, 0, 1, 0), 24, 7)
     PrintString("SCORE:", CREATE_ATTRIB(7, 0, 1, 0), 24, 10)
     PrintString("SAT:", CREATE_ATTRIB(7, 0, 1, 0), 24, 13)
-
-end sub
-
-sub DrawGrid()
-
-    Dim tmpX as uByte
-    Dim tmpY as uByte
-    Dim tmpColor as uByte
-
-    for tmpX = 1 to 20
-        for tmpY = 1 to 20
-            activeMap(tmpX, tmpY) = 0
-        next tmpY
-    next tmpX
-
-
-    SetTile(GRID_INDEX, tileColors(GRID_INDEX + 1), 0, 1)
-    SetTile(GRID_INDEX + 6, tileColors(GRID_INDEX + 7), 21, 1)
-    SetTile(GRID_INDEX + 2, tileColors(GRID_INDEX + 3), 0, 22)
-    SetTile(GRID_INDEX + 8, tileColors(GRID_INDEX + 9), 21, 22)
-
-    for tmpX = 1 to 20
-
-        SetTile(GRID_INDEX + 3, tileColors(GRID_INDEX + 4), tmpX, 1)
-        SetTile(GRID_INDEX + 5, tileColors(GRID_INDEX + 6), tmpX, 22)
-
-    next tmpX
-
-    for tmpY = 2 to 21
-    
-        SetTile(GRID_INDEX + 1, tileColors(GRID_INDEX + 2), 0, tmpY)
-        SetTile(GRID_INDEX + 7, tileColors(GRID_INDEX + 7), 21, tmpY)
-
-        if tmpY = 21 then tmpColor = $46 else tmpColor = $47
-
-        for tmpX = 1 to 20
-
-            SetTile(GRID_INDEX + 4, tmpColor, tmpX, tmpY)
-
-        next tmpX
-
-    next tmpY
 
 end sub
 
@@ -425,6 +234,7 @@ sub InitLevel()
     activeShips = 0
     activeHangars = 0
     activeTowers = 0
+    activeDestructibles = 0
     availableBlockers = 0
     availableBombs = 0
     availableMines = 0
@@ -460,6 +270,9 @@ sub InitLevel()
     shots(2,4) = -1
     shots(3,4) = -1
 
+    LoadMap(1)
+
+/'
     
     Dim buc as Ubyte
 
@@ -559,6 +372,8 @@ sub InitLevel()
     CREATE_SHIP(13, 1, 1, buc)
 
     CREATE_HANGAR(10, 1, 2, buc)
+
+    '/
 
     ShowLifes()
 
@@ -2015,149 +1830,6 @@ sub RefreshMap()
 
 end sub
 
-main:
-
-InitGraphics()
-InitInterface()
-DrawGrid()
-InitLevel()
-
-Dim buc as uByte
-Dim tmpLoop as ubyte
-
-while(1)
-
-    frameCounter = 0
-
-    UpdateCursor()
-    UpdateAliens()
-    UpdateTanks()
-    UpdateShips()
-    UpdateHangars()
-    UpdatePlayer()
-    UpdateFire()
-    TestCollisions()
-
-    Draw1x1Sprite(playerSprite, playerX, 42)
-
-    if activeShots <> 0 then
-
-        for buc = 1 to 3
-            
-            if activeShots & TABLE_LOOKUP(@maskTable, buc) then
-
-                if shots(buc, 4) <> -1 then
-                    Draw1x1Sprite(shots(buc, 4) + EXPLODEA_INDEX, shots(buc, 1), shots(buc, 2))
-                else
-                    if shots(buc, 3) < 3 then
-                         if shots(buc, 2) & 1 then 
-                            Draw1x1Sprite(VFIREA_INDEX, shots(buc, 1), shots(buc, 2))
-                        else
-                            Draw1x1Sprite(VFIREB_INDEX, shots(buc, 1), shots(buc, 2))
-                        end if
-                    else
-                        if shots(buc, 1) & 1 then 
-                            Draw1x1Sprite(HFIREA_INDEX, shots(buc, 1), shots(buc, 2))
-                        else
-                            Draw1x1Sprite(HFIREB_INDEX, shots(buc, 1), shots(buc, 2))
-                        end if
-                    end if
-                end if
-
-            end if
-
-        next buc
-
-    end if
-
-    if cursorVisible then
-        Draw1x1Sprite(CURSOR_INDEX, 2 + (cursorX << 1), 4 + (cursorY << 1))
-    end if
-
-    if activeAliens <> 0 then
-
-        for buc = 1 to MAX_ALIEN_COUNT
-
-            if activeAliens & TABLE_LOOKUP(@maskTable, buc) then
-
-                if aliens(buc, 4) <> -1 then
-                    Draw1x1Sprite(aliens(buc, 4) + EXPLODEA_INDEX, aliens(buc, 1), aliens(buc, 2))
-                else
-
-                    if aliens(buc, 1) & 1 then 
-                        Draw1x1Sprite(ENEMB_INDEX, aliens(buc, 1), aliens(buc, 2))
-                    else
-                        Draw1x1Sprite(ENEMA_INDEX, aliens(buc, 1), aliens(buc, 2))
-                    end if
-
-                end if
-
-            end if
-    
-        next buc
-
-    end if
-
-    if activeTanks <> 0 then
-
-        for buc = 1 to MAX_TANK_COUNT
-
-            if activeTanks & TABLE_LOOKUP(@maskTable, buc) then
-
-                if tanks(buc, 4) <> -1 then
-                    Draw1x1Sprite(tanks(buc, 4) + EXPLODEA_INDEX, tanks(buc, 1), tanks(buc, 2))
-                else
-
-                    if tanks(buc, 3) & 1 then 
-                        Draw1x1Sprite(TANKH_INDEX, tanks(buc, 1), tanks(buc, 2))
-                    else
-                        Draw1x1Sprite(TANKV_INDEX, tanks(buc, 1), tanks(buc, 2))
-                    end if
-
-                end if
-
-            end if
-    
-        next buc
-
-    end if
-
-    if refreshMap then
-        refreshMap = 0
-        RefreshMap()
-    end if
-
-    RenderFrame()
-
-    if updateScore then
-        updateScore = 0
-        PrintPaddedNumber(24, 11, score, 6)
-    end if
-
-    if dead <> 0 then
-
-        if dead = 1 then
-            PlayDeathAlien()
-        else if dead = 2 then
-            PlayDeathTank()
-        else
-            PlayDeathShot()
-        end if
-
-        lifes = lifes - 1
-        ShowLifes()
-
-        DrawGrid()
-        InitLevel()
-
-    end if
-
-    while frameCounter < 2
-    end while
-    
-
-end while
-
 sub PathFind(x as ubyte, y as ubyte)
 
     Dim ex as uByte = x
@@ -2385,3 +2057,147 @@ ENDP
 end asm
 
 end sub
+
+main:
+
+InitGraphics()
+InitInterface()
+DrawGrid()
+InitLevel()
+
+Dim buc as uByte
+Dim tmpLoop as ubyte
+
+while(1)
+
+    frameCounter = 0
+
+    UpdateCursor()
+    UpdateAliens()
+    UpdateTanks()
+    UpdateShips()
+    UpdateHangars()
+    UpdatePlayer()
+    UpdateFire()
+    TestCollisions()
+
+    if refreshMap then
+        refreshMap = 0
+        RefreshMap()
+    end if
+
+    Draw1x1Sprite(playerSprite, playerX, 42)
+
+    if activeShots <> 0 then
+
+        for buc = 1 to 3
+            
+            if activeShots & TABLE_LOOKUP(@maskTable, buc) then
+
+                if shots(buc, 4) <> -1 then
+                    Draw1x1Sprite(shots(buc, 4) + EXPLODEA_INDEX, shots(buc, 1), shots(buc, 2))
+                else
+                    if shots(buc, 3) < 3 then
+                         if shots(buc, 2) & 1 then 
+                            Draw1x1Sprite(VFIREA_INDEX, shots(buc, 1), shots(buc, 2))
+                        else
+                            Draw1x1Sprite(VFIREB_INDEX, shots(buc, 1), shots(buc, 2))
+                        end if
+                    else
+                        if shots(buc, 1) & 1 then 
+                            Draw1x1Sprite(HFIREA_INDEX, shots(buc, 1), shots(buc, 2))
+                        else
+                            Draw1x1Sprite(HFIREB_INDEX, shots(buc, 1), shots(buc, 2))
+                        end if
+                    end if
+                end if
+
+            end if
+
+        next buc
+
+    end if
+
+    if cursorVisible then
+        Draw1x1Sprite(CURSOR_INDEX, 2 + (cursorX << 1), 4 + (cursorY << 1))
+    end if
+
+    if activeAliens <> 0 then
+
+        for buc = 1 to MAX_ALIEN_COUNT
+
+            if activeAliens & TABLE_LOOKUP(@maskTable, buc) then
+
+                if aliens(buc, 4) <> -1 then
+                    Draw1x1Sprite(aliens(buc, 4) + EXPLODEA_INDEX, aliens(buc, 1), aliens(buc, 2))
+                else
+
+                    if aliens(buc, 1) & 1 then 
+                        Draw1x1Sprite(ENEMB_INDEX, aliens(buc, 1), aliens(buc, 2))
+                    else
+                        Draw1x1Sprite(ENEMA_INDEX, aliens(buc, 1), aliens(buc, 2))
+                    end if
+
+                end if
+
+            end if
+    
+        next buc
+
+    end if
+
+    if activeTanks <> 0 then
+
+        for buc = 1 to MAX_TANK_COUNT
+
+            if activeTanks & TABLE_LOOKUP(@maskTable, buc) then
+
+                if tanks(buc, 4) <> -1 then
+                    Draw1x1Sprite(tanks(buc, 4) + EXPLODEA_INDEX, tanks(buc, 1), tanks(buc, 2))
+                else
+
+                    if tanks(buc, 3) & 1 then 
+                        Draw1x1Sprite(TANKH_INDEX, tanks(buc, 1), tanks(buc, 2))
+                    else
+                        Draw1x1Sprite(TANKV_INDEX, tanks(buc, 1), tanks(buc, 2))
+                    end if
+
+                end if
+
+            end if
+    
+        next buc
+
+    end if
+
+    RenderFrame()
+
+    if updateScore then
+        updateScore = 0
+        PrintPaddedNumber(24, 11, score, 6)
+    end if
+
+    if dead <> 0 then
+
+        if dead = 1 then
+            PlayDeathAlien()
+        else if dead = 2 then
+            PlayDeathTank()
+        else
+            PlayDeathShot()
+        end if
+
+        lifes = lifes - 1
+        ShowLifes()
+
+        DrawGrid()
+        InitLevel()
+
+    end if
+
+    while frameCounter < 2
+    end while
+    
+
+end while
+

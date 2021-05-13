@@ -1,0 +1,17 @@
+﻿REM Write your ZX BASIC (Boriel's BASIC) code here
+
+
+function fastcall FindEmptyBit(InputByte as uByte) as uByte
+
+    asm
+
+        ld b, 0
+febloop:
+        inc b
+        srl a
+        jp c, febloop
+        ld a, b
+
+    end asm
+
+end function
