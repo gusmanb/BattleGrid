@@ -43,9 +43,10 @@ sub GridObject(INDEX as ubyte, X as ubyte, Y as ubyte)
     SetTileChecked(INDEX, tileColors(INDEX + 1), X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
 end sub
 
-sub ClearGridCell(X as ubyte, Y as ubyte)
+sub ClearGridCell(X as ubyte, Y as ubyte, UpdatePaths as uByte)
     activeMap(X,Y) = 0
     SetTileChecked(GRID_INDEX + 4, $47, X + MAP_X_OFFSET, Y + MAP_Y_OFFSET)
+    if UpdatePaths then NewPathTest()
 end sub
 
 

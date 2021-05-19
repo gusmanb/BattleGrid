@@ -22,6 +22,7 @@
     <ZxBasic Include="ZxBasicFiles\FastRND.zxbas" />
     <ZxBasic Include="ZxBasicFiles\GuSprites.zxbas" />
     <ZxBasic Include="ZxBasicFiles\InterruptInstaller.zxbas" />
+    <ZxBasic Include="ZxBasicFiles\Intro.zxbas" />
     <ZxBasic Include="ZxBasicFiles\MapLoader.zxbas" />
     <ZxBasic Include="ZxBasicFiles\Maps.zxbas" />
     <ZxBasic Include="ZxBasicFiles\MusicPlayer.zxbas" />

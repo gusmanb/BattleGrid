@@ -14,7 +14,7 @@ defines:
 
 #define MAX_SHIP_COUNT 4
 #define SHIP_SPEED 50
-z
+
 #define MAX_HANGAR_COUNT 2
 #define HANGAR_SPEED 150
 

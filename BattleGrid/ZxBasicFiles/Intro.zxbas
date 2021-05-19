@@ -1,0 +1,18 @@
+﻿REM Write your ZX BASIC (Boriel's BASIC) code here
+
+sub playIntro()
+
+    ink 0
+    paper 0
+    border 0
+
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+
+    for tmpX = 0 to 16
+
+        'printZoomedTile(8, 4
+
+    next tmpX
+
+end sub
