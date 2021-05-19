@@ -650,6 +650,7 @@ sub UpdateFire()
                 shots(1,2) = 40
                 shots(1,3) = 1
                 activeShots = 1
+                CheckShotItems(1, ((playerX >> 1) - MAP_X_OFFSET), (20 - MAP_Y_OFFSET))
             end if
         end if
 
