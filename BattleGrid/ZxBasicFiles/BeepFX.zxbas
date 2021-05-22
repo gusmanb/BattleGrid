@@ -235,6 +235,7 @@ SoundEffectsData:
 	defw SoundEffect12Data
 	defw SoundEffect13Data
 	defw SoundEffect14Data
+	defw SoundEffect15Data
 
 SoundEffect0Data:
 	defb 2 ;noise
@@ -301,6 +302,10 @@ SoundEffect13Data:
 SoundEffect14Data:
 	defb 2 ;noise
 	defw 10,125,1
+	defb 0
+SoundEffect15Data:
+	defb 2 ;noise
+	defw 10,200,64336
 	defb 0
 end asm
 
@@ -498,6 +503,19 @@ sub Teleportffect()
 	borderColors(4) = 1
 
 	PlayFX(14)
+
+	border 0
+
+end sub
+
+sub Introffect()
+
+	borderColors(1) = 2
+	borderColors(2) = 6
+	borderColors(3) = 2
+	borderColors(4) = 6
+
+	PlayFX(15)
 
 	border 0
 

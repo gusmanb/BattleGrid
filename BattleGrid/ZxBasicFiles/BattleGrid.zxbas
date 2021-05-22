@@ -1,4 +1,4 @@
-REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24500 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
+REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 25000 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
 #define PRECOMPUTED_SPRITES
 #define ENABLE_PRINT
@@ -127,11 +127,7 @@ init:
 InstallHandler()
 InitFastRnd()
 
-ink 7
-paper 0
-border 0
-bright 1
-cls
+ClearScreen(7,0,1)
 
 funcs:
 
@@ -190,8 +186,9 @@ end sub
 sub InitInterface()
 
     Dim tmpX as uByte
-    Dim tmpY as uByte
+    
 
+    /'Dim tmpY as uByte
     for tmpX = 0 to 31 step 4
 
         SetTile(LOGO_INDEX + tmpX, tileColors(LOGO_INDEX + tmpX + 1), (tmpX >> 2) + 23, 2)
@@ -200,6 +197,9 @@ sub InitInterface()
         SetTile(LOGO_INDEX + tmpX + 3, tileColors(LOGO_INDEX + tmpX + 4), (tmpX >> 2) + 23, 5)
 
     next tmpX
+    '/
+
+    ShowLogo(23, 2)
 
     SetTile(BLOCKER_INDEX, tileColors(BLOCKER_INDEX + 1), 24, 16)
     SetTile(MINE_INDEX, tileColors(MINE_INDEX + 1), 28, 16)
@@ -246,6 +246,8 @@ sub InitLevel()
     freezingShip = 1
     freezingHangar = 1
     cursorTool = TOOL_NONE
+    cursorX = 0
+    cursorY = 0
 
     PRINT_DIGIT(26, 16, 0)
     PRINT_DIGIT(30, 16, 0)
@@ -2239,9 +2241,108 @@ end asm
 
 end sub
 
-main:
+sub ShowLogo(X as uByte, Y as uByte)
+    
+    Dim tmpX as uByte
+    
+    for tmpX = 0 to 31 step 4
+
+        SetTile(LOGO_INDEX + tmpX, tileColors(LOGO_INDEX + tmpX + 1), (tmpX >> 2) + X, Y)
+        SetTile(LOGO_INDEX + tmpX + 1, tileColors(LOGO_INDEX + tmpX + 2), (tmpX >> 2) + X, Y + 1)
+        SetTile(LOGO_INDEX + tmpX + 2, tileColors(LOGO_INDEX + tmpX + 3), (tmpX >> 2) + X, Y + 2)
+        SetTile(LOGO_INDEX + tmpX + 3, tileColors(LOGO_INDEX + tmpX + 4), (tmpX >> 2) + X, Y + 3)
+
+    next tmpX
+
+end sub
+
+sub ShowMainMenu()
+
+    PlayIntro()
+
+    ClearScreen(7,0,1)
+
+    ShowLogo(12, 0)
+    
+    PrintString("THE BAD GUYS", CREATE_ATTRIB(2, 0, 1, 0), 3, 5)
+
+    Draw1x1Sprite(ENEMA_INDEX, 4, 14)
+    PrintString("ALIEN", 7, 4, 7)
+    Draw1x1Sprite(TANKV_INDEX, 4, 18)
+    PrintString("TANK", 7, 4, 9)
+
+    PrintString("YOUR UNITS", CREATE_ATTRIB(4, 0, 1, 0), 4, 17)
+
+    Draw1x1Sprite(PLAYER_INDEX, 4, 38)
+    PrintString("DRONE", 7, 4, 19)
+    Draw1x1Sprite(CURSOR_INDEX, 4, 42)
+    PrintString("SAT TARGET", 7, 4, 21)
+
+
+
+    SetTile(MOTHERSHIP_INDEX, tileColors(MOTHERSHIP_INDEX + 1), 2, 11)
+    PrintString("MOTHERSHIP", 7, 4, 11)
+
+    SetTile(HANGAR_INDEX, tileColors(HANGAR_INDEX + 1), 2, 13)
+    PrintString("HANGAR", 7, 4, 13)
+
+    SetTile(RADIOTOWER_INDEX, tileColors(RADIOTOWER_INDEX + 1), 2, 15)
+    PrintString("ENERGY TOWER", 7, 4, 15)
+
+    RenderFrame()
+    CancelOps()
+    
+
+    PrintString("SUPPLIES", CREATE_ATTRIB(5, 0, 1, 0), 20, 5)
+
+    SetTile(BLOCKERCRATE_INDEX, tileColors(BLOCKER_INDEX + 1), 17, 7)
+    PrintString("BLOCK", 7, 18, 7)
+    SetTile(MINECRATE_INDEX, tileColors(MINE_INDEX + 1), 25, 7)
+    PrintString("MINE", 7, 26, 7)
+
+    SetTile(BOMBCRATE_INDEX, tileColors(BOMB_INDEX + 1), 17, 9)
+    PrintString("BOMB", 7, 18, 9)
+    SetTile(CHARGEDSHOTCRATE_INDEX, tileColors(CHARGEDSHOT_INDEX + 1), 25, 9)
+    PrintString("LASER", 7, 26, 9)
+
+    SetTile(FIRESHOTCRATE_INDEX, tileColors(FIRESHOT_INDEX + 1), 17, 11)
+    PrintString("FIRE", 7, 18, 11)
+    SetTile(CLEARSHOTCRATE_INDEX, tileColors(CLEARSHOT_INDEX + 1), 25, 11)
+    PrintString("WHIPE", 7, 26, 11)
+
+    PrintString("OBSTACLES", CREATE_ATTRIB(6, 0, 1, 0), 20, 13)
+
+    SetTile(DEFLECTORA_INDEX, tileColors(DEFLECTORA_INDEX + 1), 17, 15)
+    PrintString("DEF.", 7, 18, 15)
+    SetTile(FORCEFIELD_INDEX, tileColors(FORCEFIELD_INDEX + 1), 25, 15)
+    PrintString("FIELD", 7, 26, 15)
+
+    SetTile(SMALLBUILDING_INDEX, tileColors(SMALLBUILDING_INDEX + 1), 17, 17)
+    PrintString("BUILD", 7, 18, 17)
+    SetTile(TREES_INDEX, tileColors(TREES_INDEX + 1), 25, 17)
+    PrintString("TREES", 7, 26, 17)
+
+    SetTile(FLOOD_INDEX, tileColors(FLOOD_INDEX + 1), 17, 19)
+    PrintString("FLOOD", 7, 18, 19)
+    SetTile(FIRE_INDEX, tileColors(FIRE_INDEX + 1), 25, 19)
+    PrintString("FIRE", 7, 26, 19)
+
+    PrintString("AND MORE...", CREATE_ATTRIB(3, 0, 1, 0), 19, 21)
+
+    PrintString("SPC = START, I = INSTRUCTIONS", CREATE_ATTRIB(7, 0, 1, 0), 2, 23)
+    
+    while MultiKeys(KEYSPACE) = 0
+    end while
+
+    ClearScreen(7,0,1)
+
+end sub
 
 InitGraphics()
+
+main:
+
+ShowMainMenu()
 InitInterface()
 DrawGrid()
 InitLevel()

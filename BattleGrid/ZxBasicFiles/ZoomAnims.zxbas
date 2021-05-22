@@ -2,106 +2,17 @@
 Dim attribsAlienB(4) as ubyte = { 66, 2, 1, 0 }
 Dim colorsExp(4) as ubyte => { 66, 2, 1, 0  }
 
-/'
-sub printZoomedPixel(x as uByte, y as uByte, bitNumber as ubyte, byteNumber as uByte, color as uByte, scale as uByte)
-
-    Dim startX as uByte = x + (bitNumber << scale)
-    Dim startY as uByte = y + (byteNumber << scale)
-
-    Dim endX as uByte = (startX + (1 << scale)) - 1
-    Dim endY as uByte = (startY + (1 << scale)) - 1
-
-    Dim tmpX as uByte 
-    Dim tmpY as uByte
-
-    for tmpY = startY to endY
-        for tmpX = startX to endX
-            SetTileColor(tmpX, tmpY, color)
-        next tmpX
-    next tmpY
-
-end sub
-
-sub printZoomedScaledTile(x as uByte, y as uByte, tileIndex as uinteger, attribute as ubyte, scaleMultiplier as uByte)
-
-    dim tbyte as ubyte
-    dim tmpX as ubyte
-    dim tmpY as ubyte
-
-    Dim onColor = attribute band 3
-    onColor = onColor bor (onColor << 3) bor (attribute band 192)
-
-    Dim offColor = attribute band 56
-    offColor = offColor bor (offColor >> 3) bor (attribute band 192)
-
-    dim tileAddress as uinteger = tileIndex << 3
-    tileAddress = tileAddress + @tileSet
-
-    for tmpY = 0 to 7
-
-        tbyte = peek(tileAddress)
-        tmpX = x
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 0, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 0, tmpY, OffColor, attribute)
-        end if
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 1, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 1, tmpY, OffColor, attribute)
-        end if
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 2, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 2, tmpY, OffColor, attribute)
-        end if
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 3, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 3, tmpY, OffColor, attribute)
-        end if
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 4, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 4, tmpY, OffColor, attribute)
-        end if
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 5, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 5, tmpY, OffColor, attribute)
-        end if
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 6, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 6, tmpY, OffColor, attribute)
-        end if
-
-        if tbyte band 128 then 
-            printZoomedPixel(x, y, 7, tmpY, onColor, attribute)
-        else
-            printZoomedPixel(x, y, 7, tmpY, OffColor, attribute)
-        end if
-
-        tileAddress = tileAddress + 1
-
-    next tmpY
-
-end sub
-'/
-
 sub printZoomedTile(x as uByte, y as uByte, tileIndex as uinteger, attribute as ubyte)
 
     dim tbyte as ubyte
     dim tmpX as ubyte
     dim tmpY as ubyte
+
+    Dim onColor as uByte = attribute band 7
+    onColor = onColor bor (onColor << 3) bor (attribute band 192)
+
+    Dim offColor as uByte = attribute band 56
+    offColor = offColor bor (offColor >> 3) bor (attribute band 192)
 
     dim tileAddress as uinteger = tileIndex << 3
     tileAddress = tileAddress + @tileSet
@@ -111,21 +22,21 @@ sub printZoomedTile(x as uByte, y as uByte, tileIndex as uinteger, attribute as 
         tbyte = peek(tileAddress)
         tmpX = x
 
-        if tbyte band 128 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 128 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         tmpX = tmpX + 1
-        if tbyte band 64 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 64 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         tmpX = tmpX + 1
-        if tbyte band 32 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 32 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         tmpX = tmpX + 1
-        if tbyte band 16 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 16 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         tmpX = tmpX + 1
-        if tbyte band 8 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 8 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         tmpX = tmpX + 1
-        if tbyte band 4 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 4 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         tmpX = tmpX + 1
-        if tbyte band 2 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 2 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         tmpX = tmpX + 1
-        if tbyte band 1 then SetTile(SOLID_INDEX, attribute, tmpX, tmpY) else SetTile(EMPTY_TILE_INDEX, attribute, tmpX, tmpY)
+        if tbyte band 1 then SetTileColor(tmpX, tmpY, onColor) else SetTileColor(tmpX, tmpY, offColor)
         
         tileAddress = tileAddress + 1
 
@@ -148,6 +59,19 @@ sub ShowZoomedColoredFrame(index as ubyte)
     printZoomedTile(11, 4, index + 1, tileColors(index + 2))
     printZoomedTile(3, 12, index + 2, tileColors(index + 3))
     printZoomedTile(11, 12, index + 3, tileColors(index + 4))
+
+end sub
+
+sub ShowLogoFrame(index as ubyte)
+
+    printZoomedTile(3, 4, index, tileColors(index + 1))
+    printZoomedTile(3, 12, index + 1, tileColors(index + 2))
+
+    printZoomedTile(11, 4, index + 4, tileColors(index + 5))
+    printZoomedTile(11, 12, index + 5, tileColors(index + 6))
+
+    printZoomedTile(19, 4, index + 8, tileColors(index + 9))
+    printZoomedTile(19, 12, index + 9, tileColors(index + 10))
 
 end sub
 
@@ -302,5 +226,36 @@ sub PlayAlienTeleport()
     printZoomedTile(3, 12, EMPTY_TILE_INDEX, 0)
     printZoomedTile(11, 12, EMPTY_TILE_INDEX, 0)
     DoPause(10)
+
+end sub
+
+sub PlayIntro()
+
+    ShowLogoFrame(LOGO_INDEX)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 4)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 8)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 12)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 16)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 20)
+    Introffect()
+
+
+    ShowLogoFrame(LOGO_INDEX + 2)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 6)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 10)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 14)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 18)
+    Introffect()
+    ShowLogoFrame(LOGO_INDEX + 22)
+    Introffect()
 
 end sub
