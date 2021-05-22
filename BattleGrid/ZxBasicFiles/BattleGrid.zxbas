@@ -115,8 +115,6 @@ Dim refreshMap as uByte = 0
 Dim destructibles(MAX_DESTRUCTIBLES_COUNT,2) as uByte
 Dim activeDestructibles as uByte
 
-Dim dirs(4) as byte
-
 init:
 
 
@@ -1458,6 +1456,8 @@ sub UpdateTanks()
     Dim tmpX as byte
     Dim tmpY as byte
     Dim tmpDir as byte
+    Dim tmpInverseDir as byte
+
     Dim tmpCellX as byte
     Dim tmpCellY as byte
     Dim tmpMask as uByte
@@ -1466,6 +1466,8 @@ sub UpdateTanks()
     Dim downCellValue as byte
     Dim leftCellValue as byte
     Dim rightCellValue as byte
+
+    Dim dirs(4) as byte
 
     for buc = 1 to MAX_TANK_COUNT
 
@@ -1578,7 +1580,19 @@ sub UpdateTanks()
 
                         freeDirs = freeDirs - 1
 
+                        if tmpDir = 1 then 
+                            tmpInverseDir = 3
+                        else if tmpDir = 2 then
+                            tmpInverseDir = 4
+                        else if tmpDir = 3 then
+                            tmpInverseDir = 1
+                        else if tmpDir = 4 then
+                            tmpInverseDir = 2
+                        end if
+
                         tmpDir = dirs((FastRnd() mod freeDirs) + 1)
+
+                        if tmpDir = tmpInverseDir then  tmpDir = dirs((FastRnd() mod freeDirs) + 1)
 
                     end if
 
