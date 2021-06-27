@@ -117,3 +117,9 @@ destructibles(TMPVAR, 1) = X \
 destructibles(TMPVAR, 2) = Y
 
 #define IS_DESTRUCTIBLE(X, Y) (GetTileColor(X + MAP_X_OFFSET, Y + MAP_Y_OFFSET) = 67)
+
+#define LOAD_VAR(value) \
+asm \
+	ld (ix-2), low(value) \
+	ld (ix-1), high(value) \
+end asm 

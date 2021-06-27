@@ -259,3 +259,79 @@ sub PlayIntro()
     Introffect()
 
 end sub
+
+sub PlayShowText(textIndex as uByte)
+
+    cls
+
+    DoPause(6)
+
+    printZoomedTile(4, 4, textIndex + 2, tileColors(textIndex + 3))
+    printZoomedTile(20, 12, textIndex + 3, tileColors(textIndex + 4))
+
+    DoPause(6)
+
+    printZoomedTile(4, 4, textIndex + 1, tileColors(textIndex + 2))
+    printZoomedTile(20, 12, textIndex + 4, tileColors(textIndex + 5))
+
+    printZoomedTile(12, 4, textIndex + 2, tileColors(textIndex + 3))
+    printZoomedTile(12, 12, textIndex + 3, tileColors(textIndex + 4))
+
+    DoPause(6)
+
+    printZoomedTile(4, 4, textIndex, tileColors(textIndex + 1))
+    printZoomedTile(20, 12, textIndex + 5, tileColors(textIndex + 6))
+
+    printZoomedTile(12, 4, textIndex + 1, tileColors(textIndex + 2))
+    printZoomedTile(12, 12, textIndex + 4, tileColors(textIndex + 5))
+
+    printZoomedTile(20, 4, textIndex + 2, tileColors(GRIDCLEAR_INDEX + 3))
+    printZoomedTile(4, 12, textIndex + 3, tileColors(GRIDCLEAR_INDEX + 4))
+
+    DoPause(140)
+
+end sub
+
+sub PlayLevel(level as uByte)
+
+    Dim num1 as uByte
+    Dim num2 as uByte
+
+    Dim color as uByte
+
+    cls
+
+    DoPause(2)
+
+    for color = 1 to 6
+
+        printZoomedTile(4, 4, LEVEL_INDEX, CREATE_ATTRIB(color, 0, 1, 0))
+        printZoomedTile(12, 4, LEVEL_INDEX + 1, CREATE_ATTRIB(color, 0, 1, 0))
+        printZoomedTile(20, 4, LEVEL_INDEX + 2, CREATE_ATTRIB(color, 0, 1, 0))
+   
+        DoPause(2)
+
+    next color
+    
+    DoPause(8)
+
+    if level < 10 then
+        num1 = 0
+        num2 = level
+    else
+        num1 = level / 10
+        num2 = level mod 10
+    end if
+
+    for color = 1 to 2
+
+        printZoomedTile(8, 12, NUMBERS_INDEX + num1, CREATE_ATTRIB(color, 0, 1, 0))
+        printZoomedTile(16, 12, NUMBERS_INDEX + num2, CREATE_ATTRIB(color, 0, 1, 0))
+
+        DoPause(4)
+
+    next color
+
+    DoPause(140)
+
+end sub

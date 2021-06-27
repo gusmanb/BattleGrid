@@ -1760,10 +1760,12 @@ WRITE_HL_POINTER(d, e)
 ld a, 2
 ld (hl), a
 
-pop de                                  ;cleanup
-pop de                                  ;cleanup
+push de
 
-jp END_SET
+;pop de                                  ;cleanup
+;pop de                                  ;cleanup
+
+;jp END_SET
 
 NO_OP:
 
@@ -2041,6 +2043,19 @@ sub PrintString(text as string, Color as uInteger, X as uInteger, Y as uInteger)
     for buc = 1 to tmpVal
         PrintChar(code(text(buc to buc)), Color, X + buc - 1, Y)
     next buc 
+
+end sub
+
+sub PrintBinaryString(text as uInteger, Color as uInteger, X as uInteger, Y as uInteger)
+
+    Dim tmpVal as uByte = peek(text)
+    Dim add as uByte = 0
+
+    while tmpVal <> 0
+        PrintChar(tmpVal, Color, X + add, Y)
+        add = add + 1
+        tmpVal = peek(text + add)
+    end while
 
 end sub
 
