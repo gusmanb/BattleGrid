@@ -335,3 +335,44 @@ sub PlayLevel(level as uByte)
     DoPause(140)
 
 end sub
+
+sub PlayEnding()
+
+    cls
+
+    Dim offset as uByte
+    Dim buc as uByte
+
+    for buc = 0 to 16 step 16
+
+        printZoomedTile(4, buc, ENDINGFIXED_INDEX + offset, tileColors(ENDINGFIXED_INDEX + offset + 1))
+        printZoomedTile(12, buc, ENDINGFIXED_INDEX + 1 + offset, tileColors(ENDINGFIXED_INDEX + offset + 2))
+        printZoomedTile(20, buc, ENDINGFIXED_INDEX + 2 + offset, tileColors(ENDINGFIXED_INDEX + offset + 3))
+
+        offset = 3
+
+    next buc
+
+    DoPause (60)
+
+    for buc = 0 to 8
+
+        offset = buc * 3
+
+        printZoomedTile(4, 8, ENDINGANIMA_INDEX + offset, tileColors(ENDINGANIMA_INDEX + offset + 1))
+        printZoomedTile(12, 8, ENDINGANIMA_INDEX + 1 + offset, tileColors(ENDINGANIMA_INDEX + offset + 2))
+        printZoomedTile(20, 8, ENDINGANIMA_INDEX + 2 + offset, tileColors(ENDINGANIMA_INDEX + offset + 3))
+
+        DoPause (5)
+
+    next buc
+
+        printZoomedTile(4, 8, 0, 0)
+        printZoomedTile(12, 8, 0, 0)
+        printZoomedTile(20, 8, 0, 0)
+
+        DoPause (5)
+
+    DoPause(140)
+
+end sub

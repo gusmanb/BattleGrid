@@ -977,7 +977,7 @@ function LineOfSight(x as uinteger, y as uinteger) as ubyte
 
 end function
 
-sub CheckShipGens()
+sub CheckShipGens ()
 
     if activeShips <> 0 then
 
@@ -1021,28 +1021,28 @@ sub CheckShipGens()
 
                 tmpX = 255
 
-                if valL < tmpX and valL <> 0 then
+                if valL < tmpX and valL <> 0 and valL <> 255 then
                     tmpX = valL
                     tmpDir = 3
                 end if
 
-                if valR < tmpX and valR <> 0 then
+                if valR < tmpX and valR <> 0 and valR <> 255 then
                     tmpX = valR
                     tmpDir = 1
                 end if
 
-                if valU < tmpX and valU <> 0 then
+                if valU < tmpX and valU <> 0 and valU <> 255 then
                     tmpX = valU
                     tmpDir = 4
                 end if
 
-                if valD < tmpX and valD <> 0 then
+                if valD < tmpX and valD <> 0 and valD <> 255 then
                     tmpX = valD
                     tmpDir = 2
                 end if
 
-                if ships(buc, 3) = 0 then ships(buc, 4) = SHIP_SPEED
                 ships(buc, 3) = tmpDir
+                if ships(buc, 3) = 0 then ships(buc, 4) = SHIP_SPEED
                 
             end if
 
@@ -1062,6 +1062,7 @@ function CheckAlienPaths() as uByte
     Dim tmpX as uByte
     Dim tmpY as uByte
     Dim tmpMask as uByte
+    Dim currCell as uByte
 
     Dim teleport as ubyte = 0
 
@@ -1081,26 +1082,31 @@ function CheckAlienPaths() as uByte
                 tmpX = (aliens(buc, 1) >> 1) - MAP_X_OFFSET
                 tmpY = (aliens(buc, 2) >> 1) - MAP_Y_OFFSET
 
-                if tmpX > 1 then
-                    valL = pathMap(tmpY + 1, tmpX)
-                end if
+                currCell = pathMap(tmpY + 1, tmpX + 1)
 
-                if tmpX < 20 then
-                    valR = pathMap(tmpY + 1, tmpX + 2)
-                end if
+                if currCell <> 0 and currCell <> 255 then
 
-                if tmpY > 1 then
-                    valU = pathMap(tmpY, tmpX + 1)
-                end if
+                    if tmpX > 1 then
+                        valL = pathMap(tmpY + 1, tmpX)
+                        if valL <> 0 and valU <> 255 then continue for
+                    end if
 
-                if tmpY < 20 then
-                    valD = pathMap(tmpY + 2, tmpX + 1)
-                end if
+                    if tmpX < 20 then
+                        valR = pathMap(tmpY + 1, tmpX + 2)
+                        if valR <> 0 and valU <> 255 then continue for
+                    end if
 
-                if valU <> 0 and valU <> 255 then continue for
-                if valU <> 0 and valU <> 255 then continue for
-                if valU <> 0 and valU <> 255 then continue for
-                if valU <> 0 and valU <> 255 then continue for
+                    if tmpY > 1 then
+                        valU = pathMap(tmpY, tmpX + 1)
+                        if valU <> 0 and valU <> 255 then continue for
+                    end if
+
+                    if tmpY < 20 then
+                        valD = pathMap(tmpY + 2, tmpX + 1)
+                        if valD <> 0 and valU <> 255 then continue for
+                    end if
+
+                end if
 
                 activeAliens = activeAliens bxor tmpMask
                 teleport = 1
@@ -1212,7 +1218,6 @@ sub UpdateAliens()
                 tmpY = aliens(buc, 2)
                 tmpDir = aliens(buc, 3)
                 
-
                 if (tmpX & 1) = 0 and (tmpY & 1) = 0 then
 
                     tmpCellX = (tmpX >> 1) - MAP_X_OFFSET
@@ -1223,6 +1228,8 @@ sub UpdateAliens()
                    
                     tmpDir = 0
                     
+                    if currentWeight = 255 or currentWeight = 0 then goto search
+
                     'No comprobamos límites, nunca nos vamos a salir del mapa de caminos
                     'ya que contiene un borde con 0's
 
@@ -1281,6 +1288,7 @@ cpabajo:
                     tmpY = tmpY + 1
                 else 
 
+search:
                     AlienSearchPath()
 
                 end if
@@ -2264,7 +2272,7 @@ sub ShowInstructions()
     
     PrintString("Controls:", CREATE_ATTRIB(5, 0, 1, 0), 0, 8)
     PrintString("Move your drone with Z/X, fire", CREATE_ATTRIB(7, 0, 1, 0), 0, 9)
-    PrintString("with C.", CREATE_ATTRIB(7, 0, 1, 0), 0, 10)
+    PrintString("with C, self-destruct with 0.", CREATE_ATTRIB(7, 0, 1, 0), 0, 10)
     PrintString("Move the S.A.T. cursor with", CREATE_ATTRIB(7, 0, 1, 0), 0, 11)
     PrintString("IKJL and fire with space.", CREATE_ATTRIB(7, 0, 1, 0), 0, 12)
     PrintString("Choose a S.A.T. tool with 1-7.", CREATE_ATTRIB(7, 0, 1, 0), 0, 13)
@@ -2302,6 +2310,12 @@ PlayLevel(level)
 InitInterface()
 DrawGrid()
 InitLevel()
+
+while(1)
+
+    PlayEnding()
+
+end while
 
 while(1)
 
