@@ -27,6 +27,7 @@
     <ZxBasic Include="ZxBasicFiles\MusicPlayer.zxbas" />
     <Z80Test Include="Z80UnitTests\UnitTest.z80test" />
     <Tzx Include="TapeFiles\Welcome.tzx" />
+    <ZxBasic Include="ZxBasicFiles\Scroll.zxbas" />
     <ZxBasic Include="ZxBasicFiles\Tools.zxbas" />
     <ZxBasic Include="ZxBasicFiles\ZoomAnims.zxbas" />
   </ItemGroup>

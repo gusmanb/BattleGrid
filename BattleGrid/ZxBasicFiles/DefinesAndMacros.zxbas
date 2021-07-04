@@ -36,7 +36,7 @@ macros:
 
 #define PRINT_DIGIT(X, Y, DIGIT) SetTile(NUMBERS_INDEX + DIGIT, tileColors(NUMBERS_INDEX + DIGIT + 1), X, Y)
 
-#define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 20 \
+#define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 1 \
 PRINT_DIGIT(26, 16, availableBlockers)
 #define DECREASE_BLOCKERS() availableBlockers = availableBlockers - 1 \
 PRINT_DIGIT(26, 16, availableBlockers)

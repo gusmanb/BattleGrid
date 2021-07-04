@@ -1,4 +1,6 @@
-﻿Dim attribsAlienA(6) as ubyte = { 0, 1, 65, 3, 4, 68 }
+﻿#include "Scroll.zxbas"
+
+Dim attribsAlienA(6) as ubyte = { 0, 1, 65, 3, 4, 68 }
 Dim attribsAlienB(4) as ubyte = { 66, 2, 1, 0 }
 Dim colorsExp(4) as ubyte => { 66, 2, 1, 0  }
 
@@ -367,11 +369,40 @@ sub PlayEnding()
 
     next buc
 
-        printZoomedTile(4, 8, 0, 0)
-        printZoomedTile(12, 8, 0, 0)
-        printZoomedTile(20, 8, 0, 0)
+    for buc = 4 to 28
+        for offset = 8 to 15
+            SetTileColor(buc, offset, 7)
+        next offset
+    next buc
 
-        DoPause (5)
+    DoPause (60)
+
+    Dim tmpString as string
+
+    for buc = 1 to 13
+
+        if buc = 1 then
+            tmpString = "The last alien units"
+        else if buc = 2 then
+            tmpString = "are leaving the earth."
+        else if buc = 4 then
+            tmpString = "Thanks to you the planet"
+        else if buc = 5 then
+            tmpString = "is safe again."
+        else if buc = 7 then
+            tmpString = "        GAME OVER"
+        else if buc = 9 then
+            tmpString = "        (C)  2021"
+        else if buc = 10 then
+            tmpString = "      El Dr. Gusman"
+        else
+            tmpString = " "
+        end if
+
+        BLWindowScrollUp(4, 8, 24, 8)
+        PrintString(tmpString, CREATE_ATTRIB(7, 0, 1, 0), 4, 15)
+        DoPause (60)
+    next buc
 
     DoPause(140)
 

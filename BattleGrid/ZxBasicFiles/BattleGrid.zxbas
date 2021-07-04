@@ -1,4 +1,4 @@
-REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 25000 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
+REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24750 --heap-size 128 --explicit --strict -D HIDE_LOAD_MSG
 
 #define PRECOMPUTED_SPRITES
 #define ENABLE_PRINT
@@ -243,12 +243,19 @@ sub InitLevel()
     cursorX = 0
     cursorY = 0
 
+    for tmpX = 26 to 30 step 4
+        for tmpY = 16 to 20 step 2
+            PRINT_DIGIT(tmpX, tmpY, 0)
+        next tmpY
+    next tmpX
+    /'
     PRINT_DIGIT(26, 16, 0)
     PRINT_DIGIT(30, 16, 0)
     PRINT_DIGIT(26, 18, 0)
     PRINT_DIGIT(30, 18, 0)
     PRINT_DIGIT(26, 20, 0)
     PRINT_DIGIT(30, 20, 0)
+    '/
 
     playerX = 20
     dead = 0
@@ -631,6 +638,26 @@ sub UpdateFire()
 
 end sub
 
+function Intersects(active as uByte, enemX as uByte, enemY as ubyte, xMin as ubyte, xMax as uByte, yMin as ubyte, yMax as ubyte) as ubyte
+
+    if active then
+    if enemX >= xMin then
+    if enemX <= xMax then
+    if enemY >= yMin then
+    if enemY <= yMax then
+
+        return 1
+
+    end if
+    end if
+    end if
+    end if
+    end if
+
+    return 0
+
+end function
+
 sub CheckShotUnits(DirectKill as ubyte, cellX as ubyte, cellY as ubyte, squareOffset as ubyte)
 
     Dim tmpMask as ubyte
@@ -651,10 +678,12 @@ sub CheckShotUnits(DirectKill as ubyte, cellX as ubyte, cellY as ubyte, squareOf
 
             if activeAliens & tmpMask then
 
-                if aliens(buc, 1) <= xMax then
-                if aliens(buc, 1) >= xMin then
-                if aliens(buc, 2) <= yMax then
-                if aliens(buc, 2) >= yMin then
+                'if aliens(buc, 1) <= xMax then
+                'if aliens(buc, 1) >= xMin then
+                'if aliens(buc, 2) <= yMax then
+                'if aliens(buc, 2) >= yMin then
+
+                 if Intersects(1, aliens(buc, 1), aliens(buc, 2), xMin, xMax, yMin, yMax) then
 
                     if DirectKill then
                         activeAliens = activeAliens bxor tmpMask
@@ -666,9 +695,11 @@ sub CheckShotUnits(DirectKill as ubyte, cellX as ubyte, cellY as ubyte, squareOf
                     continue for
 
                 end if
-                end if
-                end if
-                end if
+
+                'end if
+                'end if
+                'end if
+                'end if
 
             end if
 
@@ -1341,6 +1372,13 @@ function TestTankMine(CellX as uByte, CellY as uByte, Dir as uByte, TankIndex as
 
 end function
 
+function CheckTankObstacle(obstacle as byte) as byte
+
+    if (obstacle >= TOXICWASTE_INDEX and obstacle <= FLOOD_INDEX) or obstacle = FORCEFIELD_INDEX then return 0
+    return obstacle
+
+end function
+
 sub UpdateTanks()
 
     if activeTanks = 0 then return
@@ -1362,12 +1400,12 @@ sub UpdateTanks()
     Dim tmpCellY as byte
     Dim tmpMask as uByte
 
-    Dim upCellValue as byte
-    Dim downCellValue as byte
-    Dim leftCellValue as byte
-    Dim rightCellValue as byte
+    Dim upCellValue as ubyte
+    Dim downCellValue as ubyte
+    Dim leftCellValue as ubyte
+    Dim rightCellValue as ubyte
 
-    Dim dirs(4) as byte
+    Dim dirs(4) as ubyte
 
     for buc = 1 to MAX_TANK_COUNT
 
@@ -1427,33 +1465,48 @@ sub UpdateTanks()
 
                 else
 
-                    if tmpCellX > 1 then leftCellValue = activeMap(tmpCellX - 1, tmpCellY) else leftCellValue = -1
-                    if tmpCellX < 20 then rightCellValue = activeMap(tmpCellX + 1, tmpCellY) else rightCellValue = -1
-                    if tmpCellY > 1 then upCellValue = activeMap(tmpCellX, tmpCellY - 1) else upCellValue = -1
-                    if tmpCellY < 19 then downCellValue = activeMap(tmpCellX, tmpCellY + 1) else downCellValue = -1
+                    if tmpCellX > 1 then leftCellValue = activeMap(tmpCellX - 1, tmpCellY) else leftCellValue = 255
+                    if tmpCellX < 20 then rightCellValue = activeMap(tmpCellX + 1, tmpCellY) else rightCellValue = 255
+                    if tmpCellY > 1 then upCellValue = activeMap(tmpCellX, tmpCellY - 1) else upCellValue = 255
+                    if tmpCellY < 19 then downCellValue = activeMap(tmpCellX, tmpCellY + 1) else downCellValue = 255
 
-                    if (leftCellValue >= TOXICWASTE_INDEX and leftCellValue <= FLOOD_INDEX) or leftCellValue = FORCEFIELD_INDEX then leftCellValue = 0
-                    if (rightCellValue >= TOXICWASTE_INDEX and rightCellValue <= FLOOD_INDEX) or rightCellValue = FORCEFIELD_INDEX then rightCellValue = 0
-                    if (upCellValue >= TOXICWASTE_INDEX and upCellValue <= FLOOD_INDEX) or upCellValue = FORCEFIELD_INDEX then upCellValue = 0
-                    if (downCellValue >= TOXICWASTE_INDEX and downCellValue <= FLOOD_INDEX) or downCellValue = FORCEFIELD_INDEX then downCellValue = 0
+                    
+                    'if (leftCellValue >= TOXICWASTE_INDEX and leftCellValue <= FLOOD_INDEX) or leftCellValue = FORCEFIELD_INDEX then leftCellValue = 0
+                    'if (rightCellValue >= TOXICWASTE_INDEX and rightCellValue <= FLOOD_INDEX) or rightCellValue = FORCEFIELD_INDEX then rightCellValue = 0
+                    'if (upCellValue >= TOXICWASTE_INDEX and upCellValue <= FLOOD_INDEX) or upCellValue = FORCEFIELD_INDEX then upCellValue = 0
+                    'if (downCellValue >= TOXICWASTE_INDEX and downCellValue <= FLOOD_INDEX) or downCellValue = FORCEFIELD_INDEX then downCellValue = 0
 
+                    'dirs(1) = rightCellValue
+                    'dirs(2) = downCellValue
+                    'dirs(3) = leftCellValue
+                    'dirs(4) = upCellValue
+assign_array:
+                    rightCellValue = CheckTankObstacle(rightCellValue)
                     dirs(1) = rightCellValue
+                    downCellValue = CheckTankObstacle(downCellValue)
                     dirs(2) = downCellValue
+                    leftCellValue = CheckTankObstacle(leftCellValue)
                     dirs(3) = leftCellValue
+                    upCellValue = CheckTankObstacle(upCellValue)
                     dirs(4) = upCellValue
+
 
                     if dirs(tmpDir) <> 0 and dirs(tmpDir) <> MINE_INDEX then
 
-                        if leftCellValue = -1 then
-                        if rightCellValue = -1 then
-                        if upCellValue = -1 then
-                        if downCellValue = -1 then
-                            tanks(buc, 4) = 0
-                            goto ENDTANKMOVE
-                        end if
-                        end if
-                        end if
-                        end if
+                        'if leftCellValue = -1 then
+                        'if rightCellValue = -1 then
+                        'if upCellValue = -1 then
+                        'if downCellValue = -1 then
+                        'if dirs(1) = -1 then
+                        'if dirs(2) = -1 then
+                        'if dirs(3) = -1 then
+                        'if dirs(4) = -1 then
+                        '    tanks(buc, 4) = 0
+                        '    goto ENDTANKMOVE
+                        'end if
+                        'end if
+                        'end if
+                        'end if
 
                         Dim freeDirs as uByte
                         freeDirs = 1
@@ -1479,6 +1532,13 @@ sub UpdateTanks()
                         end if
 
                         freeDirs = freeDirs - 1
+
+                        if freeDirs = 0 then
+
+                            tanks(buc, 4) = 0
+                            goto ENDTANKMOVE
+
+                        end if
 
                         if tmpDir = 1 then 
                             tmpInverseDir = 3
@@ -1544,7 +1604,7 @@ sub UpdateTanks()
 
 end sub
 
-sub TestCollisions()
+sub TestCollisions()    
 
     Dim buc as ubyte
 
@@ -1609,6 +1669,35 @@ sub TestCollisions()
                         tmpEnemX = aliens(buc, 1)
                         tmpEnemY = aliens(buc, 2)
 
+                        if Intersects(activeShot1, tmpEnemX, tmpEnemY, tmpShot1XMin, tmpShot1XMax, tmpShot1YMin, tmpShot1YMax) then
+
+                            aliens(buc, 4) = 0
+                            activeShots = activeShots band 11111110b
+                            KilledAlienEffect()
+                            continue for
+
+                        end if
+
+                        if Intersects(activeShot2, tmpEnemX, tmpEnemY, tmpShot2XMin, tmpShot2XMax, tmpShot2YMin, tmpShot2YMax) then
+
+                            aliens(buc, 4) = 0
+                            activeShots = activeShots band 11111101b
+                            KilledAlienEffect()
+                            continue for
+
+                        end if
+
+                        if Intersects(activeShot3, tmpEnemX, tmpEnemY, tmpShot3XMin, tmpShot3XMax, tmpShot3YMin, tmpShot3YMax) then
+
+                            aliens(buc, 4) = 0
+                            activeShots = activeShots band 11111011b
+                            KilledAlienEffect()
+                            continue for
+
+                        end if
+
+                        /'
+
                         if activeShot1 then
                         if tmpEnemX >= tmpShot1XMin then
                         if tmpEnemX <= tmpShot1XMax then
@@ -1659,6 +1748,7 @@ sub TestCollisions()
                         end if
                         end if
                         end if
+                        '/
 
                     end if
 
@@ -1674,11 +1764,39 @@ sub TestCollisions()
 
                 if activeTanks & TABLE_LOOKUP(@maskTable, buc) then
 
-                    if aliens(buc, 4) = -1 then
+                    if tanks(buc, 4) = -1 then
 
                         tmpEnemX = tanks(buc, 1)
                         tmpEnemY = tanks(buc, 2)
 
+                        if Intersects(activeShot1, tmpEnemX, tmpEnemY, tmpShot1XMin, tmpShot1XMax, tmpShot1YMin, tmpShot1YMax) then
+
+                            tanks(buc, 4) = 0
+                            activeShots = activeShots band 11111110b
+                            BuildTankDestroyedEffect()
+                            continue for
+
+                        end if
+
+                        if Intersects(activeShot2, tmpEnemX, tmpEnemY, tmpShot2XMin, tmpShot2XMax, tmpShot2YMin, tmpShot2YMax) then
+
+                            tanks(buc, 4) = 0
+                            activeShots = activeShots band 11111101b
+                            BuildTankDestroyedEffect()
+                            continue for
+
+                        end if
+
+                        if Intersects(activeShot3, tmpEnemX, tmpEnemY, tmpShot3XMin, tmpShot3XMax, tmpShot3YMin, tmpShot3YMax) then
+
+                            tanks(buc, 4) = 0
+                            activeShots = activeShots band 11111011b
+                            BuildTankDestroyedEffect()
+                            continue for
+
+                        end if
+
+                        /'
                         if activeShot1 then
                         if tmpEnemX >= tmpShot1XMin then
                         if tmpEnemX <= tmpShot1XMax then
@@ -1729,6 +1847,8 @@ sub TestCollisions()
                         end if
                         end if
                         end if
+
+                        '/
 
                     end if
 
@@ -2281,7 +2401,7 @@ sub ShowInstructions()
     PrintString("the game manual.", CREATE_ATTRIB(6, 0, 1, 0), 0, 18)
 
     PrintString("PRESS SPACE TO CONTINUE...", CREATE_ATTRIB(7, 0, 1, 0), 0, 23)
-
+    
 
     while not MultiKeys(KEYSPACE)
     end while
@@ -2310,12 +2430,6 @@ PlayLevel(level)
 InitInterface()
 DrawGrid()
 InitLevel()
-
-while(1)
-
-    PlayEnding()
-
-end while
 
 while(1)
 
@@ -2461,9 +2575,12 @@ while(1)
 
             PlayShowText(GRIDCLEAR_INDEX)
 
-            if level < ubound(mapIndexes) then
+            if level < 2 then
                 level = level + 1
                 goto init_level
+            else
+                PlayEnding()
+                goto main
             end if
 
         end if
