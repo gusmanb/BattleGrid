@@ -248,14 +248,6 @@ sub InitLevel()
             PRINT_DIGIT(tmpX, tmpY, 0)
         next tmpY
     next tmpX
-    /'
-    PRINT_DIGIT(26, 16, 0)
-    PRINT_DIGIT(30, 16, 0)
-    PRINT_DIGIT(26, 18, 0)
-    PRINT_DIGIT(30, 18, 0)
-    PRINT_DIGIT(26, 20, 0)
-    PRINT_DIGIT(30, 20, 0)
-    '/
 
     playerX = 20
     dead = 0
@@ -356,7 +348,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 else
 
                     EXPLODE_SHOT(shotIndex)
-
+                    PrintString("A", 7, 0, 0)
                 end if
 
                 return
@@ -402,7 +394,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             if tmpCell <= EXPLOSIONCRATER_INDEX + 8 then
 
                 EXPLODE_SHOT(shotIndex)
-
+                PrintString("B", 7, 0, 0)
                 return
 
             end if
@@ -412,6 +404,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             if tmpCell <= BLOCKER_INDEX then
 
                 EXPLODE_SHOT(shotIndex)
+                PrintString("C " + str(tmpCell) + " " + str(cellX) + " " + str(cellY) + "   ", 7, 0, 0)
                 return
             
             end if
@@ -423,6 +416,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 ClearGridCell(cellX, cellY, 1)
                 CrateDestroyedEffect()
                 EXPLODE_SHOT(shotIndex)
+                PrintString("D", 7, 0, 0)
                 AddScore(5)
 
                 if tmpCell = MINECRATE_INDEX then
@@ -465,6 +459,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             if shotIndex <> 255 then 
                 BuildTankDestroyedEffect()            
                 EXPLODE_SHOT(shotIndex) 
+                PrintString("E", 7, 0, 0)
             end if
             
             activeTowers = activeTowers - 1
@@ -491,6 +486,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             if shotIndex <> 255 then
                 EXPLODE_SHOT(shotIndex)
+                PrintString("F", 7, 0, 0)
                 BuildTankDestroyedEffect()
             end if
 
@@ -516,6 +512,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             if shotIndex <> 255 then
                 EXPLODE_SHOT(shotIndex)
+                PrintString("G", 7, 0, 0)
                 BuildTankDestroyedEffect()
             end if
 
@@ -591,28 +588,32 @@ sub UpdateFire()
 
                     if tmpDir = 1 then                      'arriba
                         if tmpY <= 4 then 
-                            shots(buc, 4) = 0
+                            EXPLODE_SHOT(buc)
+                            PrintString("H", 7, 0, 0)
                             tmpY = 4
                         else
                             tmpY = tmpY - 1
                         end if
                     else if tmpDir = 2 then                 'abajo
                         if tmpY >= 42 then 
-                            shots(buc, 4) = 0
+                            EXPLODE_SHOT(buc)
+                            PrintString("I", 7, 0, 0)
                             tmpY = 42
                         else
                             tmpY = tmpY + 1
                         end if
                     else if tmpDir = 3 then                 'izquierda
                         if tmpX <= 2 then
-                            shots(buc, 4) = 0
+                            EXPLODE_SHOT(buc)
+                            PrintString("J", 7, 0, 0)
                             tmpX = 2
                         else
                             tmpX = tmpX - 1
                         end if
                     else if tmpDir = 4 then
                         if tmpX >= 40 then
-                            shots(buc, 4) = 0
+                            EXPLODE_SHOT(buc)
+                            PrintString("K", 7, 0, 0)
                             tmpX = 40
                         else
                             tmpX = tmpX + 1
@@ -678,11 +679,6 @@ sub CheckShotUnits(DirectKill as ubyte, cellX as ubyte, cellY as ubyte, squareOf
 
             if activeAliens & tmpMask then
 
-                'if aliens(buc, 1) <= xMax then
-                'if aliens(buc, 1) >= xMin then
-                'if aliens(buc, 2) <= yMax then
-                'if aliens(buc, 2) >= yMin then
-
                  if Intersects(1, aliens(buc, 1), aliens(buc, 2), xMin, xMax, yMin, yMax) then
 
                     if DirectKill then
@@ -695,11 +691,6 @@ sub CheckShotUnits(DirectKill as ubyte, cellX as ubyte, cellY as ubyte, squareOf
                     continue for
 
                 end if
-
-                'end if
-                'end if
-                'end if
-                'end if
 
             end if
 
@@ -1470,17 +1461,6 @@ sub UpdateTanks()
                     if tmpCellY > 1 then upCellValue = activeMap(tmpCellX, tmpCellY - 1) else upCellValue = 255
                     if tmpCellY < 19 then downCellValue = activeMap(tmpCellX, tmpCellY + 1) else downCellValue = 255
 
-                    
-                    'if (leftCellValue >= TOXICWASTE_INDEX and leftCellValue <= FLOOD_INDEX) or leftCellValue = FORCEFIELD_INDEX then leftCellValue = 0
-                    'if (rightCellValue >= TOXICWASTE_INDEX and rightCellValue <= FLOOD_INDEX) or rightCellValue = FORCEFIELD_INDEX then rightCellValue = 0
-                    'if (upCellValue >= TOXICWASTE_INDEX and upCellValue <= FLOOD_INDEX) or upCellValue = FORCEFIELD_INDEX then upCellValue = 0
-                    'if (downCellValue >= TOXICWASTE_INDEX and downCellValue <= FLOOD_INDEX) or downCellValue = FORCEFIELD_INDEX then downCellValue = 0
-
-                    'dirs(1) = rightCellValue
-                    'dirs(2) = downCellValue
-                    'dirs(3) = leftCellValue
-                    'dirs(4) = upCellValue
-assign_array:
                     rightCellValue = CheckTankObstacle(rightCellValue)
                     dirs(1) = rightCellValue
                     downCellValue = CheckTankObstacle(downCellValue)
@@ -1492,21 +1472,6 @@ assign_array:
 
 
                     if dirs(tmpDir) <> 0 and dirs(tmpDir) <> MINE_INDEX then
-
-                        'if leftCellValue = -1 then
-                        'if rightCellValue = -1 then
-                        'if upCellValue = -1 then
-                        'if downCellValue = -1 then
-                        'if dirs(1) = -1 then
-                        'if dirs(2) = -1 then
-                        'if dirs(3) = -1 then
-                        'if dirs(4) = -1 then
-                        '    tanks(buc, 4) = 0
-                        '    goto ENDTANKMOVE
-                        'end if
-                        'end if
-                        'end if
-                        'end if
 
                         Dim freeDirs as uByte
                         freeDirs = 1
@@ -1642,21 +1607,21 @@ sub TestCollisions()
         tmpShot1XMax = tmpShot1XMin + 2
         tmpShot1YMax = tmpShot1YMin + 2
 
-        activeShot1 = activeShots band 1
+        activeShot1 = (activeShots band 1) and shots(1,4) = -1
 
         tmpShot2XMin = shots(2,1) - 1
         tmpShot2YMin = shots(2,2) - 1
         tmpShot2XMax = tmpShot2XMin + 2
         tmpShot2YMax = tmpShot2YMin + 2
 
-        activeShot2 = activeShots band 2
+        activeShot2 = (activeShots band 2) and shots(2,4) = -1
 
         tmpShot3XMin = shots(3,1)
         tmpShot3YMin = shots(3,2)
         tmpShot3XMax = tmpShot3XMin + 2
         tmpShot3YMax = tmpShot3YMin + 2
 
-        activeShot3 = activeShots band 4
+        activeShot3 = (activeShots band 4) and shots(3,4) = -1
 
         if activeAliens then
 
@@ -1695,60 +1660,6 @@ sub TestCollisions()
                             continue for
 
                         end if
-
-                        /'
-
-                        if activeShot1 then
-                        if tmpEnemX >= tmpShot1XMin then
-                        if tmpEnemX <= tmpShot1XMax then
-                        if tmpEnemY >= tmpShot1YMin then
-                        if tmpEnemY <= tmpShot1YMax then
-
-                            aliens(buc, 4) = 0
-                            activeShots = activeShots band 11111110b
-                            KilledAlienEffect()
-                            continue for
-
-                        end if
-                        end if
-                        end if
-                        end if
-                        end if
-
-                        if activeShot2 then
-                        if tmpEnemX >= tmpShot2XMin then
-                        if tmpEnemX <= tmpShot2XMax then
-                        if tmpEnemY >= tmpShot2YMin then
-                        if tmpEnemY <= tmpShot2YMax then
-
-                            aliens(buc, 4) = 0
-                            activeShots = activeShots band 11111101b
-                            KilledAlienEffect()
-                            continue for
-
-                        end if
-                        end if
-                        end if
-                        end if
-                        end if
-
-                        if activeShot3 then
-                        if tmpEnemX >= tmpShot3XMin then
-                        if tmpEnemX <= tmpShot3XMax then
-                        if tmpEnemY >= tmpShot3YMin then
-                        if tmpEnemY <= tmpShot3YMax then
-
-                            aliens(buc, 4) = 0
-                            activeShots = activeShots band 11111011b
-                            KilledAlienEffect()
-                            continue for
-
-                        end if
-                        end if
-                        end if
-                        end if
-                        end if
-                        '/
 
                     end if
 
