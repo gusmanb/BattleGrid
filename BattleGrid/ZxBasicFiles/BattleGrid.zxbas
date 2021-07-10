@@ -107,10 +107,12 @@ Dim availableClearShots as uByte = 0
 Dim activeShips as uByte
 Dim ships(MAX_SHIP_COUNT,4) as uByte 'x,y,dir,frame
 Dim freezingShip as uByte = 1
+Dim shipIndexes(MAX_SHIP_COUNT * 2) as uByte
 
 Dim activeHangars as uByte
 Dim hangars(MAX_HANGAR_COUNT,4) as uByte 'x,y,dir,frame
 Dim freezingHangar as uByte = 1
+Dim hangarIndexes(MAX_SHIP_COUNT * 2) as uByte
 
 Dim refreshMap as uByte = 0
 
@@ -348,7 +350,6 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 else
 
                     EXPLODE_SHOT(shotIndex)
-                    PrintString("A", 7, 0, 0)
                 end if
 
                 return
@@ -394,7 +395,6 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             if tmpCell <= EXPLOSIONCRATER_INDEX + 8 then
 
                 EXPLODE_SHOT(shotIndex)
-                PrintString("B", 7, 0, 0)
                 return
 
             end if
@@ -404,7 +404,6 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             if tmpCell <= BLOCKER_INDEX then
 
                 EXPLODE_SHOT(shotIndex)
-                PrintString("C " + str(tmpCell) + " " + str(cellX) + " " + str(cellY) + "   ", 7, 0, 0)
                 return
             
             end if
@@ -416,7 +415,6 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 ClearGridCell(cellX, cellY, 1)
                 CrateDestroyedEffect()
                 EXPLODE_SHOT(shotIndex)
-                PrintString("D", 7, 0, 0)
                 AddScore(5)
 
                 if tmpCell = MINECRATE_INDEX then
@@ -459,7 +457,6 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             if shotIndex <> 255 then 
                 BuildTankDestroyedEffect()            
                 EXPLODE_SHOT(shotIndex) 
-                PrintString("E", 7, 0, 0)
             end if
             
             activeTowers = activeTowers - 1
@@ -486,7 +483,6 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             if shotIndex <> 255 then
                 EXPLODE_SHOT(shotIndex)
-                PrintString("F", 7, 0, 0)
                 BuildTankDestroyedEffect()
             end if
 
@@ -497,6 +493,9 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
                     activeShips = activeShips bxor TABLE_LOOKUP(@maskTable, tmpCell)
                     AddScore(50)
+
+                    if tmpCell = freezingShip then freezingShip = 1
+
                     return
 
                 end if
@@ -512,7 +511,6 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             if shotIndex <> 255 then
                 EXPLODE_SHOT(shotIndex)
-                PrintString("G", 7, 0, 0)
                 BuildTankDestroyedEffect()
             end if
 
@@ -523,6 +521,9 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
                     activeHangars = activeHangars bxor TABLE_LOOKUP(@maskTable, tmpCell)
                     AddScore(75)
+
+                    if tmpCell = freezingHangar then freezingHangar = 1
+
                     return
 
                 end if
@@ -589,7 +590,6 @@ sub UpdateFire()
                     if tmpDir = 1 then                      'arriba
                         if tmpY <= 4 then 
                             EXPLODE_SHOT(buc)
-                            PrintString("H", 7, 0, 0)
                             tmpY = 4
                         else
                             tmpY = tmpY - 1
@@ -597,7 +597,6 @@ sub UpdateFire()
                     else if tmpDir = 2 then                 'abajo
                         if tmpY >= 42 then 
                             EXPLODE_SHOT(buc)
-                            PrintString("I", 7, 0, 0)
                             tmpY = 42
                         else
                             tmpY = tmpY + 1
@@ -605,7 +604,6 @@ sub UpdateFire()
                     else if tmpDir = 3 then                 'izquierda
                         if tmpX <= 2 then
                             EXPLODE_SHOT(buc)
-                            PrintString("J", 7, 0, 0)
                             tmpX = 2
                         else
                             tmpX = tmpX - 1
@@ -613,7 +611,6 @@ sub UpdateFire()
                     else if tmpDir = 4 then
                         if tmpX >= 40 then
                             EXPLODE_SHOT(buc)
-                            PrintString("K", 7, 0, 0)
                             tmpX = 40
                         else
                             tmpX = tmpX + 1
@@ -1818,23 +1815,26 @@ sub UpdateShips()
     Dim tmpX as uByte
     Dim tmpY as uByte
     Dim tmpDir as uByte
+    Dim shipIndex as uByte
 
-    for buc = freezingShip to MAX_SHIP_COUNT
+    for buc = freezingShip to freezingShip + (MAX_SHIP_COUNT - 1)
     
-        if activeShips & TABLE_LOOKUP(@maskTable, buc) then
+        shipIndex = TABLE_LOOKUP(@shipIndexes, buc)
 
-            if ships(buc, 4) > 0 then
-                ships(buc, 4) = ships(buc, 4) - 1
+        if activeShips & TABLE_LOOKUP(@maskTable, shipIndex) then
+
+            if ships(shipIndex, 4) > 0 then
+                ships(shipIndex, 4) = ships(shipIndex, 4) - 1
             else
 
-                if ships(buc, 3) <> 0 then 'if not deactivated...
+                if ships(shipIndex, 3) <> 0 then 'if not deactivated...
 
                     if AVAILABLE_SLOT(activeAliens, MAX_ALIEN_COUNT) then
     compute_alien_pos:
-                        ships(buc, 4) = SHIP_SPEED
-                        tmpX = ships(buc, 1)
-                        tmpY = ships(buc, 2)
-                        tmpVal = ships(buc, 3)
+                        ships(shipIndex, 4) = SHIP_SPEED
+                        tmpX = ships(shipIndex, 1)
+                        tmpY = ships(shipIndex, 2)
+                        tmpVal = ships(shipIndex, 3)
                     
                         if tmpVal = 1 then  'spawn derecha
                             tmpX = tmpX + 1
@@ -1854,7 +1854,7 @@ sub UpdateShips()
 
                         freezingShip = 1
                     else
-                        freezingShip = buc
+                        freezingShip = shipIndex
                         return                                      'If a ship is ready to generate aliens but no free spot is available we freeze the generation timers
             
                     end if
@@ -1875,19 +1875,22 @@ sub UpdateHangars()
     Dim tmpY as uByte
     Dim tmpDir as uByte
     Dim tmpVal as uByte
+    Dim hangarIndex as uByte
 
-    for buc = freezingHangar to MAX_HANGAR_COUNT
+    for buc = freezingHangar to freezingHangar + (MAX_HANGAR_COUNT - 1)
     
-        if activeHangars & TABLE_LOOKUP(@maskTable, buc) then
+        hangarIndex = hangarIndexes(buc)
+
+        if activeHangars & TABLE_LOOKUP(@maskTable, hangarIndex) then
 
             if hangars(buc, 4) > 0 then
-                hangars(buc, 4) = hangars(buc, 4) - 1
+                hangars(buc, 4) = hangars(hangarIndex, 4) - 1
             else
                 if AVAILABLE_SLOT(activeTanks, MAX_TANK_COUNT) then
-                    hangars(buc, 4) = HANGAR_SPEED
-                    tmpX = hangars(buc, 1)
-                    tmpY = hangars(buc, 2)
-                    tmpDir = hangars(buc, 3)
+                    hangars(hangarIndex, 4) = HANGAR_SPEED
+                    tmpX = hangars(hangarIndex, 1)
+                    tmpY = hangars(hangarIndex, 2)
+                    tmpDir = hangars(hangarIndex, 3)
                     
                     if tmpDir = 1 then  'spawn derecha
                         tmpX = tmpX + 1
@@ -1902,7 +1905,7 @@ sub UpdateHangars()
                     CREATE_TANK(tmpX, tmpY, tmpDir, tmpVal)
                     freezingHangar = 1
                 else
-                    freezingHangar = buc
+                    freezingHangar = hangarIndex
                     return                                      'If a hangar is ready to generate tank but no free spot is available we freeze the generation timers
                 end if
             end if
@@ -2322,8 +2325,29 @@ end sub
 InitGraphics()
 
 main:
+
 Dim buc as uByte
 Dim tmpLoop as ubyte
+
+tmpLoop = 1
+
+for buc = 1 to MAX_SHIP_COUNT * 2
+
+    shipIndexes(buc) = tmpLoop
+    tmpLoop = tmpLoop + 1
+    if tmpLoop > MAX_SHIP_COUNT then tmpLoop = 1
+
+next buc
+
+tmpLoop = 1
+
+for buc = 1 to MAX_HANGAR_COUNT * 2
+
+    hangarIndexes(buc) = tmpLoop
+    tmpLoop = tmpLoop + 1
+    if tmpLoop > MAX_HANGAR_COUNT then tmpLoop = 1
+
+next buc
 
 buc = ShowMainMenu()
 
@@ -2486,7 +2510,7 @@ while(1)
 
             PlayShowText(GRIDCLEAR_INDEX)
 
-            if level < 2 then
+            if level < 3 then
                 level = level + 1
                 goto init_level
             else
