@@ -409,45 +409,48 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             end if
             end if
 
-            if tmpCell >= MINECRATE_INDEX then
-            if tmpCell <= CLEARSHOTCRATE_INDEX then
+        end if
 
-                ClearGridCell(cellX, cellY, 1)
+        if tmpCell >= MINECRATE_INDEX then
+        if tmpCell <= CLEARSHOTCRATE_INDEX then
+
+            ClearGridCell(cellX, cellY, 1)
+
+            if shotIndex <> 255 then 
                 CrateDestroyedEffect()
                 EXPLODE_SHOT(shotIndex)
                 AddScore(5)
-
-                if tmpCell = MINECRATE_INDEX then
-
-                    INCREASE_MINES()
-
-                else if tmpCell = BOMBCRATE_INDEX then
-
-                    INCREASE_BOMBS()
-
-                else if tmpCell = BLOCKERCRATE_INDEX then
-
-                    INCREASE_BLOCKERS()
-
-                else if tmpCell = CHARGEDSHOTCRATE_INDEX then
-
-                    INCREASE_CHARGEDSHOTS()
-
-                else if tmpCell = FIRESHOTCRATE_INDEX then
-
-                    INCREASE_FIRESHOTS()
-
-                else if tmpCell = CLEARSHOTCRATE_INDEX then
-
-                    INCREASE_CLEARSHOTS()
-
-                end if
-
-                return
-
-            end if
             end if
 
+            if tmpCell = MINECRATE_INDEX then
+
+                INCREASE_MINES()
+
+            else if tmpCell = BOMBCRATE_INDEX then
+
+                INCREASE_BOMBS()
+
+            else if tmpCell = BLOCKERCRATE_INDEX then
+
+                INCREASE_BLOCKERS()
+
+            else if tmpCell = CHARGEDSHOTCRATE_INDEX then
+
+                INCREASE_CHARGEDSHOTS()
+
+            else if tmpCell = FIRESHOTCRATE_INDEX then
+
+                INCREASE_FIRESHOTS()
+
+            else if tmpCell = CLEARSHOTCRATE_INDEX then
+
+                INCREASE_CLEARSHOTS()
+
+            end if
+
+            return
+
+        end if
         end if
 
         if tmpCell = RADIOTOWER_INDEX then
@@ -2510,7 +2513,7 @@ while(1)
 
             PlayShowText(GRIDCLEAR_INDEX)
 
-            if level < 3 then
+            if level < 4 then
                 level = level + 1
                 goto init_level
             else
