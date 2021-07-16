@@ -2,12 +2,11 @@
 
 #include "Maps.zxbas"
 
-Dim indexes(31, 2) as ubyte => _
+#define DEFLECTOR_INDEX 41
+
+Dim indexes(29, 2) as ubyte => _
 { _
-    { DEFLECTORA_INDEX, 11 } , _
-    { DEFLECTORB_INDEX, 11 } , _
-    { DEFLECTORC_INDEX, 11 } , _
-    { DEFLECTORD_INDEX, 11 } , _
+    { DEFLECTOR_INDEX, 11 } , _
     { HBARRIER_INDEX, 31 } , _
     { VBARRIER_INDEX, 13 } , _
     { BIGBUILDING_INDEX, 33 } , _
@@ -34,7 +33,8 @@ Dim indexes(31, 2) as ubyte => _
     { CLEARSHOTCRATE_INDEX, 11 } , _
     { RADIOTOWER_INDEX, 11 } , _
     { MOTHERSHIP_INDEX, 11 } , _
-    { HANGAR_INDEX, 11 } _
+    { HANGAR_INDEX, 11 }, _
+    { BLOCKER_INDEX, 11 } _
 }
 
 
@@ -108,20 +108,18 @@ function LoadObject(objectType as ubyte, objectX as ubyte, objectY as ubyte, off
     realIndex = indexes(objectType, 1)
     size = indexes(objectType, 2)
 
-    if realIndex >= DEFLECTORA_INDEX then
-    if realIndex <= DEFLECTORD_INDEX then
+    if realIndex = DEFLECTOR_INDEX then
 
         extraByte = peek(offset)
 
-        GridObject(realIndex, objectX, objectY)
+        GridObject(realIndex + (extraByte >> 4), objectX, objectY)
 
-        if extraByte then 
+        if (extraByte band 1) then 
             MAKE_DESTRUCTIBLE(objectX, objectY, tmpVar)
         end if
 
         return 1
 
-    end if
     end if
 
     if realIndex = RADIOTOWER_INDEX then
@@ -132,7 +130,7 @@ function LoadObject(objectType as ubyte, objectX as ubyte, objectY as ubyte, off
     end if
 
     if realIndex = MOTHERSHIP_INDEX then
-
+    
         extraByte = peek(offset)
         CREATE_SHIP(objectX, objectY, extraByte, tmpVar)
         return 1
@@ -172,7 +170,6 @@ sub LoadMap(mapNumber as uByte)
     Dim objectY as ubyte
 
     DrawGrid()
-
 
     while 1
 

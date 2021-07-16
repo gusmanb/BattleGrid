@@ -401,13 +401,27 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
             end if 
             
             if tmpCell >= FORCEFIELD_INDEX then
-            if tmpCell <= BLOCKER_INDEX then
+            if tmpCell < BLOCKER_INDEX then
 
                 EXPLODE_SHOT(shotIndex)
                 return
             
             end if
             end if
+
+        end if
+
+        if tmpCell = BLOCKER_INDEX then
+
+            ClearGridCell(cellX, cellY, 1)
+            AddScore(5)
+
+            if shotIndex <> 255 then 
+                CrateDestroyedEffect()
+                EXPLODE_SHOT(shotIndex)                
+            end if
+
+            return
 
         end if
 
@@ -418,9 +432,10 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
 
             if shotIndex <> 255 then 
                 CrateDestroyedEffect()
-                EXPLODE_SHOT(shotIndex)
-                AddScore(5)
+                EXPLODE_SHOT(shotIndex)                
             end if
+
+            AddScore(5)
 
             if tmpCell = MINECRATE_INDEX then
 
@@ -2513,7 +2528,7 @@ while(1)
 
             PlayShowText(GRIDCLEAR_INDEX)
 
-            if level < 4 then
+            if level < 10 then
                 level = level + 1
                 goto init_level
             else
