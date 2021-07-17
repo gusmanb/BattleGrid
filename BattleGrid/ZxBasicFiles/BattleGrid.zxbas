@@ -256,7 +256,7 @@ sub InitLevel()
     tankProbability = 128
 
     
-    PrintPaddedNumber(24, 8, 1, 2)
+    PrintPaddedNumber(24, 8, level, 2)
     updateScore = 0
     PrintPaddedNumber(24, 11, score, 6)
 
@@ -1631,8 +1631,8 @@ sub TestCollisions()
 
         activeShot2 = (activeShots band 2) and shots(2,4) = -1
 
-        tmpShot3XMin = shots(3,1)
-        tmpShot3YMin = shots(3,2)
+        tmpShot3XMin = shots(3,1) - 1
+        tmpShot3YMin = shots(3,2) - 1
         tmpShot3XMax = tmpShot3XMin + 2
         tmpShot3YMax = tmpShot3YMin + 2
 
@@ -1784,9 +1784,12 @@ sub TestCollisions()
 
         end if
 
+
+        buc = playerX - 1
+
         if activeShot1 then
         if 41 = tmpShot1YMin then
-        if playerX - 1 = tmpShot1XMin then
+        if buc = tmpShot1XMin then
 
             dead = 3
             activeShots = activeShots band 11111110b
@@ -1798,7 +1801,7 @@ sub TestCollisions()
 
         if activeShot2 then
         if 41 = tmpShot2YMin then
-        if playerX - 1 = tmpShot2XMin then
+        if buc = tmpShot2XMin then
 
             dead = 3
             activeShots = activeShots band 11111101b
@@ -1810,7 +1813,7 @@ sub TestCollisions()
 
         if activeShot3 then
         if 41 = tmpShot3YMin then
-        if playerX - 1 = tmpShot3XMin then
+        if buc = tmpShot3XMin then
 
             dead = 3
             activeShots = activeShots band 11111011b
@@ -2528,7 +2531,7 @@ while(1)
 
             PlayShowText(GRIDCLEAR_INDEX)
 
-            if level < 10 then
+            if level < 11 then
                 level = level + 1
                 goto init_level
             else

@@ -3555,6 +3555,12 @@ _mapIndexes:
 _mapIndexes.__DATA__.__PTR__:
 	DEFW _mapIndexes.__DATA__
 _mapIndexes.__DATA__:
+	DEFB 36h
+	DEFB 04h
+	DEFB 2Ah
+	DEFB 05h
+	DEFB 3Bh
+	DEFB 06h
 	DEFB 00h
 	DEFB 00h
 	DEFB 42h
@@ -3563,18 +3569,14 @@ _mapIndexes.__DATA__:
 	DEFB 00h
 	DEFB 0E7h
 	DEFB 00h
-	DEFB 71h
+	DEFB 82h
 	DEFB 01h
-	DEFB 0Ch
+	DEFB 3Fh
 	DEFB 02h
-	DEFB 0B5h
+	DEFB 0E8h
 	DEFB 02h
-	DEFB 79h
+	DEFB 72h
 	DEFB 03h
-	DEFB 6Dh
-	DEFB 04h
-	DEFB 6Eh
-	DEFB 05h
 .LABEL.__LABEL1092:
 	DEFW 0000h
 	DEFB 02h
@@ -3814,144 +3816,6 @@ _maps.__DATA__:
 	DEFB 31h
 	DEFB 20h
 	DEFB 00h
-	DEFB 7Bh
-	DEFB 0Ch
-	DEFB 02h
-	DEFB 7Bh
-	DEFB 14h
-	DEFB 02h
-	DEFB 3Bh
-	DEFB 16h
-	DEFB 02h
-	DEFB 7Bh
-	DEFB 16h
-	DEFB 02h
-	DEFB 0FCh
-	DEFB 20h
-	DEFB 03h
-	DEFB 0DCh
-	DEFB 21h
-	DEFB 01h
-	DEFB 22h
-	DEFB 4Ch
-	DEFB 42h
-	DEFB 4Eh
-	DEFB 0CAh
-	DEFB 4Ch
-	DEFB 0EAh
-	DEFB 4Dh
-	DEFB 89h
-	DEFB 4Dh
-	DEFB 29h
-	DEFB 4Dh
-	DEFB 93h
-	DEFB 44h
-	DEFB 53h
-	DEFB 3Eh
-	DEFB 41h
-	DEFB 36h
-	DEFB 11h
-	DEFB 61h
-	DEFB 34h
-	DEFB 20h
-	DEFB 54h
-	DEFB 19h
-	DEFB 94h
-	DEFB 15h
-	DEFB 34h
-	DEFB 15h
-	DEFB 74h
-	DEFB 19h
-	DEFB 54h
-	DEFB 1Dh
-	DEFB 74h
-	DEFB 1Dh
-	DEFB 34h
-	DEFB 21h
-	DEFB 94h
-	DEFB 21h
-	DEFB 41h
-	DEFB 05h
-	DEFB 10h
-	DEFB 21h
-	DEFB 04h
-	DEFB 10h
-	DEFB 21h
-	DEFB 18h
-	DEFB 20h
-	DEFB 0E1h
-	DEFB 18h
-	DEFB 20h
-	DEFB 0E1h
-	DEFB 14h
-	DEFB 10h
-	DEFB 0C1h
-	DEFB 15h
-	DEFB 10h
-	DEFB 61h
-	DEFB 05h
-	DEFB 21h
-	DEFB 41h
-	DEFB 06h
-	DEFB 40h
-	DEFB 0A4h
-	DEFB 28h
-	DEFB 0C4h
-	DEFB 29h
-	DEFB 21h
-	DEFB 44h
-	DEFB 11h
-	DEFB 41h
-	DEFB 46h
-	DEFB 10h
-	DEFB 21h
-	DEFB 45h
-	DEFB 30h
-	DEFB 56h
-	DEFB 2Eh
-	DEFB 76h
-	DEFB 2Ch
-	DEFB 5Dh
-	DEFB 21h
-	DEFB 7Dh
-	DEFB 21h
-	DEFB 5Dh
-	DEFB 15h
-	DEFB 7Dh
-	DEFB 15h
-	DEFB 31h
-	DEFB 48h
-	DEFB 52h
-	DEFB 48h
-	DEFB 72h
-	DEFB 48h
-	DEFB 52h
-	DEFB 4Ah
-	DEFB 71h
-	DEFB 4Ah
-	DEFB 92h
-	DEFB 4Ah
-	DEFB 72h
-	DEFB 20h
-	DEFB 5Dh
-	DEFB 35h
-	DEFB 7Dh
-	DEFB 35h
-	DEFB 0BDh
-	DEFB 41h
-	DEFB 0DDh
-	DEFB 41h
-	DEFB 1Dh
-	DEFB 41h
-	DEFB 0FDh
-	DEFB 40h
-	DEFB 01h
-	DEFB 3Eh
-	DEFB 10h
-	DEFB 81h
-	DEFB 3Ch
-	DEFB 11h
-	DEFB 00h
 	DEFB 22h
 	DEFB 4Ch
 	DEFB 42h
@@ -4106,6 +3970,195 @@ _maps.__DATA__:
 	DEFB 29h
 	DEFB 95h
 	DEFB 29h
+	DEFB 00h
+	DEFB 0D3h
+	DEFB 20h
+	DEFB 33h
+	DEFB 12h
+	DEFB 0D3h
+	DEFB 2Dh
+	DEFB 73h
+	DEFB 40h
+	DEFB 0F2h
+	DEFB 1Ch
+	DEFB 0B2h
+	DEFB 1Ch
+	DEFB 0B2h
+	DEFB 24h
+	DEFB 0F2h
+	DEFB 24h
+	DEFB 0B1h
+	DEFB 29h
+	DEFB 0F1h
+	DEFB 25h
+	DEFB 0B1h
+	DEFB 31h
+	DEFB 31h
+	DEFB 48h
+	DEFB 91h
+	DEFB 48h
+	DEFB 52h
+	DEFB 48h
+	DEFB 72h
+	DEFB 48h
+	DEFB 12h
+	DEFB 16h
+	DEFB 52h
+	DEFB 0Eh
+	DEFB 51h
+	DEFB 16h
+	DEFB 11h
+	DEFB 0Eh
+	DEFB 0FBh
+	DEFB 14h
+	DEFB 03h
+	DEFB 0BBh
+	DEFB 15h
+	DEFB 01h
+	DEFB 5Bh
+	DEFB 30h
+	DEFB 03h
+	DEFB 3Bh
+	DEFB 36h
+	DEFB 01h
+	DEFB 4Bh
+	DEFB 05h
+	DEFB 21h
+	DEFB 20h
+	DEFB 40h
+	DEFB 21h
+	DEFB 14h
+	DEFB 30h
+	DEFB 22h
+	DEFB 34h
+	DEFB 0E2h
+	DEFB 39h
+	DEFB 42h
+	DEFB 3Ah
+	DEFB 0EAh
+	DEFB 35h
+	DEFB 82h
+	DEFB 34h
+	DEFB 0E3h
+	DEFB 28h
+	DEFB 0C1h
+	DEFB 30h
+	DEFB 11h
+	DEFB 0Dh
+	DEFB 2Ah
+	DEFB 2Dh
+	DEFB 2Ah
+	DEFB 4Dh
+	DEFB 26h
+	DEFB 6Dh
+	DEFB 22h
+	DEFB 6Dh
+	DEFB 1Eh
+	DEFB 6Dh
+	DEFB 1Ah
+	DEFB 2Dh
+	DEFB 26h
+	DEFB 4Dh
+	DEFB 22h
+	DEFB 2Ah
+	DEFB 08h
+	DEFB 41h
+	DEFB 21h
+	DEFB 20h
+	DEFB 31h
+	DEFB 3Dh
+	DEFB 92h
+	DEFB 3Dh
+	DEFB 71h
+	DEFB 3Dh
+	DEFB 4Ah
+	DEFB 41h
+	DEFB 32h
+	DEFB 45h
+	DEFB 71h
+	DEFB 41h
+	DEFB 72h
+	DEFB 45h
+	DEFB 92h
+	DEFB 45h
+	DEFB 21h
+	DEFB 40h
+	DEFB 20h
+	DEFB 21h
+	DEFB 38h
+	DEFB 10h
+	DEFB 41h
+	DEFB 39h
+	DEFB 11h
+	DEFB 0A1h
+	DEFB 40h
+	DEFB 10h
+	DEFB 0B9h
+	DEFB 21h
+	DEFB 0D9h
+	DEFB 21h
+	DEFB 0F9h
+	DEFB 21h
+	DEFB 01h
+	DEFB 2Dh
+	DEFB 20h
+	DEFB 01h
+	DEFB 11h
+	DEFB 10h
+	DEFB 11h
+	DEFB 31h
+	DEFB 52h
+	DEFB 04h
+	DEFB 71h
+	DEFB 08h
+	DEFB 52h
+	DEFB 0Ch
+	DEFB 92h
+	DEFB 04h
+	DEFB 91h
+	DEFB 0Ch
+	DEFB 0B1h
+	DEFB 08h
+	DEFB 0D1h
+	DEFB 31h
+	DEFB 0F5h
+	DEFB 34h
+	DEFB 0D5h
+	DEFB 35h
+	DEFB 2Ah
+	DEFB 42h
+	DEFB 4Ah
+	DEFB 3Eh
+	DEFB 6Ah
+	DEFB 42h
+	DEFB 4Ah
+	DEFB 46h
+	DEFB 52h
+	DEFB 42h
+	DEFB 71h
+	DEFB 3Eh
+	DEFB 31h
+	DEFB 3Eh
+	DEFB 31h
+	DEFB 46h
+	DEFB 71h
+	DEFB 46h
+	DEFB 0B5h
+	DEFB 35h
+	DEFB 15h
+	DEFB 35h
+	DEFB 0ADh
+	DEFB 25h
+	DEFB 0CDh
+	DEFB 25h
+	DEFB 0EDh
+	DEFB 2Dh
+	DEFB 0CDh
+	DEFB 29h
+	DEFB 0EDh
+	DEFB 29h
+	DEFB 0EAh
+	DEFB 31h
 	DEFB 00h
 	DEFB 3Bh
 	DEFB 04h
@@ -4275,6 +4328,144 @@ _maps.__DATA__:
 	DEFB 44h
 	DEFB 59h
 	DEFB 46h
+	DEFB 00h
+	DEFB 7Bh
+	DEFB 0Ch
+	DEFB 02h
+	DEFB 7Bh
+	DEFB 14h
+	DEFB 02h
+	DEFB 3Bh
+	DEFB 16h
+	DEFB 02h
+	DEFB 7Bh
+	DEFB 16h
+	DEFB 02h
+	DEFB 0FCh
+	DEFB 20h
+	DEFB 03h
+	DEFB 0DCh
+	DEFB 21h
+	DEFB 01h
+	DEFB 22h
+	DEFB 4Ch
+	DEFB 42h
+	DEFB 4Eh
+	DEFB 0CAh
+	DEFB 4Ch
+	DEFB 0EAh
+	DEFB 4Dh
+	DEFB 89h
+	DEFB 4Dh
+	DEFB 29h
+	DEFB 4Dh
+	DEFB 93h
+	DEFB 44h
+	DEFB 53h
+	DEFB 3Eh
+	DEFB 41h
+	DEFB 36h
+	DEFB 11h
+	DEFB 61h
+	DEFB 34h
+	DEFB 20h
+	DEFB 54h
+	DEFB 19h
+	DEFB 94h
+	DEFB 15h
+	DEFB 34h
+	DEFB 15h
+	DEFB 74h
+	DEFB 19h
+	DEFB 54h
+	DEFB 1Dh
+	DEFB 74h
+	DEFB 1Dh
+	DEFB 34h
+	DEFB 21h
+	DEFB 94h
+	DEFB 21h
+	DEFB 41h
+	DEFB 05h
+	DEFB 10h
+	DEFB 21h
+	DEFB 04h
+	DEFB 10h
+	DEFB 21h
+	DEFB 18h
+	DEFB 20h
+	DEFB 0E1h
+	DEFB 18h
+	DEFB 20h
+	DEFB 0E1h
+	DEFB 14h
+	DEFB 10h
+	DEFB 0C1h
+	DEFB 15h
+	DEFB 10h
+	DEFB 61h
+	DEFB 05h
+	DEFB 21h
+	DEFB 41h
+	DEFB 06h
+	DEFB 40h
+	DEFB 0A4h
+	DEFB 28h
+	DEFB 0C4h
+	DEFB 29h
+	DEFB 21h
+	DEFB 44h
+	DEFB 10h
+	DEFB 41h
+	DEFB 46h
+	DEFB 10h
+	DEFB 21h
+	DEFB 45h
+	DEFB 30h
+	DEFB 56h
+	DEFB 2Eh
+	DEFB 76h
+	DEFB 2Ch
+	DEFB 5Dh
+	DEFB 21h
+	DEFB 7Dh
+	DEFB 21h
+	DEFB 5Dh
+	DEFB 15h
+	DEFB 7Dh
+	DEFB 15h
+	DEFB 31h
+	DEFB 48h
+	DEFB 52h
+	DEFB 48h
+	DEFB 72h
+	DEFB 48h
+	DEFB 52h
+	DEFB 4Ah
+	DEFB 71h
+	DEFB 4Ah
+	DEFB 92h
+	DEFB 4Ah
+	DEFB 72h
+	DEFB 20h
+	DEFB 5Dh
+	DEFB 35h
+	DEFB 7Dh
+	DEFB 35h
+	DEFB 0BDh
+	DEFB 41h
+	DEFB 0DDh
+	DEFB 41h
+	DEFB 1Dh
+	DEFB 41h
+	DEFB 0FDh
+	DEFB 40h
+	DEFB 01h
+	DEFB 3Eh
+	DEFB 10h
+	DEFB 81h
+	DEFB 3Ch
+	DEFB 11h
 	DEFB 00h
 	DEFB 49h
 	DEFB 14h
@@ -4796,8 +4987,8 @@ _maps.__DATA__:
 	DEFB 15h
 	DEFB 88h
 	DEFB 11h
-	DEFB 53h
-	DEFB 08h
+	DEFB 33h
+	DEFB 42h
 	DEFB 31h
 	DEFB 29h
 	DEFB 91h
@@ -4872,12 +5063,8 @@ _maps.__DATA__:
 	DEFB 2Dh
 	DEFB 74h
 	DEFB 2Dh
-	DEFB 73h
-	DEFB 0Ah
-	DEFB 0D3h
-	DEFB 2Ch
-	DEFB 0F3h
-	DEFB 2Dh
+	DEFB 93h
+	DEFB 40h
 	DEFB 81h
 	DEFB 39h
 	DEFB 10h
@@ -4972,6 +5159,26 @@ _maps.__DATA__:
 	DEFB 44h
 	DEFB 88h
 	DEFB 46h
+	DEFB 35h
+	DEFB 3Dh
+	DEFB 95h
+	DEFB 3Dh
+	DEFB 0D5h
+	DEFB 31h
+	DEFB 0F5h
+	DEFB 30h
+	DEFB 21h
+	DEFB 40h
+	DEFB 10h
+	DEFB 81h
+	DEFB 42h
+	DEFB 10h
+	DEFB 21h
+	DEFB 0Ch
+	DEFB 10h
+	DEFB 81h
+	DEFB 0Eh
+	DEFB 10h
 	DEFB 00h
 	DEFB 0A2h
 	DEFB 4Ch
@@ -5062,17 +5269,10 @@ _maps.__DATA__:
 	DEFB 45h
 	DEFB 42h
 	DEFB 4Dh
-	DEFB 30h
-	DEFB 4Dh
 	DEFB 4Ah
 	DEFB 35h
 	DEFB 30h
-	DEFB 4Ch
-	DEFB 4Ah
-	DEFB 48h
-	DEFB 7Bh
-	DEFB 48h
-	DEFB 04h
+	DEFB 4Dh
 	DEFB 77h
 	DEFB 04h
 	DEFB 77h
@@ -5185,19 +5385,41 @@ _maps.__DATA__:
 	DEFB 26h
 	DEFB 0F4h
 	DEFB 21h
-	DEFB 54h
-	DEFB 3Eh
-	DEFB 0F4h
-	DEFB 0Dh
-	DEFB 74h
+	DEFB 14h
 	DEFB 0Eh
-	DEFB 34h
+	DEFB 54h
+	DEFB 0Eh
+	DEFB 14h
 	DEFB 2Eh
 	DEFB 94h
 	DEFB 46h
 	DEFB 3Ch
-	DEFB 1Eh
-	DEFB 03h
+	DEFB 0Eh
+	DEFB 02h
+	DEFB 2Ah
+	DEFB 4Ch
+	DEFB 0BDh
+	DEFB 04h
+	DEFB 0BDh
+	DEFB 08h
+	DEFB 0FDh
+	DEFB 04h
+	DEFB 0FDh
+	DEFB 08h
+	DEFB 3Dh
+	DEFB 05h
+	DEFB 3Dh
+	DEFB 09h
+	DEFB 74h
+	DEFB 2Eh
+	DEFB 0D4h
+	DEFB 19h
+	DEFB 94h
+	DEFB 1Ah
+	DEFB 0D4h
+	DEFB 11h
+	DEFB 94h
+	DEFB 12h
 	DEFB 00h
 .LABEL.__LABEL1093:
 	DEFW 0000h
@@ -7073,7 +7295,7 @@ GSPRITES_LIB_END:
 	push af
 	call _PlayShowText
 	ld a, (_level)
-	cp 10
+	cp 11
 	jp nc, .LABEL.__LABEL85
 	ld hl, _level
 	inc (hl)
@@ -10829,7 +11051,9 @@ _InitLevel:
 	ld (_tankProbability), a
 	ld a, 2
 	push af
-	ld hl, 1
+	ld a, (_level)
+	ld l, a
+	ld h, 0
 	push hl
 	ld a, 8
 	push af
@@ -15131,8 +15355,10 @@ _TestCollisions:
 .LABEL.__LABEL1067:
 	ld (ix-15), a
 	ld a, (_shots.__DATA__ + 8)
+	dec a
 	ld (ix-10), a
 	ld a, (_shots.__DATA__ + 9)
+	dec a
 	ld (ix-11), a
 	ld a, (ix-10)
 	add a, 2
@@ -15450,14 +15676,16 @@ _TestCollisions:
 	cp (ix-1)
 	jp nc, .LABEL.__LABEL863
 .LABEL.__LABEL859:
+	ld a, (_playerX)
+	dec a
+	ld (ix-1), a
 	ld a, (ix-14)
 	or a
 	jp z, .LABEL.__LABEL876
 	ld a, 41
 	sub (ix-3)
 	jp nz, .LABEL.__LABEL876
-	ld a, (_playerX)
-	dec a
+	ld a, (ix-1)
 	sub (ix-2)
 	jp nz, .LABEL.__LABEL876
 	ld a, 3
@@ -15473,8 +15701,7 @@ _TestCollisions:
 	ld a, 41
 	sub (ix-7)
 	jp nz, .LABEL.__LABEL882
-	ld a, (_playerX)
-	dec a
+	ld a, (ix-1)
 	sub (ix-6)
 	jp nz, .LABEL.__LABEL882
 	ld a, 3
@@ -15490,8 +15717,7 @@ _TestCollisions:
 	ld a, 41
 	sub (ix-11)
 	jp nz, _TestCollisions__leave
-	ld a, (_playerX)
-	dec a
+	ld a, (ix-1)
 	sub (ix-10)
 	jp nz, _TestCollisions__leave
 	ld a, 3
@@ -16270,7 +16496,7 @@ _PathFind:
 	ld a, 20
 	cp (ix-3)
 	jp nc, .LABEL.__LABEL979
-#line 2012 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 2015 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 		PROC
 		LOCAL pmap, worklist1, worklist2, save_sp
 		LOCAL calc_distance, step_loop, skip_left, skip_right, skip_up, skip_down, swap_lists
@@ -16386,7 +16612,7 @@ worklist2:	ds	2*4*min
 end_path_proc:
 		ei
 		ENDP
-#line 2207 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 2210 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 _PathFind__leave:
 	ld sp, ix
 	pop ix
@@ -18119,7 +18345,7 @@ TMP_ARR_PTR:
 	    ENDP
 
 
-#line 3770 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3773 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/calloc.asm"
@@ -18600,7 +18826,7 @@ __MEM_SUBTRACT:
 
 #line 139 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
-#line 3771 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3774 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/asc.asm"
 	; Returns the ascii code for the given str
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/free.asm"
@@ -18831,7 +19057,7 @@ __ASC_END:
 	    ret
 	    ENDP
 
-#line 3772 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3775 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/band16.asm"
 ; vim:ts=4:et:
 	; FASTCALL bitwise and16 version.
@@ -18854,7 +19080,7 @@ __ASC_END:
 	    ret
 
 
-#line 3773 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3776 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/border.asm"
 	; __FASTCALL__ Routine to change de border
 	; Parameter (color) specified in A register
@@ -18865,7 +19091,7 @@ __ASC_END:
 
 
 	; Nothing to do! (Directly from the ZX Spectrum ROM)
-#line 3774 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3777 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/bright.asm"
 	; Sets bright flag in ATTR_P permanently
 ; Parameter: Paper color in A register
@@ -18924,7 +19150,7 @@ IS_TR:  ; transparent
 	    jr .core.__SET_BRIGHT
 	    ENDP
 
-#line 3775 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3778 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/cls.asm"
 	; JUMPS directly to spectrum CLS
 	; This routine does not clear lower screen
@@ -19009,7 +19235,7 @@ __CLS_SCR:
 	    ENDP
 
 
-#line 3776 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3779 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/copy_attr.asm"
 #line 4 "C:/zxbasic/src/arch/zx48k/library-asm/copy_attr.asm"
 
@@ -19054,7 +19280,7 @@ __REFRESH_TMP:
 	    ENDP
 
 
-#line 3777 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3780 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/div8.asm"
 	    ; --------------------------------
 
@@ -19145,7 +19371,7 @@ __REFRESH_TMP:
 	    ret		; a = Modulus
 
 
-#line 3778 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3781 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/ink.asm"
 	; Sets ink color in ATTR_P permanently
@@ -19193,7 +19419,7 @@ __SET_INK2:
 	    ENDP
 
 
-#line 3780 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3783 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lei8.asm"
 
 .core.__LEI8: ; Signed <= comparison for 8bit int
@@ -19218,7 +19444,7 @@ checkParity:
 	    ret
 	    ENDP
 
-#line 3781 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3784 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/loadstr.asm"
 
 
@@ -19265,10 +19491,10 @@ checkParity:
 	    pop hl	; Recovers destiny in hl as result
 	    ret
 
-#line 3782 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3785 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lti8.asm"
 
-#line 3783 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3786 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/mul8.asm"
 
@@ -19324,7 +19550,7 @@ __MUL8B:
 	    ENDP
 
 
-#line 3785 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3788 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/paper.asm"
 	; Sets paper color in ATTR_P permanently
 ; Parameter: Paper color in A register
@@ -19374,7 +19600,7 @@ __SET_PAPER2:
 	    ENDP
 
 
-#line 3786 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3789 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -19699,7 +19925,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR
 
 
-#line 3787 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3790 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr2.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -19760,7 +19986,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR2
 
 
-#line 3788 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3791 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/str.asm"
 	; The STR$( ) BASIC function implementation
 
@@ -19889,7 +20115,7 @@ __STR_END:
 	    ENDP
 
 
-#line 3789 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3792 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strcat.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strlen.asm"
@@ -20038,7 +20264,7 @@ __STRCATEND:
 	    ENDP
 
 
-#line 3790 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3793 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strslice.asm"
 	; String slicing library
@@ -20149,7 +20375,7 @@ __FREE_ON_EXIT:
 	    ENDP
 
 
-#line 3792 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3795 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/u32tofreg.asm"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/neg32.asm"
 
@@ -20275,7 +20501,7 @@ __U32TOFREG_END:
 	    ENDP
 
 
-#line 3793 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 3796 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 .LABEL.__LABEL1045:
 	DEFB 0FFh
