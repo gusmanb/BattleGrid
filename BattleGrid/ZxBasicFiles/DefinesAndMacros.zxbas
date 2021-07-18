@@ -20,6 +20,9 @@ defines:
 
 #define MAX_DESTRUCTIBLES_COUNT 4
 
+#define MAX_ACTIVE_FIRES 4
+#define FIRE_SPEED 255
+
 #define TOOL_NONE 0
 #define TOOL_BLOCKER 1
 #define TOOL_MINE 2
@@ -34,37 +37,35 @@ macros:
 
 #define EXPLODE_SHOT(INDEX) shots(INDEX, 4) = 0
 
-#define PRINT_DIGIT(X, Y, DIGIT) SetTile(NUMBERS_INDEX + DIGIT, tileColors(NUMBERS_INDEX + DIGIT + 1), X, Y)
-
 #define INCREASE_BLOCKERS() availableBlockers = availableBlockers + 1 \
-PRINT_DIGIT(26, 16, availableBlockers)
+PrintDigit(26, 16, availableBlockers)
 #define DECREASE_BLOCKERS() availableBlockers = availableBlockers - 1 \
-PRINT_DIGIT(26, 16, availableBlockers)
+PrintDigit(26, 16, availableBlockers)
 
 #define INCREASE_MINES() availableMines = availableMines + 1 \
-PRINT_DIGIT(30, 16, availableMines)
+PrintDigit(30, 16, availableMines)
 #define DECREASE_MINES() availableMines = availableMines - 1 \
-PRINT_DIGIT(30, 16, availableMines)
+PrintDigit(30, 16, availableMines)
 
 #define INCREASE_BOMBS() availableBombs = availableBombs + 1 \
-PRINT_DIGIT(26, 18, availableBombs)
+PrintDigit(26, 18, availableBombs)
 #define DECREASE_BOMBS() availableBombs = availableBombs - 1 \
-PRINT_DIGIT(26, 18, availableBombs)
+PrintDigit(26, 18, availableBombs)
 
 #define INCREASE_CHARGEDSHOTS() availableChargedShots = availableChargedShots + 1 \
-PRINT_DIGIT(30, 18, availableChargedShots)
+PrintDigit(30, 18, availableChargedShots)
 #define DECREASE_CHARGEDSHOTS() availableChargedShots = availableChargedShots - 1 \
-PRINT_DIGIT(30, 18, availableChargedShots)
+PrintDigit(30, 18, availableChargedShots)
 
 #define INCREASE_FIRESHOTS() availableFireShots = availableFireShots + 1 \
-PRINT_DIGIT(26, 20, availableFireShots)
+PrintDigit(26, 20, availableFireShots)
 #define DECREASE_FIRESHOTS() availableFireShots = availableFireShots - 1 \
-PRINT_DIGIT(26, 20, availableFireShots)
+PrintDigit(26, 20, availableFireShots)
 
 #define INCREASE_CLEARSHOTS() availableClearShots = availableClearShots + 1 \
-PRINT_DIGIT(30, 20, availableClearShots)
+PrintDigit(30, 20, availableClearShots)
 #define DECREASE_CLEARSHOTS() availableClearShots = availableClearShots - 1 \
-PRINT_DIGIT(30, 20, availableClearShots)
+PrintDigit(30, 20, availableClearShots)
 
 
 

@@ -119,6 +119,9 @@ Dim refreshMap as uByte = 0
 Dim destructibles(MAX_DESTRUCTIBLES_COUNT,2) as uByte
 Dim activeDestructibles as uByte
 
+Dim fires(MAX_ACTIVE_FIRES, 3) as uByte
+Dim activeFires as uByte
+
 init:
 
 
@@ -177,7 +180,7 @@ sub PrintPaddedNumber(x as ubyte, y as ubyte, value as uinteger, length as ubyte
 
     for tmpVal = 1 to length
 
-        PRINT_DIGIT(x + tmpVal - 1, y, code(strnum(tmpVal to tmpVal)) - 48)
+        PrintDigit(x + tmpVal - 1, y, code(strnum(tmpVal to tmpVal)) - 48)
 
     next tmpVal
 
@@ -247,7 +250,7 @@ sub InitLevel()
 
     for tmpX = 26 to 30 step 4
         for tmpY = 16 to 20 step 2
-            PRINT_DIGIT(tmpX, tmpY, 0)
+            PrintDigit(tmpX, tmpY, 0)
         next tmpY
     next tmpX
 
@@ -856,13 +859,22 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
 
             if activeMap(mapX, mapY) = 0 then
 
-                DECREASE_FIRESHOTS()
-                SATShotEffect()
-                GridObject(FIRE_INDEX, mapX, mapY)
+                cnt = FindEmptyBit(activeFires)
 
-                pathMap(mapY + 1, mapX + 1) = 0
+                if cnt <= MAX_ACTIVE_FIRES then
 
-                CheckShotUnits(1, mapX, mapY, 0)
+                    activeFires = activeFires bxor TABLE_LOOKUP(@maskTable, cnt)
+                    fires(cnt, 1) = mapX
+                    fires(cnt, 2) = mapY
+                    fires(cnt, 3) = FIRE_SPEED
+
+                    DECREASE_FIRESHOTS()
+                    SATShotEffect()
+                    GridObject(FIRE_INDEX, mapX, mapY)
+                    pathMap(mapY + 1, mapX + 1) = 0
+                    CheckShotUnits(1, mapX, mapY, 0)
+
+                end if
 
             end if
 
@@ -2210,6 +2222,14 @@ end asm
 
 end sub
 
+sub PrintDigit(x as uByte, y as uByte, value as uByte)
+
+    Dim realIndex as uByte
+    if value > 9 then realIndex = PLUS_INDEX else realIndex = NUMBERS_INDEX + value
+    SetTile(realIndex, tileColors(realIndex + 1), x, y)
+
+end sub
+
 sub ShowLogo(X as uByte, Y as uByte)
     
     Dim tmpX as uByte
@@ -2343,6 +2363,45 @@ sub ShowInstructions()
 
 end sub
 
+sub UpdateFires()
+
+    if activeFires = 0 then return
+
+    Dim buc as uByte
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpVal as uByte
+    Dim tmpMask as uByte
+    Dim fireIndex as uByte
+
+    for buc = 1 to MAX_ACTIVE_FIRES
+    
+        tmpMask = TABLE_LOOKUP(@maskTable, buc)
+
+        if activeFires & tmpMask then
+
+            tmpVal = fires(buc, 3)
+
+            if tmpVal = 0 then
+
+                activeFires = activeFires bxor tmpMask
+                ClearGridCell(fires(buc, 1), fires(buc, 2), 1)
+                FireOffEffect()
+                return
+
+            else
+
+                tmpVal = tmpVal - 1
+                fires(buc, 3) = tmpVal
+
+            end if
+
+        end if
+
+    next buc
+
+end sub
+
 InitGraphics()
 
 main:
@@ -2399,6 +2458,7 @@ while(1)
     UpdatePlayer()
     UpdateFire()
     TestCollisions()
+    UpdateFires()
 
     if refreshMap then
         refreshMap = 0

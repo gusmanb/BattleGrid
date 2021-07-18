@@ -236,6 +236,7 @@ SoundEffectsData:
 	defw SoundEffect13Data
 	defw SoundEffect14Data
 	defw SoundEffect15Data
+	defw SoundEffect16Data
 
 SoundEffect0Data:
 	defb 2 ;noise
@@ -306,6 +307,10 @@ SoundEffect14Data:
 SoundEffect15Data:
 	defb 2 ;noise
 	defw 10,200,64336
+	defb 0
+SoundEffect16Data:
+	defb 2 ;noise
+	defw 20,250,1
 	defb 0
 end asm
 
@@ -516,6 +521,19 @@ sub Introffect()
 	borderColors(4) = 6
 
 	PlayFX(15)
+
+	border 0
+
+end sub
+
+sub FireOffEffect()
+
+	borderColors(1) = 6
+	borderColors(2) = 7
+	borderColors(3) = 7
+	borderColors(4) = 6
+
+	PlayFX(16)
 
 	border 0
 
