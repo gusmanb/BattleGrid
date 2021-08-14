@@ -859,6 +859,8 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
 
             if activeMap(mapX, mapY) = 0 then
 
+burn_fire:
+
                 cnt = FindEmptyBit(activeFires)
 
                 if cnt <= MAX_ACTIVE_FIRES then
@@ -875,6 +877,10 @@ sub CheckCursorAction(mapX as uByte, mapY as uByte)
                     CheckShotUnits(1, mapX, mapY, 0)
 
                 end if
+
+            else if activeMap(mapX, mapY) >= BUSH_INDEX and activeMap(mapX, mapY) <= TREES_INDEX then
+
+                goto burn_fire
 
             end if
 
