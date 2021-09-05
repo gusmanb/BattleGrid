@@ -1,6 +1,7 @@
 	.zxbasic
 	org 24750
 .core.__START_PROGRAM:
+	ld HL, END
 	di
 	push ix
 	push iy
@@ -100,7 +101,7 @@ _buc:
 _tmpLoop:
 	DEFB 00
 _tileSet:
-	DEFW .LABEL.__LABEL1088
+	DEFW .LABEL.__LABEL1090
 _tileSet.__DATA__.__PTR__:
 	DEFW _tileSet.__DATA__
 _tileSet.__DATA__:
@@ -2104,12 +2105,12 @@ _tileSet.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-.LABEL.__LABEL1088:
+.LABEL.__LABEL1090:
 	DEFW 0001h
 	DEFW 0008h
 	DEFB 01h
 _tileColors:
-	DEFW .LABEL.__LABEL1089
+	DEFW .LABEL.__LABEL1091
 _tileColors.__DATA__.__PTR__:
 	DEFW _tileColors.__DATA__
 _tileColors.__DATA__:
@@ -2363,11 +2364,11 @@ _tileColors.__DATA__:
 	DEFB 47h
 	DEFB 47h
 	DEFB 47h
-.LABEL.__LABEL1089:
+.LABEL.__LABEL1091:
 	DEFW 0000h
 	DEFB 01h
 _borderColors:
-	DEFW .LABEL.__LABEL1090
+	DEFW .LABEL.__LABEL1092
 _borderColors.__DATA__.__PTR__:
 	DEFW _borderColors.__DATA__
 _borderColors.__DATA__:
@@ -2375,11 +2376,11 @@ _borderColors.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-.LABEL.__LABEL1090:
+.LABEL.__LABEL1092:
 	DEFW 0000h
 	DEFB 01h
 _shots:
-	DEFW .LABEL.__LABEL1091
+	DEFW .LABEL.__LABEL1093
 _shots.__DATA__.__PTR__:
 	DEFW _shots.__DATA__
 _shots.__DATA__:
@@ -2395,12 +2396,12 @@ _shots.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-.LABEL.__LABEL1091:
+.LABEL.__LABEL1093:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
 _activeMap:
-	DEFW .LABEL.__LABEL1092
+	DEFW .LABEL.__LABEL1094
 _activeMap.__DATA__.__PTR__:
 	DEFW _activeMap.__DATA__
 _activeMap.__DATA__:
@@ -2804,12 +2805,12 @@ _activeMap.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-.LABEL.__LABEL1092:
+.LABEL.__LABEL1094:
 	DEFW 0001h
 	DEFW 0014h
 	DEFB 01h
 _pathMap:
-	DEFW .LABEL.__LABEL1093
+	DEFW .LABEL.__LABEL1095
 _pathMap.__DATA__.__PTR__:
 	DEFW _pathMap.__DATA__
 _pathMap.__DATA__:
@@ -3297,12 +3298,12 @@ _pathMap.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-.LABEL.__LABEL1093:
+.LABEL.__LABEL1095:
 	DEFW 0001h
 	DEFW 0016h
 	DEFB 01h
 _reflectDirsA:
-	DEFW .LABEL.__LABEL1094
+	DEFW .LABEL.__LABEL1096
 _reflectDirsA.__DATA__.__PTR__:
 	DEFW _reflectDirsA.__DATA__
 _reflectDirsA.__DATA__:
@@ -3310,11 +3311,11 @@ _reflectDirsA.__DATA__:
 	DEFB 04h
 	DEFB 01h
 	DEFB 03h
-.LABEL.__LABEL1094:
+.LABEL.__LABEL1096:
 	DEFW 0000h
 	DEFB 01h
 _reflectDirsB:
-	DEFW .LABEL.__LABEL1095
+	DEFW .LABEL.__LABEL1097
 _reflectDirsB.__DATA__.__PTR__:
 	DEFW _reflectDirsB.__DATA__
 _reflectDirsB.__DATA__:
@@ -3322,11 +3323,11 @@ _reflectDirsB.__DATA__:
 	DEFB 01h
 	DEFB 02h
 	DEFB 03h
-.LABEL.__LABEL1095:
+.LABEL.__LABEL1097:
 	DEFW 0000h
 	DEFB 01h
 _reflectDirsC:
-	DEFW .LABEL.__LABEL1096
+	DEFW .LABEL.__LABEL1098
 _reflectDirsC.__DATA__.__PTR__:
 	DEFW _reflectDirsC.__DATA__
 _reflectDirsC.__DATA__:
@@ -3334,11 +3335,11 @@ _reflectDirsC.__DATA__:
 	DEFB 03h
 	DEFB 04h
 	DEFB 01h
-.LABEL.__LABEL1096:
+.LABEL.__LABEL1098:
 	DEFW 0000h
 	DEFB 01h
 _reflectDirsD:
-	DEFW .LABEL.__LABEL1097
+	DEFW .LABEL.__LABEL1099
 _reflectDirsD.__DATA__.__PTR__:
 	DEFW _reflectDirsD.__DATA__
 _reflectDirsD.__DATA__:
@@ -3346,11 +3347,11 @@ _reflectDirsD.__DATA__:
 	DEFB 01h
 	DEFB 04h
 	DEFB 02h
-.LABEL.__LABEL1097:
+.LABEL.__LABEL1099:
 	DEFW 0000h
 	DEFB 01h
 _maskTable:
-	DEFW .LABEL.__LABEL1098
+	DEFW .LABEL.__LABEL1100
 _maskTable.__DATA__.__PTR__:
 	DEFW _maskTable.__DATA__
 _maskTable.__DATA__:
@@ -3362,11 +3363,11 @@ _maskTable.__DATA__:
 	DEFB 20h
 	DEFB 40h
 	DEFB 80h
-.LABEL.__LABEL1098:
+.LABEL.__LABEL1100:
 	DEFW 0000h
 	DEFB 01h
 _bitTable:
-	DEFW .LABEL.__LABEL1099
+	DEFW .LABEL.__LABEL1101
 _bitTable.__DATA__.__PTR__:
 	DEFW _bitTable.__DATA__
 _bitTable.__DATA__:
@@ -3378,56 +3379,14 @@ _bitTable.__DATA__:
 	DEFB 3Fh
 	DEFB 7Fh
 	DEFB 00h
-.LABEL.__LABEL1099:
+.LABEL.__LABEL1101:
 	DEFW 0000h
 	DEFB 01h
 _aliens:
-	DEFW .LABEL.__LABEL1100
+	DEFW .LABEL.__LABEL1102
 _aliens.__DATA__.__PTR__:
 	DEFW _aliens.__DATA__
 _aliens.__DATA__:
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-.LABEL.__LABEL1100:
-	DEFW 0001h
-	DEFW 0004h
-	DEFB 01h
-_tanks:
-	DEFW .LABEL.__LABEL1101
-_tanks.__DATA__.__PTR__:
-	DEFW _tanks.__DATA__
-_tanks.__DATA__:
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-	DEFB 00h
-.LABEL.__LABEL1101:
-	DEFW 0001h
-	DEFW 0004h
-	DEFB 01h
-_ships:
-	DEFW .LABEL.__LABEL1102
-_ships.__DATA__.__PTR__:
-	DEFW _ships.__DATA__
-_ships.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
@@ -3448,11 +3407,11 @@ _ships.__DATA__:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
-_shipIndexes:
+_tanks:
 	DEFW .LABEL.__LABEL1103
-_shipIndexes.__DATA__.__PTR__:
-	DEFW _shipIndexes.__DATA__
-_shipIndexes.__DATA__:
+_tanks.__DATA__.__PTR__:
+	DEFW _tanks.__DATA__
+_tanks.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
@@ -3462,13 +3421,22 @@ _shipIndexes.__DATA__:
 	DEFB 00h
 	DEFB 00h
 .LABEL.__LABEL1103:
-	DEFW 0000h
+	DEFW 0001h
+	DEFW 0004h
 	DEFB 01h
-_hangars:
+_ships:
 	DEFW .LABEL.__LABEL1104
-_hangars.__DATA__.__PTR__:
-	DEFW _hangars.__DATA__
-_hangars.__DATA__:
+_ships.__DATA__.__PTR__:
+	DEFW _ships.__DATA__
+_ships.__DATA__:
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
@@ -3481,11 +3449,11 @@ _hangars.__DATA__:
 	DEFW 0001h
 	DEFW 0004h
 	DEFB 01h
-_hangarIndexes:
+_shipIndexes:
 	DEFW .LABEL.__LABEL1105
-_hangarIndexes.__DATA__.__PTR__:
-	DEFW _hangarIndexes.__DATA__
-_hangarIndexes.__DATA__:
+_shipIndexes.__DATA__.__PTR__:
+	DEFW _shipIndexes.__DATA__
+_shipIndexes.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
@@ -3497,8 +3465,41 @@ _hangarIndexes.__DATA__:
 .LABEL.__LABEL1105:
 	DEFW 0000h
 	DEFB 01h
-_destructibles:
+_hangars:
 	DEFW .LABEL.__LABEL1106
+_hangars.__DATA__.__PTR__:
+	DEFW _hangars.__DATA__
+_hangars.__DATA__:
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+.LABEL.__LABEL1106:
+	DEFW 0001h
+	DEFW 0004h
+	DEFB 01h
+_hangarIndexes:
+	DEFW .LABEL.__LABEL1107
+_hangarIndexes.__DATA__.__PTR__:
+	DEFW _hangarIndexes.__DATA__
+_hangarIndexes.__DATA__:
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+	DEFB 00h
+.LABEL.__LABEL1107:
+	DEFW 0000h
+	DEFB 01h
+_destructibles:
+	DEFW .LABEL.__LABEL1108
 _destructibles.__DATA__.__PTR__:
 	DEFW _destructibles.__DATA__
 _destructibles.__DATA__:
@@ -3510,12 +3511,12 @@ _destructibles.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-.LABEL.__LABEL1106:
+.LABEL.__LABEL1108:
 	DEFW 0001h
 	DEFW 0002h
 	DEFB 01h
 _fires:
-	DEFW .LABEL.__LABEL1107
+	DEFW .LABEL.__LABEL1109
 _fires.__DATA__.__PTR__:
 	DEFW _fires.__DATA__
 _fires.__DATA__:
@@ -3531,12 +3532,12 @@ _fires.__DATA__:
 	DEFB 00h
 	DEFB 00h
 	DEFB 00h
-.LABEL.__LABEL1107:
+.LABEL.__LABEL1109:
 	DEFW 0001h
 	DEFW 0003h
 	DEFB 01h
 _attribsAlienA:
-	DEFW .LABEL.__LABEL1108
+	DEFW .LABEL.__LABEL1110
 _attribsAlienA.__DATA__.__PTR__:
 	DEFW _attribsAlienA.__DATA__
 _attribsAlienA.__DATA__:
@@ -3546,11 +3547,11 @@ _attribsAlienA.__DATA__:
 	DEFB 03h
 	DEFB 04h
 	DEFB 44h
-.LABEL.__LABEL1108:
+.LABEL.__LABEL1110:
 	DEFW 0000h
 	DEFB 01h
 _attribsAlienB:
-	DEFW .LABEL.__LABEL1109
+	DEFW .LABEL.__LABEL1111
 _attribsAlienB.__DATA__.__PTR__:
 	DEFW _attribsAlienB.__DATA__
 _attribsAlienB.__DATA__:
@@ -3558,11 +3559,11 @@ _attribsAlienB.__DATA__:
 	DEFB 02h
 	DEFB 01h
 	DEFB 00h
-.LABEL.__LABEL1109:
+.LABEL.__LABEL1111:
 	DEFW 0000h
 	DEFB 01h
 _colorsExp:
-	DEFW .LABEL.__LABEL1110
+	DEFW .LABEL.__LABEL1112
 _colorsExp.__DATA__.__PTR__:
 	DEFW _colorsExp.__DATA__
 _colorsExp.__DATA__:
@@ -3570,16 +3571,14 @@ _colorsExp.__DATA__:
 	DEFB 02h
 	DEFB 01h
 	DEFB 00h
-.LABEL.__LABEL1110:
+.LABEL.__LABEL1112:
 	DEFW 0000h
 	DEFB 01h
 _mapIndexes:
-	DEFW .LABEL.__LABEL1111
+	DEFW .LABEL.__LABEL1113
 _mapIndexes.__DATA__.__PTR__:
 	DEFW _mapIndexes.__DATA__
 _mapIndexes.__DATA__:
-	DEFB 0C0h
-	DEFB 06h
 	DEFB 00h
 	DEFB 00h
 	DEFB 62h
@@ -3602,23 +3601,29 @@ _mapIndexes.__DATA__:
 	DEFB 05h
 	DEFB 36h
 	DEFB 06h
-	DEFB 61h
+	DEFB 0C0h
+	DEFB 06h
+	DEFB 91h
 	DEFB 08h
-	DEFB 1Ah
+	DEFB 96h
 	DEFB 09h
-	DEFB 0E6h
-	DEFB 09h
-	DEFB 0DAh
+	DEFB 4Fh
 	DEFB 0Ah
-	DEFB 0EFh
+	DEFB 1Bh
 	DEFB 0Bh
-	DEFB 0A9h
+	DEFB 0Fh
+	DEFB 0Ch
+	DEFB 24h
 	DEFB 0Dh
-.LABEL.__LABEL1111:
+	DEFB 0DEh
+	DEFB 0Eh
+	DEFB 0CFh
+	DEFB 0Fh
+.LABEL.__LABEL1113:
 	DEFW 0000h
 	DEFB 02h
 _maps:
-	DEFW .LABEL.__LABEL1112
+	DEFW .LABEL.__LABEL1114
 _maps.__DATA__.__PTR__:
 	DEFW _maps.__DATA__
 _maps.__DATA__:
@@ -5577,7 +5582,7 @@ _maps.__DATA__:
 	DEFB 0D2h
 	DEFB 30h
 	DEFB 0B1h
-	DEFB 3Dh
+	DEFB 41h
 	DEFB 0D2h
 	DEFB 45h
 	DEFB 91h
@@ -5684,11 +5689,11 @@ _maps.__DATA__:
 	DEFB 3Bh
 	DEFB 14h
 	DEFB 02h
-	DEFB 0BBh
-	DEFB 39h
+	DEFB 7Bh
+	DEFB 25h
 	DEFB 04h
 	DEFB 0BBh
-	DEFB 28h
+	DEFB 18h
 	DEFB 04h
 	DEFB 91h
 	DEFB 3Dh
@@ -5701,7 +5706,7 @@ _maps.__DATA__:
 	DEFB 31h
 	DEFB 19h
 	DEFB 0B2h
-	DEFB 41h
+	DEFB 45h
 	DEFB 98h
 	DEFB 46h
 	DEFB 98h
@@ -5766,6 +5771,315 @@ _maps.__DATA__:
 	DEFB 48h
 	DEFB 8Dh
 	DEFB 06h
+	DEFB 0B1h
+	DEFB 38h
+	DEFB 0B1h
+	DEFB 3Ch
+	DEFB 0B2h
+	DEFB 28h
+	DEFB 31h
+	DEFB 28h
+	DEFB 0B2h
+	DEFB 24h
+	DEFB 51h
+	DEFB 35h
+	DEFB 31h
+	DEFB 1Dh
+	DEFB 52h
+	DEFB 1Dh
+	DEFB 51h
+	DEFB 19h
+	DEFB 98h
+	DEFB 45h
+	DEFB 58h
+	DEFB 45h
+	DEFB 0B8h
+	DEFB 40h
+	DEFB 98h
+	DEFB 40h
+	DEFB 98h
+	DEFB 3Ch
+	DEFB 98h
+	DEFB 34h
+	DEFB 98h
+	DEFB 30h
+	DEFB 0B8h
+	DEFB 39h
+	DEFB 0B8h
+	DEFB 3Dh
+	DEFB 0B8h
+	DEFB 35h
+	DEFB 38h
+	DEFB 31h
+	DEFB 38h
+	DEFB 2Dh
+	DEFB 0D8h
+	DEFB 44h
+	DEFB 0D8h
+	DEFB 3Ch
+	DEFB 0D8h
+	DEFB 34h
+	DEFB 00h
+	DEFB 0FAh
+	DEFB 34h
+	DEFB 0DAh
+	DEFB 35h
+	DEFB 1Ah
+	DEFB 0Dh
+	DEFB 0BAh
+	DEFB 0Dh
+	DEFB 9Ah
+	DEFB 24h
+	DEFB 3Ah
+	DEFB 26h
+	DEFB 0Fh
+	DEFB 11h
+	DEFB 2Fh
+	DEFB 11h
+	DEFB 4Fh
+	DEFB 11h
+	DEFB 6Fh
+	DEFB 11h
+	DEFB 8Fh
+	DEFB 11h
+	DEFB 0AFh
+	DEFB 11h
+	DEFB 0EFh
+	DEFB 38h
+	DEFB 0Fh
+	DEFB 39h
+	DEFB 2Fh
+	DEFB 39h
+	DEFB 4Fh
+	DEFB 39h
+	DEFB 6Fh
+	DEFB 39h
+	DEFB 8Fh
+	DEFB 39h
+	DEFB 0AFh
+	DEFB 39h
+	DEFB 0CFh
+	DEFB 39h
+	DEFB 0E2h
+	DEFB 39h
+	DEFB 82h
+	DEFB 38h
+	DEFB 63h
+	DEFB 20h
+	DEFB 43h
+	DEFB 22h
+	DEFB 0C2h
+	DEFB 11h
+	DEFB 0A2h
+	DEFB 10h
+	DEFB 8Fh
+	DEFB 28h
+	DEFB 0AFh
+	DEFB 28h
+	DEFB 0CFh
+	DEFB 28h
+	DEFB 0EFh
+	DEFB 28h
+	DEFB 0Fh
+	DEFB 29h
+	DEFB 2Fh
+	DEFB 29h
+	DEFB 4Fh
+	DEFB 29h
+	DEFB 6Fh
+	DEFB 29h
+	DEFB 8Fh
+	DEFB 29h
+	DEFB 0AFh
+	DEFB 29h
+	DEFB 0CFh
+	DEFB 29h
+	DEFB 0EFh
+	DEFB 29h
+	DEFB 0Fh
+	DEFB 2Ah
+	DEFB 2Fh
+	DEFB 2Ah
+	DEFB 8Fh
+	DEFB 20h
+	DEFB 0AFh
+	DEFB 20h
+	DEFB 0CFh
+	DEFB 20h
+	DEFB 0EFh
+	DEFB 20h
+	DEFB 0Fh
+	DEFB 21h
+	DEFB 2Fh
+	DEFB 21h
+	DEFB 4Fh
+	DEFB 21h
+	DEFB 6Fh
+	DEFB 21h
+	DEFB 8Fh
+	DEFB 21h
+	DEFB 0AFh
+	DEFB 21h
+	DEFB 0EFh
+	DEFB 21h
+	DEFB 0CFh
+	DEFB 21h
+	DEFB 0Fh
+	DEFB 22h
+	DEFB 2Fh
+	DEFB 22h
+	DEFB 0A5h
+	DEFB 18h
+	DEFB 0BBh
+	DEFB 08h
+	DEFB 03h
+	DEFB 1Bh
+	DEFB 25h
+	DEFB 03h
+	DEFB 0BBh
+	DEFB 25h
+	DEFB 01h
+	DEFB 1Bh
+	DEFB 0Ah
+	DEFB 01h
+	DEFB 5Ch
+	DEFB 35h
+	DEFB 04h
+	DEFB 7Ch
+	DEFB 35h
+	DEFB 04h
+	DEFB 07h
+	DEFB 49h
+	DEFB 87h
+	DEFB 49h
+	DEFB 28h
+	DEFB 4Ch
+	DEFB 88h
+	DEFB 4Eh
+	DEFB 0C5h
+	DEFB 19h
+	DEFB 46h
+	DEFB 19h
+	DEFB 66h
+	DEFB 19h
+	DEFB 08h
+	DEFB 1Dh
+	DEFB 0A8h
+	DEFB 1Dh
+	DEFB 31h
+	DEFB 10h
+	DEFB 52h
+	DEFB 10h
+	DEFB 31h
+	DEFB 14h
+	DEFB 51h
+	DEFB 14h
+	DEFB 72h
+	DEFB 14h
+	DEFB 31h
+	DEFB 18h
+	DEFB 52h
+	DEFB 18h
+	DEFB 71h
+	DEFB 12h
+	DEFB 92h
+	DEFB 12h
+	DEFB 92h
+	DEFB 16h
+	DEFB 72h
+	DEFB 16h
+	DEFB 51h
+	DEFB 16h
+	DEFB 92h
+	DEFB 1Ah
+	DEFB 71h
+	DEFB 1Ah
+	DEFB 41h
+	DEFB 41h
+	DEFB 11h
+	DEFB 61h
+	DEFB 41h
+	DEFB 11h
+	DEFB 21h
+	DEFB 40h
+	DEFB 20h
+	DEFB 81h
+	DEFB 42h
+	DEFB 30h
+	DEFB 21h
+	DEFB 04h
+	DEFB 10h
+	DEFB 0A1h
+	DEFB 04h
+	DEFB 10h
+	DEFB 01h
+	DEFB 06h
+	DEFB 20h
+	DEFB 21h
+	DEFB 0Ch
+	DEFB 41h
+	DEFB 81h
+	DEFB 0Eh
+	DEFB 21h
+	DEFB 77h
+	DEFB 04h
+	DEFB 58h
+	DEFB 49h
+	DEFB 78h
+	DEFB 49h
+	DEFB 0F8h
+	DEFB 41h
+	DEFB 18h
+	DEFB 42h
+	DEFB 98h
+	DEFB 40h
+	DEFB 0B8h
+	DEFB 40h
+	DEFB 57h
+	DEFB 06h
+	DEFB 81h
+	DEFB 06h
+	DEFB 10h
+	DEFB 56h
+	DEFB 3Dh
+	DEFB 76h
+	DEFB 3Dh
+	DEFB 39h
+	DEFB 24h
+	DEFB 99h
+	DEFB 26h
+	DEFB 34h
+	DEFB 28h
+	DEFB 34h
+	DEFB 20h
+	DEFB 95h
+	DEFB 2Ah
+	DEFB 95h
+	DEFB 22h
+	DEFB 0A6h
+	DEFB 30h
+	DEFB 90h
+	DEFB 34h
+	DEFB 06h
+	DEFB 32h
+	DEFB 30h
+	DEFB 36h
+	DEFB 6Dh
+	DEFB 4Ch
+	DEFB 4Dh
+	DEFB 4Eh
+	DEFB 49h
+	DEFB 05h
+	DEFB 69h
+	DEFB 05h
+	DEFB 94h
+	DEFB 3Ch
+	DEFB 0B4h
+	DEFB 3Ch
+	DEFB 0F5h
+	DEFB 3Dh
+	DEFB 15h
+	DEFB 3Eh
 	DEFB 00h
 	DEFB 9Bh
 	DEFB 0Ch
@@ -7360,11 +7674,314 @@ _maps.__DATA__:
 	DEFB 94h
 	DEFB 12h
 	DEFB 00h
-.LABEL.__LABEL1112:
+	DEFB 93h
+	DEFB 0Ch
+	DEFB 93h
+	DEFB 18h
+	DEFB 13h
+	DEFB 0Dh
+	DEFB 0B3h
+	DEFB 0Dh
+	DEFB 33h
+	DEFB 0Eh
+	DEFB 13h
+	DEFB 19h
+	DEFB 0B3h
+	DEFB 19h
+	DEFB 33h
+	DEFB 1Ah
+	DEFB 93h
+	DEFB 24h
+	DEFB 13h
+	DEFB 25h
+	DEFB 0B3h
+	DEFB 25h
+	DEFB 33h
+	DEFB 26h
+	DEFB 93h
+	DEFB 30h
+	DEFB 13h
+	DEFB 31h
+	DEFB 0B3h
+	DEFB 31h
+	DEFB 33h
+	DEFB 32h
+	DEFB 93h
+	DEFB 3Ch
+	DEFB 13h
+	DEFB 3Dh
+	DEFB 0B3h
+	DEFB 3Dh
+	DEFB 33h
+	DEFB 3Eh
+	DEFB 93h
+	DEFB 48h
+	DEFB 13h
+	DEFB 49h
+	DEFB 0B3h
+	DEFB 49h
+	DEFB 33h
+	DEFB 4Ah
+	DEFB 5Dh
+	DEFB 4Ch
+	DEFB 0DDh
+	DEFB 4Ch
+	DEFB 5Dh
+	DEFB 4Dh
+	DEFB 7Dh
+	DEFB 4Dh
+	DEFB 0FDh
+	DEFB 4Dh
+	DEFB 7Dh
+	DEFB 4Eh
+	DEFB 0A5h
+	DEFB 40h
+	DEFB 0C5h
+	DEFB 41h
+	DEFB 0A5h
+	DEFB 28h
+	DEFB 0C5h
+	DEFB 29h
+	DEFB 0A5h
+	DEFB 10h
+	DEFB 0C5h
+	DEFB 11h
+	DEFB 21h
+	DEFB 20h
+	DEFB 20h
+	DEFB 21h
+	DEFB 38h
+	DEFB 20h
+	DEFB 81h
+	DEFB 3Ah
+	DEFB 10h
+	DEFB 81h
+	DEFB 22h
+	DEFB 40h
+	DEFB 81h
+	DEFB 06h
+	DEFB 10h
+	DEFB 21h
+	DEFB 04h
+	DEFB 40h
+	DEFB 4Dh
+	DEFB 29h
+	DEFB 6Dh
+	DEFB 29h
+	DEFB 4Dh
+	DEFB 2Dh
+	DEFB 6Dh
+	DEFB 2Dh
+	DEFB 4Dh
+	DEFB 41h
+	DEFB 4Dh
+	DEFB 45h
+	DEFB 6Dh
+	DEFB 41h
+	DEFB 6Dh
+	DEFB 45h
+	DEFB 4Dh
+	DEFB 15h
+	DEFB 6Dh
+	DEFB 15h
+	DEFB 4Dh
+	DEFB 11h
+	DEFB 6Dh
+	DEFB 11h
+	DEFB 75h
+	DEFB 39h
+	DEFB 55h
+	DEFB 39h
+	DEFB 75h
+	DEFB 35h
+	DEFB 55h
+	DEFB 35h
+	DEFB 75h
+	DEFB 21h
+	DEFB 55h
+	DEFB 21h
+	DEFB 75h
+	DEFB 1Dh
+	DEFB 55h
+	DEFB 1Dh
+	DEFB 55h
+	DEFB 05h
+	DEFB 75h
+	DEFB 05h
+	DEFB 55h
+	DEFB 09h
+	DEFB 75h
+	DEFB 09h
+	DEFB 0B9h
+	DEFB 38h
+	DEFB 0F9h
+	DEFB 38h
+	DEFB 0B9h
+	DEFB 20h
+	DEFB 0F9h
+	DEFB 20h
+	DEFB 0B9h
+	DEFB 04h
+	DEFB 0F9h
+	DEFB 04h
+	DEFB 0D9h
+	DEFB 05h
+	DEFB 19h
+	DEFB 06h
+	DEFB 0D9h
+	DEFB 21h
+	DEFB 19h
+	DEFB 22h
+	DEFB 0D9h
+	DEFB 39h
+	DEFB 19h
+	DEFB 3Ah
+	DEFB 0DBh
+	DEFB 08h
+	DEFB 03h
+	DEFB 0FBh
+	DEFB 09h
+	DEFB 01h
+	DEFB 3Bh
+	DEFB 2Ch
+	DEFB 01h
+	DEFB 9Bh
+	DEFB 2Eh
+	DEFB 03h
+	DEFB 0DCh
+	DEFB 18h
+	DEFB 01h
+	DEFB 0FCh
+	DEFB 19h
+	DEFB 03h
+	DEFB 75h
+	DEFB 14h
+	DEFB 55h
+	DEFB 40h
+	DEFB 75h
+	DEFB 40h
+	DEFB 75h
+	DEFB 44h
+	DEFB 55h
+	DEFB 44h
+	DEFB 55h
+	DEFB 14h
+	DEFB 55h
+	DEFB 10h
+	DEFB 75h
+	DEFB 10h
+	DEFB 55h
+	DEFB 12h
+	DEFB 55h
+	DEFB 16h
+	DEFB 75h
+	DEFB 12h
+	DEFB 75h
+	DEFB 16h
+	DEFB 75h
+	DEFB 46h
+	DEFB 55h
+	DEFB 46h
+	DEFB 75h
+	DEFB 42h
+	DEFB 55h
+	DEFB 42h
+	DEFB 55h
+	DEFB 24h
+	DEFB 55h
+	DEFB 34h
+	DEFB 75h
+	DEFB 26h
+	DEFB 75h
+	DEFB 36h
+	DEFB 01h
+	DEFB 05h
+	DEFB 10h
+	DEFB 0A1h
+	DEFB 05h
+	DEFB 30h
+	DEFB 8Ah
+	DEFB 28h
+	DEFB 2Ah
+	DEFB 2Eh
+	DEFB 0Ah
+	DEFB 35h
+	DEFB 0AAh
+	DEFB 15h
+	DEFB 2Ah
+	DEFB 4Ch
+	DEFB 8Ah
+	DEFB 4Eh
+	DEFB 75h
+	DEFB 2Ah
+	DEFB 75h
+	DEFB 32h
+	DEFB 55h
+	DEFB 28h
+	DEFB 55h
+	DEFB 30h
+	DEFB 35h
+	DEFB 1Dh
+	DEFB 35h
+	DEFB 21h
+	DEFB 95h
+	DEFB 1Dh
+	DEFB 95h
+	DEFB 21h
+	DEFB 35h
+	DEFB 05h
+	DEFB 35h
+	DEFB 09h
+	DEFB 95h
+	DEFB 05h
+	DEFB 95h
+	DEFB 09h
+	DEFB 35h
+	DEFB 35h
+	DEFB 95h
+	DEFB 35h
+	DEFB 95h
+	DEFB 39h
+	DEFB 35h
+	DEFB 39h
+	DEFB 35h
+	DEFB 41h
+	DEFB 95h
+	DEFB 41h
+	DEFB 95h
+	DEFB 45h
+	DEFB 35h
+	DEFB 45h
+	DEFB 35h
+	DEFB 29h
+	DEFB 95h
+	DEFB 29h
+	DEFB 95h
+	DEFB 2Dh
+	DEFB 35h
+	DEFB 2Dh
+	DEFB 35h
+	DEFB 11h
+	DEFB 95h
+	DEFB 11h
+	DEFB 95h
+	DEFB 15h
+	DEFB 35h
+	DEFB 15h
+	DEFB 0B9h
+	DEFB 4Ch
+	DEFB 0F9h
+	DEFB 4Ch
+	DEFB 0D9h
+	DEFB 4Dh
+	DEFB 19h
+	DEFB 4Eh
+	DEFB 00h
+.LABEL.__LABEL1114:
 	DEFW 0000h
 	DEFB 01h
 _indexes:
-	DEFW .LABEL.__LABEL1113
+	DEFW .LABEL.__LABEL1115
 _indexes.__DATA__.__PTR__:
 	DEFW _indexes.__DATA__
 _indexes.__DATA__:
@@ -7426,7 +8043,7 @@ _indexes.__DATA__:
 	DEFB 0Bh
 	DEFB 5Ah
 	DEFB 0Bh
-.LABEL.__LABEL1113:
+.LABEL.__LABEL1115:
 	DEFW 0001h
 	DEFW 0002h
 	DEFB 01h
@@ -12163,9 +12780,9 @@ _LoadObject:
 	push af
 	ld a, (ix-3)
 	ld b, 4
-.LABEL.__LABEL1056:
+.LABEL.__LABEL1058:
 	srl a
-	djnz .LABEL.__LABEL1056
+	djnz .LABEL.__LABEL1058
 	ld h, a
 	pop af
 	add a, h
@@ -12486,13 +13103,10 @@ _LoadMap:
 	ld l, (ix-7)
 	ld h, (ix-6)
 	ld b, 5
-	or a
-	jr z, .LABEL.__LABEL1058
-.LABEL.__LABEL1057:
+.LABEL.__LABEL1059:
 	srl h
 	rr l
-	djnz .LABEL.__LABEL1057
-.LABEL.__LABEL1058:
+	djnz .LABEL.__LABEL1059
 	ld (ix-7), l
 	ld (ix-6), h
 	ld de, 31
@@ -12502,13 +13116,10 @@ _LoadMap:
 	ld l, (ix-7)
 	ld h, (ix-6)
 	ld b, 5
-	or a
-	jr z, .LABEL.__LABEL1060
-.LABEL.__LABEL1059:
+.LABEL.__LABEL1061:
 	srl h
 	rr l
-	djnz .LABEL.__LABEL1059
-.LABEL.__LABEL1060:
+	djnz .LABEL.__LABEL1061
 	ld (ix-7), l
 	ld (ix-6), h
 	ld de, 31
@@ -14236,9 +14847,9 @@ _CheckShotUnits:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1061
+	jr z, .LABEL.__LABEL1063
 	ld a, h
-.LABEL.__LABEL1061:
+.LABEL.__LABEL1063:
 	or a
 	jp nz, _CheckShotUnits__leave
 	ld a, (ix+7)
@@ -14464,7 +15075,7 @@ _CheckCursorAction:
 	ld bc, -3
 	add hl, bc
 	ex de, hl
-	ld hl, .LABEL.__LABEL1062
+	ld hl, .LABEL.__LABEL1064
 	ld bc, 1
 	ldir
 	ld a, (_cursorTool)
@@ -14984,9 +15595,9 @@ _CheckCursorAction:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1063
+	jr z, .LABEL.__LABEL1065
 	ld a, h
-.LABEL.__LABEL1063:
+.LABEL.__LABEL1065:
 	or a
 	jp nz, .LABEL._burn_fire
 .LABEL.__LABEL568:
@@ -15373,9 +15984,9 @@ _LineOfSight:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1064
+	jr z, .LABEL.__LABEL1066
 	ld a, h
-.LABEL.__LABEL1064:
+.LABEL.__LABEL1066:
 	pop de
 	or d
 	jp z, .LABEL.__LABEL636
@@ -15549,18 +16160,18 @@ _CheckShipGens:
 	sbc a, a
 	ld h, (ix-4)
 	or a
-	jr z, .LABEL.__LABEL1065
+	jr z, .LABEL.__LABEL1067
 	ld a, h
-.LABEL.__LABEL1065:
+.LABEL.__LABEL1067:
 	push af
 	ld a, (ix-4)
 	sub 255
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1066
+	jr z, .LABEL.__LABEL1068
 	ld a, h
-.LABEL.__LABEL1066:
+.LABEL.__LABEL1068:
 	or a
 	jp z, .LABEL.__LABEL656
 	ld a, (ix-4)
@@ -15572,18 +16183,18 @@ _CheckShipGens:
 	sbc a, a
 	ld h, (ix-5)
 	or a
-	jr z, .LABEL.__LABEL1067
+	jr z, .LABEL.__LABEL1069
 	ld a, h
-.LABEL.__LABEL1067:
+.LABEL.__LABEL1069:
 	push af
 	ld a, (ix-5)
 	sub 255
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1068
+	jr z, .LABEL.__LABEL1070
 	ld a, h
-.LABEL.__LABEL1068:
+.LABEL.__LABEL1070:
 	or a
 	jp z, .LABEL.__LABEL658
 	ld a, (ix-5)
@@ -15595,18 +16206,18 @@ _CheckShipGens:
 	sbc a, a
 	ld h, (ix-2)
 	or a
-	jr z, .LABEL.__LABEL1069
+	jr z, .LABEL.__LABEL1071
 	ld a, h
-.LABEL.__LABEL1069:
+.LABEL.__LABEL1071:
 	push af
 	ld a, (ix-2)
 	sub 255
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1070
+	jr z, .LABEL.__LABEL1072
 	ld a, h
-.LABEL.__LABEL1070:
+.LABEL.__LABEL1072:
 	or a
 	jp z, .LABEL.__LABEL660
 	ld a, (ix-2)
@@ -15618,18 +16229,18 @@ _CheckShipGens:
 	sbc a, a
 	ld h, (ix-3)
 	or a
-	jr z, .LABEL.__LABEL1071
+	jr z, .LABEL.__LABEL1073
 	ld a, h
-.LABEL.__LABEL1071:
+.LABEL.__LABEL1073:
 	push af
 	ld a, (ix-3)
 	sub 255
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1072
+	jr z, .LABEL.__LABEL1074
 	ld a, h
-.LABEL.__LABEL1072:
+.LABEL.__LABEL1074:
 	or a
 	jp z, .LABEL.__LABEL662
 	ld a, (ix-3)
@@ -15758,9 +16369,9 @@ _CheckAlienPaths:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1073
+	jr z, .LABEL.__LABEL1075
 	ld a, h
-.LABEL.__LABEL1073:
+.LABEL.__LABEL1075:
 	or a
 	jp z, .LABEL.__LABEL675
 	ld a, 1
@@ -15787,9 +16398,9 @@ _CheckAlienPaths:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1074
+	jr z, .LABEL.__LABEL1076
 	ld a, h
-.LABEL.__LABEL1074:
+.LABEL.__LABEL1076:
 	or a
 	jp nz, .LABEL.__LABEL671
 .LABEL.__LABEL677:
@@ -15817,9 +16428,9 @@ _CheckAlienPaths:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1075
+	jr z, .LABEL.__LABEL1077
 	ld a, h
-.LABEL.__LABEL1075:
+.LABEL.__LABEL1077:
 	or a
 	jp nz, .LABEL.__LABEL671
 .LABEL.__LABEL681:
@@ -15846,9 +16457,9 @@ _CheckAlienPaths:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1076
+	jr z, .LABEL.__LABEL1078
 	ld a, h
-.LABEL.__LABEL1076:
+.LABEL.__LABEL1078:
 	or a
 	jp nz, .LABEL.__LABEL671
 .LABEL.__LABEL685:
@@ -15877,9 +16488,9 @@ _CheckAlienPaths:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1077
+	jr z, .LABEL.__LABEL1079
 	ld a, h
-.LABEL.__LABEL1077:
+.LABEL.__LABEL1079:
 	or a
 	jp nz, .LABEL.__LABEL671
 .LABEL.__LABEL675:
@@ -16091,9 +16702,9 @@ _UpdateAliens:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1078
+	jr z, .LABEL.__LABEL1080
 	ld a, h
-.LABEL.__LABEL1078:
+.LABEL.__LABEL1080:
 	or a
 	jp z, .LABEL.__LABEL721
 	ld a, (ix-3)
@@ -16462,9 +17073,9 @@ _CheckTankObstacle:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1079
+	jr z, .LABEL.__LABEL1081
 	ld a, h
-.LABEL.__LABEL1079:
+.LABEL.__LABEL1081:
 	ld d, a
 	ld a, (ix+5)
 	sub 86
@@ -16498,7 +17109,7 @@ _UpdateTanks:
 	inc de
 	ldir
 	ld hl, -18
-	ld de, .LABEL.__LABEL1080
+	ld de, .LABEL.__LABEL1082
 	ld bc, 4
 	call .core.__ALLOC_LOCAL_ARRAY
 	ld a, (_activeTanks)
@@ -16615,9 +17226,9 @@ _UpdateTanks:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1081
+	jr z, .LABEL.__LABEL1083
 	ld a, h
-.LABEL.__LABEL1081:
+.LABEL.__LABEL1083:
 	or a
 	jp z, .LABEL.__LABEL782
 	ld a, (ix-8)
@@ -16853,9 +17464,9 @@ _UpdateTanks:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1082
+	jr z, .LABEL.__LABEL1084
 	ld a, h
-.LABEL.__LABEL1082:
+.LABEL.__LABEL1084:
 	or a
 	jp z, .LABEL.__LABEL806
 	ld (ix-14), 1
@@ -17109,9 +17720,9 @@ _UpdateTanks:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1083
+	jr z, .LABEL.__LABEL1085
 	ld a, h
-.LABEL.__LABEL1083:
+.LABEL.__LABEL1085:
 	or a
 	jp z, .LABEL._ENDTANKMOVE
 	ld a, (ix-3)
@@ -17198,9 +17809,9 @@ _TestCollisions:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1084
+	jr z, .LABEL.__LABEL1086
 	ld a, h
-.LABEL.__LABEL1084:
+.LABEL.__LABEL1086:
 	ld (ix-14), a
 	ld a, (_shots.__DATA__ + 4)
 	dec a
@@ -17224,9 +17835,9 @@ _TestCollisions:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1085
+	jr z, .LABEL.__LABEL1087
 	ld a, h
-.LABEL.__LABEL1085:
+.LABEL.__LABEL1087:
 	ld (ix-15), a
 	ld a, (_shots.__DATA__ + 8)
 	dec a
@@ -17250,9 +17861,9 @@ _TestCollisions:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1086
+	jr z, .LABEL.__LABEL1088
 	ld a, h
-.LABEL.__LABEL1086:
+.LABEL.__LABEL1088:
 	ld (ix-16), a
 	ld a, (_activeAliens)
 	or a
@@ -18302,9 +18913,9 @@ _PathFind:
 	ld h, a
 	pop af
 	or a
-	jr z, .LABEL.__LABEL1087
+	jr z, .LABEL.__LABEL1089
 	ld a, h
-.LABEL.__LABEL1087:
+.LABEL.__LABEL1089:
 	pop de
 	or d
 	push af
@@ -22514,9 +23125,9 @@ __U32TOFREG_END:
 
 #line 3951 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
-.LABEL.__LABEL1062:
+.LABEL.__LABEL1064:
 	DEFB 0FFh
-.LABEL.__LABEL1080:
+.LABEL.__LABEL1082:
 	DEFB 00h
 	DEFB 00h
 	DEFB 01h
