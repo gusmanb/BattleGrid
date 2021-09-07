@@ -264,7 +264,7 @@ end sub
 
 sub PlayShowText(textIndex as uByte)
 
-    cls
+    ClearScreen(7)
 
     DoPause(6)
 
@@ -301,7 +301,7 @@ sub PlayLevel(level as uByte)
 
     Dim color as uByte
 
-    cls
+    ClearScreen(7)
 
     DoPause(2)
 
@@ -340,7 +340,7 @@ end sub
 
 sub PlayEnding()
 
-    cls
+    ClearScreen(7)
 
     Dim offset as uByte
     Dim buc as uByte

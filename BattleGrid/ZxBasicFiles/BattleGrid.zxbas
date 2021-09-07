@@ -37,17 +37,6 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24750 --hea
 #include "BeepFX.zxbas"
 #include "InterruptInstaller.zxbas"
 #include "DefinesAndMacros.zxbas"
-/' IDEAS
-
-    Espejos morados, solo soportan un disparo
-    Divisores azules, solo soportan un disparo
-    Los bloqueadores se destruyen cuando un enemigo los toca
-    Generadores de enemigos
-    Celdas donde no se acepten poner objetos
-
-    https://github.com/migueldeicaza/gui.cs Hacer versión de consola??? :D
-
-'/
 
 vars:
 Dim playerX as uByte = 20
@@ -194,7 +183,7 @@ end sub
 
 sub InitInterface()
 
-    ClearScreen(7,0,1)
+    ClearScreen(CREATE_ATTRIB(7,0,0,0))
 
     Dim tmpX as uByte
 
@@ -1954,6 +1943,45 @@ sub UpdateHangars()
 
 end sub
 
+sub UpdateFires()
+
+    if activeFires = 0 then return
+
+    Dim buc as uByte
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpVal as uByte
+    Dim tmpMask as uByte
+    Dim fireIndex as uByte
+
+    for buc = 1 to MAX_ACTIVE_FIRES
+    
+        tmpMask = TABLE_LOOKUP(@maskTable, buc)
+
+        if activeFires & tmpMask then
+
+            tmpVal = fires(buc, 3)
+
+            if tmpVal = 0 then
+
+                activeFires = activeFires bxor tmpMask
+                ClearGridCell(fires(buc, 1), fires(buc, 2), 1)
+                FireOffEffect()
+                return
+
+            else
+
+                tmpVal = tmpVal - 1
+                fires(buc, 3) = tmpVal
+
+            end if
+
+        end if
+
+    next buc
+
+end sub
+
 sub RefreshMap()
 
     Dim tmpX as uByte
@@ -2251,13 +2279,144 @@ sub ShowLogo(X as uByte, Y as uByte)
 
 end sub
 
+
+
+
+Dim highScores(10) as uInteger => { 4096, 4000, 3500, 3000, 2500, 2000, 1500, 1000, 500, 250 }
+Dim initials(10) as string ' => { "GUS", "AGB", "CHX", "JRC", "SJO", "PCV", "MGA", "BRL", "SRC", "SMB" }
+initials(1) = "GUS"
+initials(2) = "AGB"
+initials(3) = "CHX"
+initials(4) = "JRC"
+initials(5) = "SJO"
+initials(6) = "PCV"
+initials(7) = "MGA"
+initials(8) = "BRL"
+initials(9) = "SRC"
+initials(10) = "SMB"
+
+
+sub InputHighScore()
+
+    ClearScreen(CREATE_ATTRIB(7, 0, 0, 0))
+
+    Dim tmpX as uByte = 65
+    Dim tmpY as uByte = 0
+
+    Dim ints as string = ""
+
+    PrintString("YOU GOT A HIGH SCORE!", CREATE_ATTRIB(6, 0, 1, 0), 6, 1)
+    PrintString("ENTER YOUR INITIALS", CREATE_ATTRIB(7, 0, 1, 0), 7, 10)
+    PrintString("-   -   -", CREATE_ATTRIB(7, 0, 1, 0), 12, 14)
+
+    while MultiKeys(KEYZ) or MultiKeys(KEYX) or MultiKeys(KEYC)
+    end while
+
+    while tmpY < 3
+
+        PrintString(CHR$(tmpX), CREATE_ATTRIB(7, 0, 1, 0), tmpY * 4 + 12, 13)
+
+        if MultiKeys(KEYZ) then
+            tmpX = tmpX - 1
+            if tmpX < 65 then tmpX = 122
+        else if MultiKeys(KEYC) then
+            tmpX = tmpX + 1
+            if tmpX > 122 then tmpX = 65
+        else if MultiKeys(KEYX) then
+            tmpY = tmpY + 1
+            ints = ints + CHR$(tmpX)
+            tmpX = 65
+        else if MultiKeys(KEYV) then
+            if tmpY > 0 then 
+                 PrintString(" ", CREATE_ATTRIB(7, 0, 1, 0), tmpY * 4 + 12, 13)
+                tmpX = 65
+                tmpY = tmpY - 1
+                ints = ints(0 to tmpY)
+            end if
+        end if
+
+        while MultiKeys(KEYZ) or  MultiKeys(KEYX) or MultiKeys(KEYC)
+        end while
+                
+    end while
+    
+    tmpX = 10
+
+    for tmpY = 9 to 1 step -1
+        if score > highScores(tmpY) then
+            tmpX = tmpY
+        else
+            exit for
+        end if
+    next tmpY
+
+    if tmpX < 10 then
+        for tmpY = 9 to tmpX step -1
+            highScores(tmpY + 1) = highScores(tmpY)
+            initials(tmpY + 1) = initials(tmpY)
+        next tmpY
+    end if
+
+    highScores(tmpX) = score
+    initials(tmpX) = ints
+
+end sub
+
+sub ShowScores()
+
+    ClearScreen(CREATE_ATTRIB(7, 0, 0, 0))
+
+    PrintString("HIGH SCORES", CREATE_ATTRIB(6, 0, 1, 0), 10, 1)
+    
+    Dim tmpString as string
+    
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpZ as uByte
+
+    Dim tmpScore as uInteger
+
+    for tmpX = 1 to 10
+
+        /'
+        tmpString = STR$(highScores(tmpX))
+        while len(tmpString) < 5
+            tmpString = "0" + tmpString
+        end while
+        '/
+        tmpString = ""
+        tmpScore = highScores(tmpX)
+
+        for tmpY = 1 to 5
+        
+            tmpZ = tmpScore mod 10
+            tmpScore = tmpScore / 10
+            tmpString = chr$(tmpZ + 48) + tmpString
+
+        next tmpY
+
+        PrintString(initials(tmpX), CREATE_ATTRIB(7, 0, 1, 0), 4, tmpX * 2 + 2)
+        PrintString("................", CREATE_ATTRIB(7, 0, 1, 0), 7, tmpX * 2 + 2)
+        PrintString(tmpString, CREATE_ATTRIB(7, 0, 1, 0), 23, tmpX * 2 + 2)
+
+        'print at tmpX * 2 + 2, 4; initials(tmpX);"................"; tmpString
+
+    next tmpX
+
+end sub
+
+
+
+
 function ShowMainMenu() as uByte
 
-    ClearScreen(7,0,1)
+    ClearScreen(CREATE_ATTRIB(7,0,0, 0))
 
     PlayIntro()
 
-    ClearScreen(7,0,1)
+show_menu:
+
+    ClearScreen(CREATE_ATTRIB(7,0,0, 0))
 
     ShowLogo(12, 0)
     
@@ -2312,7 +2471,7 @@ function ShowMainMenu() as uByte
     SetTile(DEFLECTORA_INDEX, tileColors(DEFLECTORA_INDEX + 1), 17, 15)
     PrintString("DEF.", 7, 18, 15)
     SetTile(FORCEFIELD_INDEX, tileColors(FORCEFIELD_INDEX + 1), 25, 15)
-    PrintString("FIELD", 7, 26, 15)
+    PrintString("F.FLD", 7, 26, 15)
 
     SetTile(SMALLBUILDING_INDEX, tileColors(SMALLBUILDING_INDEX + 1), 17, 17)
     PrintString("BUILD", 7, 18, 17)
@@ -2328,17 +2487,29 @@ function ShowMainMenu() as uByte
 
     PrintString("SPC = START, I = INSTRUCTIONS", CREATE_ATTRIB(7, 0, 1, 0), 2, 23)
     
+    frameCounter = 0
+
     while 1
 
         if MultiKeys(KEYSPACE) then
             return 0
         else if MultiKeys(KEYI) then
             return 1
+        else if frameCounter > 600
+
+            
+            frameCounter = 0
+            ShowScores()
+            while frameCounter < 300 and not MultiKeys(KEYSPACE)
+            end while
+
+            goto show_menu
+
         end if
 
     end while
 
-    ClearScreen(7,0,1)
+    ClearScreen(CREATE_ATTRIB(7,0,0, 0))
 
 end function
 
@@ -2366,45 +2537,6 @@ sub ShowInstructions()
 
     while not MultiKeys(KEYSPACE)
     end while
-
-end sub
-
-sub UpdateFires()
-
-    if activeFires = 0 then return
-
-    Dim buc as uByte
-    Dim tmpX as uByte
-    Dim tmpY as uByte
-    Dim tmpVal as uByte
-    Dim tmpMask as uByte
-    Dim fireIndex as uByte
-
-    for buc = 1 to MAX_ACTIVE_FIRES
-    
-        tmpMask = TABLE_LOOKUP(@maskTable, buc)
-
-        if activeFires & tmpMask then
-
-            tmpVal = fires(buc, 3)
-
-            if tmpVal = 0 then
-
-                activeFires = activeFires bxor tmpMask
-                ClearGridCell(fires(buc, 1), fires(buc, 2), 1)
-                FireOffEffect()
-                return
-
-            else
-
-                tmpVal = tmpVal - 1
-                fires(buc, 3) = tmpVal
-
-            end if
-
-        end if
-
-    next buc
 
 end sub
 
@@ -2437,7 +2569,7 @@ next buc
 
 buc = ShowMainMenu()
 
-ClearScreen(7,0,1)
+ClearScreen(CREATE_ATTRIB(7,0,0, 0))
 
 if buc = 1 then
     ShowInstructions()
@@ -2577,12 +2709,18 @@ while(1)
         if lifes = 0 then
 
             PlayShowText(GAMEOVER_INDEX)
+
+            if score > highScores(10) then
+
+                InputHighScore()
+
+            end if
+
             goto main
 
         end if
 
         ShowLifes()
-
         DrawGrid()
         InitLevel()
 

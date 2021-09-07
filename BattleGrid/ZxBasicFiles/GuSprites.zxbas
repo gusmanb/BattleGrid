@@ -87,6 +87,16 @@ ld bc, length - 1 \
 ldir \
 
 
+#define FILL_MEMORY(address, length, value) \
+ld a, value \
+ld de, address \
+ld (de), a \
+inc de \
+ld hl, address \
+ld bc, length - 1 \
+ldir \
+
+
 #define SHIFT_24B(first,second,third) \
 srl first \
 rr second \
@@ -202,6 +212,10 @@ ldi \
 #endif
 
 #define ROM_CHARSET 3C00h
+#define PIXEL_DATA 4000h
+#define COLOR_DATA 5800h
+#define PIXEL_DATA_SIZE 6144
+#define COLOR_DATA_SIZE 768
 
 SPRITE_1x1_BUFFER_SIZE equ (6 * 8)
 SPRITE_1x2_BUFFER_SIZE equ (9 * 8)
@@ -368,6 +382,9 @@ ENDP
 
 PROC
 CLEAR_SCREEN:                      ;TRASHES: HL, A
+
+FILL_MEMORY(COLOR_DATA, COLOR_DATA_SIZE, a)
+ERASE_MEMORY(PIXEL_DATA, PIXEL_DATA_SIZE)
 
 WRITE_16B_ADDRESS(DRAW_OPS_A, CURRENT_DRAW_OPS, hl)
 WRITE_16B_ADDRESS(DRAW_OPS_B, CURRENT_CLEAR_OPS, hl)
@@ -2020,12 +2037,12 @@ sub fastcall CancelOps()
 
 end sub
 
-sub ClearScreen(NewInk as uByte, NewPaper as uByte, NewBright as uByte)
+sub fastcall ClearScreen(Attribute as uByte)
 
-    ink NewInk
-    paper NewPaper
-    bright NewBright
-    cls
+    'ink NewInk
+    'paper NewPaper
+    'bright NewBright
+    'cls
 
     asm
     call CLEAR_SCREEN
