@@ -37,6 +37,7 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24750 --hea
 #include "BeepFX.zxbas"
 #include "InterruptInstaller.zxbas"
 #include "DefinesAndMacros.zxbas"
+'#include "MusicPlayer.zxbas"
 
 vars:
 Dim playerX as uByte = 20
@@ -2414,6 +2415,9 @@ function ShowMainMenu() as uByte
 
     PlayIntro()
 
+'    InitMusic()
+'    PlayMusic()
+
 show_menu:
 
     ClearScreen(CREATE_ATTRIB(7,0,0, 0))
@@ -2510,6 +2514,8 @@ show_menu:
     end while
 
     ClearScreen(CREATE_ATTRIB(7,0,0, 0))
+
+  '  StopMusic()
 
 end function
 

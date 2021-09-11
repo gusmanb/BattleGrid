@@ -10770,7 +10770,7 @@ _DoPause__leave:
 	exx
 	ret
 _InstallHandler:
-#line 16 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+#line 17 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 		ld hl, INT_HANDLER
 		ld (_intHandlerAddress), hl
 		di
@@ -10787,11 +10787,11 @@ INT_HANDLER:
 		pop hl
 		ei
 		ret
-#line 37 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+#line 38 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 _InstallHandler__leave:
 	ret
 _AnyKey:
-#line 43 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+#line 116 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 		ld a, $FE
 		in a, (0FEh)
 		ld b,a
@@ -10811,7 +10811,7 @@ _AnyKey:
 		in a, (0FEh)
 		and b
 		cpl
-#line 68 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+#line 141 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 _AnyKey__leave:
 	ret
 _BLWindowScrollUp:
@@ -19159,7 +19159,7 @@ _PathFind:
 	ld a, 20
 	cp (ix-3)
 	jp nc, .LABEL.__LABEL1006
-#line 2061 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 2062 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 		PROC
 		LOCAL pmap, worklist1, worklist2, save_sp
 		LOCAL calc_distance, step_loop, skip_left, skip_right, skip_up, skip_down, swap_lists
@@ -19275,7 +19275,7 @@ worklist2:	ds	2*4*min
 end_path_proc:
 		ei
 		ENDP
-#line 2256 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 2257 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 _PathFind__leave:
 	ld sp, ix
 	pop ix
@@ -21668,7 +21668,7 @@ TMP_ARR_PTR:
 	    ENDP
 
 
-#line 4479 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4480 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/calloc.asm"
@@ -22149,7 +22149,7 @@ __MEM_SUBTRACT:
 
 #line 139 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
-#line 4480 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4481 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/asc.asm"
 	; Returns the ascii code for the given str
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/free.asm"
@@ -22380,7 +22380,7 @@ __ASC_END:
 	    ret
 	    ENDP
 
-#line 4481 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4482 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/band16.asm"
 ; vim:ts=4:et:
 	; FASTCALL bitwise and16 version.
@@ -22403,7 +22403,7 @@ __ASC_END:
 	    ret
 
 
-#line 4482 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4483 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/border.asm"
 	; __FASTCALL__ Routine to change de border
 	; Parameter (color) specified in A register
@@ -22414,7 +22414,7 @@ __ASC_END:
 
 
 	; Nothing to do! (Directly from the ZX Spectrum ROM)
-#line 4483 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4484 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/chr.asm"
 	; CHR$(x, y, x) returns the string CHR$(x) + CHR$(y) + CHR$(z)
 	;
@@ -22493,7 +22493,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ENDP
 
 
-#line 4484 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4485 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/div16.asm"
 	; 16 bit division and modulo functions
 	; for both signed and unsigned values
@@ -22616,7 +22616,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ret
 
 
-#line 4485 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4486 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/div8.asm"
 	    ; --------------------------------
 
@@ -22707,7 +22707,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ret		; a = Modulus
 
 
-#line 4486 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4487 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lei8.asm"
 
@@ -22733,7 +22733,7 @@ checkParity:
 	    ret
 	    ENDP
 
-#line 4488 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4489 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/loadstr.asm"
 
 
@@ -22780,10 +22780,10 @@ checkParity:
 	    pop hl	; Recovers destiny in hl as result
 	    ret
 
-#line 4489 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4490 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lti8.asm"
 
-#line 4490 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4491 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/mul8.asm"
 
@@ -22839,7 +22839,7 @@ __MUL8B:
 	    ENDP
 
 
-#line 4492 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4493 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -23164,7 +23164,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR
 
 
-#line 4493 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4494 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr2.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -23225,7 +23225,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR2
 
 
-#line 4494 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4495 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/str.asm"
@@ -23369,7 +23369,7 @@ __STR_END:
 	    ENDP
 
 
-#line 4497 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4498 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strcat.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strlen.asm"
@@ -23518,7 +23518,7 @@ __STRCATEND:
 	    ENDP
 
 
-#line 4498 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4499 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strslice.asm"
 	; String slicing library
@@ -23629,7 +23629,7 @@ __FREE_ON_EXIT:
 	    ENDP
 
 
-#line 4500 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4501 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/u32tofreg.asm"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/neg32.asm"
 
@@ -23755,7 +23755,7 @@ __U32TOFREG_END:
 	    ENDP
 
 
-#line 4501 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4502 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 .LABEL.__LABEL1130:
 	DEFB 0FFh
