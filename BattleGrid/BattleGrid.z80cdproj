@@ -32,5 +32,8 @@
     <ZxBasic Include="ZxBasicFiles\Tools.zxbas" />
     <ZxBasic Include="ZxBasicFiles\ZoomAnims.zxbas" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ZxBasicFiles\Todo.txt" />
+  </ItemGroup>
   <Import Project="$(CustomProjectExtensionsPath)Spect.Net.CodeDiscover.targets" />
 </Project>

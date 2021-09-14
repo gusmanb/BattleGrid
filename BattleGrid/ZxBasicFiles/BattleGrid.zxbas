@@ -237,6 +237,8 @@ sub InitLevel()
     cursorTool = TOOL_NONE
     cursorX = 0
     cursorY = 0
+    cursorFrames = CURSOR_FRAMES
+    cursorVisible = 0
 
     for tmpX = 26 to 30 step 4
         for tmpY = 16 to 20 step 2
@@ -900,42 +902,92 @@ burn_fire:
 
 end sub
 
+Dim changingCursor as uByte = 0
+
 sub UpdateCursor()
+
+    Dim changed as ubyte = 0
 
     if MultiKeys(KEY1) then
 
+        changed = 1
         cursorTool = TOOL_NONE
-        PrintString("NONE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
         
     else if MultiKeys(KEY2) then
 
-        cursorTool = TOOL_BLOCKER
-        PrintString("BARRIER", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)        
+        changed = 1
+        cursorTool = TOOL_BLOCKER   
 
     else if MultiKeys(KEY3) then
 
+        changed = 1
         cursorTool = TOOL_MINE
-        PrintString("MINE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY4) then
         
+        changed = 1
         cursorTool = TOOL_BOMB
-        PrintString("BOMB   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY5) then
 
+        changed = 1
         cursorTool = TOOL_CHARGEDSHOT
-        PrintString("LASER  ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY6) then
 
+        changed = 1
         cursorTool = TOOL_FIRESHOT
-        PrintString("FIRE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
 
     else if MultiKeys(KEY7) then
 
+        changed = 1
         cursorTool = TOOL_CLEARSHOT
-        PrintString("WIPE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
+
+    else if MultiKeys(KEYN) then
+    
+        if changingCursor = 0 then
+
+            changed = 1
+            cursorTool = cursorTool - 1
+            if cursorTool > TOOL_CLEARSHOT then cursorTool = TOOL_CLEARSHOT
+            changingCursor = 1
+
+        end if
+    
+    else if MultiKeys(KEYM) then
+
+        if changingCursor = 0 then
+
+            changed = 1
+            cursorTool = cursorTool + 1
+            if cursorTool > TOOL_CLEARSHOT then cursorTool = TOOL_NONE
+            changingCursor = 1
+
+        end if
+
+    else
+
+        changingCursor = 0
+
+    end if
+
+    if changed then
+
+        if cursorTool = TOOL_NONE then
+            PrintString("NONE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
+        else if cursorTool = TOOL_BLOCKER then
+            PrintString("BARRIER", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)     
+        else if cursorTool = TOOL_MINE then
+            PrintString("MINE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
+        else if cursorTool = TOOL_BOMB then
+            PrintString("BOMB   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
+        else if cursorTool = TOOL_CHARGEDSHOT then
+            PrintString("LASER  ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
+        else if cursorTool = TOOL_FIRESHOT then
+            PrintString("FIRE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
+        else if cursorTool = TOOL_CLEARSHOT then
+            PrintString("WIPE   ", CREATE_ATTRIB(7, 0, 1, 0), 24, 14)
+        end if
 
     end if
 
@@ -1729,60 +1781,6 @@ sub TestCollisions()
                             continue for
 
                         end if
-
-                        /'
-                        if activeShot1 then
-                        if tmpEnemX >= tmpShot1XMin then
-                        if tmpEnemX <= tmpShot1XMax then
-                        if tmpEnemY >= tmpShot1YMin then
-                        if tmpEnemY <= tmpShot1YMax then
-
-                            tanks(buc, 4) = 0
-                            activeShots = activeShots band 11111110b
-                            BuildTankDestroyedEffect()
-                            continue for
-
-                        end if
-                        end if
-                        end if
-                        end if
-                        end if
-
-                        if activeShot2 then
-                        if tmpEnemX >= tmpShot2XMin then
-                        if tmpEnemX <= tmpShot2XMax then
-                        if tmpEnemY >= tmpShot2YMin then
-                        if tmpEnemY <= tmpShot2YMax then
-
-                            tanks(buc, 4) = 0
-                            activeShots = activeShots band 11111101b
-                            BuildTankDestroyedEffect()
-                            continue for
-
-                        end if
-                        end if
-                        end if
-                        end if
-                        end if
-
-                        if activeShot3 then
-                        if tmpEnemX >= tmpShot3XMin then
-                        if tmpEnemX <= tmpShot3XMax then
-                        if tmpEnemY >= tmpShot3YMin then
-                        if tmpEnemY <= tmpShot3YMax then
-
-                            tanks(buc, 4) = 0
-                            activeShots = activeShots band 11111011b
-                            BuildTankDestroyedEffect()
-                            continue for
-
-                        end if
-                        end if
-                        end if
-                        end if
-                        end if
-
-                        '/
 
                     end if
 
@@ -2710,7 +2708,7 @@ while(1)
             PlayDeathShot()
         end if
 
-        lifes = lifes - 1
+        'lifes = lifes - 1
 
         if lifes = 0 then
 
@@ -2735,13 +2733,13 @@ while(1)
         if activeShips = 0 then
         if activeHangars = 0 then
         if activeTowers = 0 then
-        
+nextLevel:
             score = score + lifes * level
             updateScore = 1
 
             PlayShowText(GRIDCLEAR_INDEX)
 
-            if level < 11 then
+            if level < 20 then
                 level = level + 1
                 goto init_level
             else
@@ -2753,6 +2751,8 @@ while(1)
         end if
         end if
         end if
+    else if MultiKeys(KEYY) then
+        goto nextLevel
     end if
 
     while frameCounter < 2

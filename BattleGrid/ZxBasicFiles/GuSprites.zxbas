@@ -2033,6 +2033,10 @@ sub fastcall CancelOps()
     xor a
     ld (CURRENT_DRAW_COUNT), a
     ld (CURRENT_CLEAR_COUNT), a
+
+    ERASE_MEMORY(CELL_MAP_A, 768)
+    ERASE_MEMORY(CELL_MAP_B, 768)
+
     end asm
 
 end sub
