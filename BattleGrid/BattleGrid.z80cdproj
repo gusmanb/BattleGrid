@@ -19,6 +19,7 @@
     <Z80Asm Include="ZxBasicFiles\Sprites.zxbas" />
     <ZxBasic Include="ZxBasicFiles\BattleGrid.zxbas" />
     <ZxBasic Include="ZxBasicFiles\BeepFX.zxbas" />
+    <ZxBasic Include="ZxBasicFiles\KeyManager.zxbas" />
     <ZxBasic Include="ZxBasicFiles\DefinesAndMacros.zxbas" />
     <ZxBasic Include="ZxBasicFiles\FastRND.zxbas" />
     <ZxBasic Include="ZxBasicFiles\GuSprites.zxbas" />

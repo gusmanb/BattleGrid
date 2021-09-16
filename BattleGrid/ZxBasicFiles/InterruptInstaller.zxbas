@@ -122,6 +122,11 @@ function fastcall AnyKey() AS UByte
         and b
         ld b,a
 
+        ld a, $EF
+        in a, (0FEh)
+        and b
+        ld b,a
+
         ld a, $DF
         in a, (0FEh)
         and b
@@ -135,6 +140,9 @@ function fastcall AnyKey() AS UByte
         ld a, $7F
         in a, (0FEh)
         and b
+        
+        or $F0
+
         cpl
 
     end asm

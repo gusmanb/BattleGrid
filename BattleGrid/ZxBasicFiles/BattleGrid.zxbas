@@ -37,6 +37,7 @@ REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24750 --hea
 #include "BeepFX.zxbas"
 #include "InterruptInstaller.zxbas"
 #include "DefinesAndMacros.zxbas"
+#include "KeyManager.zxbas"
 '#include "MusicPlayer.zxbas"
 
 vars:
@@ -174,12 +175,6 @@ sub PrintPaddedNumber(x as ubyte, y as ubyte, value as uinteger, length as ubyte
 
     next tmpVal
 
-end sub
-
-sub NewGameVars()
-    lifes = 4
-    score = 0
-    level = 1
 end sub
 
 sub InitInterface()
@@ -2308,7 +2303,7 @@ sub InputHighScore()
     PrintString("ENTER YOUR INITIALS", CREATE_ATTRIB(7, 0, 1, 0), 7, 10)
     PrintString("-   -   -", CREATE_ATTRIB(7, 0, 1, 0), 12, 14)
 
-    while MultiKeys(KEYZ) or MultiKeys(KEYX) or MultiKeys(KEYC)
+    while MultiKeys(KEYZ) or MultiKeys(KEYX) or MultiKeys(KEYC) or MultiKeys(KEYV)
     end while
 
     while tmpY < 3
@@ -2327,14 +2322,14 @@ sub InputHighScore()
             tmpX = 65
         else if MultiKeys(KEYV) then
             if tmpY > 0 then 
-                 PrintString(" ", CREATE_ATTRIB(7, 0, 1, 0), tmpY * 4 + 12, 13)
+                PrintString(" ", CREATE_ATTRIB(7, 0, 1, 0), tmpY * 4 + 12, 13)
                 tmpX = 65
                 tmpY = tmpY - 1
                 ints = ints(0 to tmpY)
             end if
         end if
 
-        while MultiKeys(KEYZ) or  MultiKeys(KEYX) or MultiKeys(KEYC)
+        while MultiKeys(KEYZ) or  MultiKeys(KEYX) or MultiKeys(KEYC) or MultiKeys(KEYV)
         end while
                 
     end while
@@ -2487,7 +2482,7 @@ show_menu:
 
     PrintString("AND MORE...", CREATE_ATTRIB(3, 0, 1, 0), 19, 21)
 
-    PrintString("SPC = START, I = INSTRUCTIONS", CREATE_ATTRIB(7, 0, 1, 0), 2, 23)
+    PrintString("SPC=START I=INSTRUCTIONS C=CODE", CREATE_ATTRIB(7, 0, 1, 0), 1, 23)
     
     frameCounter = 0
 
@@ -2497,6 +2492,8 @@ show_menu:
             return 0
         else if MultiKeys(KEYI) then
             return 1
+        else if MultiKeys(KEYC) then
+            return 2
         else if frameCounter > 600
 
             
@@ -2544,6 +2541,70 @@ sub ShowInstructions()
 
 end sub
 
+function EnterCode() as uByte
+
+    ClearScreen(CREATE_ATTRIB(7, 0, 0, 0))
+
+    Dim tmpX as uByte = 65
+    Dim tmpY as uByte = 0
+
+    Dim ints as string = ""
+
+    PrintString("ENTER YOUR CODE", CREATE_ATTRIB(6, 0, 1, 0), 8, 1)
+    PrintString("- - - - -", CREATE_ATTRIB(7, 0, 1, 0), 11, 14)
+
+    while MultiKeys(KEYZ) or MultiKeys(KEYX) or MultiKeys(KEYC) or MultiKeys(KEYV)
+    end while
+
+    while tmpY < 5
+
+        PrintString(CHR$(tmpX), CREATE_ATTRIB(7, 0, 1, 0), tmpY * 2 + 11, 13)
+
+        while AnyKey() = 0
+        end while
+
+        if MultiKeys(KEYZ) then
+            tmpX = tmpX - 1
+            if tmpX < 65 then tmpX = 80
+        else if MultiKeys(KEYC) then
+            tmpX = tmpX + 1
+            if tmpX > 80 then tmpX = 65
+        else if MultiKeys(KEYX) then
+            tmpY = tmpY + 1
+            ints = ints + CHR$(tmpX)
+            tmpX = 65
+        else if MultiKeys(KEYV) then
+            if tmpY > 0 then 
+                PrintString(" ", CREATE_ATTRIB(7, 0, 1, 0), tmpY * 2 + 11, 13)
+                tmpX = 65
+                tmpY = tmpY - 1
+                ints = ints(0 to tmpY)
+            end if
+        end if
+
+        while MultiKeys(KEYZ) or  MultiKeys(KEYX) or MultiKeys(KEYC) or MultiKeys(KEYV)
+        end while
+                
+    end while
+
+    while AnyKey()
+    end while
+    
+    if DecodeKey(ints, level, lifes) = 0 or lifes > 4 or lifes < 1 or level < 2 or level > 20  then
+
+        PrintString("INVALID CODE", CREATE_ATTRIB(2, 0, 1, 0), 10, 18)
+
+        while not AnyKey()
+        end while
+
+        return 0
+
+    end if
+
+    return 1
+
+end function
+
 InitGraphics()
 
 main:
@@ -2580,7 +2641,16 @@ if buc = 1 then
     goto main
 end if
 
-NewGameVars()
+lifes = 4
+score = 0
+level = 1
+
+if buc = 2 then
+
+    if EnterCode() = 0 then goto main
+
+end if
+
 init_level:
 
 PlayLevel(level)
@@ -2714,6 +2784,8 @@ while(1)
 
             PlayShowText(GAMEOVER_INDEX)
 
+            DoPause(140)
+
             if score > highScores(10) then
 
                 InputHighScore()
@@ -2740,9 +2812,20 @@ nextLevel:
             PlayShowText(GRIDCLEAR_INDEX)
 
             if level < 20 then
+
                 level = level + 1
+    
+                PrintString("CODE: " + GenerateKey(level,lifes), CREATE_ATTRIB(7, 0, 1, 0), 11, 21)
+                PrintString("PRESS SPACE  TO CONTINUE", CREATE_ATTRIB(7, 0, 1, 0), 4, 23)
+
+                while AnyKey() = 0
+                end while
+
                 goto init_level
             else
+
+                DoPause(140)
+
                 PlayEnding()
                 goto main
             end if

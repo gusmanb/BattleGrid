@@ -290,8 +290,6 @@ sub PlayShowText(textIndex as uByte)
     printZoomedTile(20, 4, textIndex + 2, tileColors(GRIDCLEAR_INDEX + 3))
     printZoomedTile(4, 12, textIndex + 3, tileColors(GRIDCLEAR_INDEX + 4))
 
-    DoPause(140)
-
 end sub
 
 sub PlayLevel(level as uByte)

@@ -1,0 +1,74 @@
+﻿function GenerateKey(level as uByte, lifes as uByte) as string
+
+    Dim bData(2) as uByte
+    
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpZ as uByte
+
+    Dim strData as string = ""
+
+
+    bData(1) = (level bor (lifes << 5)) bxor $AA
+    bData(2) = bData(1) band $0F
+    bData(1) = bData(1) >> 4
+
+    tmpY = 0
+
+    for tmpX = 1 to 2
+
+        tmpY = FastRnd() mod 16
+        bData(tmpX) = tmpY bxor bData(tmpX)
+
+        tmpZ = tmpZ bxor tmpY
+        tmpZ = tmpZ bxor bData(tmpX)
+
+        strData = strData + chr$(tmpY + 65) + chr$(bData(tmpX) + 65)
+
+    next tmpX
+
+    strData = strData + chr$((tmpZ band $0f) + 65)
+
+    return strData
+
+end function
+
+function DecodeKey(key as string, byref level as uByte, byref lifes as uByte) as uByte
+
+    if len(key) <> 5 then return 0
+
+    Dim bData(2) as uByte
+    
+    Dim tmpX as uByte
+    Dim tmpY as uByte
+    Dim tmpZ as uByte
+
+    Dim tmpData as uByte
+    Dim tmpKey as uByte
+
+    tmpY = 0
+
+    for tmpX = 1 to 3 step 2
+
+        tmpKey = code(key(tmpX to tmpX)) - 65
+        tmpData = code(key(tmpX + 1 to tmpX + 1)) - 65
+
+        tmpY = tmpY bxor tmpKey
+        tmpY = tmpY bxor tmpData
+
+        tmpZ = (tmpX + 1) >> 1 
+
+        bData(tmpZ) = tmpKey bxor tmpData
+
+    next tmpX
+
+    if (tmpY band $0f) + 65 <> code(key(5 to 5)) then return 0
+
+    tmpZ = ((bData(1) << 4) bor bData(2)) bxor $AA
+
+    level = tmpZ band 31
+    lifes = tmpZ >> 5
+
+    return 1
+
+end function
