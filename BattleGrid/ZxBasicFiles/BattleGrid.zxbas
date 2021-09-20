@@ -112,7 +112,8 @@ Dim activeDestructibles as uByte
 
 Dim fires(MAX_ACTIVE_FIRES, 3) as uByte
 Dim activeFires as uByte
-
+Dim usedPause as uByte
+Dim timeLeft as uByte
 init:
 
 
@@ -144,14 +145,23 @@ sub ShowLifes()
 
     for buc = 1 to 4
         if lifes >= buc then
-            SetTile(LIFE_INDEX, tileColors(LIFE_INDEX + 1), 22 + (buc << 1), 22)
+            SetTile(LIFE_INDEX, tileColors(LIFE_INDEX + 1), 26 + buc, 22)
         else
-            SetTile(EMPTY_TILE_INDEX, 0, 22 + (buc << 1), 22)
+            SetTile(EMPTY_TILE_INDEX, 0, 26 + buc, 22)
         end if
     next buc        
 
 end sub
 
+sub ShowPause()
+
+    if usedPause = 0 then
+        SetTile(STOP_INDEX, tileColors(STOP_INDEX + 1), 24, 22)
+    else
+        SetTile(EMPTY_TILE_INDEX, 0, 24, 22)
+    end if
+
+end sub
 
 sub PrintPaddedNumber(x as ubyte, y as ubyte, value as uinteger, length as ubyte)
 
@@ -234,7 +244,7 @@ sub InitLevel()
     cursorY = 0
     cursorFrames = CURSOR_FRAMES
     cursorVisible = 0
-
+    
     for tmpX = 26 to 30 step 4
         for tmpY = 16 to 20 step 2
             PrintDigit(tmpX, tmpY, 0)
@@ -259,6 +269,7 @@ sub InitLevel()
     LoadMap(level)
 
     ShowLifes()
+    ShowPause()
 
     PathFind(10,20)
 
@@ -2644,6 +2655,7 @@ end if
 lifes = 4
 score = 0
 level = 1
+usedPause = 0
 
 if buc = 2 then
 
@@ -2809,6 +2821,8 @@ nextLevel:
             score = score + lifes * level
             updateScore = 1
 
+            usedPause = 0
+            
             PlayShowText(GRIDCLEAR_INDEX)
 
             if level < 20 then
@@ -2836,6 +2850,34 @@ nextLevel:
         end if
     else if MultiKeys(KEYY) then
         goto nextLevel
+    else if MultiKeys(KEYP) then
+
+        if usedPause = 0 then
+
+            usedPause = 1
+            ShowPause()
+
+            timeLeft = 30
+
+            while timeLeft > 0
+
+                timeLeft = timeLeft - 1
+                frameCounter = 0
+                TickEffect()
+
+                while frameCounter < 50
+                end while
+
+            end while
+
+            TickEffect()
+            TickEffect()
+            TickEffect()
+            TickEffect()
+            TickEffect()
+
+        end if
+
     end if
 
     while frameCounter < 2

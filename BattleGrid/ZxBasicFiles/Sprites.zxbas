@@ -217,42 +217,43 @@ end asm
 #define HANGAR_INDEX 106
 #define NUMBERS_INDEX 107
 #define PLUS_INDEX 117
-#define ZOOMALIENA_INDEX 118
-#define ZOOMALIENB_INDEX 122
-#define SHOTDEATHA_INDEX 126
-#define SHOTDEATHB_INDEX 130
-#define SHOTDEATHC_INDEX 134
-#define SHOTDEATHD_INDEX 138
-#define SHOTDEATHE_INDEX 142
-#define SHOTDEATHF_INDEX 146
-#define SHOTDEATHG_INDEX 150
-#define TANKDEATHA_INDEX 154
-#define TANKDEATHB_INDEX 158
-#define ALIENTALKA_INDEX 162
-#define ALIENTALKB_INDEX 166
-#define COMPUTERA_INDEX 170
-#define COMPUTERB_INDEX 174
-#define ALIENTALKC_INDEX 178
-#define ALIENTALKD_INDEX 182
-#define TELEPORTA_INDEX 186
-#define TELEPORTB_INDEX 190
-#define TELEPORTC_INDEX 194
-#define TELEPORTD_INDEX 198
-#define GRIDCLEAR_INDEX 202
-#define LEVEL_INDEX 208
-#define GAMEOVER_INDEX 211
-#define ENDINGFIXED_INDEX 217
-#define ENDINGANIMA_INDEX 223
-#define ENDINGANIMB_INDEX 226
-#define ENDINGANIMC_INDEX 229
-#define ENDINGANIMD_INDEX 232
-#define ENDINGANIME_INDEX 235
-#define ENDINGANIMF_INDEX 238
-#define ENDINGANIMG_INDEX 241
-#define ENDINGANIMH_INDEX 244
-#define ENDINGANIMI_INDEX 247
+#define STOP_INDEX 118
+#define ZOOMALIENA_INDEX 119
+#define ZOOMALIENB_INDEX 123
+#define SHOTDEATHA_INDEX 127
+#define SHOTDEATHB_INDEX 131
+#define SHOTDEATHC_INDEX 135
+#define SHOTDEATHD_INDEX 139
+#define SHOTDEATHE_INDEX 143
+#define SHOTDEATHF_INDEX 147
+#define SHOTDEATHG_INDEX 151
+#define TANKDEATHA_INDEX 155
+#define TANKDEATHB_INDEX 159
+#define ALIENTALKA_INDEX 163
+#define ALIENTALKB_INDEX 167
+#define COMPUTERA_INDEX 171
+#define COMPUTERB_INDEX 175
+#define ALIENTALKC_INDEX 179
+#define ALIENTALKD_INDEX 183
+#define TELEPORTA_INDEX 187
+#define TELEPORTB_INDEX 191
+#define TELEPORTC_INDEX 195
+#define TELEPORTD_INDEX 199
+#define GRIDCLEAR_INDEX 203
+#define LEVEL_INDEX 209
+#define GAMEOVER_INDEX 212
+#define ENDINGFIXED_INDEX 218
+#define ENDINGANIMA_INDEX 224
+#define ENDINGANIMB_INDEX 227
+#define ENDINGANIMC_INDEX 230
+#define ENDINGANIMD_INDEX 233
+#define ENDINGANIME_INDEX 236
+#define ENDINGANIMF_INDEX 239
+#define ENDINGANIMG_INDEX 242
+#define ENDINGANIMH_INDEX 245
+#define ENDINGANIMI_INDEX 248
 
-Dim tileSet(250,8) as uByte => { _
+Dim tileSet(251,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 }, _
 { $00, $0F, $07, $07, $07, $07, $07, $07 }, _
 { $07, $07, $07, $07, $0F, $00, $00, $FC }, _
@@ -350,7 +351,7 @@ Dim tileSet(250,8) as uByte => { _
 { $19, $22, $98, $44, $19, $22, $98, $44 }, _
 { $24, $71, $24, $8E, $24, $71, $24, $8E }, _
 { $28, $20, $14, $04, $28, $20, $14, $04 }, _
-{ $00, $66, $FF, $FF, $7E, $3C, $18, $00 }, _
+{ $00, $6C, $FE, $FE, $7C, $38, $10, $00 }, _
 { $E7, $81, $81, $18, $3C, $81, $81, $E7 }, _
 { $E7, $81, $BD, $3C, $24, $A5, $81, $E7 }, _
 { $E7, $81, $A5, $18, $3C, $99, $81, $E7 }, _
@@ -371,6 +372,7 @@ Dim tileSet(250,8) as uByte => { _
 { $00, $3C, $2C, $24, $7E, $62, $7E, $00 }, _
 { $00, $7E, $62, $7E, $02, $06, $7E, $00 }, _
 { $00, $18, $18, $7E, $7E, $18, $18, $00 }, _
+{ $7E, $24, $B5, $99, $99, $BD, $3C, $7E }, _
 { $00, $1F, $38, $67, $7E, $73, $61, $71 }, _
 { $00, $F8, $1C, $E6, $7E, $CE, $86, $8E }, _
 { $79, $3F, $37, $32, $30, $35, $1F, $0F }, _
@@ -505,4 +507,4 @@ Dim tileSet(250,8) as uByte => { _
 { $00, $00, $00, $00, $00, $00, $00, $00 } _
 }
 
-Dim tileColors(250) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $07, $07, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $45, $F2, $C6, $05, $04, $04, $03, $44, $06, $42, $44, $46, $45, $42, $06, $03, $42, $44, $46, $45, $05, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72, $04, $05, $07, $07, $04, $05, $07, $07, $03, $03, $06, $42, $03, $03, $05, $44, $04, $05, $07, $07, $04, $05, $07, $07, $04, $04, $07, $07, $44, $44, $05, $05, $45, $45, $45, $45, $47, $47, $47, $47, $46, $46, $46, $42, $42, $42, $46, $46, $46, $46, $46, $46, $42, $42, $42, $46, $41, $07, $2C, $2C, $2C, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47 }
+Dim tileColors(251) as ubyte => { $0, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $42, $42, $46, $46, $41, $41, $41, $41, $47, $41, $41, $41, $41, $45, $45, $45, $45, $07, $47, $07, $07, $47, $07, $03, $03, $02, $03, $02, $02, $02, $02, $02, $03, $03, $02, $03, $02, $02, $03, $02, $03, $02, $02, $07, $07, $10, $10, $10, $10, $16, $10, $10, $10, $10, $06, $45, $F2, $C6, $05, $04, $04, $03, $44, $06, $42, $44, $46, $45, $42, $06, $03, $42, $44, $46, $45, $05, $46, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $46, $04, $04, $04, $04, $04, $04, $04, $04, $06, $06, $06, $06, $46, $46, $46, $46, $72, $72, $72, $72, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $56, $07, $07, $07, $07, $72, $72, $72, $72, $04, $05, $07, $07, $04, $05, $07, $07, $03, $03, $06, $42, $03, $03, $05, $44, $04, $05, $07, $07, $04, $05, $07, $07, $04, $04, $07, $07, $44, $44, $05, $05, $45, $45, $45, $45, $47, $47, $47, $47, $46, $46, $46, $42, $42, $42, $46, $46, $46, $46, $46, $46, $42, $42, $42, $46, $41, $07, $2C, $2C, $2C, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47, $47 }
