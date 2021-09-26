@@ -233,32 +233,21 @@ end sub
 
 sub PlayIntro()
 
-    ShowLogoFrame(LOGO_INDEX)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 4)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 8)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 12)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 16)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 20)
-    Introffect()
+    Dim buc as uByte
 
+    for buc = 0 to 20 step 4
 
-    ShowLogoFrame(LOGO_INDEX + 2)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 6)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 10)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 14)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 18)
-    Introffect()
-    ShowLogoFrame(LOGO_INDEX + 22)
-    Introffect()
+        ShowLogoFrame(LOGO_INDEX + buc)
+        Introffect()
+
+    next buc
+
+    for buc = 2 to 22 step 4
+
+        ShowLogoFrame(LOGO_INDEX + buc)
+        Introffect()
+
+    next buc
 
 end sub
 

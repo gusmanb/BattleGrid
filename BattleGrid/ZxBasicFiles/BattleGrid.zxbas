@@ -1,4 +1,4 @@
-REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24750 --heap-size 128 --explicit --strict -D HIDE_LOAD_MSG
+REM @options --asm --array-base 1 --string-base 1 --optimize 4 --org 24750 --heap-size 256 --explicit --strict -D HIDE_LOAD_MSG
 
 #define PRECOMPUTED_SPRITES
 #define ENABLE_PRINT
@@ -83,8 +83,8 @@ Dim alienFrame as uByte = ALIEN_SPEED
 Dim tanks(MAX_TANK_COUNT,4) as Byte         'x,y,dir,explodePhase
 Dim activeTanks as uByte
 Dim tankFrame as uByte = TANK_SPEED
-Dim tankProbability as uByte
-
+'Dim tankProbability as uByte
+Dim tankProbabilities(20) as uByte => { 16,32,32,64,64,64,64,64,64,64,64,128,128,128,128,128,128,255,255, 255 }
 Dim activeTowers as uByte 
 
 Dim availableMines as uByte = 0
@@ -253,7 +253,7 @@ sub InitLevel()
 
     playerX = 20
     dead = 0
-    tankProbability = 128
+    'tankProbability = 128
 
     
     PrintPaddedNumber(24, 8, level, 2)
@@ -1511,8 +1511,9 @@ sub UpdateTanks()
                 tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
 
                 if tmpX + 1 >= playerX and tmpX - 1 <= playerX  then
-                if LineOfSight((playerX >> 1) - MAP_X_OFFSET, tmpCellY) then
-                    if FastRnd() <= tankProbability then
+                if LineOfSight((playerX >> 1) - MAP_X_OFFSET, tmpCellY) then 'asa
+                    if FastRnd() <= tankProbabilities(tmpCellY) then 
+'tankProbability then
                         dead = 2
                         return
                     end if
@@ -1632,7 +1633,7 @@ sub UpdateTanks()
                     tmpCellY = (tmpY >> 1) - MAP_Y_OFFSET
 
                     if LineOfSight((playerX >> 1) - MAP_X_OFFSET, tmpCellY) then
-                        if FastRnd() <= tankProbability then
+                        if FastRnd() <= tankProbabilities(tmpCellY) then
                             dead = 2
                             return
                         end if
@@ -2541,8 +2542,8 @@ sub ShowInstructions()
     PrintString("IKJL and fire with space.", CREATE_ATTRIB(7, 0, 1, 0), 0, 12)
     PrintString("Choose a S.A.T. tool with 1-7.", CREATE_ATTRIB(7, 0, 1, 0), 0, 13)
 
-    PrintString("For detailed instructions read", CREATE_ATTRIB(6, 0, 1, 0), 0, 17)
-    PrintString("the game manual.", CREATE_ATTRIB(6, 0, 1, 0), 0, 18)
+    'PrintString("For detailed instructions read", CREATE_ATTRIB(6, 0, 1, 0), 0, 17)
+    'PrintString("the game manual.", CREATE_ATTRIB(6, 0, 1, 0), 0, 18)
 
     PrintString("PRESS SPACE TO CONTINUE...", CREATE_ATTRIB(7, 0, 1, 0), 0, 23)
     
