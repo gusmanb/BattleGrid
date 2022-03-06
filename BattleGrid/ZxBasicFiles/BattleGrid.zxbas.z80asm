@@ -60,7 +60,7 @@ _level:
 _activeAliens:
 	DEFB 00
 _alienFrame:
-	DEFB 0Ah
+	DEFB 0Ch
 _activeTanks:
 	DEFB 00
 _tankFrame:
@@ -3444,6 +3444,8 @@ _tankProbabilities.__DATA__:
 	DEFB 10h
 	DEFB 20h
 	DEFB 20h
+	DEFB 20h
+	DEFB 20h
 	DEFB 40h
 	DEFB 40h
 	DEFB 40h
@@ -3452,8 +3454,6 @@ _tankProbabilities.__DATA__:
 	DEFB 40h
 	DEFB 40h
 	DEFB 40h
-	DEFB 80h
-	DEFB 80h
 	DEFB 80h
 	DEFB 80h
 	DEFB 80h
@@ -3625,38 +3625,38 @@ _mapIndexes.__DATA__:
 	DEFB 00h
 	DEFB 0C1h
 	DEFB 00h
-	DEFB 99h
-	DEFB 05h
-	DEFB 0D0h
-	DEFB 06h
-	DEFB 5Fh
-	DEFB 0Ah
-	DEFB 1Fh
-	DEFB 0Ch
-	DEFB 0E2h
-	DEFB 01h
-	DEFB 0ECh
-	DEFB 03h
-	DEFB 0D4h
-	DEFB 04h
 	DEFB 46h
 	DEFB 06h
-	DEFB 0A1h
-	DEFB 08h
-	DEFB 0A6h
-	DEFB 09h
-	DEFB 34h
-	DEFB 0Dh
-	DEFB 25h
-	DEFB 0Eh
-	DEFB 2Fh
+	DEFB 0E2h
 	DEFB 01h
 	DEFB 7Dh
 	DEFB 02h
 	DEFB 53h
 	DEFB 03h
+	DEFB 0ECh
+	DEFB 03h
+	DEFB 0D4h
+	DEFB 04h
+	DEFB 99h
+	DEFB 05h
+	DEFB 2Fh
+	DEFB 01h
+	DEFB 0D0h
+	DEFB 06h
+	DEFB 0A1h
+	DEFB 08h
+	DEFB 0A6h
+	DEFB 09h
+	DEFB 5Fh
+	DEFB 0Ah
 	DEFB 2Bh
 	DEFB 0Bh
+	DEFB 1Fh
+	DEFB 0Ch
+	DEFB 34h
+	DEFB 0Dh
+	DEFB 25h
+	DEFB 0Eh
 	DEFB 54h
 	DEFB 0Fh
 .LABEL.__LABEL1288:
@@ -9984,6 +9984,8 @@ GSPRITES_LIB_END:
 .LABEL.__LABEL85:
 	call _PlayDeathShot
 .LABEL.__LABEL84:
+	ld hl, _lifes
+	dec (hl)
 	ld a, (_lifes)
 	or a
 	jp nz, .LABEL.__LABEL88
@@ -13591,7 +13593,7 @@ _LoadObject:
 	push hl
 	ld hl, _ships
 	call .core.__ARRAY
-	ld (hl), 50
+	ld (hl), 60
 	ld a, (ix+9)
 	push af
 	ld a, (ix+7)
@@ -17042,15 +17044,7 @@ _CheckShipGens:
 	call .core.__ARRAY
 	pop af
 	ld (hl), a
-	ld hl, 2
-	push hl
-	ld a, (ix-1)
-	ld l, a
-	dec hl
-	push hl
-	ld hl, _ships
-	call .core.__ARRAY
-	ld a, (hl)
+	ld a, (ix-8)
 	or a
 	jp nz, .LABEL.__LABEL723
 	ld hl, 3
@@ -17061,7 +17055,7 @@ _CheckShipGens:
 	push hl
 	ld hl, _ships
 	call .core.__ARRAY
-	ld (hl), 50
+	ld (hl), 60
 .LABEL.__LABEL723:
 	inc (ix-1)
 .LABEL.__LABEL719:
@@ -17387,7 +17381,7 @@ _UpdateAliens:
 	ld a, (_alienFrame)
 	or a
 	jp nz, _UpdateAliens__leave
-	ld a, 10
+	ld a, 12
 	ld (_alienFrame), a
 	ld (ix-1), 1
 	jp .LABEL.__LABEL788
@@ -17527,60 +17521,6 @@ _UpdateAliens:
 	sbc a, a
 	or d
 	jp nz, .LABEL._search
-	ld a, (ix-6)
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld a, (ix-7)
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld hl, _pathMap
-	call .core.__ARRAY
-	ld a, (hl)
-	ld (ix-10), a
-	cp (ix-9)
-	jp nc, .LABEL._cpderecha
-	or a
-	jp z, .LABEL._cpderecha
-	ld a, (ix-10)
-	ld (ix-9), a
-	ld (ix-5), 1
-.LABEL._cpderecha:
-	ld a, (ix-6)
-	add a, 2
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld a, (ix-7)
-	inc a
-	ld l, a
-	add a, a
-	sbc a, a
-	ld h, a
-	dec hl
-	push hl
-	ld hl, _pathMap
-	call .core.__ARRAY
-	ld a, (hl)
-	ld (ix-10), a
-	cp (ix-9)
-	jp nc, .LABEL._cparriba
-	or a
-	jp z, .LABEL._cparriba
-	ld a, (ix-10)
-	ld (ix-9), a
-	ld (ix-5), 2
 .LABEL._cparriba:
 	ld a, (ix-6)
 	inc a
@@ -17630,12 +17570,67 @@ _UpdateAliens:
 	ld a, (hl)
 	ld (ix-10), a
 	cp (ix-9)
+	jp nc, .LABEL._cpizquierda
+	or a
+	jp z, .LABEL._cpizquierda
+	ld a, (ix-10)
+	ld (ix-9), a
+	ld (ix-5), 4
+.LABEL._cpizquierda:
+	ld a, (ix-6)
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld a, (ix-7)
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld hl, _pathMap
+	call .core.__ARRAY
+	ld a, (hl)
+	ld (ix-10), a
+	cp (ix-9)
+	jp nc, .LABEL._cpderecha
+	or a
+	jp z, .LABEL._cpderecha
+	ld a, (ix-10)
+	ld (ix-9), a
+	ld (ix-5), 1
+.LABEL._cpderecha:
+	ld a, (ix-6)
+	add a, 2
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld a, (ix-7)
+	inc a
+	ld l, a
+	add a, a
+	sbc a, a
+	ld h, a
+	dec hl
+	push hl
+	ld hl, _pathMap
+	call .core.__ARRAY
+	ld a, (hl)
+	ld (ix-10), a
+	cp (ix-9)
 	jp nc, .LABEL.__LABEL800
 	or a
 	jp z, .LABEL.__LABEL800
 	ld a, (ix-10)
 	ld (ix-9), a
-	ld (ix-5), 4
+	ld (ix-5), 2
 .LABEL.__LABEL800:
 	ld a, (ix-5)
 	dec a
@@ -19110,7 +19105,7 @@ _UpdateShips:
 	push hl
 	ld hl, _ships
 	call .core.__ARRAY
-	ld (hl), 50
+	ld (hl), 60
 	ld hl, 0
 	push hl
 	ld a, (ix-6)
@@ -19875,7 +19870,7 @@ _PathFind:
 	ld a, 20
 	cp (ix-3)
 	jp nc, .LABEL.__LABEL1073
-#line 2067 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 2070 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 		PROC
 		LOCAL pmap, worklist1, worklist2, save_sp
 		LOCAL calc_distance, step_loop, skip_left, skip_right, skip_up, skip_down, swap_lists
@@ -19991,7 +19986,7 @@ worklist2:	ds	2*4*min
 end_path_proc:
 		ei
 		ENDP
-#line 2262 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 2265 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 _PathFind__leave:
 	ld sp, ix
 	pop ix
@@ -22665,7 +22660,7 @@ TMP_ARR_PTR:
 	    ENDP
 
 
-#line 4766 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4769 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/calloc.asm"
@@ -23146,7 +23141,7 @@ __MEM_SUBTRACT:
 
 #line 139 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
-#line 4767 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4770 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/asc.asm"
 	; Returns the ascii code for the given str
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/free.asm"
@@ -23377,7 +23372,7 @@ __ASC_END:
 	    ret
 	    ENDP
 
-#line 4768 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4771 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/band16.asm"
 ; vim:ts=4:et:
 	; FASTCALL bitwise and16 version.
@@ -23400,7 +23395,7 @@ __ASC_END:
 	    ret
 
 
-#line 4769 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4772 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/border.asm"
 	; __FASTCALL__ Routine to change de border
 	; Parameter (color) specified in A register
@@ -23411,7 +23406,7 @@ __ASC_END:
 
 
 	; Nothing to do! (Directly from the ZX Spectrum ROM)
-#line 4770 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4773 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/chr.asm"
 	; CHR$(x, y, x) returns the string CHR$(x) + CHR$(y) + CHR$(z)
 	;
@@ -23490,7 +23485,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ENDP
 
 
-#line 4771 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4774 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/div16.asm"
 	; 16 bit division and modulo functions
 	; for both signed and unsigned values
@@ -23613,7 +23608,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ret
 
 
-#line 4772 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4775 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/div8.asm"
 	    ; --------------------------------
 
@@ -23704,7 +23699,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ret		; a = Modulus
 
 
-#line 4773 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4776 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lei8.asm"
 
@@ -23730,7 +23725,7 @@ checkParity:
 	    ret
 	    ENDP
 
-#line 4775 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4778 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/loadstr.asm"
 
 
@@ -23777,10 +23772,10 @@ checkParity:
 	    pop hl	; Recovers destiny in hl as result
 	    ret
 
-#line 4776 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4779 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lti8.asm"
 
-#line 4777 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4780 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/mul8.asm"
 
@@ -23836,7 +23831,7 @@ __MUL8B:
 	    ENDP
 
 
-#line 4779 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4782 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -24161,7 +24156,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR
 
 
-#line 4780 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4783 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr2.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -24222,7 +24217,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR2
 
 
-#line 4781 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4784 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/str.asm"
@@ -24366,7 +24361,7 @@ __STR_END:
 	    ENDP
 
 
-#line 4784 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4787 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strcat.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strlen.asm"
@@ -24515,7 +24510,7 @@ __STRCATEND:
 	    ENDP
 
 
-#line 4785 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4788 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strslice.asm"
 	; String slicing library
@@ -24626,7 +24621,7 @@ __FREE_ON_EXIT:
 	    ENDP
 
 
-#line 4787 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4790 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/u32tofreg.asm"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/neg32.asm"
 
@@ -24752,7 +24747,7 @@ __U32TOFREG_END:
 	    ENDP
 
 
-#line 4788 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4791 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 .LABEL.__LABEL1223:
 	DEFB 00h
