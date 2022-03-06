@@ -2813,11 +2813,7 @@ while(1)
         DrawGrid()
         InitLevel()
 
-    else if activeAliens = 0 then
-        if activeTanks = 0 then
-        if activeShips = 0 then
-        if activeHangars = 0 then
-        if activeTowers = 0 then
+    else if activeAliens = 0 and activeTanks = 0 and activeShips = 0 and activeHangars = 0 and activeTowers = 0 then
 nextLevel:
             score = score + lifes * level
             updateScore = 1
@@ -2844,11 +2840,6 @@ nextLevel:
                 PlayEnding()
                 goto main
             end if
-
-        end if
-        end if
-        end if
-        end if
     else if MultiKeys(KEYY) then
         goto nextLevel
     else if MultiKeys(KEYP) then
@@ -2867,6 +2858,10 @@ nextLevel:
                 TickEffect()
 
                 while frameCounter < 50
+                    if MULTIKEYS(KEYSPACE) then
+                        frameCounter = 0
+                        exit while
+                    end if
                 end while
 
             end while
