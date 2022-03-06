@@ -7,13 +7,15 @@ defines:
 #define MAP_Y_OFFSET 1
 
 #define MAX_ALIEN_COUNT 4
-#define ALIEN_SPEED 10
+'#define ALIEN_SPEED 10
+#define ALIEN_SPEED 12
 
 #define MAX_TANK_COUNT 2
 #define TANK_SPEED 4
 
 #define MAX_SHIP_COUNT 4
-#define SHIP_SPEED 50
+'#define SHIP_SPEED 50
+#define SHIP_SPEED 60
 
 #define MAX_HANGAR_COUNT 2
 #define HANGAR_SPEED 150

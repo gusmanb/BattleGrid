@@ -379,7 +379,7 @@ sub PlayEnding()
         else if buc = 7 then
             tmpString = "        GAME OVER"
         else if buc = 9 then
-            tmpString = "        (C)  2021"
+            tmpString = "        (C)  2022"
         else if buc = 10 then
             tmpString = "      El Dr. Gusman"
         else

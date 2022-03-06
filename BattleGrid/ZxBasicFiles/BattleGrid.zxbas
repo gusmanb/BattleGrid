@@ -84,7 +84,7 @@ Dim tanks(MAX_TANK_COUNT,4) as Byte         'x,y,dir,explodePhase
 Dim activeTanks as uByte
 Dim tankFrame as uByte = TANK_SPEED
 'Dim tankProbability as uByte
-Dim tankProbabilities(20) as uByte => { 16,32,32,64,64,64,64,64,64,64,64,128,128,128,128,128,128,255,255, 255 }
+Dim tankProbabilities(20) as uByte => { 16,32,32,32,32,64,64,64,64,64,64,64,64,128,128,128,128,255,255, 255 }
 Dim activeTowers as uByte 
 
 Dim availableMines as uByte = 0
@@ -429,6 +429,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
         if tmpCell >= MINECRATE_INDEX then
         if tmpCell <= CLEARSHOTCRATE_INDEX then
 
+            
             ClearGridCell(cellX, cellY, 1)
 
             if shotIndex <> 255 then 
@@ -463,7 +464,7 @@ sub CheckShotItems(shotIndex as uByte, cellX as uByte, cellY as uByte)
                 INCREASE_CLEARSHOTS()
 
             end if
-
+            
             return
 
         end if
@@ -1145,7 +1146,7 @@ sub CheckShipGens ()
                 end if
 
                 ships(buc, 3) = tmpDir
-                if ships(buc, 3) = 0 then ships(buc, 4) = SHIP_SPEED
+                if tmpDir = 0 then ships(buc, 4) = SHIP_SPEED
                 
             end if
 
@@ -1336,24 +1337,6 @@ sub UpdateAliens()
                     'No comprobamos límites, nunca nos vamos a salir del mapa de caminos
                     'ya que contiene un borde con 0's
 
-                    'izquierda
-                    tmpWeight = pathMap(tmpCellY + 1, tmpCellX)
-                    if tmpWeight < currentWeight then
-                    if tmpWeight <> 0 then
-                            currentWeight = tmpWeight
-                            tmpDir = 1
-                    end if
-                    end if
-
-cpderecha:
-                    'derecha
-                    tmpWeight = pathMap(tmpCellY + 1, tmpCellX + 2)
-                    if tmpWeight < currentWeight then
-                    if tmpWeight <> 0 then
-                            currentWeight = tmpWeight
-                            tmpDir = 2
-                    end if
-                    end if
 cparriba:
                     'Arriba
                     tmpWeight = pathMap(tmpCellY, tmpCellX + 1)
@@ -1372,6 +1355,26 @@ cpabajo:
                             'print at 0,0; tmpWeight; "  "; tmpX ; "  "; tmpCellY + 1; "  "
                             currentWeight = tmpWeight
                             tmpDir = 4
+                    end if
+                    end if
+
+cpizquierda:
+                    'izquierda
+                    tmpWeight = pathMap(tmpCellY + 1, tmpCellX)
+                    if tmpWeight < currentWeight then
+                    if tmpWeight <> 0 then
+                            currentWeight = tmpWeight
+                            tmpDir = 1
+                    end if
+                    end if
+
+cpderecha:
+                    'derecha
+                    tmpWeight = pathMap(tmpCellY + 1, tmpCellX + 2)
+                    if tmpWeight < currentWeight then
+                    if tmpWeight <> 0 then
+                            currentWeight = tmpWeight
+                            tmpDir = 2
                     end if
                     end if
                 
@@ -2791,7 +2794,7 @@ while(1)
             PlayDeathShot()
         end if
 
-        'lifes = lifes - 1
+        lifes = lifes - 1
 
         if lifes = 0 then
 
