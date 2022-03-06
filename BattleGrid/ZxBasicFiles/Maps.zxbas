@@ -23,26 +23,26 @@
 
 '----INDEXES----
 Dim mapIndexes(20) as uInteger => { _
-0, _
-98, _
-193, _
-303, _
-482, _
-637, _
-851, _
-1004, _
-1236, _
-1433, _
-1606, _
-1744, _
-2209, _
-2470, _
-2655, _
-2859, _
-3103, _
-3380, _
-3621, _
-3924 _
+MAP_0_INDEX, _
+MAP_1_INDEX, _
+MAP_2_INDEX, _
+MAP_9_INDEX, _
+MAP_11_INDEX, _
+MAP_14_INDEX, _
+MAP_16_INDEX, _
+MAP_4_INDEX, _
+MAP_7_INDEX, _
+MAP_8_INDEX, _
+MAP_10_INDEX, _
+MAP_12_INDEX, _
+MAP_13_INDEX, _
+MAP_17_INDEX, _
+MAP_18_INDEX, _
+MAP_3_INDEX, _
+MAP_5_INDEX, _
+MAP_6_INDEX, _
+MAP_15_INDEX, _
+MAP_19_INDEX _
 }
 
 '----MAP_CONTENT----
