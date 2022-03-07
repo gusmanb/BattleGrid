@@ -3629,8 +3629,8 @@ _mapIndexes.__DATA__:
 	DEFB 06h
 	DEFB 0E2h
 	DEFB 01h
-	DEFB 7Dh
-	DEFB 02h
+	DEFB 25h
+	DEFB 0Eh
 	DEFB 53h
 	DEFB 03h
 	DEFB 0ECh
@@ -3655,8 +3655,8 @@ _mapIndexes.__DATA__:
 	DEFB 0Ch
 	DEFB 34h
 	DEFB 0Dh
-	DEFB 25h
-	DEFB 0Eh
+	DEFB 7Dh
+	DEFB 02h
 	DEFB 54h
 	DEFB 0Fh
 .LABEL.__LABEL1288:
@@ -21715,7 +21715,7 @@ _EnterCode__leave:
 	DEFB 32h
 	DEFB 30h
 	DEFB 32h
-	DEFB 31h
+	DEFB 32h
 .LABEL.__LABEL245:
 	DEFW 0013h
 	DEFB 20h
