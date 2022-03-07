@@ -36,5 +36,8 @@
   <ItemGroup>
     <None Include="ZxBasicFiles\Todo.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Tap Include="TapeFiles\BattleGrid.tap" />
+  </ItemGroup>
   <Import Project="$(CustomProjectExtensionsPath)Spect.Net.CodeDiscover.targets" />
 </Project>
