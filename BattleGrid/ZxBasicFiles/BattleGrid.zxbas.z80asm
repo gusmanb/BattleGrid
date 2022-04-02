@@ -3629,7 +3629,7 @@ _mapIndexes.__DATA__:
 	DEFB 06h
 	DEFB 0E2h
 	DEFB 01h
-	DEFB 25h
+	DEFB 27h
 	DEFB 0Eh
 	DEFB 53h
 	DEFB 03h
@@ -3643,21 +3643,21 @@ _mapIndexes.__DATA__:
 	DEFB 01h
 	DEFB 0D0h
 	DEFB 06h
-	DEFB 0A1h
+	DEFB 0A3h
 	DEFB 08h
-	DEFB 0A6h
+	DEFB 0A8h
 	DEFB 09h
-	DEFB 5Fh
+	DEFB 61h
 	DEFB 0Ah
-	DEFB 2Bh
+	DEFB 2Dh
 	DEFB 0Bh
-	DEFB 1Fh
+	DEFB 21h
 	DEFB 0Ch
-	DEFB 34h
+	DEFB 36h
 	DEFB 0Dh
 	DEFB 7Dh
 	DEFB 02h
-	DEFB 54h
+	DEFB 56h
 	DEFB 0Fh
 .LABEL.__LABEL1286:
 	DEFW 0000h
@@ -5875,6 +5875,8 @@ _maps.__DATA__:
 	DEFB 3Ch
 	DEFB 0D8h
 	DEFB 34h
+	DEFB 0F6h
+	DEFB 1Dh
 	DEFB 00h
 	DEFB 0FAh
 	DEFB 34h
@@ -8167,78 +8169,144 @@ _initials.__DATA__:
 	DEFB 02h
 .core.ZXBASIC_USER_DATA_END:
 .core.__MAIN_PROGRAM__:
-#line 43 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 42 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
+
+
 #line 47 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 54 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 61 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 66 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 75 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 79 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 89 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 99 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 114 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 155 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 160 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 166 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 173 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 181 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 191 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 #line 199 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
+
 #line 203 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 204 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 206 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
+
 #line 210 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 211 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 213 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 215 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 216 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 217 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 218 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 #line 219 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		SPRITE_1x1_BUFFER_SIZE equ (6 * 8)
 		SPRITE_1x2_BUFFER_SIZE equ (9 * 8)
 		SPRITE_2x2_BUFFER_SIZE equ (15 * 8)
+
 		SPRITE_1x1_SHIFTED_SIZE equ 4
 		SPRITE_1x2_SHIFTED_SIZE equ 6
 		SPRITE_2x2_SHIFTED_SIZE equ 9
+
 		TOTAL_1x1_OPS equ (10 * SPRITE_1x1_SHIFTED_SIZE)
 		TOTAL_1x2_OPS equ (0 * SPRITE_1x2_SHIFTED_SIZE)
 		TOTAL_2x2_OPS equ (0 * SPRITE_2x2_SHIFTED_SIZE)
+
 		TOTAL_DRAW_OPS equ ((TOTAL_1x1_OPS + TOTAL_1x2_OPS + TOTAL_2x2_OPS) * 2)
+
+
 		DRAW_OP_SIZE equ 5
 #line 239 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		DRAW_OPS_SIZE equ (TOTAL_DRAW_OPS * DRAW_OP_SIZE)
 		DRAW_OPS_DATA_SIZE equ (TOTAL_DRAW_OPS * 8)
+
 		SPRITE_BUFFER_SIZE equ ((16 * SPRITE_1x1_BUFFER_SIZE)+(0 * SPRITE_1x2_BUFFER_SIZE)+(0 * SPRITE_2x2_BUFFER_SIZE))
 		SPRITE_INDEX_SIZE equ ((16 + 0 + 0 + 1) * 2)
+
+
+
+
 		jp GSPRITES_LIB_END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 DRAW_OPS_A:
 		defs DRAW_OPS_SIZE
+
 DRAW_OPS_B:
 		defs DRAW_OPS_SIZE
+
 DRAW_OPS_DATA:
 		defs DRAW_OPS_DATA_SIZE
+
 CURRENT_DRAW_OPS:
 		defw 0
 CURRENT_CLEAR_OPS:
 		defw 0
+
 CURRENT_DRAW_COUNT:
 		defb 0
 CURRENT_CLEAR_COUNT:
 		defb 0
+
 DRAW_OPS_DATA_INDEX:
 		defw 0
+
 CELL_MAP_A:
 		defs (32 * 24)
 CELL_MAP_B:
 		defs (32 * 24)
+
 CURRENT_DRAW_MAP:
 		defw 0
 CURRENT_CLEAR_MAP:
 		defw 0
+
 #line 307 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 #line 175 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
-#line 4 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Sprites.zxbas"
+#line 3 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Sprites.zxbas"
+
+
 SPRITE_BUFFER:
 PLAYER_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 018h, 05Ah, 0A5h, 0BDh
@@ -8247,6 +8315,7 @@ PLAYER_ADDRESS:
 		DEFB 007h, 006h, 005h, 00Ah, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 080h, 0A0h, 050h, 0D0h
 		DEFB 0E0h, 060h, 0A0h, 050h, 000h, 000h, 000h, 000h
+
 PLAYERRIGHT_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 008h, 02Ah, 014h, 01Ch
 		DEFB 03Eh, 036h, 02Ah, 055h, 000h, 000h, 000h, 000h
@@ -8254,6 +8323,7 @@ PLAYERRIGHT_ADDRESS:
 		DEFB 003h, 003h, 002h, 005h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 080h, 0A0h, 040h, 0C0h
 		DEFB 0E0h, 060h, 0A0h, 050h, 000h, 000h, 000h, 000h
+
 PLAYERLEFT_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 010h, 054h, 028h, 038h
 		DEFB 07Ch, 06Ch, 054h, 0AAh, 000h, 000h, 000h, 000h
@@ -8261,6 +8331,7 @@ PLAYERLEFT_ADDRESS:
 		DEFB 007h, 006h, 005h, 00Ah, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 000h, 040h, 080h, 080h
 		DEFB 0C0h, 0C0h, 040h, 0A0h, 000h, 000h, 000h, 000h
+
 VFIREA_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 021h, 018h, 085h, 018h
 		DEFB 021h, 018h, 084h, 018h, 000h, 000h, 000h, 000h
@@ -8268,6 +8339,7 @@ VFIREA_ADDRESS:
 		DEFB 002h, 001h, 008h, 001h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 010h, 080h, 050h, 080h
 		DEFB 010h, 080h, 040h, 080h, 000h, 000h, 000h, 000h
+
 VFIREB_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 018h, 084h, 018h, 0A1h
 		DEFB 018h, 084h, 018h, 021h, 000h, 000h, 000h, 000h
@@ -8275,6 +8347,7 @@ VFIREB_ADDRESS:
 		DEFB 001h, 008h, 001h, 002h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 080h, 040h, 080h, 010h
 		DEFB 080h, 040h, 080h, 010h, 000h, 000h, 000h, 000h
+
 HFIREA_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 015h, 000h, 044h, 0AAh
 		DEFB 0AAh, 011h, 000h, 044h, 000h, 000h, 000h, 000h
@@ -8282,6 +8355,7 @@ HFIREA_ADDRESS:
 		DEFB 00Ah, 001h, 000h, 004h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 050h, 000h, 040h, 0A0h
 		DEFB 0A0h, 010h, 000h, 040h, 000h, 000h, 000h, 000h
+
 HFIREB_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 088h, 000h, 022h, 055h
 		DEFB 055h, 088h, 000h, 02Ah, 000h, 000h, 000h, 000h
@@ -8289,6 +8363,7 @@ HFIREB_ADDRESS:
 		DEFB 005h, 008h, 000h, 002h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 080h, 000h, 020h, 050h
 		DEFB 050h, 080h, 000h, 0A0h, 000h, 000h, 000h, 000h
+
 EXPLODEA_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 000h, 000h, 018h, 03Ch
 		DEFB 03Ch, 018h, 000h, 000h, 000h, 000h, 000h, 000h
@@ -8296,6 +8371,7 @@ EXPLODEA_ADDRESS:
 		DEFB 003h, 001h, 000h, 000h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 000h, 000h, 080h, 0C0h
 		DEFB 0C0h, 080h, 000h, 000h, 000h, 000h, 000h, 000h
+
 EXPLODEB_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 000h, 018h, 024h, 05Ah
 		DEFB 05Ah, 024h, 018h, 000h, 000h, 000h, 000h, 000h
@@ -8303,6 +8379,7 @@ EXPLODEB_ADDRESS:
 		DEFB 005h, 002h, 001h, 000h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 000h, 080h, 040h, 0A0h
 		DEFB 0A0h, 040h, 080h, 000h, 000h, 000h, 000h, 000h
+
 EXPLODEC_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 03Ch, 042h, 099h, 0A5h
 		DEFB 0A5h, 099h, 042h, 03Ch, 000h, 000h, 000h, 000h
@@ -8310,6 +8387,7 @@ EXPLODEC_ADDRESS:
 		DEFB 00Ah, 009h, 004h, 003h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 0C0h, 020h, 090h, 050h
 		DEFB 050h, 090h, 020h, 0C0h, 000h, 000h, 000h, 000h
+
 EXPLODED_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 042h, 081h, 024h, 000h
 		DEFB 000h, 024h, 081h, 042h, 000h, 000h, 000h, 000h
@@ -8317,6 +8395,7 @@ EXPLODED_ADDRESS:
 		DEFB 000h, 002h, 008h, 004h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 020h, 010h, 040h, 000h
 		DEFB 000h, 040h, 010h, 020h, 000h, 000h, 000h, 000h
+
 CURSOR_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 0E7h, 081h, 081h, 000h
 		DEFB 000h, 081h, 081h, 0E7h, 000h, 000h, 000h, 000h
@@ -8324,6 +8403,7 @@ CURSOR_ADDRESS:
 		DEFB 000h, 008h, 008h, 00Eh, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 070h, 010h, 010h, 000h
 		DEFB 000h, 010h, 010h, 070h, 000h, 000h, 000h, 000h
+
 ENEMA_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 024h, 07Eh, 0FFh, 099h
 		DEFB 0DBh, 0FFh, 066h, 024h, 000h, 000h, 000h, 000h
@@ -8331,6 +8411,7 @@ ENEMA_ADDRESS:
 		DEFB 00Dh, 00Fh, 006h, 002h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 040h, 0E0h, 0F0h, 090h
 		DEFB 0B0h, 0F0h, 060h, 040h, 000h, 000h, 000h, 000h
+
 ENEMB_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 024h, 07Eh, 0FFh, 0BDh
 		DEFB 0DBh, 07Eh, 07Eh, 018h, 000h, 000h, 000h, 000h
@@ -8338,6 +8419,7 @@ ENEMB_ADDRESS:
 		DEFB 00Dh, 007h, 007h, 001h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 040h, 0E0h, 0F0h, 0D0h
 		DEFB 0B0h, 0E0h, 0E0h, 080h, 000h, 000h, 000h, 000h
+
 TANKV_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 05Ah, 07Eh, 066h, 05Ah
 		DEFB 05Ah, 066h, 05Ah, 018h, 000h, 000h, 000h, 000h
@@ -8345,6 +8427,7 @@ TANKV_ADDRESS:
 		DEFB 005h, 006h, 005h, 001h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 0A0h, 0E0h, 060h, 0A0h
 		DEFB 0A0h, 060h, 0A0h, 080h, 000h, 000h, 000h, 000h
+
 TANKH_ADDRESS:
 		DEFB 000h, 000h, 000h, 000h, 0FFh, 066h, 0DBh, 0DBh
 		DEFB 066h, 0FFh, 018h, 018h, 000h, 000h, 000h, 000h
@@ -8352,6 +8435,7 @@ TANKH_ADDRESS:
 		DEFB 006h, 00Fh, 001h, 001h, 000h, 000h, 000h, 000h
 		DEFB 000h, 000h, 000h, 000h, 0F0h, 060h, 0B0h, 0B0h
 		DEFB 060h, 0F0h, 080h, 080h, 000h, 000h, 000h, 000h
+
 SPRITE_INDEX:
 		DEFW (SPRITE_BUFFER + 0)
 		DEFW (SPRITE_BUFFER + 48)
@@ -8370,61 +8454,109 @@ SPRITE_INDEX:
 		DEFW (SPRITE_BUFFER + 672)
 		DEFW (SPRITE_BUFFER + 720)
 		DEFW (SPRITE_BUFFER + 768)
+
 SPRITE_COUNT:
 		DEFB 16
+
+
 #line 157 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Sprites.zxbas"
-#line 313 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 312 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 #line 315 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 320 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 TILE_SET:
 		defw 0
 TILE_MAP:
 		defs 768
 #line 327 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
+
+
 		PROC
 INIT_GFX_LIB:
+
 #line 337 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		ld hl, DRAW_OPS_A
 		ld (CURRENT_DRAW_OPS), hl
+
 #line 339
+
 		ld hl, DRAW_OPS_B
 		ld (CURRENT_CLEAR_OPS), hl
+
 #line 340
+
+
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
+
 #line 342
+
+
 		ld hl, CELL_MAP_A
 		ld (CURRENT_DRAW_MAP), hl
+
 #line 344
+
 		ld hl, CELL_MAP_B
 		ld (CURRENT_CLEAR_MAP), hl
+
 #line 345
+
+
 		ld hl, SPRITE_BUFFER
 		ld (SPRITE_INDEX), hl
+
 #line 347
+
 		ret
 		ENDP
+
 		PROC
 RESET_GFX_LIB:
+
+
 		ld hl, DRAW_OPS_A
 		ld (CURRENT_DRAW_OPS), hl
+
 #line 355
+
 		ld hl, DRAW_OPS_B
 		ld (CURRENT_CLEAR_OPS), hl
+
 #line 356
+
+
 		ld hl, CELL_MAP_A
 		ld (CURRENT_DRAW_MAP), hl
+
 #line 358
+
 		ld hl, CELL_MAP_B
 		ld (CURRENT_CLEAR_MAP), hl
+
 #line 359
+
+
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
+
 #line 361
+
 #line 368 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		xor a
 		ld (CURRENT_DRAW_COUNT), a
 		ld (CURRENT_CLEAR_COUNT), a
+
+
 		xor a
 		ld de, CELL_MAP_A
 		ld (de), a
@@ -8432,7 +8564,9 @@ RESET_GFX_LIB:
 		ld hl, CELL_MAP_A
 		ld bc, 768 - 1
 		ldir
+
 #line 374
+
 		xor a
 		ld de, CELL_MAP_B
 		ld (de), a
@@ -8440,7 +8574,11 @@ RESET_GFX_LIB:
 		ld hl, CELL_MAP_B
 		ld bc, 768 - 1
 		ldir
+
 #line 375
+
+
+
 		xor a
 		ld de, TILE_MAP
 		ld (de), a
@@ -8448,12 +8586,17 @@ RESET_GFX_LIB:
 		ld hl, TILE_MAP
 		ld bc, 768 - 1
 		ldir
+
 #line 378
 #line 379 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ret
 		ENDP
+
 		PROC
 CLEAR_SCREEN:
+
+
 		ld a, a
 		ld de, 5800h
 		ld (de), a
@@ -8461,7 +8604,9 @@ CLEAR_SCREEN:
 		ld hl, 5800h
 		ld bc, 768 - 1
 		ldir
+
 #line 387
+
 		xor a
 		ld de, 4000h
 		ld (de), a
@@ -8469,25 +8614,42 @@ CLEAR_SCREEN:
 		ld hl, 4000h
 		ld bc, 6144 - 1
 		ldir
+
 #line 388
+
+
 		ld hl, DRAW_OPS_A
 		ld (CURRENT_DRAW_OPS), hl
+
 #line 390
+
 		ld hl, DRAW_OPS_B
 		ld (CURRENT_CLEAR_OPS), hl
+
 #line 391
+
+
 		ld hl, CELL_MAP_A
 		ld (CURRENT_DRAW_MAP), hl
+
 #line 393
+
 		ld hl, CELL_MAP_B
 		ld (CURRENT_CLEAR_MAP), hl
+
 #line 394
+
+
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
+
 #line 396
+
 		xor a
 		ld (CURRENT_DRAW_COUNT), a
 		ld (CURRENT_CLEAR_COUNT), a
+
+
 		xor a
 		ld de, CELL_MAP_A
 		ld (de), a
@@ -8495,7 +8657,9 @@ CLEAR_SCREEN:
 		ld hl, CELL_MAP_A
 		ld bc, 768 - 1
 		ldir
+
 #line 402
+
 		xor a
 		ld de, CELL_MAP_B
 		ld (de), a
@@ -8503,7 +8667,11 @@ CLEAR_SCREEN:
 		ld hl, CELL_MAP_B
 		ld bc, 768 - 1
 		ldir
+
 #line 403
+
+
+
 		xor a
 		ld de, TILE_MAP
 		ld (de), a
@@ -8511,42 +8679,64 @@ CLEAR_SCREEN:
 		ld hl, TILE_MAP
 		ld bc, 768 - 1
 		ldir
+
 #line 406
 #line 407 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ret
 		ENDP
+
 		PROC
 		LOCAL RENDER_LOOP, END_RENDER, RESTORE_STACK
 RENDER_FRAME:
+
 #line 418 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 		halt
 #line 422 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		ld a, (CURRENT_DRAW_COUNT)
 		cp 0
 		jp z, END_RENDER
+
 		ld hl, (CURRENT_DRAW_OPS)
 		push hl
+
 RENDER_LOOP:
+
 		pop hl
+
+
 		ld e, (hl)
 		inc hl
 		ld d, (hl)
 		inc hl
+
 #line 436
+
 		ld c, (hl)
 		inc hl
 		ld b, (hl)
 		inc hl
+
 #line 437
+
+
 		inc hl
 #line 441 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		push hl
+
+
 		ld h, b
 		ld l, c
+
 #line 445
+
 		ld (RESTORE_STACK + 1), sp
 		ld sp, hl
 		ex de, hl
+
 		pop de
 		ld (hl), e
 		inc h
@@ -8566,21 +8756,32 @@ RENDER_LOOP:
 		ld (hl), e
 		inc h
 		ld (hl), d
+
 RESTORE_STACK:
 		ld sp, 0
+
+
 		ld hl, CURRENT_DRAW_COUNT
 		dec (hl)
 		jp nz, RENDER_LOOP
+
+
 		pop bc
+
+
 END_RENDER:
+
+
 		ld bc, (CURRENT_DRAW_OPS)
 		ld de, (CURRENT_CLEAR_OPS)
 		ld (CURRENT_DRAW_OPS), de
 		ld (CURRENT_CLEAR_OPS), bc
+
 		ld de, (CURRENT_DRAW_MAP)
 		ld bc, (CURRENT_CLEAR_MAP)
 		ld (CURRENT_DRAW_MAP), bc
 		ld (CURRENT_CLEAR_MAP), de
+
 		xor a
 		push de
 		ld (de), a
@@ -8588,58 +8789,91 @@ END_RENDER:
 		pop hl
 		ld bc, 767
 		ldir
+
 		ld a, (CURRENT_CLEAR_COUNT)
 		ld (CURRENT_DRAW_COUNT), a
 		xor a
 		ld (CURRENT_CLEAR_COUNT), a
+
+
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
+
 #line 509
+
 		ret
 		ENDP
+
 #line 726 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		PROC
 		LOCAL EXISTING_OP, REAL_EXISTING_OP
 CREATE_DRAW_OP:
+
+
+
 		push hl
 		push bc
+
 		ld l, c
 		ld h, 0
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 740
+
 		ld c, b
 		ld b, 0
+
 		add hl, bc
+
 		ld de, (CURRENT_DRAW_MAP)
+
 		push hl
+
 		add hl, de
+
 		ld a, (hl)
 		and a
 		jp nz, EXISTING_OP
+
 		ld a, (CURRENT_DRAW_COUNT)
 		inc a
 		ld (CURRENT_DRAW_COUNT), a
 		ld (hl), a
 		dec a
+
 		ld l, a
 		ld h, 0
+
+
+
+
 		ld d, h
 		ld e, l
+
 #line 768
+
 		add hl, hl
 		add hl, hl
+
 #line 769
 		add hl, de
+
 #line 774 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ld bc, (CURRENT_DRAW_OPS)
 		add hl, bc
+
 		pop de
 		pop bc
 		push de
+
 		ld a, c
 		and %00011000
 		or  %01000000
@@ -8653,77 +8887,136 @@ CREATE_DRAW_OP:
 		rla
 		or b
 		ld e, a
+
 		ld ixh, d
 		ld ixl, e
+
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 800
+
 		ld de, (DRAW_OPS_DATA_INDEX)
+
 		ld iyh, d
 		ld iyl, e
+
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 807
+
+
+
+
 		ld (hl), 1
 #line 813 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		ld l, 8
 		ld h, 0
 		add hl, de
+
 		ld (DRAW_OPS_DATA_INDEX), hl
+
+
+
 		pop bc
 		ld hl, (CURRENT_CLEAR_MAP)
+
 		add hl, bc
+
 		ld a, (CURRENT_CLEAR_COUNT)
 		inc a
 		ld (CURRENT_CLEAR_COUNT), a
 		ld (hl), a
 		dec a
+
 		ld l, a
 		ld h, 0
+
+
+
 		ld d, h
 		ld e, l
+
 #line 839
+
 		add hl, hl
 		add hl, hl
+
 #line 840
 		add hl, de
+
 #line 847 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ld de, (CURRENT_CLEAR_OPS)
 		add hl, de
+
 		ld d, ixh
 		ld e, ixl
+
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 855
+
+
+
 		ex de, hl
 		ld hl, TILE_MAP
 		add hl, bc
 		ld a, (hl)
+
 		ld l, a
 		ld h, 0
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 867
+
 		ld bc, (TILE_SET)
 		add hl, bc
 		ex de, hl
+
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 873
+
+
 		ld (hl), 2
+
 #line 884 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		pop hl
+
+
+
+
+
 		ld b, iyh
 		ld c, iyl
+
+
+
+
 		ld a, (de)
 		or (hl)
 		ld (bc), a
@@ -8766,99 +9059,190 @@ CREATE_DRAW_OP:
 		inc bc
 		inc de
 		inc hl
+
 		ld a, (de)
 		or (hl)
 		ld (bc), a
+
 #line 953 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ret
+
 EXISTING_OP:
+
 		dec a
+
 		ld l, a
 		ld h, 0
+
+
+
+
 		ld d, h
 		ld e, l
+
 #line 966
+
 		add hl, hl
 		add hl, hl
+
 #line 967
 		add hl, de
+
 #line 972 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ld bc, (CURRENT_DRAW_OPS)
+
 		add hl, bc
+
+
 		ld c, (hl)
 		inc hl
 		ld b, (hl)
 		inc hl
+
 #line 978
+
 		push hl
 		push bc
+
+
 		ld e, (hl)
 		inc hl
 		ld d, (hl)
 		inc hl
+
 #line 983
+
+
+
 		push de
+
 		ld a, (hl)
 		and 2
 		jp z, REAL_EXISTING_OP
+
 		ld (hl), 1
 #line 1000 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
+
+
+
+
+
+
+
+
+
+
 		pop af
 #line 1014 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		pop bc
 		pop de
 		pop hl
 		push de
+
+
 		push af
 #line 1023 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
+
+
+
+
+
 		ld de, (CURRENT_CLEAR_MAP)
 		add hl, de
+
 		ld a, (CURRENT_CLEAR_COUNT)
 		inc a
 		ld (hl), a
 		ld (CURRENT_CLEAR_COUNT), a
+
 		dec a
 		ld l, a
 		ld h, 0
+
+
+
+
 		ld d, h
 		ld e, l
+
 #line 1045
+
 		add hl, hl
 		add hl, hl
+
 #line 1046
 		add hl, de
+
 #line 1051 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ld de, (CURRENT_CLEAR_OPS)
 		add hl, de
+
+
 		ld (hl), c
 		inc hl
 		ld (hl), b
 		inc hl
+
 #line 1056
+
+
+
 		pop de
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 1061
+
+
 		ld (hl), 2
+
 #line 1072 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		pop hl
+
+
 		push de
 #line 1078 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ld de, (DRAW_OPS_DATA_INDEX)
+
+
+
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 1084
+
 		ld hl, 8
 		add hl, de
+
 		ld (DRAW_OPS_DATA_INDEX), hl
+
+
 		pop bc
 #line 1093 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		pop hl
 		pop hl
+
+
+
+
+
 		ld a, (bc)
 		or (hl)
 		ld (de), a
@@ -8901,20 +9285,31 @@ EXISTING_OP:
 		inc bc
 		inc de
 		inc hl
+
 		ld a, (bc)
 		or (hl)
 		ld (de), a
+
 #line 1153 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		ret
+
 REAL_EXISTING_OP:
+
 		pop hl
 		pop hl
 		pop hl
 		pop hl
+
+
 		pop hl
 #line 1166 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		pop hl
+
 		ex de, hl
+
+
 		ld a, (de)
 		or (hl)
 		ld (hl),  a
@@ -8953,51 +9348,79 @@ REAL_EXISTING_OP:
 		ld a, (de)
 		or (hl)
 		ld (hl),  a
+
 #line 1172
+
 		ret
+
 		ENDP
+
+
 		PROC
 		LOCAL LOOP
 DRAW_SPRITE_COLUMN:
+
 		LOOP
+
 		push hl
 		push bc
 		ex af, af'
+
 		call CREATE_DRAW_OP
+
 		pop bc
 		pop hl
+
 		inc c
 		ld de, 8
 		add hl, de
+
 		ex af, af'
+
 		dec a
 		jr nz, LOOP
+
 		ret
 		ENDP
+
+
+
 		PROC
 		LOCAL TEST_SHIFTS, HORIZONTAL_SHIFT, VERTICAL_SHIFT
 DRAW_1x1_SPRITE:
+
 		dec a
 		add a, a
 		ld l, a
 		ld h, 0
 		ld de, SPRITE_INDEX
 		add hl, de
+
+
 		ld e, (hl)
 		inc hl
 		ld d, (hl)
 		inc hl
+
 #line 1219
+
 		ld a, b
 		or c
 		and 1
+
 		jp nz, TEST_SHIFTS
+
+
 		srl b
 		srl c
+
 		ld hl, 4
 		add hl, de
+
 		call CREATE_DRAW_OP
+
 		ret
+
 TEST_SHIFTS:
 		ld a, c
 		and 1
@@ -9005,71 +9428,116 @@ TEST_SHIFTS:
 		ld a, b
 		and 1
 		jp z, VERTICAL_SHIFT
+
+
+
 		srl b
 		srl c
+
 		ld hl, 16
 		add hl, de
+
 		push bc
+
+
 		ld a, 2
 		call DRAW_SPRITE_COLUMN
+
 		ld a,2
 		pop bc
 		inc b
 		call DRAW_SPRITE_COLUMN
+
 		ret
+
 HORIZONTAL_SHIFT:
+
 		srl b
 		srl c
+
 		ld hl, 20
 		add hl, de
+
 		push bc
 		push hl
+
 		call CREATE_DRAW_OP
+
 		pop hl
 		pop bc
 		inc b
+
+
 		ld de, 16
 		add hl, de
+
 		call CREATE_DRAW_OP
+
 		ret
+
 VERTICAL_SHIFT:
+
 		srl b
 		srl c
+
 		ex de, hl
 		ld a, 2
 		call DRAW_SPRITE_COLUMN
+
 		ret
 		ENDP
+
 #line 1304 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 1399 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 #line 1522 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
+
 		PROC
 PRINT_CHAR:
+
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1530
+
 		add hl, de
+
 		ex de, hl
+
 		ld hl, $5800
 		add hl, de
 		ld (hl), c
+
+
 		ld l, a
 		ld h, 0
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1544
+
 		ld bc, 3C00h
 		add hl, bc
+
+
 		ld a, d
 		rla
 		rla
 		rla
 		or %01000000
 		ld d, a
+
 		ld a, (hl)
 		ld (de), a
 		inc hl
@@ -9098,52 +9566,80 @@ PRINT_CHAR:
 		ld (de), a
 		inc hl
 		inc d
+
 		ld a, (hl)
 		ld (de), a
+
 		ret
 		ENDP
+
 #line 1592 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		PROC
 SET_TILEMAP:
+
 		ld de, TILE_SET
 		ex de, hl
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 1600
+
 		ret
 		ENDP
+
 		PROC
 SET_TILE:
+
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1609
+
 		add hl, de
+
 		ex de, hl
+
 		ld hl, TILE_MAP
 		add hl, de
+
 		ld (hl), a
+
 		ld hl, $5800
 		add hl, de
 		ld (hl), c
+
+
 		ld l, a
 		ld h, 0
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1628
+
 		ld bc, (TILE_SET)
 		add hl, bc
+
+
 		ld a, d
 		rla
 		rla
 		rla
 		or %01000000
 		ld d, a
+
 		ld a, (hl)
 		ld (de), a
 		inc hl
@@ -9172,111 +9668,178 @@ SET_TILE:
 		ld (de), a
 		inc hl
 		inc d
+
 		ld a, (hl)
 		ld (de), a
+
 		ret
 		ENDP
+
 		PROC
 SET_TILE_COLOR:
+
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1680
+
 		add hl, de
 		ex de, hl
 		ld hl, $5800
 		add hl, de
 		ld (hl), c
+
 		ret
+
 		ENDP
+
 		PROC
 GET_TILE_COLOR:
+
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1696
+
 		add hl, de
 		ex de, hl
 		ld hl, $5800
 		add hl, de
 		ld a, (hl)
+
 		ret
+
 		ENDP
+
 		PROC
 		LOCAL REAL_OP, NO_OP, END_SET
+
 SET_TILE_CHECKED:
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1713
+
 		add hl, de
+
 		push hl
+
 		ex de, hl
+
 		ld hl, TILE_MAP
 		add hl, de
+
 		ld (hl), a
+
 		ld hl, $5800
 		add hl, de
 		ld (hl), c
+
+
 		ld l, a
 		ld h, 0
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1734
+
 		ld bc, (TILE_SET)
 		add hl, bc
+
 		push hl
+
 		pop bc
 		pop hl
+
 		push hl
 		push de
 		push bc
+
 		ld de, (CURRENT_DRAW_MAP)
+
 		add hl, de
+
 		ld a, (hl)
 		and a
 		jp z, NO_OP
+
 REAL_OP:
+
 		dec a
+
 		ld l, a
 		ld h, 0
+
+
 		ld d, h
 		ld e, l
+
 #line 1763
+
 		add hl, hl
 		add hl, hl
+
 #line 1764
 		add hl, de
+
 		ld bc, (CURRENT_DRAW_OPS)
+
 		add hl, bc
+
 		inc hl
 		inc hl
+
 		pop de
+
+
 		ld (hl), e
 		inc hl
 		ld (hl), d
 		inc hl
+
 #line 1776
+
 		ld a, 2
 		ld (hl), a
+
 		push de
+
+
+
+
+
+
 NO_OP:
+
 		pop hl
 		pop de
 		pop bc
+
 		ld a, d
 		rla
 		rla
 		rla
 		or %01000000
 		ld d, a
+
 		ld a, (hl)
 		ld (de), a
 		inc hl
@@ -9305,28 +9868,44 @@ NO_OP:
 		ld (de), a
 		inc hl
 		inc d
+
 		ld a, (hl)
 		ld (de), a
+
 END_SET:
+
 		ret
 		ENDP
+
 		PROC
 GET_TILE:
+
+
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
 		add hl, hl
+
 #line 1841
+
 		add hl, de
+
 		ex de, hl
+
 		ld hl, TILE_MAP
 		add hl, de
+
 		ld a, (hl)
+
 		ret
 		ENDP
+
 #line 1855 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 GSPRITES_LIB_END:
+
+
 #line 1757 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 .LABEL._defines:
 .LABEL._macros:
@@ -10182,19 +10761,29 @@ GSPRITES_LIB_END:
 	ei
 	ret
 _InitGFXLib:
-#line 1864 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1863 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		call INIT_GFX_LIB
+
+
 #line 1868 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _InitGFXLib__leave:
 	ret
 _RenderFrame:
-#line 1884 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1883 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		call RENDER_FRAME
+
+
 #line 1888 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _RenderFrame__leave:
 	ret
 _Draw1x1Sprite:
-#line 1914 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 1913 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		exx
 		pop hl
 		exx
@@ -10203,29 +10792,41 @@ _Draw1x1Sprite:
 		exx
 		push hl
 		exx
+
 		push ix
 		push iy
 		ld c, d
 		call DRAW_1x1_SPRITE
 		pop iy
 		pop ix
+
+
 #line 1932 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _Draw1x1Sprite__leave:
 	ret
 _CancelOps:
-#line 2030 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2029 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
+
 		ld hl, DRAW_OPS_A
 		ld (CURRENT_DRAW_OPS), hl
+
 #line 2031
+
 		ld hl, DRAW_OPS_B
 		ld (CURRENT_CLEAR_OPS), hl
+
 #line 2032
+
 		ld hl, DRAW_OPS_DATA
 		ld (DRAW_OPS_DATA_INDEX), hl
+
 #line 2033
 		xor a
 		ld (CURRENT_DRAW_COUNT), a
 		ld (CURRENT_CLEAR_COUNT), a
+
+
 		xor a
 		ld de, CELL_MAP_A
 		ld (de), a
@@ -10233,7 +10834,9 @@ _CancelOps:
 		ld hl, CELL_MAP_A
 		ld bc, 768 - 1
 		ldir
+
 #line 2038
+
 		xor a
 		ld de, CELL_MAP_B
 		ld (de), a
@@ -10241,13 +10844,18 @@ _CancelOps:
 		ld hl, CELL_MAP_B
 		ld bc, 768 - 1
 		ldir
+
 #line 2039
+
+
 #line 2071 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _CancelOps__leave:
 	ret
 _ClearScreen:
-#line 2052 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2051 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		call CLEAR_SCREEN
+
 #line 2054 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _ClearScreen__leave:
 	ret
@@ -10322,7 +10930,8 @@ _PrintString__leave:
 	exx
 	ret
 _PrintChar:
-#line 2086 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2085 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		exx
 		pop hl
 		exx
@@ -10333,17 +10942,21 @@ _PrintChar:
 		push hl
 		exx
 		call PRINT_CHAR
+
 #line 2097 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _PrintChar__leave:
 	ret
 _SetTileset:
-#line 2107 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2106 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		call SET_TILEMAP
+
 #line 2109 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _SetTileset__leave:
 	ret
 _SetTile:
-#line 2115 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2114 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		exx
 		pop hl
 		exx
@@ -10354,11 +10967,13 @@ _SetTile:
 		push hl
 		exx
 		call SET_TILE
+
 #line 2126 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _SetTile__leave:
 	ret
 _SetTileColor:
-#line 2132 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2131 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		exx
 		pop hl
 		exx
@@ -10369,11 +10984,13 @@ _SetTileColor:
 		push hl
 		exx
 		call SET_TILE_COLOR
+
 #line 2143 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _SetTileColor__leave:
 	ret
 _SetTileChecked:
-#line 2149 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2148 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		exx
 		pop hl
 		exx
@@ -10384,30 +11001,36 @@ _SetTileChecked:
 		push hl
 		exx
 		call SET_TILE_CHECKED
+
 #line 2160 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _SetTileChecked__leave:
 	ret
 _GetTileColor:
-#line 2179 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+#line 2178 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
+
 		pop bc
 		pop de
 		push bc
 		ex de, hl
 		call GET_TILE_COLOR
+
 #line 2185 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/GuSprites.zxbas"
 _GetTileColor__leave:
 	ret
 _MultiKeys:
-#line 43 "C:/zxbasic/src/arch/zx48k/library/keys.bas"
+#line 42 "C:/zxbasic/src/arch/zx48k/library/keys.bas"
+
 		ld a, h
 		in a, (0FEh)
 		cpl
 		and l
+
 #line 48 "C:/zxbasic/src/arch/zx48k/library/keys.bas"
 _MultiKeys__leave:
 	ret
 _InitFastRnd:
-#line 5 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/FastRND.zxbas"
+#line 4 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/FastRND.zxbas"
+
 		PROC
 		LOCAL NOT_EMPTY_L, TEST_H, NOT_EMPTY_H, LOAD_SEED
 		ld hl, ($5C78)
@@ -10435,12 +11058,16 @@ NOT_EMPTY_H:
 LOAD_SEED:
 		ld      (FAST_RAND + 1),hl
 		ENDP
+
 #line 33 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/FastRND.zxbas"
 _InitFastRnd__leave:
 	ret
 _FastRnd:
-#line 39 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/FastRND.zxbas"
+#line 38 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/FastRND.zxbas"
+
+
 FAST_RAND:
+
 		ld hl,$FFFF
 		ld a,r
 		ld d,a
@@ -10449,16 +11076,22 @@ FAST_RAND:
 		add a,l
 		xor h
 		ld (FAST_RAND + 1),hl
+
+
 #line 52 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/FastRND.zxbas"
 _FastRnd__leave:
 	ret
 _PlayFX:
-#line 6 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/BeepFX.zxbas"
+#line 5 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/BeepFX.zxbas"
+
+
 play:
 		ld hl,sfxData
+
 		di
 		push ix
 		push iy
+
 		ld b,0
 		ld c,a
 		add hl,bc
@@ -10468,11 +11101,17 @@ play:
 		ld d,(hl)
 		push de
 		pop ix
+
 		ld a,(23624)
 		rra
 		rra
 		rra
 		and 7
+
+
+
+
+
 readData:
 		ld a,(ix+0)
 		ld c,(ix+1)
@@ -10481,6 +11120,7 @@ readData:
 		ld d,(ix+4)
 		push de
 		pop iy
+
 		dec a
 		jr z,sfxRoutineTone
 		dec a
@@ -10491,6 +11131,11 @@ readData:
 		pop ix
 		ei
 		ret
+
+
+
+
+
 sfxRoutineSample:
 		ex de,hl
 sfxRS0:
@@ -10514,16 +11159,24 @@ sfxRoutineSampleBorder:
 		ld a,b
 		or c
 		jr nz,sfxRS0
+
 		ld c,6
+
 nextData:
 		add ix,bc
 		jr readData
+
+
+
+
+
 sfxRoutineTone:
 		ld e,(ix+5)
 		ld d,(ix+6)
 		ld a,(ix+9)
 		ld (sfxRoutineToneDuty+1),a
 		ld hl,0
+
 sfxRT0:
 		push bc
 		push iy
@@ -10536,6 +11189,9 @@ sfxRoutineToneDuty:
 		sbc a,a
 		and 16
 sfxRoutineToneBorder:
+
+
+
 		push de
 		push hl
 		push af
@@ -10550,28 +11206,39 @@ sfxRoutineToneBorder:
 		or l
 		pop hl
 		pop de
+
 		out (254),a
 		dec bc
 		ld a,b
 		or c
 		jr nz,sfxRT1
+
 		ld a,(sfxRoutineToneDuty+1)
 		add a,(ix+10)
 		ld (sfxRoutineToneDuty+1),a
+
 		ld c,(ix+7)
 		ld b,(ix+8)
 		ex de,hl
 		add hl,bc
 		ex de,hl
+
 		pop bc
 		dec bc
 		ld a,b
 		or c
 		jr nz,sfxRT0
+
 		ld c,11
 		jp nextData
+
+
+
+
+
 sfxRoutineNoise:
 		ld e,(ix+5)
+
 		ld d,1
 		ld h,d
 		ld l,d
@@ -10583,6 +11250,9 @@ sfxRN1:
 		ld a,(hl)
 		and 16
 sfxRoutineNoiseBorder:
+
+
+
 		push de
 		push hl
 		push af
@@ -10597,6 +11267,9 @@ sfxRoutineNoiseBorder:
 		or l
 		pop hl
 		pop de
+
+
+
 		out (254),a
 		dec d
 		jr nz,sfxRN2
@@ -10610,17 +11283,23 @@ sfxRN2:
 		ld a,b
 		or c
 		jr nz,sfxRN1
+
 		ld a,e
 		add a,(ix+6)
 		ld e,a
+
 		pop bc
 		dec bc
 		ld a,b
 		or c
 		jr nz,sfxRN0
+
 		ld c,7
 		jp nextData
+
+
 sfxData:
+
 SoundEffectsData:
 		defw SoundEffect0Data
 		defw SoundEffect1Data
@@ -10640,6 +11319,7 @@ SoundEffectsData:
 		defw SoundEffect15Data
 		defw SoundEffect16Data
 		defw SoundEffect17Data
+
 SoundEffect0Data:
 		defb 2
 		defw 10,1000,3074
@@ -10718,6 +11398,8 @@ SoundEffect17Data:
 		defb 1
 		defw 5,250,4096,0,64
 		defb 0
+
+
 #line 322 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/BeepFX.zxbas"
 	ld a, (_borderColors.__DATA__ + -1)
 	ld hl, (_borderColors.__DATA__ + 0 - 1)
@@ -11000,7 +11682,9 @@ _DoPause__leave:
 	exx
 	ret
 _InstallHandler:
-#line 17 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+#line 16 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+
+
 		ld hl, INT_HANDLER
 		ld (_intHandlerAddress), hl
 		di
@@ -11009,7 +11693,9 @@ _InstallHandler:
 		im 2
 		ei
 		ret
+
 INT_HANDLER:
+
 		push hl
 		ld hl, (_frameCounter)
 		inc hl
@@ -11017,35 +11703,47 @@ INT_HANDLER:
 		pop hl
 		ei
 		ret
+
+
 #line 38 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 _InstallHandler__leave:
 	ret
 _AnyKey:
-#line 44 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+#line 43 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
+
 		ld a, $FE
 		in a, (0FEh)
 		ld b,a
+
 		ld a, $F7
 		in a, (0FEh)
 		and b
 		ld b,a
+
 		ld a, $EF
 		in a, (0FEh)
 		and b
 		ld b,a
+
 		ld a, $DF
 		in a, (0FEh)
 		and b
 		ld b,a
+
 		ld a, $BF
 		in a, (0FEh)
 		and b
 		ld b,a
+
 		ld a, $7F
 		in a, (0FEh)
 		and b
+
 		or $F0
+
 		cpl
+
+
 #line 77 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/InterruptInstaller.zxbas"
 _AnyKey__leave:
 	ret
@@ -11410,11 +12108,17 @@ _BLWindowScrollUp:
 	push ix
 	ld ix, 0
 	add ix, sp
-#line 3 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Scroll.zxbas"
+#line 2 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Scroll.zxbas"
+
+
+
+
+
 BLWindowScrollUp:
 		EX AF, AF'
 		LD   A,(IX+11)
 		EX AF,AF'
+
 		LD   HL,BLWindowScrollUpScreenTable
 		LD   C,(IX+7)
 		LD   B,0
@@ -11422,13 +12126,18 @@ BLWindowScrollUp:
 		ADD  HL,BC
 		LD   (BLWindowScrollUpPOINT),HL
 BLWindowScrollUpLOOP:
+
 		LD   HL,(BLWindowScrollUpPOINT)
 		LD   E,(HL)
 		INC  HL
 		LD   D,(HL)
+
+
 		LD A,(IX+5)
 		ADD A,E
 		LD E,A
+
+
 		EX AF,AF'
 		DEC  A
 		JP   Z,BLWindowScrollUpBLANK
@@ -11441,7 +12150,11 @@ BLWindowScrollUpLOOP:
 		LD   L,(IX+5)
 		LD   H,0
 		ADD  HL,BC
+
+
 		LD   B,8
+
+
 BLWindowScrollUpTRANS:
 		LD A,B
 		LD   C,(IX+9)
@@ -11451,15 +12164,24 @@ BLWindowScrollUpTRANS:
 		LDIR
 		POP  DE
 		POP  HL
+
+
 		INC D
 		INC H
+
 		LD B,A
+
 		DJNZ BLWindowScrollUpTRANS
+
+
 		JP   BLWindowScrollUpLOOP
+
+
 BLWindowScrollUpBLANK:
 		LD   C,8
 		LD   L,(IX+9)
 BLWindowScrollUpLOOP2:
+
 		PUSH DE
 		LD   B,L
 		XOR  A
@@ -11471,8 +12193,12 @@ BLWindowScrollUpLOOP3:
 		INC D
 		DEC C
 		JR NZ, BLWindowScrollUpLOOP2
+
+
 		JP BLWindowScrollEnd
+
 BLWindowScrollUpPOINT:  DEFW 0
+
 BLWindowScrollUpScreenTable:
 		DEFW 16384
 		DEFW 16416
@@ -11498,7 +12224,9 @@ BLWindowScrollUpScreenTable:
 		DEFW 20640
 		DEFW 20672
 		DEFW 20704
+
 BLWindowScrollEnd:
+
 #line 120 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Scroll.zxbas"
 _BLWindowScrollUp__leave:
 	ld sp, ix
@@ -12858,8 +13586,7 @@ _PlayEnding:
 	jp .LABEL.__LABEL198
 .LABEL.__LABEL201:
 	ld a, (ix-1)
-	add a, 218
-	inc a
+	add a, 219
 	ld l, a
 	ld h, 0
 	dec hl
@@ -12879,8 +13606,7 @@ _PlayEnding:
 	push af
 	call _printZoomedTile
 	ld a, (ix-1)
-	add a, 218
-	add a, 2
+	add a, 220
 	ld l, a
 	ld h, 0
 	dec hl
@@ -12900,8 +13626,7 @@ _PlayEnding:
 	push af
 	call _printZoomedTile
 	ld a, (ix-1)
-	add a, 218
-	add a, 3
+	add a, 221
 	ld l, a
 	ld h, 0
 	dec hl
@@ -12938,8 +13663,7 @@ _PlayEnding:
 	ld h, 3
 	call .core.__MUL8_FAST
 	ld (ix-1), a
-	add a, 224
-	inc a
+	add a, 225
 	ld l, a
 	ld h, 0
 	dec hl
@@ -12959,8 +13683,7 @@ _PlayEnding:
 	push af
 	call _printZoomedTile
 	ld a, (ix-1)
-	add a, 224
-	add a, 2
+	add a, 226
 	ld l, a
 	ld h, 0
 	dec hl
@@ -12980,8 +13703,7 @@ _PlayEnding:
 	push af
 	call _printZoomedTile
 	ld a, (ix-1)
-	add a, 224
-	add a, 3
+	add a, 227
 	ld l, a
 	ld h, 0
 	dec hl
@@ -13141,13 +13863,17 @@ _PlayEnding__leave:
 	pop ix
 	ret
 _FindEmptyBit:
-#line 7 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Tools.zxbas"
+#line 6 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Tools.zxbas"
+
+
 		ld b, 0
 febloop:
 		inc b
 		srl a
 		jp c, febloop
 		ld a, b
+
+
 #line 16 "C:/Users/geniw/source/repos/BattleGrid/BattleGrid/ZxBasicFiles/Tools.zxbas"
 _FindEmptyBit__leave:
 	ret
@@ -19866,44 +20592,99 @@ _PathFind:
 	ld a, 20
 	cp (ix-3)
 	jp nc, .LABEL.__LABEL1071
-#line 2070 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 2069 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+
+
 		PROC
 		LOCAL pmap, worklist1, worklist2, save_sp
 		LOCAL calc_distance, step_loop, skip_left, skip_right, skip_up, skip_down, swap_lists
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 calc_distance:
+
+
+
+
+
+
+
+
+
+
+
 		ld d, (ix - 1)
 		ld e, (ix - 2)
+
+
+
+
 		di
 		ld	l,e
 		ld	h,0
 		ld	e,d
 		ld	d,h
+
 		ld c, l
 		ld b, h
+
+
 		add	hl,hl
 		add	hl,hl
 		add	hl,hl
 		add	hl,hl
+
 		add hl, bc
 		add hl, bc
 		add hl, bc
 		add hl, bc
 		add hl, bc
 		add hl, bc
+
 		add	hl,de
 		ld	de,pmap
 		add	hl,de
+
 		ld	(save_sp),sp
 		ld	sp,worklist1+2
 		xor	a
 		ld	(worklist1+3),a
 		ld	de,worklist2
+
 		ld	a,255-max_steps
 		ld	(hl),254-max_steps
+
+
+
+
+
+
+
+
+
+
+
 		step_loop
+
+
 		dec	hl
 		cp	(hl)
 		jr	nc,skip_left
+
 		ld	(hl),a
 		ex	de,hl
 		ld	(hl),e
@@ -19952,9 +20733,11 @@ calc_distance:
 		inc	h
 		dec	h
 		jr	nz,step_loop
+
 		ex	de,hl
 		inc	hl
 		ld	(hl),b
+
 		inc	a
 		ld	de,worklist2
 		ld	hl,worklist1
@@ -19962,26 +20745,50 @@ calc_distance:
 		jr	z,swap_lists
 		ex	de,hl
 		swap_lists	ld	sp,hl
+
+
+
+
+
 		pop	hl
 		inc	h
 		dec	h
 		jr	nz,step_loop
+
+
+
+
 		ld	sp,(save_sp)
+
 		jp end_path_proc
+
+
+
+
+
 		map_width	equ	22
 		map_height	equ	22
 		map_size	equ	map_width * map_height
 		max_steps	equ	253
+
 		min		equ	22
+
+
 		W		equ	0
 		_		equ	255
+
 		pmap EQU _pathMap.__DATA__
 worklist1:	ds	2*4*min
 worklist2:	ds	2*4*min
 		save_sp		ds	2
+
 end_path_proc:
+
 		ei
+
 		ENDP
+
+
 #line 2265 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 _PathFind__leave:
 	ld sp, ix
@@ -20060,8 +20867,7 @@ _ShowLogo:
 	ld h, 0
 	push hl
 	ld a, (ix-1)
-	inc a
-	inc a
+	add a, 2
 	ld l, a
 	dec hl
 	push hl
@@ -20087,35 +20893,6 @@ _ShowLogo:
 	ld h, 0
 	push hl
 	ld a, (ix-1)
-	inc a
-	add a, 2
-	ld l, a
-	dec hl
-	push hl
-	ld hl, _tileColors
-	call .core.__ARRAY
-	ld a, (hl)
-	ld l, a
-	ld h, 0
-	push hl
-	ld a, (ix-1)
-	inc a
-	inc a
-	call _SetTile
-	ld a, (ix+7)
-	add a, 2
-	ld l, a
-	ld h, 0
-	push hl
-	ld a, (ix-1)
-	srl a
-	srl a
-	add a, (ix+5)
-	ld l, a
-	ld h, 0
-	push hl
-	ld a, (ix-1)
-	inc a
 	add a, 3
 	ld l, a
 	dec hl
@@ -20127,11 +20904,10 @@ _ShowLogo:
 	ld h, 0
 	push hl
 	ld a, (ix-1)
-	inc a
 	add a, 2
 	call _SetTile
 	ld a, (ix+7)
-	add a, 3
+	add a, 2
 	ld l, a
 	ld h, 0
 	push hl
@@ -20143,7 +20919,6 @@ _ShowLogo:
 	ld h, 0
 	push hl
 	ld a, (ix-1)
-	inc a
 	add a, 4
 	ld l, a
 	dec hl
@@ -20155,8 +20930,33 @@ _ShowLogo:
 	ld h, 0
 	push hl
 	ld a, (ix-1)
-	inc a
 	add a, 3
+	call _SetTile
+	ld a, (ix+7)
+	add a, 3
+	ld l, a
+	ld h, 0
+	push hl
+	ld a, (ix-1)
+	srl a
+	srl a
+	add a, (ix+5)
+	ld l, a
+	ld h, 0
+	push hl
+	ld a, (ix-1)
+	add a, 5
+	ld l, a
+	dec hl
+	push hl
+	ld hl, _tileColors
+	call .core.__ARRAY
+	ld a, (hl)
+	ld l, a
+	ld h, 0
+	push hl
+	ld a, (ix-1)
+	add a, 4
 	call _SetTile
 	ld a, (ix-1)
 	add a, 4
@@ -22656,7 +23456,7 @@ TMP_ARR_PTR:
 	    ENDP
 
 
-#line 4769 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4762 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/calloc.asm"
@@ -23137,7 +23937,7 @@ __MEM_SUBTRACT:
 
 #line 139 "C:/zxbasic/src/arch/zx48k/library-asm/arrayalloc.asm"
 
-#line 4770 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4763 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/asc.asm"
 	; Returns the ascii code for the given str
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/free.asm"
@@ -23368,7 +24168,7 @@ __ASC_END:
 	    ret
 	    ENDP
 
-#line 4771 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4764 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/band16.asm"
 ; vim:ts=4:et:
 	; FASTCALL bitwise and16 version.
@@ -23391,7 +24191,7 @@ __ASC_END:
 	    ret
 
 
-#line 4772 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4765 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/border.asm"
 	; __FASTCALL__ Routine to change de border
 	; Parameter (color) specified in A register
@@ -23402,7 +24202,7 @@ __ASC_END:
 
 
 	; Nothing to do! (Directly from the ZX Spectrum ROM)
-#line 4773 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4766 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/chr.asm"
 	; CHR$(x, y, x) returns the string CHR$(x) + CHR$(y) + CHR$(z)
 	;
@@ -23481,7 +24281,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ENDP
 
 
-#line 4774 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4767 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/div16.asm"
 	; 16 bit division and modulo functions
 	; for both signed and unsigned values
@@ -23604,7 +24404,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ret
 
 
-#line 4775 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4768 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/div8.asm"
 	    ; --------------------------------
 
@@ -23695,7 +24495,7 @@ __POPOUT:	; Removes out of the stack every byte and return
 	    ret		; a = Modulus
 
 
-#line 4776 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4769 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lei8.asm"
 
@@ -23721,7 +24521,7 @@ checkParity:
 	    ret
 	    ENDP
 
-#line 4778 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4771 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/loadstr.asm"
 
 
@@ -23768,10 +24568,10 @@ checkParity:
 	    pop hl	; Recovers destiny in hl as result
 	    ret
 
-#line 4779 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4772 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/lti8.asm"
 
-#line 4780 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4773 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/mul8.asm"
 
@@ -23827,7 +24627,7 @@ __MUL8B:
 	    ENDP
 
 
-#line 4782 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4775 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -24152,7 +24952,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR
 
 
-#line 4783 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4776 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/pstorestr2.asm"
 ; vim:ts=4:et:sw=4
 	;
@@ -24213,7 +25013,7 @@ __NOTHING_TO_COPY:
 	    jp .core.__STORE_STR2
 
 
-#line 4784 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4777 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/str.asm"
@@ -24273,19 +25073,35 @@ __NOTHING_TO_COPY:
 	    jp .core.__FPSTACK_PUSH
 
 #line 9 "C:/zxbasic/src/arch/zx48k/library-asm/str.asm"
-#line 1 "C:/zxbasic/src/arch/zx48k/library-asm/const.asm"
-	; Global constants
+#line 1 "C:/zxbasic/src/arch/zx48k/library-asm/sysvars.asm"
+	;; -----------------------------------------------------------------------
+	;; ZX Basic System Vars
+	;; Some of them will be mapped over Sinclair ROM ones for compatibility
+	;; -----------------------------------------------------------------------
 
 
-	.core.P_FLAG	EQU 23697
-	.core.FLAGS2	EQU 23681
-	.core.ATTR_P	EQU 23693	; permanet ATTRIBUTES
-	.core.ATTR_T	EQU 23695	; temporary ATTRIBUTES
-	.core.CHARS	EQU 23606 ; Pointer to ROM/RAM Charset
-	.core.UDG	EQU 23675 ; Pointer to .core.UDG Charset
-	.core.MEM0	EQU 5C92h ; Temporary memory buffer used by ROM chars
+.core.SCREEN_ADDR:        DW 16384  ; Screen address (can be pointed to other place to use a screen buffer)
+.core.SCREEN_ATTR_ADDR:   DW 22528  ; Screen attribute address (ditto.)
 
+	; These are mapped onto ZX Spectrum ROM VARS
 
+	CHARS	            EQU 23606  ; Pointer to ROM/RAM Charset
+	TVFLAGS             EQU 23612  ; TV Flags
+	UDG	                EQU 23675  ; Pointer to UDG Charset
+	COORDS              EQU 23677  ; Last PLOT coordinates
+	FLAGS2	            EQU 23681  ;
+	ECHO_E              EQU 23682  ;
+	DFCC                EQU 23684  ; Next screen addr for PRINT
+	DFCCL               EQU 23686  ; Next screen attr for PRINT
+	S_POSN              EQU 23688
+	ATTR_P              EQU 23693  ; Current Permanent ATTRS set with INK, PAPER, etc commands
+	ATTR_T	            EQU 23695  ; temporary ATTRIBUTES
+	P_FLAG	            EQU 23697  ;
+	MEM0                EQU 23698  ; Temporary memory buffer used by ROM chars
+
+	SCR_COLS            EQU 33     ; Screen with in columns + 1
+	SCR_ROWS            EQU 24     ; Screen height in rows
+	SCR_SIZE            EQU (SCR_ROWS << 8) + SCR_COLS
 #line 10 "C:/zxbasic/src/arch/zx48k/library-asm/str.asm"
 
 
@@ -24300,7 +25116,7 @@ __NOTHING_TO_COPY:
 
 	    ld hl, (STK_END)
 	    push hl; Stores STK_END
-	    ld hl, (.core.ATTR_T)	; Saves .core.ATTR_T since it's changed by STR$ due to a ROM BUG
+	    ld hl, (ATTR_T)	; Saves ATTR_T since it's changed by STR$ due to a ROM BUG
 	    push hl
 
 	    call .core.__FPSTACK_PUSH ; Push number into stack
@@ -24310,7 +25126,7 @@ __NOTHING_TO_COPY:
 	    call __FPSTACK_POP ; Recovers string parameters to A ED CB (Only ED LH are important)
 
 	    pop hl
-	    ld (.core.ATTR_T), hl	; Restores .core.ATTR_T
+	    ld (ATTR_T), hl	; Restores ATTR_T
 	    pop hl
 	    ld (STK_END), hl	; Balance STK_END to avoid STR$ bug
 
@@ -24357,7 +25173,7 @@ __STR_END:
 	    ENDP
 
 
-#line 4787 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4780 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strcat.asm"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strlen.asm"
@@ -24506,7 +25322,7 @@ __STRCATEND:
 	    ENDP
 
 
-#line 4788 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4781 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/strslice.asm"
 	; String slicing library
@@ -24617,7 +25433,7 @@ __FREE_ON_EXIT:
 	    ENDP
 
 
-#line 4790 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4783 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/u32tofreg.asm"
 #line 1 "C:/zxbasic/src/arch/zx48k/library-asm/neg32.asm"
 
@@ -24743,7 +25559,7 @@ __U32TOFREG_END:
 	    ENDP
 
 
-#line 4791 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
+#line 4784 "C:\Users\geniw\source\repos\BattleGrid\BattleGrid\ZxBasicFiles\BattleGrid.zxbas"
 
 .LABEL.__LABEL1221:
 	DEFB 00h
